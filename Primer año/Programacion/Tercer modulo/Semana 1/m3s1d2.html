@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planificación de Clase - Informática / Linux</title>
+    <title>
+      Planificación de Clase · Instalación de Ventoy y Windows para Dual Boot
+    </title>
     <style>
       * {
         margin: 0;
@@ -12,7 +14,7 @@
       }
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: #f0f4f8;
+        background: #f5f7fa;
         padding: 40px 20px;
         display: flex;
         justify-content: center;
@@ -30,7 +32,15 @@
         color: #1a237e;
         border-left: 6px solid #1a237e;
         padding-left: 20px;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
       }
       .comp-general {
         background: #e8eaf6;
@@ -143,12 +153,6 @@
         font-weight: 600;
         color: #1a237e;
       }
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin: 12px 0;
-      }
       .ejemplo-box {
         background: #e3f2fd;
         padding: 14px 18px;
@@ -160,16 +164,6 @@
         font-size: 18px;
         font-weight: 600;
         color: #0d47a1;
-      }
-      .codigo-box {
-        background: #1a1a2e;
-        color: #e0e0e0;
-        padding: 14px 18px;
-        border-radius: 10px;
-        margin: 8px 0;
-        font-family: "Courier New", monospace;
-        font-size: 15px;
-        overflow-x: auto;
       }
       .actividad-practica {
         background: #fff3e0;
@@ -207,68 +201,186 @@
         font-size: 15px;
         margin: 4px 0;
       }
-      .warning-box {
-        background: #fff8e1;
-        border-left: 6px solid #f9a825;
-        padding: 12px 18px;
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
         border-radius: 10px;
-        margin: 12px 0;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
       }
-      .step-list {
-        list-style: none;
-        counter-reset: step-counter;
-        padding: 0;
-      }
-      .step-list li {
-        counter-increment: step-counter;
-        padding: 10px 0 10px 50px;
-        position: relative;
-        border-bottom: 1px solid #e0e0e0;
-        font-size: 15px;
-        line-height: 1.6;
-      }
-      .step-list li::before {
-        content: counter(step-counter);
-        background: #3f51b5;
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
         color: white;
-        font-weight: bold;
-        width: 30px;
-        height: 30px;
         border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      /* Estilos para la terminal */
+      .terminal {
+        background: #0c0c0c;
+        color: #cccccc;
+        padding: 16px 20px;
+        border-radius: 10px;
+        font-family: "Consolas", "Courier New", monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        margin: 10px 0;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        border: 1px solid #333;
+      }
+      .terminal .rojo {
+        color: #ff6b6b;
+        font-weight: 600;
+      }
+      .terminal .verde {
+        color: #4ec9b0;
+        font-weight: 600;
+      }
+      .terminal .comentario {
+        color: #6a9955;
+        font-style: italic;
+      }
+      .terminal .prompt {
+        color: #dcdcaa;
+      }
+
+      .leyenda {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 8px 0;
+      }
+      .leyenda .item {
         display: flex;
         align-items: center;
-        justify-content: center;
-        position: absolute;
-        left: 0;
-        top: 8px;
+        gap: 6px;
         font-size: 14px;
       }
-      .step-list li:last-child {
-        border-bottom: none;
+      .leyenda .item .color-rojo {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        background: #ff6b6b;
+        border-radius: 3px;
       }
-      .comparison-grid {
+      .leyenda .item .color-verde {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        background: #4ec9b0;
+        border-radius: 3px;
+      }
+
+      .bios-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
-        margin: 10px 0;
+        margin: 12px 0;
       }
-      .comparison-grid > div {
+      .bios-item {
         background: #f5f7fa;
-        padding: 12px 16px;
+        padding: 14px 16px;
         border-radius: 10px;
-        border-left: 4px solid #3f51b5;
+        border-top: 4px solid #3f51b5;
       }
-      .comparison-grid > div strong {
+      .bios-item h5 {
         color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 6px;
       }
-      .comparison-grid .vs {
+      .bios-item p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .bios-item ul {
+        padding-left: 20px;
+        font-size: 14px;
+      }
+      .bios-item.fabricante {
+        border-top-color: #e65100;
+      }
+
+      .mock-usb {
+        background: white;
+        border-radius: 12px;
+        border: 2px solid #1a237e;
+        overflow: hidden;
+        margin: 8px auto;
+        max-width: 420px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .mock-usb .header {
+        background: #1a237e;
+        color: white;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: 600;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 28px;
-        font-weight: bold;
-        color: #e65100;
+        justify-content: space-between;
       }
+      .mock-usb .body {
+        padding: 14px;
+        background: #f5f7fa;
+      }
+      .mock-usb .archivo {
+        background: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+        border-left: 3px solid #1e88e5;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .mock-usb .archivo .nombre {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .mock-usb .archivo.iso-windows {
+        border-left-color: #0d47a1;
+      }
+      .mock-usb .archivo.iso-fedora {
+        border-left-color: #2e7d32;
+      }
+      .mock-usb .archivo.ventoy {
+        border-left-color: #e65100;
+      }
+      .mock-usb .archivo .tamano {
+        font-size: 11px;
+        color: #888;
+      }
+
       @media (max-width: 768px) {
         .container {
           padding: 20px;
@@ -276,94 +388,83 @@
         .competencias {
           grid-template-columns: 1fr;
         }
-        .grid-2 {
+        .bios-grid {
           grid-template-columns: 1fr;
         }
         .actividad-practica ul {
           columns: 1;
         }
-        .comparison-grid {
-          grid-template-columns: 1fr;
-        }
-        .comparison-grid .vs {
-          display: none;
+        .terminal {
+          font-size: 11px;
+          padding: 10px;
         }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>📘 PLANIFICACIÓN DE CLASE</h1>
-      <p
-        style="
-          font-size: 18px;
-          color: #1a237e;
-          margin-top: -10px;
-          margin-bottom: 25px;
-          font-weight: 500;
-        "
-      >
-        Tema: Flashear ISO de Fedora en USB con Rufus desde Windows, Boot Live y
-        configuración de BIOS/UEFI
-      </p>
+      <h1>💻 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Instalación de Ventoy · Preparación de USB · Configuración de BIOS ·
+        Instalación de Windows para Dual Boot
+      </div>
 
-      <!-- COMPETENCIA GENERAL -->
       <div class="comp-general">
         <h2>🎯 Competencia General</h2>
         <p>
-          Comprende el concepto de flasheo y su diferencia con copiar archivos,
-          realiza el flasheo de la ISO de Fedora en una USB utilizando Rufus
-          desde Windows, intenta arrancar el entorno Live, y si la computadora
-          no lo permite, se prepara para configurar la BIOS/UEFI en la siguiente
-          clase para instalar Fedora.
+          El estudiante instala Ventoy en una USB, copia las ISOs de Windows y
+          Fedora, configura el BIOS/UEFI para permitir el arranque desde USB, y
+          realiza la instalación de Windows con los pasos extra necesarios:
+          desactivar BitLocker y crear las particiones adecuadas para el dual
+          boot con Fedora.
         </p>
       </div>
 
-      <!-- COMPETENCIAS -->
       <div class="competencias">
         <div class="comp-box">
           <h3>📖 Conceptuales (Saber)</h3>
           <ul>
-            <li>Define qué es flashear una ISO y por qué es necesario.</li>
-            <li>Comprende la diferencia entre flashear y copiar archivos.</li>
-            <li>Reconoce el propósito del entorno Live de Fedora.</li>
+            <li>Comprende el proceso de instalación de Ventoy en una USB.</li>
             <li>
-              Identifica el rol de la BIOS/UEFI en el proceso de arranque.
+              Reconoce las opciones del BIOS/UEFI relacionadas con el arranque.
             </li>
             <li>
-              Entiende qué es el Boot Lock y cómo puede afectar el arranque
-              desde USB.
+              Entiende la importancia de desactivar BitLocker antes de instalar.
+            </li>
+            <li>
+              Identifica los comandos de DiskPart para particionar el disco.
+            </li>
+            <li>
+              Comprende la estructura de particiones necesaria para el dual
+              boot.
             </li>
           </ul>
         </div>
         <div class="comp-box">
           <h3>🛠️ Procedimentales (Saber hacer)</h3>
           <ul>
+            <li>Instalar Ventoy en la USB y copiar las ISOs.</li>
+            <li>Configurar el BIOS/UEFI para arrancar desde USB.</li>
             <li>
-              Flashear la ISO de Fedora en una USB usando Rufus desde Windows.
+              Ejecutar los comandos de registro para desactivar BitLocker.
             </li>
             <li>
-              Seleccionar el dispositivo, la ISO y el esquema de partición
-              correcto en Rufus.
+              Usar DiskPart para particionar el disco (EFI, MSR, Windows).
             </li>
-            <li>Verificar que la USB fue flasheada correctamente.</li>
-            <li>Intentar arrancar el entorno Live de Fedora desde la USB.</li>
-            <li>
-              Identificar cuándo la BIOS/UEFI o el Boot Lock bloquean el
-              arranque desde USB.
-            </li>
+            <li>Instalar Windows en la partición creada.</li>
+            <li>Verificar que todo esté listo para instalar Fedora.</li>
           </ul>
         </div>
         <div class="comp-box">
           <h3>❤️ Actitudinales (Saber ser)</h3>
           <ul>
+            <li>Muestra interés por la instalación de sistemas operativos.</li>
+            <li>Valora la importancia de seguir los pasos con precisión.</li>
             <li>
-              Muestra precaución al seleccionar el dispositivo de destino en
-              Rufus.
+              Participa activamente en la configuración del BIOS y la
+              instalación.
             </li>
-            <li>Sigue las instrucciones con atención y orden.</li>
-            <li>Participa activamente en el proceso de flasheo.</li>
-            <li>Desarrolla paciencia ante posibles problemas de boot.</li>
+            <li>Desarrolla paciencia y atención al detalle.</li>
           </ul>
         </div>
       </div>
@@ -372,85 +473,58 @@
       <div class="seccion inicio">
         <div class="seccion-header">
           <span>🟢 INICIO</span>
-          <span class="tiempo">15 minutos</span>
+          <span class="tiempo">10 minutos</span>
         </div>
         <div class="seccion-body">
-          <h4>
-            Actividad: "¿Qué es flashear y por qué copiar no es suficiente?"
-          </h4>
+          <h4>Actividad: "Preparación para la instalación"</h4>
+          <p><span class="label">Metodología:</span> Repaso y organización.</p>
           <p>
-            <span class="label">Metodología:</span> Cuestionamiento y
-            explicación conceptual.
+            El docente repasa brevemente lo visto en la clase anterior (Linux,
+            distribuciones, Ventoy, ISOs) y presenta el objetivo de hoy:
+            <em
+              >"Vamos a instalar Windows para preparar el dual boot con Fedora.
+              Primero configuraremos el BIOS, luego instalaremos Windows con
+              pasos extra para evitar problemas."</em
+            >
           </p>
-          <p>
-            <span class="label">Descripción:</span> El docente plantea
-            preguntas:
-          </p>
-          <ul>
-            <li>
-              ¿Alguna vez has copiado un archivo a un USB? ¿Crees que eso es
-              suficiente para hacerlo booteable?
-            </li>
-            <li>
-              ¿Qué diferencia hay entre "copiar" un archivo y "flashear" una
-              imagen?
-            </li>
-            <li>¿Qué significa que un USB sea "booteable"?</li>
-          </ul>
-          <p>
-            Se introduce el concepto de <strong>flasheo</strong> como el proceso
-            de escribir una imagen ISO
-            <strong>directamente en los sectores del USB</strong>, incluyendo el
-            sector de arranque, para que la computadora pueda reconocerlo como
-            un dispositivo desde el cual iniciar.
-          </p>
-
-          <div class="comparison-grid">
-            <div style="border-left-color: #2e7d32">
-              <strong>📄 Copiar archivos</strong>
-              <ul style="padding-left: 16px; font-size: 14px">
-                <li>Solo copia el contenido visible.</li>
-                <li>No escribe el sector de arranque.</li>
-                <li>El USB no es booteable.</li>
-                <li>Ejemplo: Arrastrar archivos .iso al USB.</li>
-              </ul>
-            </div>
-            <div style="border-left-color: #c62828">
-              <strong>⚡ Flashear (Escribir imagen)</strong>
-              <ul style="padding-left: 16px; font-size: 14px">
-                <li>Escribe la ISO completa bit a bit.</li>
-                <li>Incluye el sector de arranque.</li>
-                <li>El USB se vuelve booteable.</li>
-                <li>Ejemplo: Usar Rufus, Etcher, Fedora Media Writer.</li>
-              </ul>
-            </div>
-          </div>
 
           <div class="ejemplo-box">
-            <span class="highlight">💡 Analogía:</span><br />
-            Copiar un archivo .iso a un USB es como
-            <strong>poner un libro dentro de una caja</strong>. Flashear es como
-            <strong>grabar el libro directamente en el disco</strong> para que
-            el reproductor pueda leerlo correctamente.
+            <span class="highlight">📌 Pasos de la clase de hoy:</span>
+            <ol style="padding-left: 20px">
+              <li>
+                <strong>Instalar Ventoy</strong> en la USB y copiar las ISOs.
+              </li>
+              <li>
+                <strong>Configurar el BIOS/UEFI</strong> para arrancar desde
+                USB.
+              </li>
+              <li>
+                <strong>Desactivar BitLocker</strong> para evitar que pida
+                clave.
+              </li>
+              <li>
+                <strong>Particionar el disco</strong> con DiskPart (EFI, MSR,
+                Windows).
+              </li>
+              <li><strong>Instalar Windows</strong> en la partición creada.</li>
+              <li><strong>Preparar el espacio</strong> para Fedora.</li>
+            </ol>
           </div>
 
           <h4>Aprendizaje esperado</h4>
-          <p>
-            El estudiante comprende la diferencia entre copiar y flashear, y por
-            qué el flasheo es necesario para crear un USB booteable.
-          </p>
+          <p>El estudiante comprende los pasos a seguir durante la clase.</p>
 
           <h4>Criterios de evaluación</h4>
           <ul>
-            <li>Explica la diferencia entre copiar y flashear.</li>
-            <li>Participa en la discusión inicial.</li>
+            <li>Participa en el repaso.</li>
+            <li>Comprende los pasos de la clase.</li>
           </ul>
 
           <h4>Recursos</h4>
           <ul>
             <li>Pizarra</li>
-            <li>Marcadores</li>
-            <li>Computadora con Windows y Rufus instalado</li>
+            <li>Proyector</li>
+            <li>USB con Ventoy, ISO de Windows e ISO de Fedora</li>
           </ul>
         </div>
       </div>
@@ -459,242 +533,570 @@
       <div class="seccion desarrollo">
         <div class="seccion-header">
           <span>🟡 DESARROLLO</span>
-          <span class="tiempo">35 minutos</span>
+          <span class="tiempo">60 minutos</span>
         </div>
         <div class="seccion-body">
           <h4>
-            Actividad: "Flasheando la USB con Rufus e intentando el Live de
-            Fedora"
+            Actividad: "Instalación de Ventoy, configuración de BIOS y
+            particionado"
           </h4>
           <p>
-            <span class="label">Metodología:</span> Demostración guiada paso a
-            paso + práctica.
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes siguen).
           </p>
 
-          <!-- Preparación -->
-          <h4>🔹 Preparación</h4>
-          <p>Cada estudiante debe tener:</p>
-          <ul>
-            <li>
-              La <strong>ISO de Fedora</strong> copiada en su computadora (de la
-              clase anterior).
-            </li>
-            <li>
-              Una <strong>USB</strong> (mínimo 8 GB) que el maestro
-              proporcionará.
-            </li>
-            <li>
-              <strong>Rufus instalado</strong> en Windows (instalado en clase
-              anterior).
-            </li>
-          </ul>
+          <!-- ============================================ -->
+          <!-- PARTE 1: INSTALAR VENTOY -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 1: Instalar Ventoy en la USB</h4>
 
-          <!-- Herramientas -->
-          <h4>🔹 Rufus - La herramienta para flashear</h4>
-          <p>
-            Rufus es una herramienta gratuita y muy popular para crear USB
-            booteables en Windows. Escribe la ISO directamente en el USB.
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">1</span>
+            <h5>Verificar que ya tiene Ventoy en su carpeta de Documentos</h5>
+            <p>
+              Ir a <strong>Documents</strong> y verificar que tenga el archivo
+              necesario para poder instalar Ventoy.
+            </p>
+            <div class="captura-mock">
+              Documents → Doble click en el programa o descomprimir el archivo
+              ventoy-x.x.x-windows.zip
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">2</span>
+            <h5>Instalar Ventoy en la USB</h5>
+            <p>
+              Conectar una USB (mínimo 16 GB) y ejecutar
+              <strong>Ventoy2Disk.exe</strong>. Seleccionar la USB y hacer clic
+              en <strong>"Install"</strong>.
+            </p>
+            <div class="captura-mock">
+              💾 Ventoy2Disk.exe → Seleccionar USB → Install
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              ⚠️ <strong>Advertencia:</strong> Esto formateará la USB.
+              Asegurarse de que no tenga datos importantes.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">3</span>
+            <h5>Copiar la ISO de Windows</h5>
+            <p>
+              Copiar el archivo <strong>ISO de Windows</strong> a la partición
+              "Ventoy" de la USB.
+            </p>
+            <div class="captura-mock">
+              💿 Copiar: Windows.iso → USB (partición Ventoy)
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">4</span>
+            <h5>Copiar la ISO de Fedora</h5>
+            <p>
+              Copiar el archivo <strong>ISO de Fedora</strong> a la misma
+              partición de Ventoy.
+            </p>
+            <div class="captura-mock">
+              🐧 Copiar: Fedora.iso → USB (partición Ventoy)
+            </div>
+          </div>
+
+          <div class="mock-usb">
+            <div class="header">
+              <span>💾 USB - Ventoy</span>
+              <span>📁</span>
+            </div>
+            <div class="body">
+              <div class="archivo ventoy">
+                <span class="nombre">📁 ventoy</span>
+                <span class="tamano">—</span>
+              </div>
+              <div class="archivo iso-windows">
+                <span class="nombre">💿 Windows.iso</span>
+                <span class="tamano">5.2 GB</span>
+              </div>
+              <div class="archivo iso-fedora">
+                <span class="nombre">🐧 Fedora.iso</span>
+                <span class="tamano">2.1 GB</span>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ USB con Ventoy y las ISOs copiadas.
           </p>
 
-          <!-- Paso a paso con Rufus -->
-          <h4>🔹 Paso a paso para flashear con Rufus</h4>
-          <ol class="step-list">
-            <li><strong>Conectar la USB</strong> a la computadora.</li>
-            <li>
-              <strong>Abrir Rufus</strong> (se puede descargar desde
-              <code>https://rufus.ie</code>).
-            </li>
-            <li>
-              <strong>Seleccionar el dispositivo (Device):</strong> Asegurarse
-              de que la USB esté seleccionada.
-              <strong>¡Cuidado de no seleccionar el disco duro!</strong>
-            </li>
-            <li>
-              <strong>Seleccionar la ISO (Boot selection):</strong> Hacer clic
-              en <strong>"SELECCIONAR"</strong> y elegir la ISO de Fedora que
-              copiaste en tu computadora.
-            </li>
-            <li>
-              <strong>Esquema de partición (Partition scheme):</strong>
+          <!-- ============================================ -->
+          <!-- PARTE 2: CONFIGURAR BIOS -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 2: Configurar el BIOS/UEFI para arrancar desde USB</h4>
+
+          <div class="bios-grid">
+            <div class="bios-item">
+              <h5>🔧 Acceder al BIOS/UEFI</h5>
+              <p>
+                Al encender la computadora, presionar la tecla correspondiente
+                según el fabricante:
+              </p>
+              <ul>
+                <li><strong>HP:</strong> F10 o Esc</li>
+                <li><strong>Dell:</strong> F2 o F12</li>
+                <li><strong>Lenovo:</strong> F1 o F2</li>
+                <li><strong>Asus:</strong> F2 o Del</li>
+                <li><strong>Acer:</strong> F2 o Del</li>
+              </ul>
+            </div>
+            <div class="bios-item fabricante">
+              <h5>⚙️ Configurar opciones de arranque</h5>
+              <p>Buscar las siguientes opciones en el BIOS:</p>
               <ul>
                 <li>
-                  <strong>MBR</strong> para sistemas BIOS/Legacy (computadoras
-                  más antiguas).
+                  <strong>Boot Mode:</strong> UEFI (recomendado) o Legacy.
                 </li>
                 <li>
-                  <strong>GPT</strong> para sistemas UEFI (la mayoría de las
-                  computadoras modernas).
+                  <strong>Secure Boot:</strong> Desactivar (Disable) para
+                  permitir arrancar desde USB.
+                </li>
+                <li>
+                  <strong>Boot Order:</strong> Poner la USB en primer lugar.
+                </li>
+                <li>
+                  <strong>Fast Boot:</strong> Desactivar si no detecta la USB.
                 </li>
               </ul>
-            </li>
-            <li>
-              <strong>Hacer clic en "EMPEZAR" (Start):</strong> Rufus mostrará
-              un diálogo con opciones:
-              <ul>
-                <li>
-                  <strong>"Escribir en modo ISO" (Write in ISO mode):</strong>
-                  Recomendado para la mayoría de los casos.
-                </li>
-                <li>
-                  <strong>"Escribir en modo DD" (Write in DD mode):</strong>
-                  Útil si el modo ISO falla, pero menos común.
-                </li>
-              </ul>
-            </li>
-            <li>
-              <strong
-                >Confirmar que se borrarán todos los datos de la USB.</strong
-              >
-            </li>
-            <li>
-              <strong>Esperar a que termine el proceso:</strong> Puede tomar
-              varios minutos. La barra de progreso mostrará el avance.
-            </li>
-            <li>
-              <strong>Verificar que el proceso fue exitoso:</strong> Al
-              finalizar, Rufus mostrará un mensaje de "LISTO" (READY).
-            </li>
-          </ol>
+            </div>
+          </div>
 
-          <div class="warning-box">
+          <div
+            class="ejemplo-box"
+            style="background: #fff3e0; border-left: 4px solid #e65100"
+          >
+            <span class="highlight" style="color: #e65100"
+              >📌 ¿Qué es Secure Boot?</span
+            >
             <p>
-              <strong>⚠️ ¡Cuidado con la selección del dispositivo!</strong>
+              Secure Boot es una característica de UEFI que impide que se
+              carguen sistemas operativos no firmados. Para instalar Linux o
+              arrancar desde USB, a veces es necesario
+              <strong>desactivarlo</strong>.
             </p>
             <p>
-              Rufus muestra todos los discos conectados.
-              <strong>Asegúrate de que el "Device" sea tu USB</strong> (por su
-              tamaño y nombre) y no el disco duro interno. ¡Seleccionar el disco
-              equivocado puede borrar todo tu sistema operativo!
+              <strong>Pasos:</strong> Ir a <em>Security</em> →
+              <em>Secure Boot</em> → <em>Disabled</em>.
             </p>
           </div>
 
-          <!-- Intentar arrancar Live -->
-          <h4>🔹 Intentar arrancar Fedora Live desde la USB</h4>
-          <p>
-            Ahora que la USB está flasheada, intentamos arrancar el entorno
-            Live.
-          </p>
-          <ol class="step-list">
-            <li>
-              <strong>Reiniciar la computadora</strong> con la USB conectada.
-            </li>
-            <li>
-              <strong>Presionar la tecla de Boot Menu</strong> (F12, F10, ESC,
-              F2, DEL, depende de la marca) inmediatamente después de encender.
-            </li>
-            <li>
-              <strong>Seleccionar la USB</strong> en el menú de dispositivos de
-              arranque.
-            </li>
-            <li>
-              <strong>Si todo funciona:</strong> Aparecerá el menú de arranque
-              de Fedora. Seleccionar
-              <strong>"Start Fedora Workstation Live"</strong>.
-            </li>
-            <li>
-              <strong>Si no funciona o es complicado:</strong> La computadora
-              puede tener <strong>Secure Boot</strong> activado,
-              <strong>Boot Lock</strong> habilitado, o el orden de arranque no
-              prioriza el USB. En ese caso, <strong>no forzarlo</strong>; lo
-              resolveremos en la siguiente clase.
-            </li>
-          </ol>
+          <!-- ============================================ -->
+          <!-- PARTE 3: DESACTIVAR BITLOCKER -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 3: Desactivar BitLocker (evitar que pida clave)</h4>
 
-          <div class="ejemplo-box">
-            <span class="highlight">📌 ¿Qué es el Boot Lock?</span><br />
-            El <strong>Boot Lock</strong> es una función de seguridad que evita
-            que la computadora arranque desde dispositivos externos (como USB)
-            sin autorización. Esto es común en computadoras de empresas o con
-            configuraciones de seguridad avanzadas. Si la computadora tiene Boot
-            Lock activado, solo se puede arrancar desde el disco duro interno.
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">5</span>
+            <h5>Abrir la terminal como administrador</h5>
+            <p>
+              Una vez iniciado el instalador de Windows (o antes de instalar),
+              abrir la terminal con <strong>Shift + F10</strong>.
+            </p>
+            <div class="captura-mock">⌨️ Shift + F10 → Símbolo del sistema</div>
           </div>
 
-          <div class="warning-box">
-            <p><strong>⚠️ ¡Importante!</strong></p>
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">6</span>
+            <h5>Ejecutar el comando para desactivar BitLocker</h5>
             <p>
-              Algunas computadoras tienen
-              <strong>Secure Boot</strong> habilitado, lo que impide que Fedora
-              Live arranque desde USB. También puede ser que el
-              <strong>orden de arranque</strong> en la BIOS/UEFI no incluya el
-              USB como prioridad.
-            </p>
-            <p>
-              <strong>Si no puedes arrancar el Live, no te preocupes.</strong>
-              En la <strong>próxima clase</strong> configuraremos la BIOS/UEFI
-              para solucionarlo e instalaremos Fedora.
+              En la terminal, escribir el siguiente comando y presionar Enter:
             </p>
           </div>
 
-          <!-- Actividad práctica -->
-          <div class="actividad-practica">
-            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+          <div class="leyenda">
+            <div class="item">
+              <span class="color-rojo"></span> Rojo: escribir en la terminal
+            </div>
+            <div class="item">
+              <span class="color-verde"></span> Verde: respuesta esperada si
+              todo sale bien
+            </div>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">X:\Sources&gt;</span>
+            <span class="rojo"
+              >reg add "HKLM\SYSTEM\CurrentControlSet\Control\BitLocker" /v
+              PreventDeviceEncryption /t REG_DWORD /d 1 /f</span
+            >
+            <span class="verde">The operation completed successfully.</span>
+          </div>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 ¿Qué hace este comando?</span
+            >
             <p>
-              <strong>Realiza los siguientes pasos en tu computadora:</strong>
+              Modifica el registro de Windows para
+              <strong>prevenir la encriptación automática</strong> del disco con
+              BitLocker. Esto evita que al iniciar Windows nos pida una clave de
+              recuperación.
             </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PARTE 4: PARTICIONAR CON DISKPART -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 4: Crear las particiones con DiskPart</h4>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">7</span>
+            <h5>Iniciar DiskPart</h5>
+            <p>
+              En la misma terminal, escribir <code>diskpart</code> y presionar
+              Enter.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">X:\Sources&gt;</span>
+            <span class="rojo">diskpart</span>
+            <span class="verde">Microsoft DiskPart version 10.0.xxxxx</span>
+            <span class="verde">Copyright (C) Microsoft Corporation.</span>
+            <span class="verde">On computer: MININT-XXXXX</span>
+            <span class="prompt">DISKPART&gt;</span>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">8</span>
+            <h5>Listar los discos</h5>
+            <p>
+              Escribir <code>list disk</code> para ver los discos disponibles.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">list disk</span>
+            <span class="verde"> Disk ### Status Size Free Dyn Gpt</span>
+            <span class="verde">
+              -------- ------------- ------- ------- --- ---</span
+            >
+            <span class="verde"> Disk 0 Online 476 GB 0 B *</span>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">9</span>
+            <h5>Seleccionar el disco 0</h5>
+            <p>
+              Escribir <code>select disk 0</code> para seleccionar el disco
+              principal.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">select disk 0</span>
+            <span class="verde">Disk 0 is now the selected disk.</span>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">10</span>
+            <h5>Limpiar el disco</h5>
+            <p>
+              Escribir <code>clean</code> para borrar todas las particiones
+              existentes.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">clean</span>
+            <span class="verde">DiskPart succeeded in cleaning the disk.</span>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">11</span>
+            <h5>Convertir a GPT</h5>
+            <p>
+              Escribir <code>convert gpt</code> para convertir el disco al
+              formato GPT (necesario para UEFI).
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">convert gpt</span>
+            <span class="verde"
+              >DiskPart successfully converted the selected disk to GPT
+              format.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">12</span>
+            <h5>Crear partición EFI (500 MB)</h5>
+            <p>Escribir <code>create partition efi size=500</code>.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">create partition efi size=500</span>
+            <span class="verde"
+              >DiskPart succeeded in creating the specified partition.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">13</span>
+            <h5>Formatear la partición EFI</h5>
+            <p>Escribir <code>format quick fs=fat32 label="EFI"</code>.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">format quick fs=fat32 label="EFI"</span>
+            <span class="verde">100 percent completed</span>
+            <span class="verde"
+              >DiskPart successfully formatted the volume.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">14</span>
+            <h5>Asignar letra S a la partición EFI</h5>
+            <p>Escribir <code>assign letter=S</code>.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">assign letter=S</span>
+            <span class="verde"
+              >DiskPart successfully assigned the drive letter or mount
+              point.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">15</span>
+            <h5>Crear partición MSR (16 MB)</h5>
+            <p>Escribir <code>create partition msr size=16</code>.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">create partition msr size=16</span>
+            <span class="verde"
+              >DiskPart succeeded in creating the specified partition.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">16</span>
+            <h5>Crear partición primaria para Windows (200 GB)</h5>
+            <p>
+              Escribir <code>create partition primary size=200000</code> (200 GB
+              en MB).
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">create partition primary size=200000</span>
+            <span class="verde"
+              >DiskPart succeeded in creating the specified partition.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">17</span>
+            <h5>Formatear la partición de Windows</h5>
+            <p>Escribir <code>format quick fs=ntfs label="Windows"</code>.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">format quick fs=ntfs label="Windows"</span>
+            <span class="verde">100 percent completed</span>
+            <span class="verde"
+              >DiskPart successfully formatted the volume.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">18</span>
+            <h5>Asignar letra C a la partición de Windows</h5>
+            <p>Escribir <code>assign letter=C</code>.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">assign letter=C</span>
+            <span class="verde"
+              >DiskPart successfully assigned the drive letter or mount
+              point.</span
+            >
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">19</span>
+            <h5>Salir de DiskPart</h5>
+            <p>Escribir <code>exit</code> para salir de DiskPart.</p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">DISKPART&gt;</span>
+            <span class="rojo">exit</span>
+            <span class="verde">Leaving DiskPart...</span>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ESTRUCTURA DE PARTICIONES -->
+          <!-- ============================================ -->
+          <h4>🔹 Estructura de particiones creada</h4>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 Particiones creadas:</span
+            >
             <ul>
-              <li>Conecta la USB que te proporcionó el maestro.</li>
-              <li>Abre Rufus y selecciona la USB como dispositivo.</li>
               <li>
-                Selecciona la ISO de Fedora que copiaste en la clase anterior.
+                <strong>EFI (500 MB):</strong> Para el arranque UEFI (letra S).
+              </li>
+              <li><strong>MSR (16 MB):</strong> Reservada por Microsoft.</li>
+              <li>
+                <strong>Windows (200 GB):</strong> Para el sistema operativo
+                Windows (letra C).
               </li>
               <li>
-                Elige el esquema de partición (MBR o GPT según tu computadora).
+                <strong>Espacio libre:</strong> El resto del disco quedará sin
+                asignar para instalar Fedora.
               </li>
-              <li>Haz clic en "EMPEZAR" y espera a que termine el flasheo.</li>
-              <li>Una vez terminado, reinicia la computadora.</li>
+            </ul>
+            <p style="margin-top: 6px; font-size: 14px; color: #555">
+              ⚠️ <strong>Importante:</strong> No se debe crear partición para el
+              espacio restante, debe quedar libre para Fedora.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PARTE 5: INSTALAR WINDOWS -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 5: Instalar Windows</h4>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">20</span>
+            <h5>Continuar con la instalación de Windows</h5>
+            <p>
+              Cerrar la terminal (si es necesario) y continuar con el asistente
+              de instalación de Windows. Seleccionar la partición "Windows" (200
+              GB) como destino.
+            </p>
+            <div class="captura-mock">
+              💿 Instalador de Windows → Seleccionar partición → Instalar
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">21</span>
+            <h5>Verificar que BitLocker no se active</h5>
+            <p>
+              Después de instalar, verificar en
+              <strong
+                >Configuración → Privacidad y seguridad → Cifrado de
+                dispositivo</strong
+              >
+              que BitLocker esté desactivado.
+            </p>
+            <div class="captura-mock">
+              ⚙️ Configuración → Cifrado de dispositivo → Desactivado
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">
+              📝 Actividad práctica: Instalación guiada
+            </h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
               <li>
-                Presiona la tecla de Boot Menu e intenta arrancar desde la USB.
+                1. Instalar Ventoy en la USB y copiar las ISOs de Windows y
+                Fedora.
+              </li>
+              <li>2. Reiniciar la computadora y acceder al BIOS/UEFI.</li>
+              <li>
+                3. Configurar el BIOS: desactivar Secure Boot, poner USB como
+                primer dispositivo de arranque.
               </li>
               <li>
-                Si arranca correctamente, explora el entorno Live por unos
-                minutos.
+                4. Iniciar desde la USB y seleccionar la ISO de Windows en
+                Ventoy.
               </li>
-              <li>Si no arranca, anota qué mensaje aparece o qué ocurre.</li>
+              <li>
+                5. Abrir la terminal con Shift + F10 y ejecutar el comando de
+                registro para desactivar BitLocker.
+              </li>
+              <li>
+                6. Ejecutar DiskPart y crear las particiones: EFI (500 MB), MSR
+                (16 MB), Windows (200 GB).
+              </li>
+              <li>
+                7. Continuar con la instalación de Windows en la partición
+                creada.
+              </li>
+              <li>
+                8. Verificar que el espacio libre restante quede sin asignar
+                para Fedora.
+              </li>
+              <li>
+                9. Si no tienes acceso a una computadora para practicar,
+                documenta los pasos y comandos utilizados.
+              </li>
             </ul>
             <p style="margin-top: 12px">
               <strong>Preguntas de reflexión:</strong>
             </p>
             <ul>
               <li>
-                ¿Qué opciones seleccionaste en Rufus (ISO mode o DD mode)?
+                ¿Por qué es importante desactivar BitLocker antes de instalar?
               </li>
-              <li>¿Qué tecla usaste para entrar al Boot Menu?</li>
-              <li>¿Pudiste arrancar Fedora Live? ¿Qué pasó?</li>
-              <li>
-                ¿Crees que tu computadora tiene Boot Lock o Secure Boot
-                activado?
-              </li>
+              <li>¿Qué pasaría si no dejamos espacio libre para Fedora?</li>
+              <li>¿Por qué usamos GPT en lugar de MBR?</li>
+              <li>¿Qué función cumple la partición EFI?</li>
             </ul>
           </div>
 
           <h4>Aprendizaje esperado</h4>
           <p>
-            El estudiante flashea correctamente la ISO de Fedora en una USB
-            usando Rufus desde Windows, intenta arrancar el entorno Live, e
-            identifica si su computadora requiere configuración de BIOS/UEFI.
+            El estudiante instala Ventoy, configura el BIOS, desactiva
+            BitLocker, particiona el disco e instala Windows para preparar el
+            dual boot.
           </p>
 
           <h4>Criterios de evaluación</h4>
           <ul>
-            <li>Flashea la ISO correctamente usando Rufus.</li>
-            <li>
-              Selecciona el dispositivo, la ISO y el esquema de partición
-              adecuados.
-            </li>
-            <li>Verifica que la USB fue flasheada correctamente.</li>
-            <li>Intenta arrancar desde la USB usando el Boot Menu.</li>
-            <li>
-              Identifica si la computadora permite el arranque Live o si
-              necesita configuración.
-            </li>
+            <li>Instala Ventoy correctamente y copia las ISOs.</li>
+            <li>Configura el BIOS/UEFI para arrancar desde USB.</li>
+            <li>Ejecuta el comando para desactivar BitLocker.</li>
+            <li>Usa DiskPart para crear las particiones correctamente.</li>
+            <li>Instala Windows en la partición designada.</li>
+            <li>Verifica que quede espacio libre para Fedora.</li>
           </ul>
 
           <h4>Recursos</h4>
           <ul>
-            <li>USB proporcionada por el maestro (mínimo 8 GB)</li>
-            <li>ISO de Fedora copiada en la computadora</li>
-            <li>Rufus instalado en Windows</li>
+            <li>USB (16 GB o más) por alumno</li>
+            <li>ISO de Windows e ISO de Fedora</li>
+            <li>Computadora con acceso a BIOS/UEFI</li>
             <li>Pizarra</li>
+            <li>Proyector</li>
           </ul>
         </div>
       </div>
@@ -706,100 +1108,102 @@
           <span class="tiempo">10 minutos</span>
         </div>
         <div class="seccion-body">
-          <h4>Actividad: "¿Qué pasó con tu boot?"</h4>
-          <p>
-            <span class="label">Metodología:</span> Puesta en común y
-            diagnóstico.
-          </p>
-          <p>
-            <span class="label">Descripción:</span> Los estudiantes comparten su
-            experiencia:
-          </p>
+          <h4>Actividad: "Repaso y verificación"</h4>
           <ul>
-            <li>¿Pudiste flashear la USB sin problemas?</li>
-            <li>¿Qué opción usaste en Rufus (ISO mode o DD mode)?</li>
-            <li>¿Qué tecla usaste para entrar al Boot Menu?</li>
-            <li>¿Apareció la USB en el menú?</li>
-            <li>¿Arrancó Fedora Live? ¿O apareció algún error?</li>
+            <li>¿Cómo se instala Ventoy en la USB?</li>
+            <li>¿Qué opciones del BIOS debemos configurar?</li>
+            <li>¿Qué es Secure Boot y por qué lo desactivamos?</li>
+            <li>¿Para qué sirve el comando de BitLocker?</li>
+            <li>¿Qué particiones creamos con DiskPart?</li>
+            <li>¿Por qué dejamos espacio libre sin asignar?</li>
+            <li>¿Qué haremos en la próxima clase?</li>
           </ul>
-          <p>
-            El docente explica que en la
-            <strong>próxima clase</strong> configuraremos la BIOS/UEFI para
-            resolver los problemas de boot, desactivando
-            <strong>Secure Boot</strong> y ajustando el
-            <strong>orden de arranque</strong> para instalar Fedora en las
-            computadoras que no lo permitieron.
-          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Verificación final:</span>
+            <p>Antes de terminar, cada alumno debe verificar:</p>
+            <ul>
+              <li>✅ Windows está instalado y funcionando.</li>
+              <li>✅ BitLocker está desactivado.</li>
+              <li>✅ El disco tiene espacio libre sin asignar para Fedora.</li>
+              <li>✅ La USB sigue teniendo las ISOs para la próxima clase.</li>
+            </ul>
+            <p style="margin-top: 6px">
+              💡 <strong>Nota:</strong> En la próxima clase instalaremos Fedora
+              en el espacio libre para completar el dual boot.
+            </p>
+          </div>
 
           <h4>Aprendizaje esperado</h4>
           <p>
-            El estudiante identifica si su computadora requiere configuración de
-            BIOS/UEFI para arrancar desde USB.
+            El estudiante consolida los conceptos de instalación y verifica que
+            todo esté listo para Fedora.
           </p>
 
           <h4>Criterios de evaluación</h4>
           <ul>
-            <li>Comparte su experiencia con el boot.</li>
-            <li>
-              Identifica si el problema fue Secure Boot, Boot Lock o el orden de
-              arranque.
-            </li>
-            <li>Participa activamente.</li>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Verifica que su instalación esté correcta.</li>
           </ul>
 
           <h4>Recursos</h4>
           <ul>
             <li>Pizarra</li>
-            <li>Marcadores</li>
+            <li>Computadoras de los alumnos</li>
           </ul>
         </div>
       </div>
 
       <!-- TIP CLAVE -->
       <div class="tip-clave">
-        <p><strong>💡 Tips clave:</strong></p>
         <p>
-          • <strong>Flashear ≠ Copiar:</strong> Flashear es escribir la ISO
-          directamente en el USB, incluyendo el sector de arranque.
+          <strong
+            >💡 Tips clave para la instalación de Windows y preparación del dual
+            boot:</strong
+          >
         </p>
         <p>
-          • <strong>Rufus</strong> es la herramienta más popular en Windows para
-          flashear ISOs.
+          • <strong>Ventoy:</strong> Instalar en USB y copiar las ISOs de
+          Windows y Fedora.
         </p>
         <p>
-          • <strong>Teclas de Boot Menu comunes:</strong> F12, F10, ESC, F2, DEL
-          (varía según la marca).
+          • <strong>BIOS/UEFI:</strong> Desactivar Secure Boot y poner USB como
+          primer dispositivo de arranque.
         </p>
         <p>
-          • <strong>Secure Boot</strong> y <strong>Boot Lock</strong> pueden
-          bloquear el arranque de Fedora Live. Se desactivan en la BIOS/UEFI.
+          • <strong>BitLocker:</strong> Ejecutar el comando de registro para
+          prevenir la encriptación.
         </p>
         <p>
-          • <strong>Si no arrancó:</strong> No te preocupes, en la siguiente
-          clase configuraremos la BIOS/UEFI.
+          • <strong>DiskPart:</strong> <code>clean</code> →
+          <code>convert gpt</code> → crear particiones EFI, MSR y Windows.
+        </p>
+        <p>• <strong>EFI:</strong> 500 MB, FAT32, letra S.</p>
+        <p>• <strong>MSR:</strong> 16 MB (reservada por Microsoft).</p>
+        <p>• <strong>Windows:</strong> 200 GB, NTFS, letra C.</p>
+        <p>• <strong>Espacio libre:</strong> No asignar, dejar para Fedora.</p>
+        <p>
+          • <strong>Instalar Windows:</strong> Seleccionar la partición de 200
+          GB.
         </p>
         <p>
-          • <strong>Siempre verifica el dispositivo en Rufus</strong> para no
-          borrar el disco duro por accidente.
+          • <strong>Verificar:</strong> BitLocker desactivado y espacio libre
+          disponible.
+        </p>
+        <p>
+          • <strong>Próxima clase:</strong> Instalación de Fedora en el espacio
+          libre.
         </p>
       </div>
 
       <!-- FOOTER -->
       <div class="footer-clase">
         <p><strong>🔥 Esta clase es clave porque:</strong></p>
-        <p>
-          • Enseña el proceso práctico de flasheo con Rufus, una herramienta muy
-          usada en el mundo real.
-        </p>
-        <p>• Introduce el entorno Live de Fedora y su utilidad.</p>
-        <p>
-          • Prepara a los estudiantes para resolver problemas de boot en
-          diferentes computadoras.
-        </p>
-        <p>
-          • Conecta directamente con la instalación de Fedora en la siguiente
-          clase.
-        </p>
+        <p>• Prepara el disco para el dual boot con Windows y Fedora.</p>
+        <p>• Enseña a configurar el BIOS y usar DiskPart.</p>
+        <p>• Evita problemas futuros con BitLocker y particiones.</p>
+        <p>• Sienta las bases para la instalación de Fedora.</p>
       </div>
     </div>
   </body>
