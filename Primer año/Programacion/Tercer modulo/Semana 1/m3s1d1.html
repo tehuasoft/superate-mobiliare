@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planificación de Clase - Informática / Linux</title>
+    <title>
+      Planificación de Clase · Distribuciones de Linux y Preparación de
+      Herramientas
+    </title>
     <style>
       * {
         margin: 0;
@@ -12,7 +15,7 @@
       }
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: #f0f4f8;
+        background: #f5f7fa;
         padding: 40px 20px;
         display: flex;
         justify-content: center;
@@ -30,7 +33,15 @@
         color: #1a237e;
         border-left: 6px solid #1a237e;
         padding-left: 20px;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
       }
       .comp-general {
         background: #e8eaf6;
@@ -143,12 +154,6 @@
         font-weight: 600;
         color: #1a237e;
       }
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin: 12px 0;
-      }
       .ejemplo-box {
         background: #e3f2fd;
         padding: 14px 18px;
@@ -160,16 +165,6 @@
         font-size: 18px;
         font-weight: 600;
         color: #0d47a1;
-      }
-      .codigo-box {
-        background: #1a1a2e;
-        color: #e0e0e0;
-        padding: 14px 18px;
-        border-radius: 10px;
-        margin: 8px 0;
-        font-family: "Courier New", monospace;
-        font-size: 15px;
-        overflow-x: auto;
       }
       .actividad-practica {
         background: #fff3e0;
@@ -207,102 +202,229 @@
         font-size: 15px;
         margin: 4px 0;
       }
-      .warning-box {
-        background: #fff8e1;
-        border-left: 6px solid #f9a825;
-        padding: 12px 18px;
+
+      .distro-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
         border-radius: 10px;
-        margin: 12px 0;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
       }
-      .distro-grid {
+      .distro-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      .distro-card p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .distro-card .tag {
+        display: inline-block;
+        padding: 2px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 2px 4px 2px 0;
+      }
+      .tag-ubuntu {
+        background: #e3f2fd;
+        color: #0d47a1;
+      }
+      .tag-debian {
+        background: #fce4ec;
+        color: #c62828;
+      }
+      .tag-arch {
+        background: #e8eaf6;
+        color: #1a237e;
+      }
+      .tag-tails {
+        background: #f3e5f5;
+        color: #6a1b9a;
+      }
+      .tag-kali {
+        background: #e0f7fa;
+        color: #00838f;
+      }
+      .tag-fedora {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .herramientas-grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 16px;
         margin: 12px 0;
       }
-      .distro-card {
-        background: white;
-        border-radius: 12px;
-        padding: 16px 18px;
-        border: 1px solid #e0e0e0;
-        text-align: center;
-        transition: 0.2s;
+      .herramienta-item {
+        background: #f5f7fa;
+        padding: 14px 16px;
+        border-radius: 10px;
         border-top: 4px solid #3f51b5;
       }
-      .distro-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      .distro-card .logo {
-        font-size: 32px;
+      .herramienta-item h5 {
+        color: #1a237e;
+        font-size: 16px;
         margin-bottom: 6px;
       }
-      .distro-card strong {
-        font-size: 16px;
-        color: #1a237e;
-        display: block;
+      .herramienta-item p {
+        font-size: 14px;
+        margin: 4px 0;
       }
-      .distro-card p {
-        font-size: 13px;
-        color: #555;
-        margin: 4px 0 0 0;
+      .herramienta-item .icono {
+        font-size: 28px;
+        margin-bottom: 4px;
       }
-      .distro-card .badge {
-        display: inline-block;
-        background: #e8eaf6;
-        color: #1a237e;
-        font-size: 11px;
-        padding: 2px 10px;
+      .herramienta-item.ventoy {
+        border-top-color: #e65100;
+      }
+      .herramienta-item.windows {
+        border-top-color: #0d47a1;
+      }
+      .herramienta-item.fedora {
+        border-top-color: #2e7d32;
+      }
+
+      .mock-usb {
+        background: white;
         border-radius: 12px;
-        margin-top: 6px;
+        border: 2px solid #1a237e;
+        overflow: hidden;
+        margin: 8px auto;
+        max-width: 420px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .mock-usb .header {
+        background: #1a237e;
+        color: white;
+        padding: 10px 14px;
+        font-size: 14px;
         font-weight: 600;
+        display: flex;
+        justify-content: space-between;
       }
-      .distro-card.fedora {
-        border-top-color: #1976d2;
-        background: #e3f2fd;
+      .mock-usb .body {
+        padding: 14px;
+        background: #f5f7fa;
       }
-      .distro-card.fedora .badge {
-        background: #1976d2;
-        color: white;
+      .mock-usb .archivo {
+        background: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+        border-left: 3px solid #1e88e5;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-      .copy-step {
-        background: #e8f5e9;
-        padding: 12px 16px;
-        border-radius: 10px;
-        border-left: 4px solid #2e7d32;
-        margin: 10px 0;
-      }
-      .step-list {
-        list-style: none;
-        counter-reset: step-counter;
-        padding: 0;
-      }
-      .step-list li {
-        counter-increment: step-counter;
-        padding: 10px 0 10px 50px;
-        position: relative;
-        border-bottom: 1px solid #e0e0e0;
-        font-size: 15px;
-        line-height: 1.6;
-      }
-      .step-list li::before {
-        content: counter(step-counter);
-        background: #3f51b5;
-        color: white;
-        font-weight: bold;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
+      .mock-usb .archivo .nombre {
         display: flex;
         align-items: center;
+        gap: 6px;
+      }
+      .mock-usb .archivo.iso-windows {
+        border-left-color: #0d47a1;
+      }
+      .mock-usb .archivo.iso-fedora {
+        border-left-color: #2e7d32;
+      }
+      .mock-usb .archivo.ventoy {
+        border-left-color: #e65100;
+      }
+      .mock-usb .archivo .tamano {
+        font-size: 11px;
+        color: #888;
+      }
+
+      .timeline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         justify-content: center;
-        position: absolute;
-        left: 0;
-        top: 8px;
+        gap: 8px;
+        background: #f5f7fa;
+        padding: 18px;
+        border-radius: 12px;
+        margin: 12px 0;
+      }
+      .timeline .fase {
+        background: white;
+        border: 2px solid #1a237e;
+        border-radius: 10px;
+        padding: 10px 16px;
+        text-align: center;
+        min-width: 110px;
+      }
+      .timeline .fase.hoy {
+        border-color: #2e7d32;
+        background: #e8f5e9;
+      }
+      .timeline .fase.proxima {
+        border-color: #e65100;
+        background: #fff3e0;
+      }
+      .timeline .fase.futura {
+        border-color: #0d47a1;
+        background: #e3f2fd;
+      }
+      .timeline .fase .titulo {
+        font-weight: 600;
+        font-size: 13px;
+        color: #1a237e;
+      }
+      .timeline .fase .subtitulo {
+        font-size: 11px;
+        color: #555;
+      }
+      .timeline .flecha {
+        font-size: 22px;
+        color: #3f51b5;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
         font-size: 14px;
+        margin-right: 8px;
       }
-      .step-list li:last-child {
-        border-bottom: none;
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
       }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
       @media (max-width: 768px) {
         .container {
           padding: 20px;
@@ -310,86 +432,74 @@
         .competencias {
           grid-template-columns: 1fr;
         }
-        .grid-2 {
+        .herramientas-grid {
           grid-template-columns: 1fr;
         }
         .actividad-practica ul {
           columns: 1;
         }
-        .distro-grid {
-          grid-template-columns: 1fr;
+        .timeline {
+          flex-direction: column;
         }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>📘 PLANIFICACIÓN DE CLASE</h1>
-      <p
-        style="
-          font-size: 18px;
-          color: #1a237e;
-          margin-top: -10px;
-          margin-bottom: 25px;
-          font-weight: 500;
-        "
-      >
-        Tema: Distribuciones de Linux - ¿Qué es Linux? y preparación de
-        herramientas (Rufus + ISO Fedora)
-      </p>
+      <h1>🐧 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Distribuciones de Linux · Preparación de Herramientas · Ventoy + ISO
+        Windows + ISO Fedora
+      </div>
 
-      <!-- COMPETENCIA GENERAL -->
       <div class="comp-general">
         <h2>🎯 Competencia General</h2>
         <p>
-          Comprende qué es Linux y para qué sirve, conoce las principales
-          distribuciones (Ubuntu, Debian, Arch Linux, Tails, Kali, Fedora), y
-          mientras se explican estos conceptos, copia el archivo ISO de Fedora
-          desde una USB y instala Rufus desde la Microsoft Store en las
-          computadoras con Windows.
+          El estudiante comprende qué es Linux, conoce las principales
+          distribuciones (Ubuntu, Debian, Arch Linux, Tails, Kali y Fedora), y
+          prepara las herramientas necesarias (Ventoy, ISO de Windows e ISO de
+          Fedora) para realizar un dual boot en clases futuras, comprendiendo el
+          propósito de cada herramienta y copiando los archivos necesarios en
+          sus computadoras.
         </p>
       </div>
 
-      <!-- COMPETENCIAS -->
       <div class="competencias">
         <div class="comp-box">
           <h3>📖 Conceptuales (Saber)</h3>
           <ul>
             <li>
-              Define qué es Linux (kernel) y su función en el sistema operativo.
+              Comprende qué es Linux y su importancia en el mundo tecnológico.
             </li>
-            <li>Diferencia entre Linux y distribuciones de Linux.</li>
             <li>
-              Identifica las características de las distros más comunes: Ubuntu,
-              Debian, Arch Linux, Tails, Kali y Fedora.
+              Reconoce las principales distribuciones de Linux y sus usos.
             </li>
-            <li>Reconoce los usos principales de cada distribución.</li>
+            <li>Identifica qué es Ventoy y para qué sirve.</li>
+            <li>
+              Entiende el propósito de una ISO de Windows y una ISO de Fedora.
+            </li>
+            <li>Comprende el concepto de dual boot.</li>
           </ul>
         </div>
         <div class="comp-box">
           <h3>🛠️ Procedimentales (Saber hacer)</h3>
           <ul>
+            <li>Diferenciar las distribuciones de Linux según su propósito.</li>
+            <li>Descargar e instalar Ventoy en una USB.</li>
             <li>
-              Copiar el archivo ISO de Fedora desde una USB a la computadora.
+              Copiar la ISO de Windows y la ISO de Fedora en la USB con Ventoy.
             </li>
-            <li>Instalar Rufus desde la Microsoft Store en Windows.</li>
-            <li>
-              Identificar el propósito de cada distribución según el contexto.
-            </li>
+            <li>Preparar el material necesario para el dual boot.</li>
+            <li>Verificar que los archivos estén correctamente copiados.</li>
           </ul>
         </div>
         <div class="comp-box">
           <h3>❤️ Actitudinales (Saber ser)</h3>
           <ul>
-            <li>Muestra interés por conocer diferentes sistemas operativos.</li>
-            <li>
-              Sigue las instrucciones del maestro para copiar el archivo ISO e
-              instalar Rufus.
-            </li>
-            <li>
-              Participa activamente en la discusión sobre las distribuciones.
-            </li>
-            <li>Valora la diversidad de opciones que ofrece Linux.</li>
+            <li>Muestra interés por el software libre y Linux.</li>
+            <li>Valora la importancia de la preparación previa.</li>
+            <li>Participa activamente en la copia de archivos.</li>
+            <li>Desarrolla responsabilidad con sus herramientas de trabajo.</li>
           </ul>
         </div>
       </div>
@@ -398,86 +508,74 @@
       <div class="seccion inicio">
         <div class="seccion-header">
           <span>🟢 INICIO</span>
-          <span class="tiempo">15 minutos</span>
+          <span class="tiempo">10 minutos</span>
         </div>
         <div class="seccion-body">
-          <h4>Actividad: "¿Qué es Linux? y preparación de herramientas"</h4>
+          <h4>Actividad: "¿Qué sabemos sobre Linux?"</h4>
           <p>
-            <span class="label">Metodología:</span> Exposición y actividad
-            práctica simultánea.
+            <span class="label">Metodología:</span> Lluvia de ideas y reflexión.
           </p>
           <p>
-            <span class="label">Descripción:</span> El docente explica mientras
-            los estudiantes realizan la copia del ISO y la instalación de Rufus.
+            El docente pregunta:
+            <em
+              >"¿Alguna vez han escuchado hablar de Linux? ¿Sabían que la
+              mayoría de los servidores de internet funcionan con Linux?
+              ¿Conocen alguna distribución de Linux?"</em
+            >
           </p>
 
-          <div class="copy-step">
+          <div class="ejemplo-box">
+            <span class="highlight">📌 ¿Qué es Linux?</span>
             <p>
-              <strong>🔹 Mientras escuchas la explicación, haz esto:</strong>
+              Linux es un
+              <strong>sistema operativo de código abierto</strong> (open source)
+              basado en Unix. Fue creado por Linus Torvalds en 1991 y es
+              mantenido por una comunidad global de desarrolladores.
             </p>
             <ul>
-              <li>Recibe la USB con la ISO de Fedora que pasará el maestro.</li>
-              <li>Conecta la USB a tu computadora.</li>
-              <li>Abre el explorador de archivos.</li>
               <li>
-                Ubica el archivo <strong>Fedora-Workstation-*.iso</strong>.
+                <strong>Gratuito y libre:</strong> Cualquiera puede usarlo,
+                modificarlo y distribuirlo.
               </li>
               <li>
-                <strong>Copia el archivo</strong> a tu carpeta
-                <strong>Descargas</strong> o a tu escritorio.
+                <strong>Seguro y estable:</strong> Ideal para servidores y
+                sistemas críticos.
               </li>
               <li>
-                Una vez copiado, desconecta la USB y pásala al siguiente
-                compañero.
+                <strong>Flexible:</strong> Existen distribuciones para todos los
+                gustos y necesidades.
               </li>
               <li>
-                <strong>Instala Rufus desde la Microsoft Store:</strong> Abre la
-                Microsoft Store, busca "Rufus", y haz clic en "Instalar".
+                <strong>Base de Android:</strong> El sistema operativo móvil más
+                usado del mundo.
+              </li>
+              <li>
+                <strong>Usado en servidores:</strong> Más del 90% de los
+                servidores web usan Linux.
               </li>
             </ul>
           </div>
 
-          <h4>🔹 ¿Qué es Linux?</h4>
-          <p>
-            <strong>Linux</strong> es el <strong>núcleo (kernel)</strong> de un
-            sistema operativo. Es el software que se encarga de:
-          </p>
-          <ul>
-            <li>
-              Gestionar el hardware (procesador, memoria, discos, periféricos).
-            </li>
-            <li>
-              Proveer servicios básicos para que otros programas puedan
-              funcionar.
-            </li>
-            <li>Actuar como intermediario entre el usuario y el hardware.</li>
-          </ul>
-          <div class="ejemplo-box">
-            <span class="highlight">💡 Analogía:</span><br />
-            Linux es como el <strong>"motor"</strong> de un carro. Las
-            distribuciones son el <strong>"carro completo"</strong> (carrocería,
-            asientos, dirección, etc.).
-          </div>
-
           <h4>Aprendizaje esperado</h4>
           <p>
-            El estudiante comprende qué es Linux y prepara las herramientas
-            necesarias (ISO de Fedora y Rufus).
+            El estudiante comprende qué es Linux y su importancia en el mundo
+            tecnológico.
           </p>
 
           <h4>Criterios de evaluación</h4>
           <ul>
-            <li>Explica con sus palabras qué es Linux.</li>
-            <li>Copia correctamente el archivo ISO desde la USB.</li>
-            <li>Instala Rufus desde la Microsoft Store.</li>
-            <li>Participa en la actividad inicial.</li>
+            <li>Participa en la lluvia de ideas.</li>
+            <li>Reconoce qué es Linux.</li>
           </ul>
 
           <h4>Recursos</h4>
           <ul>
-            <li>USB con ISO de Fedora</li>
-            <li>Computadora con Windows y Microsoft Store</li>
             <li>Pizarra</li>
+            <li>Proyector</li>
+            <li>
+              USB con Ventoy, ISO de Windows e ISO de Fedora (para copiar a los
+              alumnos)
+            </li>
           </ul>
         </div>
       </div>
@@ -486,162 +584,413 @@
       <div class="seccion desarrollo">
         <div class="seccion-header">
           <span>🟡 DESARROLLO</span>
-          <span class="tiempo">35 minutos</span>
+          <span class="tiempo">50 minutos</span>
         </div>
         <div class="seccion-body">
           <h4>
-            Actividad: "Distribuciones de Linux - Explorando las más comunes"
+            Actividad: "Distribuciones de Linux y preparación de herramientas"
           </h4>
           <p>
-            <span class="label">Metodología:</span> Explicación guiada con
-            ejemplos visuales.
+            <span class="label">Metodología:</span> Explicación guiada mientras
+            se copian los archivos.
           </p>
 
-          <!-- ¿Qué es una distribución? -->
-          <h4>🔹 ¿Qué es una distribución de Linux?</h4>
+          <!-- ============================================ -->
+          <!-- DISTRIBUCIONES DE LINUX -->
+          <!-- ============================================ -->
+          <h4>🔹 Distribuciones de Linux</h4>
           <p>
-            Una <strong>distribución (distro)</strong> es un
-            <strong>paquete completo</strong> que incluye:
+            Una <strong>distribución</strong> (o "distro") es una versión de
+            Linux que incluye el kernel, herramientas y aplicaciones
+            empaquetadas para un propósito específico.
           </p>
-          <ul>
-            <li>El <strong>kernel de Linux</strong>.</li>
-            <li>
-              Herramientas de sistema (gestor de paquetes, bibliotecas,
-              drivers).
-            </li>
-            <li>Entorno de escritorio (GNOME, KDE, XFCE, etc.).</li>
-            <li>Aplicaciones preinstaladas.</li>
-            <li>Sistema de configuración y administración.</li>
-          </ul>
-          <div class="warning-box">
+
+          <div class="distro-card" style="border-left-color: #0d47a1">
+            <h5>
+              <span class="tag tag-ubuntu">🟠 Ubuntu</span> — La más popular
+            </h5>
+            <p><strong>Base:</strong> Debian</p>
             <p>
-              <strong>💡 Conclusión:</strong> Todas las distribuciones usan
-              <strong>el mismo kernel Linux</strong>, pero se diferencian en las
-              <strong>herramientas, el entorno visual y el propósito</strong>
-              para el que están diseñadas.
+              <strong>Propósito:</strong> Uso general, fácil de usar, ideal para
+              principiantes.
+            </p>
+            <p>
+              <strong>Características:</strong> Interfaz amigable, gran
+              comunidad, actualizaciones frecuentes, soporte comercial de
+              Canonical.
+            </p>
+            <p>
+              <strong>Uso típico:</strong> Escritorio, servidores, desarrollo.
             </p>
           </div>
 
-          <!-- Grid de distribuciones -->
-          <h4>🔹 Principales distribuciones de Linux</h4>
-          <div class="distro-grid">
-            <div class="distro-card">
-              <div class="logo">🟠</div>
-              <strong>Ubuntu</strong>
+          <div class="distro-card" style="border-left-color: #c62828">
+            <h5>
+              <span class="tag tag-debian">🔴 Debian</span> — El pilar de Linux
+            </h5>
+            <p>
+              <strong>Base:</strong> Es la base de muchas otras distros (Ubuntu,
+              Kali, etc.)
+            </p>
+            <p><strong>Propósito:</strong> Estabilidad y confiabilidad.</p>
+            <p>
+              <strong>Características:</strong> Muy estable, 100% software
+              libre, actualizaciones más lentas pero seguras.
+            </p>
+            <p>
+              <strong>Uso típico:</strong> Servidores, sistemas embebidos,
+              usuarios avanzados.
+            </p>
+          </div>
+
+          <div class="distro-card" style="border-left-color: #1a237e">
+            <h5>
+              <span class="tag tag-arch">🔵 Arch Linux</span> — Para expertos
+            </h5>
+            <p><strong>Base:</strong> Independiente</p>
+            <p><strong>Propósito:</strong> Control total y personalización.</p>
+            <p>
+              <strong>Características:</strong> Instalación manual, rolling
+              release (siempre actualizado), documentación excelente (Arch
+              Wiki).
+            </p>
+            <p>
+              <strong>Uso típico:</strong> Usuarios avanzados que quieren
+              control absoluto.
+            </p>
+          </div>
+
+          <div class="distro-card" style="border-left-color: #6a1b9a">
+            <h5>
+              <span class="tag tag-tails">🟣 Tails</span> — Privacidad y
+              anonimato
+            </h5>
+            <p><strong>Base:</strong> Debian</p>
+            <p><strong>Propósito:</strong> Navegación anónima y segura.</p>
+            <p>
+              <strong>Características:</strong> Se ejecuta desde USB, enruta
+              todo el tráfico por Tor, no deja rastro en el equipo.
+            </p>
+            <p>
+              <strong>Uso típico:</strong> Periodistas, activistas, usuarios que
+              necesitan privacidad.
+            </p>
+          </div>
+
+          <div class="distro-card" style="border-left-color: #00838f">
+            <h5>
+              <span class="tag tag-kali">🔷 Kali Linux</span> — Seguridad y
+              hacking ético
+            </h5>
+            <p><strong>Base:</strong> Debian</p>
+            <p>
+              <strong>Propósito:</strong> Pruebas de penetración y seguridad
+              informática.
+            </p>
+            <p>
+              <strong>Características:</strong> Incluye cientos de herramientas
+              de hacking ético, auditoría y forense.
+            </p>
+            <p>
+              <strong>Uso típico:</strong> Pentesters, auditores de seguridad,
+              estudiantes de ciberseguridad.
+            </p>
+          </div>
+
+          <div class="distro-card" style="border-left-color: #2e7d32">
+            <h5>
+              <span class="tag tag-fedora">🟢 Fedora</span> — Innovación y
+              desarrollo
+            </h5>
+            <p>
+              <strong>Base:</strong> Independiente (patrocinada por Red Hat)
+            </p>
+            <p>
+              <strong>Propósito:</strong> Innovación y tecnologías emergentes.
+            </p>
+            <p>
+              <strong>Características:</strong> Actualizaciones frecuentes,
+              tecnologías de vanguardia, entorno GNOME por defecto.
+            </p>
+            <p>
+              <strong>Uso típico:</strong> Desarrolladores, entusiastas de la
+              tecnología.
+            </p>
+            <p style="font-weight: 600; color: #2e7d32">
+              ⭐ Esta es la distribución que usaremos más adelante en el curso.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- HERRAMIENTAS -->
+          <!-- ============================================ -->
+          <h4>
+            🔹 Preparación de herramientas: Ventoy + ISO de Windows + ISO de
+            Fedora
+          </h4>
+
+          <div class="herramientas-grid">
+            <div class="herramienta-item ventoy">
+              <div class="icono">💾</div>
+              <h5>Ventoy</h5>
               <p>
-                La más popular para usuarios nuevos. Fácil de usar, gran
-                comunidad y soporte. Basada en Debian.
+                <strong>¿Qué es?</strong> Una herramienta que permite crear una
+                USB de arranque <strong>multiboot</strong>.
               </p>
-              <span class="badge">🖥️ Escritorio</span>
+              <p>
+                <strong>¿Para qué sirve?</strong> Permite copiar múltiples
+                archivos ISO a una USB y arrancar desde cualquiera de ellos sin
+                necesidad de formatear la USB cada vez.
+              </p>
+              <p>
+                <strong>Ventaja:</strong> Puedes tener Windows, Fedora y otras
+                herramientas en la misma USB.
+              </p>
             </div>
-            <div class="distro-card">
-              <div class="logo">🟢</div>
-              <strong>Debian</strong>
+            <div class="herramienta-item windows">
+              <div class="icono">💿</div>
+              <h5>ISO de Windows</h5>
               <p>
-                Muy estable y segura. Base de muchas otras distros (Ubuntu,
-                Linux Mint). Usada en servidores y escritorio.
+                <strong>¿Qué es?</strong> Un archivo de imagen que contiene una
+                copia exacta de un disco de instalación de Windows.
               </p>
-              <span class="badge">⚙️ Estable</span>
+              <p>
+                <strong>¿Para qué sirve?</strong> Permite instalar Windows en
+                una computadora desde una USB.
+              </p>
+              <p>
+                <strong>Uso en el curso:</strong> Lo usaremos para hacer un
+                <strong>dual boot</strong> (Windows + Fedora).
+              </p>
             </div>
-            <div class="distro-card">
-              <div class="logo">🔴</div>
-              <strong>Arch Linux</strong>
+            <div class="herramienta-item fedora">
+              <div class="icono">🐧</div>
+              <h5>ISO de Fedora</h5>
               <p>
-                Rolling release, altamente personalizable. Para usuarios
-                avanzados que quieren control total.
+                <strong>¿Qué es?</strong> Un archivo de imagen que contiene el
+                instalador de Fedora Linux.
               </p>
-              <span class="badge">🧠 Avanzada</span>
-            </div>
-            <div class="distro-card">
-              <div class="logo">🕵️</div>
-              <strong>Tails</strong>
               <p>
-                Enfocada en anonimato y privacidad. Se ejecuta desde USB y no
-                deja rastros en el disco duro.
+                <strong>¿Para qué sirve?</strong> Permite instalar Fedora en una
+                computadora desde una USB.
               </p>
-              <span class="badge">🔒 Privacidad</span>
-            </div>
-            <div class="distro-card">
-              <div class="logo">⚫</div>
-              <strong>Kali Linux</strong>
               <p>
-                Especializada en seguridad informática y pentesting (pruebas de
-                penetración).
+                <strong>Uso en el curso:</strong> Lo instalaremos después de
+                Windows para completar el <strong>dual boot</strong>.
               </p>
-              <span class="badge">🛡️ Seguridad</span>
-            </div>
-            <div class="distro-card fedora">
-              <div class="logo">🔵</div>
-              <strong>Fedora</strong>
-              <p>
-                Moderno, con software actualizado. Respaldado por Red Hat. Es la
-                que usaremos en este curso.
-              </p>
-              <span class="badge">⭐ ¡Nuestra distro!</span>
             </div>
           </div>
 
-          <!-- Rufus -->
-          <h4>🔹 Rufus - Herramienta para crear USB booteable</h4>
-          <p>
-            <strong>Rufus</strong> es una herramienta gratuita y de código
-            abierto que permite crear USB booteables a partir de archivos ISO.
-            Es ampliamente compatible con:
-          </p>
-          <ul>
-            <li>Windows</li>
-            <li>
-              Distribuciones de Linux (Ubuntu, Fedora, Debian, Arch, etc.)
-            </li>
-            <li>BSD, DOS y otros sistemas operativos</li>
-          </ul>
-          <p>
-            En esta clase, Rufus se instaló desde la Microsoft Store, lo cual
-            facilita su obtención y actualización.
-          </p>
-
-          <!-- Actividad práctica -->
-          <div class="actividad-practica">
-            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+          <!-- ============================================ -->
+          <!-- DUAL BOOT -->
+          <!-- ============================================ -->
+          <h4>🔹 ¿Qué es un dual boot?</h4>
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Dual Boot (arranque dual):</span>
             <p>
-              <strong>Responde las siguientes preguntas en tu cuaderno:</strong>
+              Es la instalación de <strong>dos sistemas operativos</strong> en
+              la misma computadora. Al encender, el usuario puede elegir cuál
+              sistema operativo iniciar.
             </p>
             <ul>
-              <li>¿Qué es Linux? ¿Qué función tiene?</li>
-              <li>¿Qué diferencia hay entre Linux y una distribución?</li>
-              <li>Menciona 3 distribuciones y para qué sirve cada una.</li>
-              <li>¿Por qué elegimos Fedora para este curso?</li>
-              <li>¿Qué archivo copiaste desde la USB? ¿Dónde lo guardaste?</li>
-              <li>¿Cómo instalaste Rufus? ¿Desde dónde lo obtuviste?</li>
+              <li>
+                <strong>Ventaja:</strong> Puedes usar Windows para algunas cosas
+                y Fedora para otras.
+              </li>
+              <li>
+                <strong>Preparación:</strong> Necesitamos redimensionar la
+                partición de Windows para dejar espacio a Fedora.
+              </li>
+              <li>
+                <strong>Orden de instalación:</strong> Primero Windows
+                (redimensionado) y luego Fedora.
+              </li>
+            </ul>
+            <p style="margin-top: 6px; font-size: 14px; color: #555">
+              ⚠️ <strong>Importante:</strong> Hoy solo copiaremos los archivos.
+              La instalación y el redimensionado los haremos en otra clase.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- CÓMO USAR VENTOY -->
+          <!-- ============================================ -->
+          <h4>🔹 Cómo preparar la USB con Ventoy</h4>
+
+          <div class="timeline">
+            <div class="fase hoy">
+              <div class="titulo">1. Descargar Ventoy</div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="fase hoy">
+              <div class="titulo">2. Instalar en USB</div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="fase hoy">
+              <div class="titulo">3. Copiar ISOs</div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="fase proxima">
+              <div class="titulo">4. Instalar Windows</div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="fase futura">
+              <div class="titulo">5. Instalar Fedora</div>
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">1</span>
+            <h5>Descargar Ventoy</h5>
+            <p>
+              Ir a <strong>ventoy.net</strong> y descargar la versión para
+              Windows. Descomprimir el archivo ZIP.
+            </p>
+            <div class="captura-mock">
+              🌐 ventoy.net → Descargar → ventoy-x.x.x-windows.zip
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">2</span>
+            <h5>Instalar Ventoy en la USB</h5>
+            <p>
+              Conectar una USB (mínimo 16 GB) y ejecutar
+              <strong>Ventoy2Disk.exe</strong>. Seleccionar la USB y hacer clic
+              en <strong>"Install"</strong>.
+            </p>
+            <div class="captura-mock">
+              💾 Ventoy2Disk.exe → Seleccionar USB → Install
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              ⚠️ <strong>Advertencia:</strong> Esto formateará la USB.
+              Asegurarse de que no tenga datos importantes.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">3</span>
+            <h5>Copiar la ISO de Windows</h5>
+            <p>
+              Una vez instalado Ventoy, la USB tendrá una partición llamada
+              <strong>"Ventoy"</strong>. Copiar el archivo
+              <strong>ISO de Windows</strong> a esa partición.
+            </p>
+            <div class="captura-mock">
+              💿 Copiar: Windows.iso → USB (partición Ventoy)
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">4</span>
+            <h5>Copiar la ISO de Fedora</h5>
+            <p>
+              Copiar también el archivo <strong>ISO de Fedora</strong> a la
+              misma partición de Ventoy.
+            </p>
+            <div class="captura-mock">
+              🐧 Copiar: Fedora.iso → USB (partición Ventoy)
+            </div>
+          </div>
+
+          <div class="mock-usb">
+            <div class="header">
+              <span>💾 USB - Ventoy</span>
+              <span>📁</span>
+            </div>
+            <div class="body">
+              <div class="archivo ventoy">
+                <span class="nombre">📁 ventoy</span>
+                <span class="tamano">—</span>
+              </div>
+              <div class="archivo iso-windows">
+                <span class="nombre">💿 Windows.iso</span>
+                <span class="tamano">5.2 GB</span>
+              </div>
+              <div class="archivo iso-fedora">
+                <span class="nombre">🐧 Fedora.iso</span>
+                <span class="tamano">2.1 GB</span>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo de la USB con Ventoy y las ISOs copiadas (Windows +
+            Fedora).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">
+              📝 Actividad práctica: Copiar los archivos
+            </h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Mientras el docente explica, conectar una USB de al menos 16
+                GB.
+              </li>
+              <li>
+                2. Copiar la carpeta de <strong>Ventoy</strong> que el docente
+                compartirá.
+              </li>
+              <li>
+                3. Copiar el archivo <strong>ISO de Windows</strong> a la USB.
+              </li>
+              <li>
+                4. Copiar el archivo <strong>ISO de Fedora</strong> a la USB.
+              </li>
+              <li>
+                5. Verificar que los archivos estén completos y no corruptos.
+              </li>
+              <li>
+                6. Etiquetar la USB con el nombre del alumno para no perderla.
+              </li>
+              <li>
+                7. Guardar la USB en un lugar seguro para la próxima clase.
+              </li>
             </ul>
             <p style="margin-top: 12px">
-              <strong>Investiga:</strong> ¿Qué otra distribución de Linux
-              conoces que no hayamos mencionado?
+              <strong>Preguntas de reflexión:</strong>
             </p>
+            <ul>
+              <li>
+                ¿Por qué es importante preparar las herramientas antes de la
+                instalación?
+              </li>
+              <li>
+                ¿Qué ventaja tiene Ventoy sobre otros métodos de creación de USB
+                de arranque?
+              </li>
+              <li>¿Por qué instalaremos primero Windows y luego Fedora?</li>
+              <li>
+                ¿Qué precauciones debemos tomar antes de hacer un dual boot?
+              </li>
+            </ul>
           </div>
 
           <h4>Aprendizaje esperado</h4>
           <p>
-            El estudiante conoce las principales distribuciones de Linux, sus
-            características y propósitos, y ha copiado la ISO de Fedora y Rufus
-            en su computadora.
+            El estudiante comprende qué es Linux, conoce las principales
+            distribuciones y prepara las herramientas para el dual boot.
           </p>
 
           <h4>Criterios de evaluación</h4>
           <ul>
-            <li>Explica qué es Linux y su función.</li>
-            <li>Diferencia entre Linux y distribuciones.</li>
-            <li>Describe al menos 3 distribuciones y sus usos.</li>
-            <li>Ha copiado correctamente el archivo ISO de Fedora.</li>
-            <li>Ha instalado Rufus desde la Microsoft Store.</li>
+            <li>Reconoce qué es Linux y sus distribuciones.</li>
+            <li>Identifica el propósito de cada distribución.</li>
+            <li>Comprende qué es Ventoy y para qué sirve.</li>
+            <li>Comprende qué es una ISO de Windows y una ISO de Fedora.</li>
+            <li>Copia correctamente los archivos en su USB.</li>
           </ul>
 
           <h4>Recursos</h4>
           <ul>
-            <li>USB con ISO de Fedora</li>
-            <li>Computadora con Windows y Microsoft Store</li>
             <li>Pizarra</li>
-            <li>Cuaderno de los estudiantes</li>
+            <li>Proyector</li>
+            <li>USB (16 GB o más) por alumno</li>
+            <li>Carpeta con Ventoy, ISO de Windows e ISO de Fedora</li>
           </ul>
         </div>
       </div>
@@ -653,106 +1002,123 @@
           <span class="tiempo">10 minutos</span>
         </div>
         <div class="seccion-body">
-          <h4>Actividad: "Repaso de distribuciones y herramientas"</h4>
-          <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
-          <p>
-            <span class="label">Descripción:</span> El docente plantea preguntas
-            y los estudiantes responden:
-          </p>
+          <h4>Actividad: "Repaso y verificación de archivos"</h4>
           <ul>
-            <li>
-              ¿Qué es Linux? →
-              <strong>El kernel que gestiona el hardware.</strong>
-            </li>
-            <li>
-              ¿Qué es una distribución? →
-              <strong>Linux + herramientas + entorno gráfico.</strong>
-            </li>
-            <li>
-              ¿Cuál es la distribución más popular para principiantes? →
-              <strong>Ubuntu.</strong>
-            </li>
-            <li>
-              ¿Qué distribución es ideal para pentesting? →
-              <strong>Kali Linux.</strong>
-            </li>
-            <li>
-              ¿Qué distribución vamos a usar en el curso? →
-              <strong>Fedora.</strong>
-            </li>
-            <li>
-              ¿Dónde guardaste el archivo ISO de Fedora? →
-              <strong>En Descargas o en el escritorio.</strong>
-            </li>
-            <li>
-              ¿Qué herramienta instalaste y para qué sirve? →
-              <strong>Rufus, para crear USB booteables.</strong>
-            </li>
+            <li>¿Qué es Linux?</li>
+            <li>¿Cuáles son las distribuciones que vimos?</li>
+            <li>¿Cuál es la distribución que usaremos más adelante?</li>
+            <li>¿Qué es Ventoy y para qué sirve?</li>
+            <li>¿Qué es una ISO de Windows?</li>
+            <li>¿Qué es una ISO de Fedora?</li>
+            <li>¿Qué es un dual boot?</li>
+            <li>¿Qué haremos en la próxima clase?</li>
           </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Verificación de archivos:</span>
+            <p>
+              Antes de terminar, cada alumno debe verificar que su USB tenga:
+            </p>
+            <ul>
+              <li>
+                ✅ La carpeta de <strong>Ventoy</strong> correctamente copiada.
+              </li>
+              <li>
+                ✅ El archivo <strong>ISO de Windows</strong> completo (sin
+                errores).
+              </li>
+              <li>
+                ✅ El archivo <strong>ISO de Fedora</strong> completo (sin
+                errores).
+              </li>
+              <li>✅ La USB etiquetada con su nombre.</li>
+            </ul>
+            <p style="margin-top: 6px">
+              💡 <strong>Nota:</strong> En la próxima clase instalaremos Windows
+              redimensionado y luego Fedora para completar el dual boot.
+            </p>
+          </div>
 
           <h4>Aprendizaje esperado</h4>
           <p>
-            El estudiante consolida los conceptos de Linux y distribuciones, y
-            verifica que tiene la ISO de Fedora y Rufus en su computadora.
+            El estudiante consolida los conceptos de Linux y verifica que sus
+            herramientas estén listas.
           </p>
 
           <h4>Criterios de evaluación</h4>
           <ul>
             <li>Responde correctamente las preguntas.</li>
-            <li>Participa activamente.</li>
-            <li>
-              Verifica que el archivo ISO y Rufus estén en su computadora.
-            </li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Verifica que sus archivos estén correctamente copiados.</li>
           </ul>
 
           <h4>Recursos</h4>
           <ul>
             <li>Pizarra</li>
-            <li>Marcadores</li>
+            <li>USB de los alumnos</li>
           </ul>
         </div>
       </div>
 
       <!-- TIP CLAVE -->
       <div class="tip-clave">
-        <p><strong>💡 Tips clave:</strong></p>
         <p>
-          • <strong>Linux = Kernel</strong> (el motor).
-          <strong>Distribución = Sistema completo</strong> (el carro).
-        </p>
-        <p>• <strong>Ubuntu:</strong> Fácil para principiantes.</p>
-        <p>• <strong>Debian:</strong> Súper estable, para servidores.</p>
-        <p>• <strong>Arch:</strong> Para los que quieren control total.</p>
-        <p>• <strong>Tails:</strong> Para el anonimato y privacidad.</p>
-        <p>• <strong>Kali:</strong> Para pruebas de seguridad.</p>
-        <p>
-          • <strong>Fedora:</strong> Moderna y con software actualizado.
-          ¡Nuestra distro!
+          <strong
+            >💡 Tips clave sobre Linux y preparación de herramientas:</strong
+          >
         </p>
         <p>
-          • <strong>Rufus:</strong> Herramienta para crear USB booteables desde
-          Windows.
+          • <strong>Linux:</strong> Sistema operativo de código abierto,
+          gratuito, seguro y estable.
+        </p>
+        <p>
+          • <strong>Ubuntu:</strong> Fácil de usar, ideal para principiantes.
+        </p>
+        <p>
+          • <strong>Debian:</strong> Estable y confiable, base de muchas
+          distros.
+        </p>
+        <p>
+          • <strong>Arch Linux:</strong> Control total, para usuarios avanzados.
+        </p>
+        <p>• <strong>Tails:</strong> Privacidad y anonimato.</p>
+        <p>• <strong>Kali:</strong> Seguridad y hacking ético.</p>
+        <p>
+          • <strong>Fedora:</strong> Innovación y desarrollo.
+          <strong>La usaremos en el curso.</strong>
+        </p>
+        <p>
+          • <strong>Ventoy:</strong> USB multiboot, permite copiar varias ISOs.
+        </p>
+        <p>
+          • <strong>ISO de Windows:</strong> Archivo de instalación de Windows.
+        </p>
+        <p>
+          • <strong>ISO de Fedora:</strong> Archivo de instalación de Fedora.
+        </p>
+        <p>
+          • <strong>Dual boot:</strong> Dos sistemas operativos en la misma
+          computadora.
+        </p>
+        <p>
+          • <strong>Orden de instalación:</strong> Primero Windows, luego
+          Fedora.
+        </p>
+        <p>
+          • <strong>Próxima clase:</strong> Instalación de Windows
+          redimensionado.
         </p>
       </div>
 
       <!-- FOOTER -->
       <div class="footer-clase">
         <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce el mundo de Linux y el software libre.</p>
+        <p>• Prepara las herramientas necesarias para el dual boot.</p>
+        <p>• Sienta las bases para las clases prácticas de instalación.</p>
         <p>
-          • Introduce a los estudiantes en el mundo de Linux y sus
-          distribuciones.
-        </p>
-        <p>
-          • Permite conocer las diferentes opciones que existen según el
-          propósito.
-        </p>
-        <p>
-          • Prepara las herramientas necesarias para la instalación de Fedora en
-          la siguiente clase.
-        </p>
-        <p>
-          • Desarrolla habilidades prácticas como copiar archivos desde un USB e
-          instalar software desde la Microsoft Store.
+          • Desarrolla responsabilidad y organización con los materiales del
+          curso.
         </p>
       </div>
     </div>
