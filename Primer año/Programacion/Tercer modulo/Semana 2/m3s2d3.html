@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación de Clase - Informática / Linux</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f4f8;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 30px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 12px 0;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .codigo-box {
+        background: #1a1a2e;
+        color: #e0e0e0;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-family: "Courier New", monospace;
+        font-size: 15px;
+        overflow-x: auto;
+      }
+      .codigo-box .cmd {
+        color: #4fc3f7;
+      }
+      .codigo-box .output {
+        color: #a5d6a7;
+      }
+      .codigo-box .comment {
+        color: #888;
+        font-style: italic;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+      .warning-box {
+        background: #fff8e1;
+        border-left: 6px solid #f9a825;
+        padding: 12px 18px;
+        border-radius: 10px;
+        margin: 12px 0;
+      }
+      .step-list {
+        list-style: none;
+        counter-reset: step-counter;
+        padding: 0;
+      }
+      .step-list li {
+        counter-increment: step-counter;
+        padding: 10px 0 10px 50px;
+        position: relative;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .step-list li::before {
+        content: counter(step-counter);
+        background: #3f51b5;
+        color: white;
+        font-weight: bold;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 8px;
+        font-size: 14px;
+      }
+      .step-list li:last-child {
+        border-bottom: none;
+      }
+      .command-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      .command-table th {
+        background: #3f51b5;
+        color: white;
+        padding: 10px 8px;
+        border: 1px solid #3f51b5;
+        text-align: left;
+      }
+      .command-table td {
+        padding: 10px 8px;
+        border: 1px solid #ccc;
+        vertical-align: top;
+      }
+      .command-table tr:nth-child(even) {
+        background: #f5f7fa;
+      }
+      .command-table .cmd {
+        font-family: monospace;
+        font-weight: bold;
+        color: #0d47a1;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+        .command-table {
+          font-size: 12px;
+        }
+        .command-table th,
+        .command-table td {
+          padding: 6px 4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+      <p
+        style="
+          font-size: 18px;
+          color: #1a237e;
+          margin-top: -10px;
+          margin-bottom: 25px;
+          font-weight: 500;
+        "
+      >
+        Tema: Comandos básicos de la terminal de Linux (pwd, cd, mkdir, ls,
+        clear)
+      </p>
+
+      <!-- COMPETENCIA GENERAL -->
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          Comprende y aplica los comandos básicos de la terminal de Linux para
+          navegar por el sistema de archivos, crear directorios, listar
+          contenido y limpiar la pantalla, desarrollando habilidades
+          fundamentales para la administración del sistema y el trabajo en
+          entornos de línea de comandos.
+        </p>
+      </div>
+
+      <!-- COMPETENCIAS -->
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>
+              Comprende la estructura jerárquica del sistema de archivos en
+              Linux (directorio raíz, home).
+            </li>
+            <li>
+              Reconoce la función de cada comando: pwd, cd, cd .., cd (sin
+              argumentos), mkdir, ls, ls -la, clear.
+            </li>
+            <li>Diferencia entre rutas absolutas y relativas.</li>
+            <li>
+              Entiende el propósito de listar archivos ocultos con
+              <code>ls -la</code>.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Mostrar la ruta del directorio actual con <code>pwd</code>.</li>
+            <li>Cambiar de directorio con <code>cd</code> y sus variantes.</li>
+            <li>Crear directorios con <code>mkdir</code>.</li>
+            <li>
+              Listar archivos y directorios con <code>ls</code> y
+              <code>ls -la</code>.
+            </li>
+            <li>Limpiar la pantalla de la terminal con <code>clear</code>.</li>
+            <li>
+              Tomar capturas de pantalla de la terminal para evidenciar el
+              aprendizaje.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra confianza al usar la terminal.</li>
+            <li>Practica con precisión y atención a los detalles.</li>
+            <li>Participa activamente en los ejercicios prácticos.</li>
+            <li>
+              Valora la importancia de la terminal como herramienta fundamental
+              en Linux.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Introducción a la terminal de Linux"</h4>
+          <p>
+            <span class="label">Metodología:</span> Explicación y demostración.
+          </p>
+          <p>
+            <span class="label">Descripción:</span> El docente explica la
+            importancia de la terminal en Linux:
+          </p>
+          <ul>
+            <li>
+              La terminal es una interfaz de texto que permite interactuar con
+              el sistema operativo.
+            </li>
+            <li>
+              Es una herramienta poderosa para administrar archivos, instalar
+              software y configurar el sistema.
+            </li>
+            <li>
+              Muchas tareas se pueden hacer más rápido y con mayor control desde
+              la terminal.
+            </li>
+          </ul>
+          <p>Se presenta la tabla de comandos que se aprenderán en la clase.</p>
+
+          <table class="command-table">
+            <thead>
+              <tr>
+                <th>Comando</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cmd">pwd</td>
+                <td>
+                  Muestra la ruta del directorio actual (Print Working
+                  Directory).
+                </td>
+                <td><code>pwd</code> → <em>/home/usuario</em></td>
+              </tr>
+              <tr>
+                <td class="cmd">cd /ruta</td>
+                <td>Cambia al directorio especificado (Change Directory).</td>
+                <td><code>cd /etc</code> → va a /etc</td>
+              </tr>
+              <tr>
+                <td class="cmd">cd ..</td>
+                <td>Sube un nivel en la jerarquía de directorios.</td>
+                <td><code>cd ..</code> → sube al directorio padre</td>
+              </tr>
+              <tr>
+                <td class="cmd">cd</td>
+                <td>
+                  Sin argumentos, te lleva directamente al directorio home del
+                  usuario.
+                </td>
+                <td><code>cd</code> → <em>/home/usuario</em></td>
+              </tr>
+              <tr>
+                <td class="cmd">mkdir carpeta</td>
+                <td>Crea un nuevo directorio (Make Directory).</td>
+                <td>
+                  <code>mkdir proyectos</code> → crea la carpeta "proyectos"
+                </td>
+              </tr>
+              <tr>
+                <td class="cmd">ls</td>
+                <td>Lista archivos y carpetas del directorio actual (List).</td>
+                <td><code>ls</code> → muestra archivos y carpetas visibles</td>
+              </tr>
+              <tr>
+                <td class="cmd">ls -la</td>
+                <td>
+                  Lista <strong>todos</strong> los archivos (incluidos ocultos)
+                  con detalles (permisos, propietario, tamaño, fecha).
+                </td>
+                <td><code>ls -la</code> → muestra información detallada</td>
+              </tr>
+              <tr>
+                <td class="cmd">clear</td>
+                <td>Limpia la pantalla de la terminal.</td>
+                <td><code>clear</code> → pantalla limpia</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante identifica los comandos básicos de la terminal y su
+            función.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Reconoce cada comando y su propósito.</li>
+            <li>Participa en la discusión inicial.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Marcadores</li>
+            <li>Computadora con Fedora</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Práctica guiada de comandos"</h4>
+          <p>
+            <span class="label">Metodología:</span> Demostración y práctica
+            individual.
+          </p>
+
+          <!-- Comandos paso a paso -->
+          <h4>🔹 Paso 1: Abrir la terminal</h4>
+          <p>
+            Presionar <strong>Ctrl+Alt+T</strong> o buscarla en el menú de
+            aplicaciones.
+          </p>
+
+          <h4>🔹 Paso 2: Comando <code>pwd</code> - ¿Dónde estoy?</h4>
+          <div class="codigo-box">
+            <span class="cmd">pwd</span><br />
+            <span class="output">/home/tuusuario</span>
+          </div>
+
+          <h4>🔹 Paso 3: Comando <code>ls</code> - ¿Qué hay aquí?</h4>
+          <div class="codigo-box">
+            <span class="cmd">ls</span><br />
+            <span class="output"
+              >Descargas Documentos Música Imágenes Escritorio</span
+            >
+          </div>
+
+          <h4>
+            🔹 Paso 4: Comando <code>ls -la</code> - Ver todo con detalles
+          </h4>
+          <div class="codigo-box">
+            <span class="cmd">ls -la</span><br />
+            <span class="output"
+              >drwxr-xr-x 50 usuario usuario 4096 jul 12 10:00 .<br />
+              drwxr-xr-x 50 usuario usuario 4096 jul 12 10:00 ..<br />
+              -rw------- 1 usuario usuario 220 jul 12 09:55 .bash_history<br />
+              drwxr-xr-x 2 usuario usuario 4096 jul 12 10:00 Descargas<br />
+              drwxr-xr-x 2 usuario usuario 4096 jul 12 10:00 Documentos</span
+            >
+          </div>
+
+          <h4>🔹 Paso 5: Comando <code>mkdir</code> - Crear una carpeta</h4>
+          <div class="codigo-box">
+            <span class="cmd">mkdir practica_terminal</span><br />
+            <span class="cmd">ls</span><br />
+            <span class="output"
+              >Descargas Documentos Música Imágenes Escritorio
+              practica_terminal</span
+            >
+          </div>
+
+          <h4>🔹 Paso 6: Comando <code>cd</code> - Navegar a la carpeta</h4>
+          <div class="codigo-box">
+            <span class="cmd">cd practica_terminal</span><br />
+            <span class="cmd">pwd</span><br />
+            <span class="output">/home/tuusuario/practica_terminal</span>
+          </div>
+
+          <h4>🔹 Paso 7: Comando <code>cd ..</code> - Subir un nivel</h4>
+          <div class="codigo-box">
+            <span class="cmd">cd ..</span><br />
+            <span class="cmd">pwd</span><br />
+            <span class="output">/home/tuusuario</span>
+          </div>
+
+          <h4>🔹 Paso 8: Comando <code>cd</code> - Regresar al home</h4>
+          <div class="codigo-box">
+            <span class="cmd">cd /etc</span><br />
+            <span class="cmd">pwd</span><br />
+            <span class="output">/etc</span><br /><br />
+            <span class="cmd">cd</span><br />
+            <span class="cmd">pwd</span><br />
+            <span class="output">/home/tuusuario</span>
+          </div>
+
+          <h4>🔹 Paso 9: Comando <code>clear</code> - Limpiar la pantalla</h4>
+          <div class="codigo-box">
+            <span class="cmd">clear</span>
+          </div>
+
+          <!-- Actividad práctica -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p>
+              <strong
+                >Realiza los siguientes pasos en tu terminal y toma captura de
+                pantalla de cada paso:</strong
+              >
+            </p>
+            <ul>
+              <li>Ejecuta <code>pwd</code> y anota la ruta.</li>
+              <li>
+                Ejecuta <code>ls</code> y observa los archivos y carpetas.
+              </li>
+              <li>Ejecuta <code>ls -la</code> y observa los detalles.</li>
+              <li>
+                Crea una carpeta llamada <code>mi_carpeta</code> con
+                <code>mkdir</code>.
+              </li>
+              <li>Navega a <code>mi_carpeta</code> con <code>cd</code>.</li>
+              <li>
+                Verifica que estás dentro de <code>mi_carpeta</code> con
+                <code>pwd</code>.
+              </li>
+              <li>Regresa al directorio home con <code>cd</code>.</li>
+              <li>Navega a <code>/tmp</code> con <code>cd /tmp</code>.</li>
+              <li>Regresa al home con <code>cd</code>.</li>
+              <li>Limpia la pantalla con <code>clear</code>.</li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>📧 Instrucciones para enviar la evidencia:</strong>
+            </p>
+            <p>
+              Toma una <strong>captura de pantalla</strong> de la terminal donde
+              se vean todos los comandos ejecutados y sus resultados. Envía la
+              imagen al correo del maestro con el asunto:
+              <strong>"[Tu Nombre] - Práctica de terminal"</strong>.
+            </p>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>
+                ¿Qué diferencia hay entre <code>ls</code> y <code>ls -la</code>?
+              </li>
+              <li>¿Qué hace el comando <code>cd</code> sin argumentos?</li>
+              <li>¿Para qué sirve <code>clear</code>?</li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante ejecuta correctamente los comandos básicos de la
+            terminal y envía evidencia de su práctica.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>
+              Ejecuta <code>pwd</code>, <code>ls</code>, <code>ls -la</code>,
+              <code>mkdir</code>, <code>cd</code>, <code>cd ..</code>,
+              <code>cd</code> y <code>clear</code> correctamente.
+            </li>
+            <li>Crea la carpeta <code>mi_carpeta</code>.</li>
+            <li>Navega correctamente entre directorios.</li>
+            <li>Envía la captura de pantalla al correo del maestro.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Computadora con Fedora</li>
+            <li>Terminal</li>
+            <li>Herramienta de captura de pantalla</li>
+            <li>Correo electrónico</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso de comandos"</h4>
+          <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+          <p>
+            <span class="label">Descripción:</span> El docente plantea preguntas
+            y los estudiantes responden:
+          </p>
+          <ul>
+            <li>
+              ¿Qué comando usas para saber en qué directorio estás? →
+              <strong>pwd</strong>
+            </li>
+            <li>
+              ¿Qué comando usas para ver todos los archivos, incluso ocultos? →
+              <strong>ls -la</strong>
+            </li>
+            <li>
+              ¿Qué comando usas para crear una carpeta? → <strong>mkdir</strong>
+            </li>
+            <li>
+              ¿Qué comando usas para ir a tu directorio home? →
+              <strong>cd</strong>
+            </li>
+            <li>
+              ¿Qué comando usas para limpiar la pantalla? →
+              <strong>clear</strong>
+            </li>
+          </ul>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida el uso de los comandos básicos de la
+            terminal.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Marcadores</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>pwd:</strong> Siempre útil para saber dónde estás.</p>
+        <p>
+          • <strong>cd:</strong> Usa <code>cd ..</code> para subir un nivel y
+          <code>cd</code> para ir al home.
+        </p>
+        <p>
+          • <strong>ls -la:</strong> El comando más completo para ver archivos y
+          detalles.
+        </p>
+        <p>
+          • <strong>mkdir:</strong> Para crear carpetas. Puedes crear varias a
+          la vez: <code>mkdir carpeta1 carpeta2</code>.
+        </p>
+        <p>• <strong>clear:</strong> Mantiene la terminal ordenada.</p>
+        <p>
+          • <strong>Rutas absolutas:</strong> Comienzan con <code>/</code> (ej:
+          <code>cd /etc</code>).
+        </p>
+        <p>
+          • <strong>Rutas relativas:</strong> No comienzan con <code>/</code> y
+          son relativas al directorio actual.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce la terminal, una herramienta fundamental en Linux.</p>
+        <p>
+          • Enseña comandos que se usarán en todas las clases de administración
+          del sistema.
+        </p>
+        <p>
+          • Desarrolla habilidades prácticas de navegación y gestión de
+          archivos.
+        </p>
+        <p>
+          • Prepara a los estudiantes para trabajar en entornos de servidor y
+          desarrollo.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

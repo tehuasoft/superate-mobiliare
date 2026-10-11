@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Alertas y seguimiento de cambios en SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .alerta-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .alerta-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .alerta-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .alerta-card .tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+        .tag-email { background: #e3f2fd; color: #0d47a1; }
+        .tag-change { background: #fff3e0; color: #e65100; }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🔔 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Alertas y seguimiento de cambios en SharePoint</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a configurar alertas por correo electrónico en SharePoint para recibir notificaciones cuando se realicen cambios en elementos importantes de una lista o biblioteca, comprendiendo los tipos de alertas disponibles y sus aplicaciones prácticas.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué son las alertas en SharePoint y su propósito.</li>
+                <li>Reconoce los tipos de alertas disponibles y cuándo usarlas.</li>
+                <li>Entiende la relación entre alertas y notificaciones por correo electrónico.</li>
+                <li>Identifica casos de uso para el seguimiento de cambios en listas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Configurar alertas en listas y bibliotecas.</li>
+                <li>Configurar alertas en elementos específicos.</li>
+                <li>Personalizar la frecuencia y tipo de notificación.</li>
+                <li>Gestionar alertas existentes (editar, eliminar).</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la importancia de estar informado sobre cambios críticos.</li>
+                <li>Muestra interés por la automatización de notificaciones.</li>
+                <li>Participa activamente en la configuración de alertas.</li>
+                <li>Desarrolla habilidades de seguimiento de proyectos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Por qué necesitamos alertas en SharePoint?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Si trabajas en un equipo y alguien modifica un documento importante o actualiza el estado de un proyecto, ¿cómo te enteras? ¿Qué pasaría si no recibes notificación?"</em> Se introduce el concepto de alertas como mecanismo de notificación automática.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué son las alertas en SharePoint?</span>
+                <p>Las alertas son <strong>notificaciones automáticas por correo electrónico</strong> que se envían cuando ocurren cambios en listas, bibliotecas o elementos específicos. Permiten a los usuarios mantenerse informados sin tener que revisar manualmente.</p>
+                <ul>
+                    <li><strong>Tipos de alertas:</strong> A nivel de lista, biblioteca o elemento individual.</li>
+                    <li><strong>Frecuencia:</strong> Inmediata, diaria o semanal.</li>
+                    <li><strong>Eventos:</strong> Creación, modificación, eliminación o cambios de metadatos.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende el propósito y la utilidad de las alertas en SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los tipos de alertas disponibles.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a SharePoint (demo)</li>
+                <li>Ejemplos de notificaciones por correo</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Configuración de alertas y seguimiento de cambios"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- TIPOS DE ALERTAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Tipos de alertas y casos de uso</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>📌 Alerta de lista / biblioteca</h5>
+                    <p><strong>Descripción:</strong> Notifica sobre cualquier cambio en la lista o biblioteca completa.</p>
+                    <p><strong>Cuándo usarla:</strong> Cuando necesitas estar al tanto de todas las actividades en un repositorio compartido.</p>
+                    <div class="captura-mock" style="margin: 6px 0 0 0;">
+                        📂 Configurar alerta → Seleccionar "Lista completa"
+                    </div>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📌 Alerta de elemento específico</h5>
+                    <p><strong>Descripción:</strong> Notifica solo cuando se modifica un elemento en particular.</p>
+                    <p><strong>Cuándo usarla:</strong> Para seguimiento de tareas críticas, proyectos específicos o documentos clave.</p>
+                    <div class="captura-mock" style="margin: 6px 0 0 0;">
+                        📄 Seleccionar elemento → "Alert me" → Configurar alerta
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- CONFIGURACIÓN PASO A PASO -->
+            <!-- ============================================ -->
+            <h4>🔹 Configurar una alerta en una lista</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Acceder a la lista o biblioteca</h5>
+                <p>Navegar hasta la lista o biblioteca donde se desea configurar la alerta.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Crear la alerta</h5>
+                <p>En la cinta de opciones, seleccionar <strong>"Alertar"</strong> → <strong>"Alertar"</strong> (o "Alert me" en versiones antiguas) .</p>
+                <div class="captura-mock">
+                    🔔 Alertar → Configurar alerta
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Personalizar la alerta</h5>
+                <p><strong>Opciones de configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li><strong>Frecuencia:</strong> Inmediata, Resumen diario, Resumen semanal.</li>
+                    <li><strong>Eventos:</strong> Cambios en el elemento, cambios en metadatos, eliminación.</li>
+                    <li><strong>Destinatarios:</strong> Usuario actual o lista de correo (puede agregar otros).</li>
+                    <li><strong>Filtro:</strong> Solo cuando se cumplan ciertas condiciones (ej. solo proyectos "Activos").</li>
+                </ul>
+                <div class="captura-mock">
+                    📧 Frecuencia: Inmediata | Evento: Cambios en el elemento | Destinatario: usuario@empresa.com
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">4</span>
+                <h5>Guardar la alerta</h5>
+                <p>Hacer clic en <strong>"Aceptar"</strong> para crear la alerta. El usuario comenzará a recibir notificaciones según la configuración.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO DE NOTIFICACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo de notificación por correo</h4>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📧 Ejemplo de correo recibido:</span>
+                <div style="background: white; padding: 12px; border-radius: 6px; font-size: 14px; font-family: 'Segoe UI', sans-serif; border: 1px solid #ddd; margin-top: 6px;">
+                    <p><strong>De:</strong> SharePoint Alert &lt;sharepoint@empresa.com&gt;</p>
+                    <p><strong>Asunto:</strong> Alerta de SharePoint: "Proyecto Alpha" fue modificado</p>
+                    <p style="margin-top: 6px;">El elemento <strong>"Proyecto Alpha"</strong> en la lista <strong>"Proyectos"</strong> ha sido modificado.</p>
+                    <p><strong>Cambios realizados:</strong></p>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Estatus:</strong> Activo → Cerrado</li>
+                        <li><strong>Fecha de Fin:</strong> (vacío) → 15/06/2025</li>
+                    </ul>
+                    <p style="margin-top: 6px; font-size: 13px; color: #555;">Para ver el elemento, haga clic aquí: <span style="color: #1a237e;">[Enlace al elemento]</span></p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- GESTIÓN DE ALERTAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Gestión de alertas existentes</h4>
+
+            <div class="alerta-card" style="border-left-color: #e65100;">
+                <h5>📌 Ver, editar o eliminar alertas</h5>
+                <p>En <strong>Configuración</strong> → <strong>Configuración de alertas</strong> (o "My Alerts" en versiones clásicas) .</p>
+                <p>Desde allí se pueden:</p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li><strong>Ver</strong> todas las alertas activas.</li>
+                    <li><strong>Editar</strong> la frecuencia o filtros.</li>
+                    <li><strong>Eliminar</strong> alertas que ya no sean necesarias.</li>
+                </ul>
+                <div class="captura-mock">
+                    ⚙️ Configuración → Configuración de alertas → Gestionar alertas
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- LIMITACIONES Y CONSEJOS -->
+            <!-- ============================================ -->
+            <h4>🔹 Limitaciones y buenas prácticas</h4>
+
+            <div class="ejemplo-box" style="background: #ffebee; border-left: 4px solid #c62828;">
+                <span class="highlight" style="color: #c62828;">⚠️ Limitaciones a tener en cuenta</span>
+                <ul>
+                    <li><strong>Volumen:</strong> Muchas alertas pueden saturar el correo.</li>
+                    <li><strong>Permisos:</strong> Solo se reciben alertas de elementos a los que se tiene acceso.</li>
+                    <li><strong>Personalización:</strong> No es posible modificar el cuerpo del correo.</li>
+                    <li><strong>Frecuencia:</strong> La opción "Inmediata" puede generar muchos correos en listas activas.</li>
+                </ul>
+            </div>
+
+            <div class="ejemplo-box" style="background: #e8f5e9; border-left: 4px solid #2e7d32;">
+                <span class="highlight" style="color: #2e7d32;">✅ Buenas prácticas</span>
+                <ul>
+                    <li><strong>Usar filtros:</strong> Configurar alertas solo para cambios relevantes (ej. solo proyectos activos) .</li>
+                    <li><strong>Elegir frecuencia adecuada:</strong> Usar resumen diario/semanal para listas con muchos cambios.</li>
+                    <li><strong>Limitar alertas:</strong> No activar alertas para todo, solo para elementos críticos.</li>
+                    <li><strong>Revisar periódicamente:</strong> Limpiar alertas que ya no sean necesarias.</li>
+                    <li><strong>Comunicar:</strong> Informar al equipo sobre las alertas configuradas.</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, selecciona una lista "Proyectos" con al menos 5 elementos.</li>
+                    <li>2. Configura una alerta para toda la lista con frecuencia <strong>inmediata</strong>.</li>
+                    <li>3. Configura una alerta para un <strong>elemento específico</strong> (ej. un proyecto clave) con notificación diaria.</li>
+                    <li>4. Solicita a un compañero que modifique un elemento y verifica que recibes el correo.</li>
+                    <li>5. Accede a la configuración de alertas y revisa las alertas activas.</li>
+                    <li>6. Si no tienes acceso, describe los pasos que seguirías y los parámetros que configurarías.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuándo usarías una alerta inmediata frente a una diaria o semanal?</li>
+                    <li>¿Qué sucede si configuras muchas alertas en una lista activa?</li>
+                    <li>¿Cómo podrías usar alertas para el seguimiento de proyectos?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante configura alertas en listas y elementos específicos, personalizando frecuencia y eventos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Configura una alerta en una lista correctamente.</li>
+                <li>Configura una alerta en un elemento específico.</li>
+                <li>Personaliza frecuencia y eventos de la alerta.</li>
+                <li>Gestiona alertas existentes (ver, editar, eliminar).</li>
+                <li>Comprende cuándo usar cada tipo de alerta.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Ejemplos de notificaciones por correo</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué son las alertas en SharePoint?</li>
+                <li>¿Cuáles son los tipos de alertas disponibles?</li>
+                <li>¿Cómo se configura una alerta en una lista?</li>
+                <li>¿Qué opciones de frecuencia existen?</li>
+                <li>¿Qué eventos pueden activar una alerta?</li>
+                <li>¿Cómo se gestionan las alertas existentes?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña una estrategia de alertas para un proyecto de desarrollo de software con 10 personas. Define:</p>
+                <ul>
+                    <li>Qué listas/bibliotecas necesitan alertas.</li>
+                    <li>Qué tipo de alertas usarías (lista o elemento).</li>
+                    <li>Qué frecuencia recomendarías para cada caso.</li>
+                    <li>Cómo evitar la saturación de correos.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de alertas y seguimiento de cambios en SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la aplicación práctica de las alertas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre alertas en SharePoint:</strong></p>
+        <p>• <strong>Alertas de lista:</strong> Notifican sobre cualquier cambio en la lista completa.</p>
+        <p>• <strong>Alertas de elemento:</strong> Notifican solo sobre cambios en un elemento específico.</p>
+        <p>• <strong>Frecuencia:</strong> Inmediata, diaria o semanal. Elige según la actividad de la lista.</p>
+        <p>• <strong>Eventos:</strong> Creación, modificación, eliminación o cambios en metadatos.</p>
+        <p>• <strong>Filtros:</strong> Usa filtros para reducir el ruido (ej. solo proyectos activos).</p>
+        <p>• <strong>Gestión:</strong> Revisa periódicamente tus alertas para eliminar las innecesarias.</p>
+        <p>• <strong>Permisos:</strong> Solo recibes alertas de elementos a los que tienes acceso.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a mantenerse informado sobre cambios críticos.</p>
+        <p>• Desarrolla habilidades de seguimiento y monitoreo de proyectos.</p>
+        <p>• Prepara a los estudiantes para la gestión de equipos y proyectos.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

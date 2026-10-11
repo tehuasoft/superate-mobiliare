@@ -1,0 +1,521 @@
+WEBVTT
+
+0
+00:00.299 --> 00:01.203
+<v Krista>In this video we're talking</v>
+
+1
+00:01.203 --> 00:03.265
+about unit multipliers and unit multipliers
+
+2
+00:03.265 --> 00:04.619
+basically just help us get from
+
+3
+00:04.619 --> 00:07.134
+one set of units to another set of units.
+
+4
+00:07.134 --> 00:08.174
+So, in this first problem,
+
+5
+00:08.174 --> 00:09.390
+we've been asked to figure out
+
+6
+00:09.390 --> 00:12.592
+how many yards there are in 360 inches.
+
+7
+00:12.592 --> 00:13.889
+So, the first thing we need to realize
+
+8
+00:13.889 --> 00:15.572
+is that we're starting with inches, right?
+
+9
+00:15.572 --> 00:17.860
+We've been told we have 360 inches,
+
+10
+00:17.860 --> 00:21.553
+so we're starting with inches and we need to get to yards.
+
+11
+00:21.553 --> 00:25.091
+We don't know how many yards is equal to 360 inches,
+
+12
+00:25.091 --> 00:27.682
+but we're starting at inches and we need to get to yards.
+
+13
+00:27.682 --> 00:30.523
+Starting at inches, we have 360 of them.
+
+14
+00:30.523 --> 00:33.856
+So, 360 inches. We want to get to yards,
+
+15
+00:34.700 --> 00:37.358
+and your units tell you what you need to do.
+
+16
+00:37.358 --> 00:38.993
+In order for us to get to yards
+
+17
+00:38.993 --> 00:41.986
+and have an answer at the end that just says x, yards,
+
+18
+00:41.986 --> 00:45.149
+however many yards we have that's equal to 360 inches,
+
+19
+00:45.149 --> 00:47.913
+we're going to have to get rid of our inches units.
+
+20
+00:47.913 --> 00:49.655
+Those are going to have to drop away eventually
+
+21
+00:49.655 --> 00:52.219
+because we're going to need an answer that says x, yards.
+
+22
+00:52.219 --> 00:54.384
+The only way to get rid of inches
+
+23
+00:54.384 --> 00:57.051
+is to divide by the inches unit,
+
+24
+00:58.124 --> 01:00.232
+so we know we are going to need inches in the denominator.
+
+25
+01:00.232 --> 01:02.606
+You almost have to treat your units in the same way that
+
+26
+01:02.606 --> 01:04.542
+you treat whole numbers or variables.
+
+27
+01:04.542 --> 01:08.508
+In the same way that if we have 10x over 10,
+
+28
+01:08.508 --> 01:10.373
+we know that we can cancel the 10
+
+29
+01:10.373 --> 01:13.323
+in the numerator and the denominator, same thing here,
+
+30
+01:13.323 --> 01:14.658
+when we have inches in the numerator
+
+31
+01:14.658 --> 01:16.055
+and inches in the denominator,
+
+32
+01:16.055 --> 01:17.757
+we know we're going to be able to cancel them.
+
+33
+01:17.757 --> 01:18.613
+So this is the only way
+
+34
+01:18.613 --> 01:20.184
+we're going to be able to get rid of them.
+
+35
+01:20.184 --> 01:22.640
+But we're also going to need yards in our problem.
+
+36
+01:22.640 --> 01:24.588
+And we're going to need yards to end up in the numerator
+
+37
+01:24.588 --> 01:26.987
+in order to get an answer that's in terms of yards.
+
+38
+01:26.987 --> 01:30.403
+So, we could put yards up here in the numerator,
+
+39
+01:30.403 --> 01:32.414
+but then we'd have to use this fraction
+
+40
+01:32.414 --> 01:35.201
+to describe the relationship between yards and inches,
+
+41
+01:35.201 --> 01:36.428
+and we don't really know exactly
+
+42
+01:36.428 --> 01:38.631
+how many inches are in a yard.
+
+43
+01:38.631 --> 01:41.210
+However, we do know how many inches are in a foot,
+
+44
+01:41.210 --> 01:44.886
+so instead of putting yards here, we can put feet
+
+45
+01:44.886 --> 01:48.613
+and then we can say that there is one foot in 12 inches.
+
+46
+01:48.613 --> 01:49.983
+What's going to happen when we do this,
+
+47
+01:49.983 --> 01:51.375
+when we multiply these out,
+
+48
+01:51.375 --> 01:53.787
+our inches are going to cancel,
+
+49
+01:53.787 --> 01:56.450
+and you can see that the only units we have left are feet,
+
+50
+01:56.450 --> 01:57.995
+which means our answer would be in feet
+
+51
+01:57.995 --> 01:59.274
+if we did nothing else.
+
+52
+01:59.274 --> 02:01.327
+But, remember, we need our answer in yards,
+
+53
+02:01.327 --> 02:05.278
+so what we're going to have to do is multiply again.
+
+54
+02:05.278 --> 02:08.069
+We're going to to at least have to put feet in the denominator
+
+55
+02:08.069 --> 02:10.528
+so that we can get feet and feet to cancel.
+
+56
+02:10.528 --> 02:12.699
+Now, we want to see if we can put yards
+
+57
+02:12.699 --> 02:15.992
+in the numerator because we know we want yards
+
+58
+02:15.992 --> 02:17.171
+in our final answer.
+
+59
+02:17.171 --> 02:20.318
+So, now, do we know a relationship between feet and yards?
+
+60
+02:20.318 --> 02:22.548
+Well, yeah, that's a relationship we should know.
+
+61
+02:22.548 --> 02:25.462
+There's one yard for every three feet.
+
+62
+02:25.462 --> 02:28.068
+Now, you can cancel feet in the numerator
+
+63
+02:28.068 --> 02:29.867
+and feet in the denominator
+
+64
+02:29.867 --> 02:32.170
+and you can see that all of our units are canceled,
+
+65
+02:32.170 --> 02:34.332
+except for yards, and that's what we want.
+
+66
+02:34.332 --> 02:35.651
+We wanted to get to yards.
+
+67
+02:35.651 --> 02:37.236
+So, now that we're at this point,
+
+68
+02:37.236 --> 02:39.418
+we just have to multiply across through the numerators
+
+69
+02:39.418 --> 02:41.510
+and multiply across through the denominator
+
+70
+02:41.510 --> 02:43.809
+and leave these units that we want leftover.
+
+71
+02:43.809 --> 02:47.192
+So, 360 times one times one is 360,
+
+72
+02:47.192 --> 02:50.863
+and in the denominator, 12 times three is 36.
+
+73
+02:50.863 --> 02:54.666
+We have 36, and we're going to leave our yards units here.
+
+74
+02:54.666 --> 02:57.576
+360 divided by 36 is equal to 10,
+
+75
+02:57.576 --> 03:01.326
+so we get 10 yards as our final answer.
+
+76
+03:01.326 --> 03:05.261
+Which means that there are 10 yards in 360 inches.
+
+77
+03:05.261 --> 03:06.710
+Now, let's look at a second example.
+
+78
+03:06.710 --> 03:09.174
+In this one, we want to figure out how many centimeters
+
+79
+03:09.174 --> 03:11.301
+are in 1.4 kilometers.
+
+80
+03:11.301 --> 03:13.815
+So, we're starting with kilometers
+
+81
+03:13.815 --> 03:16.475
+and we need to get to centimeters.
+
+82
+03:16.475 --> 03:17.888
+Okay, so starting with kilometers,
+
+83
+03:17.888 --> 03:19.535
+how many kilometers do we have?
+
+84
+03:19.535 --> 03:21.195
+We know that we have 1.4 kilometers,
+
+85
+03:21.195 --> 03:23.926
+so we're going to put that over here on the left-hand side.
+
+86
+03:23.926 --> 03:25.855
+Now, remember, our units immediately
+
+87
+03:25.855 --> 03:27.416
+tell us what we need to do.
+
+88
+03:27.416 --> 03:28.510
+We know eventually,
+
+89
+03:28.510 --> 03:30.125
+we're going to have to get rid of kilometers,
+
+90
+03:30.125 --> 03:33.900
+so we're going to need kilometers in our denominator
+
+91
+03:33.900 --> 03:34.733
+no matter what.
+
+92
+03:34.733 --> 03:37.586
+What do we know that has a relationship with kilometers?
+
+93
+03:37.586 --> 03:42.301
+We know that there are 1000 meters in every one kilometer,
+
+94
+03:42.301 --> 03:43.816
+so we can at least write that.
+
+95
+03:43.816 --> 03:45.771
+Now we know that we'll be able to cancel our kilometers,
+
+96
+03:45.771 --> 03:47.796
+but we're going to be left with meters,
+
+97
+03:47.796 --> 03:49.917
+and we need to get from meters to centimeters.
+
+98
+03:49.917 --> 03:52.117
+Remember centimeters is our final destination.
+
+99
+03:52.117 --> 03:53.864
+So, do we have a relationship between
+
+100
+03:53.864 --> 03:55.303
+centimeters and meters?
+
+101
+03:55.303 --> 03:56.491
+Well, we do.
+
+102
+03:56.491 --> 03:59.120
+We know that there are 100 centimeters in every meter.
+
+103
+03:59.120 --> 04:00.790
+Again, with our unit multipliers,
+
+104
+04:00.790 --> 04:03.484
+we know we're going to need meters in the denominator,
+
+105
+04:03.484 --> 04:06.638
+because we need to cancel this meters with this one.
+
+106
+04:06.638 --> 04:09.865
+And now we know that there are 100 centimeters
+
+107
+04:09.865 --> 04:11.595
+in every one meter.
+
+108
+04:11.595 --> 04:13.230
+Now, if we look at our units here,
+
+109
+04:13.230 --> 04:15.449
+we're going to be able to cancel kilometers in the numerator
+
+110
+04:15.449 --> 04:16.911
+and kilometers in the denominator,
+
+111
+04:16.911 --> 04:20.419
+cancel meters in the numerator and meters in the denominator
+
+112
+04:20.419 --> 04:22.795
+and the only units left are centimeters,
+
+113
+04:22.795 --> 04:23.899
+which is perfect because we need
+
+114
+04:23.899 --> 04:25.802
+our final answer in centimeters.
+
+115
+04:25.802 --> 04:27.168
+So now that we're in that position,
+
+116
+04:27.168 --> 04:30.037
+we just go ahead and multiply across our numerators.
+
+117
+04:30.037 --> 04:34.919
+So we have 1.4 times 1000 times 100 is going to be 14
+
+118
+04:34.919 --> 04:38.876
+with one, two, three, and then an extra two zeros.
+
+119
+04:38.876 --> 04:41.588
+But then I'm going to move the decimal place over one,
+
+120
+04:41.588 --> 04:43.387
+so this guy's going to go away,
+
+121
+04:43.387 --> 04:46.704
+and I'm going to be left with one, two, three
+
+122
+04:46.704 --> 04:49.347
+140,000 in the numerator.
+
+123
+04:49.347 --> 04:51.489
+In the denominator, I have one times one,
+
+124
+04:51.489 --> 04:52.670
+so I'll have one here.
+
+125
+04:52.670 --> 04:55.421
+And then the only thing that's left is our centimeters,
+
+126
+04:55.421 --> 04:57.078
+so I'm going to do centimeters.
+
+127
+04:57.078 --> 04:58.859
+And now, if I just write this more cleanly,
+
+128
+04:58.859 --> 05:01.692
+I'm going to have 140,000 centimeters
+
+129
+05:03.098 --> 05:07.181
+are the number of centimeters in 1.4 kilometers.

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Normativa APA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .citation-box {
+            background: #fafbfc;
+            border: 1px solid #e0e0e0;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .citation-box .correct {
+            border-left: 4px solid #2e7d32;
+            padding-left: 12px;
+            background: #e8f5e9;
+        }
+        .citation-box .incorrect {
+            border-left: 4px solid #c62828;
+            padding-left: 12px;
+            background: #ffcdd2;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Citas en el texto según normativa APA
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Aplica correctamente citas en el texto utilizando normas APA para reconocer fuentes de información y evitar el plagio académico, integrando adecuadamente las ideas de otros autores en sus trabajos escritos.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es una cita en el texto y su propósito en la escritura académica.</li>
+                <li>Comprende la diferencia entre cita textual y cita parafraseada.</li>
+                <li>Reconoce el formato de las citas en APA (autor-año y autor-año-página).</li>
+                <li>Identifica la importancia de citar fuentes para evitar el plagio.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Escribir citas textuales cortas y largas según APA.</li>
+                <li>Escribir citas parafraseadas en el texto.</li>
+                <li>Diferenciar entre citas con paréntesis y narrativas.</li>
+                <li>Incluir el número de página en citas textuales.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra compromiso con la honestidad académica.</li>
+                <li>Valora la importancia de reconocer el trabajo de otros autores.</li>
+                <li>Participa activamente en la práctica de citación.</li>
+                <li>Reconoce el plagio como una falta grave en el ámbito académico.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué es una cita y por qué es importante?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y reflexión.</p>
+            <p><span class="label">Descripción:</span> El docente pregunta:</p>
+            <ul>
+                <li>¿Qué es una cita en un texto académico?</li>
+                <li>¿Por qué es importante citar las fuentes de información?</li>
+                <li>¿Qué es el plagio y cuáles son sus consecuencias?</li>
+            </ul>
+            <p>Se introduce el concepto de <strong>cita en el texto</strong> como una herramienta para reconocer el trabajo de otros autores y dar credibilidad a los argumentos propios.</p>
+
+            <div class="warning-box">
+                <p><strong>⚠️ El plagio es una falta académica grave.</strong></p>
+                <p>Copiar ideas o palabras de otros sin darles crédito es considerado plagio. Las citas correctas evitan el plagio y fortalecen el trabajo académico.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la importancia de citar fuentes en trabajos académicos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Explica qué es una cita y por qué es importante.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con Microsoft Word</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Citas en el texto según APA"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada y práctica.</p>
+
+            <!-- Tipos de citas -->
+            <h4>🔹 Tipos de citas en APA</h4>
+            <p>Existen dos formas principales de citar en el texto:</p>
+
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>📖 Cita textual</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Reproduce exactamente las palabras del autor.</li>
+                        <li>Se escribe entre comillas.</li>
+                        <li>Incluye el número de página.</li>
+                    </ul>
+                </div>
+                <div style="background: #e3f2fd; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #0d47a1;">
+                    <strong>✍️ Cita parafraseada</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Se expresa la idea del autor con palabras propias.</li>
+                        <li>No se usan comillas.</li>
+                        <li>No es obligatorio incluir página, pero se recomienda.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Formatos de cita -->
+            <h4>🔹 Formatos de cita en APA</h4>
+            <p>Las citas pueden presentarse en dos formatos:</p>
+
+            <div class="grid-2">
+                <div style="background: #fff8e1; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #f9a825;">
+                    <strong>🔹 Cita entre paréntesis</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Se coloca el autor y el año entre paréntesis al final de la idea.</li>
+                        <li><strong>Ejemplo:</strong> (García, 2020).</li>
+                    </ul>
+                </div>
+                <div style="background: #fce4ec; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #c62828;">
+                    <strong>📝 Cita narrativa</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Se menciona al autor en el texto y el año entre paréntesis.</li>
+                        <li><strong>Ejemplo:</strong> García (2020) afirma que...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ejemplos -->
+            <h4>🔹 Ejemplos de citas APA</h4>
+
+            <div class="citation-box">
+                <p><strong>📌 Cita textual corta (menos de 40 palabras):</strong></p>
+                <div class="correct">
+                    <p>"La tecnología ha transformado la manera en que aprendemos" (Pérez, 2021, p. 15).</p>
+                </div>
+                <p style="margin-top: 6px;"><strong>📌 Cita textual larga (más de 40 palabras):</strong></p>
+                <div class="correct">
+                    <p style="margin-left: 20px;">La tecnología educativa no solo facilita el acceso a la información, sino que también promueve nuevas formas de interacción entre estudiantes y docentes. Este cambio requiere una adaptación constante de las metodologías de enseñanza. (González, 2019, p. 45)</p>
+                </div>
+                <p style="margin-top: 6px;"><strong>📌 Cita parafraseada:</strong></p>
+                <div class="correct">
+                    <p>Según Fernández (2020), el uso de herramientas digitales en el aula fomenta la participación activa de los estudiantes.</p>
+                </div>
+            </div>
+
+            <!-- Errores comunes -->
+            <h4>🔹 Errores comunes al citar</h4>
+            <div class="citation-box">
+                <div class="incorrect">
+                    <p><strong>❌ Incorrecto:</strong> "La tecnología ha transformado el aprendizaje" (Pérez, 2021). (Falta el número de página en cita textual)</p>
+                </div>
+                <div class="correct" style="margin-top: 6px;">
+                    <p><strong>✅ Correcto:</strong> "La tecnología ha transformado el aprendizaje" (Pérez, 2021, p. 15).</p>
+                </div>
+                <div class="incorrect" style="margin-top: 6px;">
+                    <p><strong>❌ Incorrecto:</strong> Pérez dice que la tecnología ha transformado el aprendizaje. (Falta el año)</p>
+                </div>
+                <div class="correct" style="margin-top: 6px;">
+                    <p><strong>✅ Correcto:</strong> Pérez (2021) afirma que la tecnología ha transformado el aprendizaje.</p>
+                </div>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Escribe un párrafo en Word que incluya los siguientes tipos de citas APA:</strong></p>
+                <ul>
+                    <li><strong>Cita textual corta:</strong> Copia una frase de un libro o artículo (inventa los datos).</li>
+                    <li><strong>Cita textual larga:</strong> Escribe un párrafo de más de 40 palabras de una fuente imaginaria.</li>
+                    <li><strong>Cita parafraseada:</strong> Parafrasea una idea de un autor.</li>
+                    <li><strong>Cita narrativa:</strong> Menciona al autor en el texto y coloca el año entre paréntesis.</li>
+                    <li><strong>Cita entre paréntesis:</strong> Coloca autor y año al final de la idea.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es la diferencia entre cita textual y parafraseada?</li>
+                    <li>¿Por qué es importante incluir el número de página en citas textuales?</li>
+                    <li>¿Cómo ayuda la citación a evitar el plagio?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica correctamente citas en el texto según normas APA.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Diferencia entre cita textual y parafraseada.</li>
+                <li>Usa correctamente el formato autor-año y autor-año-página.</li>
+                <li>Escribe citas entre paréntesis y narrativas.</li>
+                <li>Incluye el número de página en citas textuales.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con Microsoft Word</li>
+                <li>Guía APA resumida</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de citas APA"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué es una cita textual? → <strong>Reproducción exacta de las palabras del autor.</strong></li>
+                <li>¿Qué es una cita parafraseada? → <strong>Expresión con palabras propias de una idea del autor.</strong></li>
+                <li>¿Qué formato se usa para citas entre paréntesis? → <strong>(Autor, año).</strong></li>
+                <li>¿Qué formato se usa para citas narrativas? → <strong>Autor (año) afirma que...</strong></li>
+                <li>¿Qué se debe incluir en una cita textual? → <strong>Número de página.</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de citas en el texto según APA.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para citar en APA:</strong></p>
+        <p>• <strong>Cita textual:</strong> "Texto literal" (Autor, año, p. número).</p>
+        <p>• <strong>Cita parafraseada:</strong> Idea con tus palabras (Autor, año).</p>
+        <p>• <strong>Cita narrativa:</strong> Autor (año) dice que...</p>
+        <p>• <strong>Más de 40 palabras:</strong> Bloque de texto con sangría, sin comillas.</p>
+        <p>• <strong>Dos autores:</strong> (García & Pérez, 2020) o García y Pérez (2020).</p>
+        <p>• <strong>Tres o más autores:</strong> (García et al., 2020).</p>
+        <p>• <strong>Siempre incluye la referencia completa en la bibliografía al final.</strong></p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a reconocer y citar correctamente las fuentes de información.</p>
+        <p>• Desarrolla habilidades de honestidad académica y ética.</p>
+        <p>• Prepara a los estudiantes para escribir trabajos académicos con integridad.</p>
+        <p>• Conecta con la importancia de la investigación y la credibilidad académica.</p>
+    </div>
+
+</div>
+</body>
+</html>

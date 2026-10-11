@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación de Clase · Presentación de Proyectos Finales y Cierre del
+      Curso
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .integracion-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin: 12px 0;
+      }
+      .integracion-item {
+        background: #f5f7fa;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-top: 4px solid #3f51b5;
+        text-align: center;
+      }
+      .integracion-item h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+      .integracion-item p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .integracion-item .icono {
+        font-size: 32px;
+        margin-bottom: 4px;
+      }
+      .integracion-item.sharepoint {
+        border-top-color: #0d47a1;
+      }
+      .integracion-item.powerapps {
+        border-top-color: #6c5ce7;
+      }
+      .integracion-item.powerautomate {
+        border-top-color: #2e7d32;
+      }
+
+      .criterios-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 12px 0;
+      }
+      .criterio-item {
+        background: #f5f7fa;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-left: 4px solid #3f51b5;
+      }
+      .criterio-item h5 {
+        color: #1a237e;
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+      .criterio-item p {
+        font-size: 13px;
+        margin: 2px 0;
+      }
+
+      .rubrica {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        margin: 12px 0;
+      }
+      .rubrica table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .rubrica th {
+        background: #1a237e;
+        color: white;
+        padding: 10px 12px;
+        text-align: left;
+        font-weight: 600;
+      }
+      .rubrica td {
+        padding: 8px 12px;
+        border-top: 1px solid #e0e0e0;
+        vertical-align: top;
+      }
+      .rubrica .puntaje {
+        font-weight: 600;
+        color: #1a237e;
+        text-align: center;
+      }
+      .rubrica .total {
+        background: #e8eaf6;
+        font-weight: 700;
+        color: #1a237e;
+      }
+
+      .feedback-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .feedback-card h5 {
+        color: #1a237e;
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+      .feedback-card p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .feedback-card .positivo {
+        color: #2e7d32;
+        font-weight: 600;
+      }
+      .feedback-card .mejora {
+        color: #e65100;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .integracion-grid {
+          grid-template-columns: 1fr;
+        }
+        .criterios-grid {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎓 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Presentación de Proyectos Finales · Retroalimentación y Cierre del Curso
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante presenta su proyecto final integrando SharePoint
+          (lista), Power Apps (interfaz) y Power Automate (automatización),
+          demuestra el funcionamiento de su solución, explica el flujo de
+          automatización y muestra la lista de datos. Además, participa en la
+          retroalimentación grupal y reflexiona sobre los aprendizajes del
+          curso.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>
+              Comprende la importancia de presentar y defender un proyecto.
+            </li>
+            <li>Reconoce los elementos clave de una demostración funcional.</li>
+            <li>
+              Identifica los criterios de evaluación de un proyecto integrador.
+            </li>
+            <li>
+              Entiende el valor de la retroalimentación para la mejora continua.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Demostrar la app funcionando en vivo.</li>
+            <li>Explicar el flujo de Power Automate paso a paso.</li>
+            <li>Mostrar la lista de SharePoint y su estructura.</li>
+            <li>Explicar la integración de las tres herramientas.</li>
+            <li>Recibir y dar retroalimentación constructiva.</li>
+            <li>Reflexionar sobre los aprendizajes del curso.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra seguridad y claridad al presentar.</li>
+            <li>Valora el trabajo de sus compañeros.</li>
+            <li>Participa activamente en la retroalimentación.</li>
+            <li>Demuestra una actitud de mejora continua.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Preparación para las presentaciones"</h4>
+          <p>
+            <span class="label">Metodología:</span> Organización y explicación
+            de la dinámica.
+          </p>
+          <p>
+            El docente explica la dinámica de las presentaciones: cada alumno o
+            grupo tendrá <strong>10 minutos</strong> para demostrar su proyecto,
+            seguido de <strong>3 minutos</strong> de retroalimentación grupal.
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Estructura de cada presentación:</span>
+            <ol style="padding-left: 20px">
+              <li>
+                <strong>Problema (1 min):</strong> ¿Qué problema resuelve?
+              </li>
+              <li>
+                <strong>Arquitectura (2 min):</strong> ¿Cómo se conectan
+                SharePoint, Power Apps y Power Automate?
+              </li>
+              <li>
+                <strong>Demo de la app (3 min):</strong> Mostrar la app
+                funcionando.
+              </li>
+              <li>
+                <strong>Explicación del flujo (2 min):</strong> Mostrar el flujo
+                de Power Automate y su ejecución.
+              </li>
+              <li>
+                <strong>Lista de SharePoint (1 min):</strong> Mostrar la
+                estructura y los datos.
+              </li>
+              <li>
+                <strong>Aprendizajes (1 min):</strong> ¿Qué aprendió? ¿Qué
+                mejoraría?
+              </li>
+            </ol>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende la dinámica y estructura de las
+            presentaciones.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Comprende la estructura de la presentación.</li>
+            <li>Prepara su demostración.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Proyector</li>
+            <li>Computadoras con acceso a las herramientas</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">60 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "Presentación de proyectos finales y retroalimentación"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Presentación
+            individual/grupal + retroalimentación.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- CRITERIOS DE EVALUACIÓN -->
+          <!-- ============================================ -->
+          <h4>🔹 Criterios de evaluación de la presentación</h4>
+
+          <div class="criterios-grid">
+            <div class="criterio-item" style="border-left-color: #0d47a1">
+              <h5>📋 SharePoint (20%)</h5>
+              <p>
+                La lista está bien estructurada con columnas adecuadas. Los
+                datos son coherentes. Se explica la relación entre listas (si
+                aplica).
+              </p>
+            </div>
+            <div class="criterio-item" style="border-left-color: #6c5ce7">
+              <h5>📱 Power Apps (30%)</h5>
+              <p>
+                La app funciona correctamente. Tiene las pantallas Browse,
+                Detail y Edit. La interfaz es clara y usable. Se muestra la
+                personalización visual.
+              </p>
+            </div>
+            <div class="criterio-item" style="border-left-color: #2e7d32">
+              <h5>⚡ Power Automate (30%)</h5>
+              <p>
+                El flujo funciona correctamente. Se explica el trigger y las
+                acciones. Se muestra el historial de ejecuciones. Se demuestra
+                la notificación.
+              </p>
+            </div>
+            <div class="criterio-item" style="border-left-color: #e65100">
+              <h5>🎤 Presentación (20%)</h5>
+              <p>
+                Claridad al explicar. Demostración fluida. Explicación de la
+                integración. Reflexión sobre aprendizajes y mejoras.
+              </p>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- RÚBRICA -->
+          <!-- ============================================ -->
+          <h4>🔹 Rúbrica de evaluación</h4>
+
+          <div class="rubrica">
+            <table>
+              <thead>
+                <tr>
+                  <th>Criterio</th>
+                  <th>Excelente (5)</th>
+                  <th>Bueno (4)</th>
+                  <th>Aceptable (3)</th>
+                  <th>Puntaje</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>SharePoint</strong></td>
+                  <td>
+                    Lista completa, bien estructurada, con datos coherentes y
+                    relación entre listas.
+                  </td>
+                  <td>Lista completa con datos coherentes.</td>
+                  <td>Lista básica con datos mínimos.</td>
+                  <td class="puntaje">___ / 5</td>
+                </tr>
+                <tr>
+                  <td><strong>Power Apps</strong></td>
+                  <td>
+                    App funcional con Browse, Detail y Edit, personalización
+                    visual, búsqueda y filtros.
+                  </td>
+                  <td>App funcional con las pantallas principales.</td>
+                  <td>App básica con funcionalidad limitada.</td>
+                  <td class="puntaje">___ / 5</td>
+                </tr>
+                <tr>
+                  <td><strong>Power Automate</strong></td>
+                  <td>
+                    Flujo funcional con trigger, acciones y notificación.
+                    Historial exitoso.
+                  </td>
+                  <td>Flujo funcional con notificación.</td>
+                  <td>Flujo básico que ejecuta una acción.</td>
+                  <td class="puntaje">___ / 5</td>
+                </tr>
+                <tr>
+                  <td><strong>Integración</strong></td>
+                  <td>
+                    Explica claramente cómo se conectan las 3 herramientas y el
+                    flujo de datos.
+                  </td>
+                  <td>Explica la conexión entre las herramientas.</td>
+                  <td>Menciona la integración pero no la explica.</td>
+                  <td class="puntaje">___ / 5</td>
+                </tr>
+                <tr>
+                  <td><strong>Presentación</strong></td>
+                  <td>
+                    Clara, fluida, con dominio del tema y reflexión profunda.
+                  </td>
+                  <td>Clara, con dominio del tema.</td>
+                  <td>Básica, con poca claridad.</td>
+                  <td class="puntaje">___ / 5</td>
+                </tr>
+                <tr class="total">
+                  <td colspan="4"><strong>Puntaje Total</strong></td>
+                  <td class="puntaje">___ / 25</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- RETROALIMENTACIÓN -->
+          <!-- ============================================ -->
+          <h4>🔹 Retroalimentación grupal</h4>
+
+          <p>
+            Después de cada presentación, el docente y los compañeros brindan
+            retroalimentación constructiva siguiendo esta estructura:
+          </p>
+
+          <div class="feedback-card">
+            <h5>💬 Estructura de la retroalimentación</h5>
+            <p>
+              <span class="positivo">✅ Lo que funcionó bien:</span> Mencionar
+              al menos 2 aspectos positivos del proyecto.
+            </p>
+            <p>
+              <span class="mejora">🔧 Áreas de mejora:</span> Mencionar al menos
+              1 aspecto a mejorar.
+            </p>
+            <p>
+              <strong>💡 Sugerencia:</strong> Dar una idea concreta para mejorar
+              el proyecto.
+            </p>
+          </div>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 Ejemplo de retroalimentación:</span
+            >
+            <p>
+              <span class="positivo">✅ Lo que funcionó bien:</span> La app
+              tiene una interfaz muy clara y el flujo de notificación funciona
+              perfectamente.
+            </p>
+            <p>
+              <span class="mejora">🔧 Área de mejora:</span> La lista de
+              SharePoint podría tener una columna adicional para la fecha de
+              vencimiento.
+            </p>
+            <p>
+              <strong>💡 Sugerencia:</strong> Agregar una vista filtrada en
+              SharePoint para ver solo los incidentes abiertos.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- CHECKLIST DEL PRESENTADOR -->
+          <!-- ============================================ -->
+          <h4>🔹 Checklist para el presentador</h4>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Antes de presentar, verifica:</span>
+            <ul>
+              <li>✅ La app está abierta y funciona correctamente.</li>
+              <li>✅ El flujo está activo y listo para ejecutarse.</li>
+              <li>✅ La lista de SharePoint tiene datos de ejemplo.</li>
+              <li>
+                ✅ Tienes preparada la explicación del problema y la solución.
+              </li>
+              <li>✅ Puedes explicar el trigger y las acciones del flujo.</li>
+              <li>✅ Tienes identificadas las mejoras futuras.</li>
+              <li>✅ Controlas el tiempo de presentación (10 minutos).</li>
+            </ul>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">
+              📝 Actividad práctica: Presentación y retroalimentación
+            </h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>1. Cada alumno o grupo presenta su proyecto (10 minutos).</li>
+              <li>
+                2. Mientras un grupo presenta, los demás toman notas para la
+                retroalimentación.
+              </li>
+              <li>
+                3. Al finalizar, el docente y los compañeros brindan
+                retroalimentación (3 minutos).
+              </li>
+              <li>
+                4. El presentador anota las sugerencias para futuras mejoras.
+              </li>
+              <li>
+                5. Al finalizar todas las presentaciones, se realiza una
+                reflexión grupal sobre los aprendizajes.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas para la reflexión grupal:</strong>
+            </p>
+            <ul>
+              <li>¿Qué fue lo más desafiante de construir el proyecto?</li>
+              <li>¿Qué herramienta te resultó más útil y por qué?</li>
+              <li>¿Qué mejorarías en tu proyecto si tuvieras más tiempo?</li>
+              <li>
+                ¿Cómo podrías aplicar lo aprendido en tu vida diaria o
+                profesional?
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante presenta su proyecto final, demuestra su
+            funcionamiento y participa en la retroalimentación grupal.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Demuestra la app funcionando correctamente.</li>
+            <li>Explica el flujo de Power Automate y su ejecución.</li>
+            <li>Muestra la lista de SharePoint y su estructura.</li>
+            <li>Explica la integración de las tres herramientas.</li>
+            <li>Participa en la retroalimentación constructiva.</li>
+            <li>Reflexiona sobre los aprendizajes del curso.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Proyector</li>
+            <li>Computadoras con acceso a las herramientas</li>
+            <li>Rúbrica de evaluación</li>
+            <li>Pizarra</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE DEL CURSO</span>
+          <span class="tiempo">20 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Reflexión final y cierre del curso"</h4>
+          <p>
+            <span class="label">Metodología:</span> Reflexión grupal y cierre.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- REFLEXIÓN FINAL -->
+          <!-- ============================================ -->
+          <h4>🔹 Reflexión final</h4>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Preguntas para la reflexión:</span>
+            <ul>
+              <li>¿Qué aprendizaje te llevas de este curso?</li>
+              <li>¿Cómo te sentiste al construir tu propio sistema?</li>
+              <li>
+                ¿Qué fue lo más valioso que aprendiste sobre SharePoint, Power
+                Apps y Power Automate?
+              </li>
+              <li>
+                ¿Cómo podrías aplicar estos conocimientos en tu futuro académico
+                o profesional?
+              </li>
+              <li>
+                ¿Qué consejo le darías a alguien que empieza a aprender estas
+                herramientas?
+              </li>
+            </ul>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- RECORRIDO DEL CURSO -->
+          <!-- ============================================ -->
+          <h4>🔹 Recorrido del curso</h4>
+
+          <div class="integracion-grid">
+            <div class="integracion-item sharepoint">
+              <div class="icono">📋</div>
+              <h5>SharePoint</h5>
+              <p>
+                Listas, columnas, validaciones, vistas, alertas,
+                importación/exportación.
+              </p>
+            </div>
+            <div class="integracion-item powerapps">
+              <div class="icono">📱</div>
+              <h5>Power Apps</h5>
+              <p>
+                Apps de Lienzo, DataSource, galerías, formularios, navegación,
+                filtros, personalización visual.
+              </p>
+            </div>
+            <div class="integracion-item powerautomate">
+              <div class="icono">⚡</div>
+              <h5>Power Automate</h5>
+              <p>
+                Flujos automatizados, instantáneos y programados, condiciones,
+                aprobaciones, manejo de errores.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 Lo que logramos juntos:</span
+            >
+            <ul>
+              <li>
+                Construimos soluciones reales con herramientas de Microsoft.
+              </li>
+              <li>
+                Aprendimos a integrar SharePoint, Power Apps y Power Automate.
+              </li>
+              <li>
+                Desarrollamos habilidades de automatización y diseño de
+                interfaces.
+              </li>
+              <li>Resolvimos problemas cotidianos con tecnología.</li>
+              <li>
+                Preparamos el camino para seguir aprendiendo Power Platform.
+              </li>
+            </ul>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PRÓXIMOS PASOS -->
+          <!-- ============================================ -->
+          <h4>🔹 Próximos pasos</h4>
+
+          <div class="criterios-grid">
+            <div class="criterio-item" style="border-left-color: #6c5ce7">
+              <h5>📚 Seguir aprendiendo</h5>
+              <ul style="padding-left: 20px; font-size: 14px">
+                <li>Explorar Power BI para análisis de datos.</li>
+                <li>Aprender Power Virtual Agents para chatbots.</li>
+                <li>Profundizar en Power Fx y expresiones avanzadas.</li>
+                <li>Certificaciones de Microsoft (PL-100, PL-200).</li>
+              </ul>
+            </div>
+            <div class="criterio-item" style="border-left-color: #2e7d32">
+              <h5>🚀 Aplicar lo aprendido</h5>
+              <ul style="padding-left: 20px; font-size: 14px">
+                <li>Automatizar tareas en tu trabajo o estudio.</li>
+                <li>Crear soluciones para tu comunidad.</li>
+                <li>Compartir tus conocimientos con otros.</li>
+                <li>Documentar y mejorar tus proyectos.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- CIERRE FORMAL -->
+          <!-- ============================================ -->
+          <h4>🔹 Cierre formal del curso</h4>
+
+          <div
+            class="feedback-card"
+            style="border-left-color: #0d47a1; background: #e8eaf6"
+          >
+            <h5>🎓 ¡Felicidades!</h5>
+            <p>
+              Has completado el curso de
+              <strong
+                >Integración de SharePoint, Power Apps y Power Automate</strong
+              >.
+            </p>
+            <p>Ahora tienes las habilidades para:</p>
+            <ul style="padding-left: 20px; font-size: 14px">
+              <li>Crear listas de SharePoint para gestionar datos.</li>
+              <li>Diseñar aplicaciones personalizadas con Power Apps.</li>
+              <li>Automatizar procesos con Power Automate.</li>
+              <li>Integrar las tres herramientas en soluciones completas.</li>
+            </ul>
+            <p style="margin-top: 8px">
+              <strong
+                >¡Sigue construyendo, sigue aprendiendo y sigue
+                automatizando!</strong
+              >
+            </p>
+          </div>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final del curso:</span>
+            <p>
+              Documenta tu proyecto final en un
+              <strong>portafolio digital</strong> que incluya:
+            </p>
+            <ul>
+              <li>Descripción del problema y solución.</li>
+              <li>Capturas de pantalla de la lista, la app y el flujo.</li>
+              <li>Explicación de la arquitectura y el flujo de datos.</li>
+              <li>Reflexión personal sobre el aprendizaje.</li>
+              <li>Enlaces a los recursos creados.</li>
+            </ul>
+            <p>
+              Este portafolio te servirá como evidencia de tus habilidades para
+              futuras oportunidades.
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante reflexiona sobre los aprendizajes del curso y recibe
+            el cierre formal.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión final.</li>
+            <li>Reconoce los aprendizajes adquiridos.</li>
+            <li>Identifica próximos pasos para seguir aprendiendo.</li>
+            <li>Completa el portafolio digital del proyecto.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Proyector</li>
+            <li>Portafolio digital (OneNote, SharePoint, etc.)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p><strong>💡 Tips clave para la presentación final:</strong></p>
+        <p>
+          • <strong>Prepara tu demo:</strong> Asegúrate de que la app, el flujo
+          y la lista funcionen correctamente.
+        </p>
+        <p>
+          • <strong>Sé claro:</strong> Explica el problema, la solución y el
+          flujo de datos de forma sencilla.
+        </p>
+        <p>
+          • <strong>Muestra el flujo en acción:</strong> Ejecuta el flujo en
+          vivo para demostrar que funciona.
+        </p>
+        <p>
+          • <strong>Explica la integración:</strong> Menciona cómo se conectan
+          SharePoint, Power Apps y Power Automate.
+        </p>
+        <p>
+          • <strong>Reconoce las mejoras:</strong> Menciona qué le agregarías a
+          tu proyecto en el futuro.
+        </p>
+        <p>
+          • <strong>Participa en la retroalimentación:</strong> Da comentarios
+          constructivos a tus compañeros.
+        </p>
+        <p>
+          • <strong>Reflexiona:</strong> Piensa en cómo aplicarás lo aprendido
+          en el futuro.
+        </p>
+        <p>• <strong>Celebra:</strong> ¡Has completado un gran proyecto!</p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>• Cierra el ciclo de aprendizaje con una demostración práctica.</p>
+        <p>• Desarrolla habilidades de comunicación y presentación.</p>
+        <p>• Fomenta la retroalimentación constructiva y la mejora continua.</p>
+        <p>
+          • Celebra los logros de los estudiantes y los prepara para seguir
+          aprendiendo.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

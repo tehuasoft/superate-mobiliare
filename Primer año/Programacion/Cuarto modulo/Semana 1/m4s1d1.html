@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Office 365 y Power Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .app-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .app-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .app-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .power-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .power-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .power-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .power-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .power-item .ejemplo {
+            font-size: 13px;
+            color: #555;
+            background: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .power-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>☁️ PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Office 365 · Aplicaciones · Power Platform</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende qué es Office 365 (ahora Microsoft 365), sus aplicaciones principales (Teams, OneDrive, Outlook, SharePoint) y el ecosistema de la Power Platform (Power Apps, Power Automate, Power BI), identificando el propósito y casos de uso de cada herramienta.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es Office 365 y su evolución a Microsoft 365.</li>
+                <li>Reconoce las aplicaciones principales: Teams, OneDrive, Outlook, SharePoint.</li>
+                <li>Identifica los componentes de la Power Platform: Power Apps, Power Automate, Power BI.</li>
+                <li>Entiende la diferencia entre Office 365 y Microsoft 365.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Identificar el propósito de cada aplicación en un entorno empresarial.</li>
+                <li>Distinguir entre herramientas de productividad (Office) y herramientas de desarrollo low-code (Power Platform).</li>
+                <li>Reconocer casos de uso de Power Apps, Power Automate y Power BI.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la integración de herramientas en la nube.</li>
+                <li>Muestra interés por la automatización y el análisis de datos.</li>
+                <li>Participa activamente en la identificación de casos de uso.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué herramientas usamos para trabajar en equipo?"</h4>
+            <p><span class="label">Metodología:</span> Lluvia de ideas y reflexión.</p>
+            <p>El docente pregunta: <em>"¿Qué aplicaciones usan para trabajar en equipo, guardar archivos o comunicarse?"</em> Se introduce el concepto de Office 365 como un ecosistema de productividad en la nube.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es Office 365?</span>
+                <p>Es un servicio en la nube que incluye aplicaciones como Word, Excel, PowerPoint, Outlook, junto con servicios como Teams, OneDrive y SharePoint. Originalmente llamado Office 365, hoy forma parte de <strong>Microsoft 365</strong>, que añade gestión de dispositivos y seguridad avanzada. </p>
+                <p><strong>Diferencia clave:</strong> Office 365 son las aplicaciones y servicios de productividad. Microsoft 365 incluye todo eso <strong>más</strong> Windows y herramientas de gestión empresarial (Enterprise Mobility + Security). </p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la evolución de Office 365 a Microsoft 365 y el concepto de productividad en la nube.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la lluvia de ideas.</li>
+                <li>Reconoce la diferencia entre Office 365 y Microsoft 365.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Presentación visual</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Aplicaciones de Office 365 y Power Platform"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos.</p>
+
+            <!-- ============================================ -->
+            <!-- APLICACIONES DE OFFICE 365 -->
+            <!-- ============================================ -->
+            <h4>🔹 Aplicaciones principales de Office 365</h4>
+
+            <div class="app-card" style="border-left-color: #4ecdc4;">
+                <h5>💬 Teams — Comunicación y colaboración</h5>
+                <p>Plataforma de comunicación que integra chat, videollamadas, reuniones y uso compartido de archivos. Permite a los equipos colaborar en tiempo real. </p>
+                <p><strong>Ejemplo de uso:</strong> Reuniones virtuales, canales de proyecto, chat con compañeros.</p>
+            </div>
+
+            <div class="app-card" style="border-left-color: #ffd93d;">
+                <h5>☁️ OneDrive — Almacenamiento en la nube</h5>
+                <p>Servicio de almacenamiento que permite guardar, sincronizar y compartir archivos desde cualquier dispositivo. Ofrece 1 TB de espacio por usuario en planes empresariales. </p>
+                <p><strong>Ejemplo de uso:</strong> Guardar documentos en la nube y acceder desde el celular o computadora.</p>
+            </div>
+
+            <div class="app-card" style="border-left-color: #1e88e5;">
+                <h5>📧 Outlook — Correo electrónico y calendario</h5>
+                <p>Cliente de correo y calendario que integra correo electrónico, contactos y gestión de citas. Es la herramienta central de comunicación profesional. </p>
+                <p><strong>Ejemplo de uso:</strong> Enviar correos, programar reuniones, administrar tareas.</p>
+            </div>
+
+            <div class="app-card" style="border-left-color: #8e24aa;">
+                <h5>📂 SharePoint — Gestión de documentos e intranet</h5>
+                <p>Plataforma para crear sitios de colaboración, gestionar documentos y construir intranets empresariales. Permite a los equipos compartir y administrar contenido. </p>
+                <p><strong>Ejemplo de uso:</strong> Portal de documentos de la empresa, flujos de trabajo de aprobación.</p>
+            </div>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Otras aplicaciones incluidas:</span>
+                <ul>
+                    <li><strong>Word, Excel, PowerPoint:</strong> Procesador de textos, hojas de cálculo y presentaciones. </li>
+                    <li><strong>OneNote:</strong> Bloc de notas digital para tomar y organizar ideas. </li>
+                    <li><strong>Access y Publisher:</strong> Bases de datos y diseño de publicaciones (solo PC). </li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- POWER PLATFORM -->
+            <!-- ============================================ -->
+            <h4>🔹 Power Platform — El poder del low-code</h4>
+            <p>Microsoft Power Platform es un conjunto de herramientas que permite a las organizaciones construir soluciones personalizadas con poco código (low-code). Incluye Power Apps, Power Automate, Power BI y Power Pages. </p>
+
+            <div class="power-grid">
+                <div class="power-item" style="border-top-color: #e65100;">
+                    <h5>📱 Power Apps</h5>
+                    <p>Entorno de desarrollo low-code para crear aplicaciones personalizadas que funcionan en web y móviles. Se conecta a múltiples fuentes de datos. </p>
+                    <div class="ejemplo">
+                        <strong>Ejemplo:</strong> Una app para registro de incidencias que los empleados usan desde su celular.
+                    </div>
+                </div>
+                <div class="power-item" style="border-top-color: #2e7d32;">
+                    <h5>⚙️ Power Automate</h5>
+                    <p>Herramienta para automatizar flujos de trabajo entre aplicaciones y servicios. Permite crear flujos que responden a eventos, como enviar notificaciones, aprobar solicitudes o generar documentos. </p>
+                    <div class="ejemplo">
+                        <strong>Ejemplo:</strong> Al recibir un correo, guardar el archivo adjunto en OneDrive y enviar una notificación en Teams.
+                    </div>
+                </div>
+                <div class="power-item" style="border-top-color: #0d47a1;">
+                    <h5>📊 Power BI</h5>
+                    <p>Servicio de análisis de negocios que transforma datos en visualizaciones interactivas. Permite crear dashboards e informes que ayudan a tomar decisiones informadas. </p>
+                    <div class="ejemplo">
+                        <strong>Ejemplo:</strong> Dashboard de ventas que muestra ingresos por región y producto, actualizado automáticamente.
+                    </div>
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Power Platform en acción:</span>
+                <p>Se puede crear una app en <strong>Power Apps</strong> que use <strong>Power Automate</strong> para enviar correos y <strong>Power BI</strong> para mostrar informes de datos, todo integrado y desde una sola plataforma. </p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Investiga un escenario empresarial ficticio (ej. una tienda online, una escuela, un hospital).</li>
+                    <li>2. Identifica qué aplicaciones de Office 365 usarían en su día a día.</li>
+                    <li>3. Piensa en un proceso que podrían automatizar con <strong>Power Automate</strong>.</li>
+                    <li>4. Piensa en un informe que podrían visualizar con <strong>Power BI</strong>.</li>
+                    <li>5. Prepara una breve explicación de tu análisis.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es la diferencia entre OneDrive y SharePoint?</li>
+                    <li>¿Por qué Teams es importante para el trabajo remoto?</li>
+                    <li>¿Qué ventaja tiene usar low-code con Power Apps?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica las aplicaciones de Office 365 y los componentes de Power Platform, comprendiendo sus casos de uso.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Reconoce Teams, OneDrive, Outlook y SharePoint.</li>
+                <li>Diferencia entre Power Apps, Power Automate y Power BI.</li>
+                <li>Identifica escenarios de uso para cada herramienta.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos visuales</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es Office 365?</li>
+                <li>¿Cuál es la diferencia con Microsoft 365?</li>
+                <li>¿Qué aplicación usarías para comunicación en equipo?</li>
+                <li>¿Qué servicio usarías para almacenar archivos en la nube?</li>
+                <li>¿Qué herramienta de Power Platform usarías para automatizar tareas?</li>
+                <li>¿Qué herramienta usarías para crear dashboards interactivos?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña una solución combinando <strong>Office 365 + Power Platform</strong> para una empresa que necesita: comunicación en equipo, almacenamiento de documentos, automatización de aprobaciones y reportes de ventas. Explica qué herramientas usarías y por qué.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el conocimiento de Office 365 y Power Platform.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la integración de herramientas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre Office 365 y Power Platform:</strong></p>
+        <p>• <strong>Office 365</strong> = aplicaciones de productividad (Word, Excel, Outlook, Teams).</p>
+        <p>• <strong>Microsoft 365</strong> = Office 365 + gestión de dispositivos + seguridad.</p>
+        <p>• <strong>Teams</strong>: comunicación y colaboración en equipo.</p>
+        <p>• <strong>OneDrive</strong>: almacenamiento personal en la nube.</p>
+        <p>• <strong>SharePoint</strong>: gestión de documentos y sitios de equipo.</p>
+        <p>• <strong>Power Apps</strong>: crea apps sin código.</p>
+        <p>• <strong>Power Automate</strong>: automatiza flujos de trabajo.</p>
+        <p>• <strong>Power BI</strong>: visualiza datos y crea dashboards.</p>
+        <p>• La <strong>Power Platform</strong> integra apps, automatización y análisis. </p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Presenta el ecosistema de productividad más usado en empresas.</p>
+        <p>• Conecta herramientas tradicionales con soluciones low-code.</p>
+        <p>• Prepara a los estudiantes para entornos laborales modernos.</p>
+        <p>• Muestra cómo la tecnología puede automatizar y mejorar procesos.</p>
+    </div>
+
+</div>
+</body>
+</html>

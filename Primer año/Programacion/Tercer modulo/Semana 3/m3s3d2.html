@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Variables en Dart (int, double, String, bool, String concatenation)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .code-block {
+            background: #1e1e2e;
+            color: #d4d4d4;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 2;
+            border: 1px solid #333;
+        }
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .type { color: #4ec9b0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .operator { color: #d4d4d4; }
+        .code-block .punctuation { color: #d4d4d4; }
+        .code-block .variable { color: #9cdcfe; }
+        .code-block .boolean { color: #569cd6; }
+
+        .def-block {
+            background: #f5f5f5;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin: 6px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .def-block strong {
+            color: #1a237e;
+        }
+        .dart-card {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #00b4d8;
+            margin-bottom: 8px;
+        }
+        .dart-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .dart-card p {
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Tema: Variables en Dart · int, double, String, bool · String concatenation</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende los tipos de datos básicos en Dart (int, double, String, bool), declara variables utilizando las reglas de sintaxis del lenguaje, y aplica la concatenación de Strings usando el operador <code>+</code>.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es una variable y su propósito en programación.</li>
+                <li>Reconoce los tipos de datos primitivos en Dart: int, double, String, bool.</li>
+                <li>Identifica la sintaxis correcta para declarar variables en Dart.</li>
+                <li>Entiende cómo concatenar Strings usando el operador <code>+</code>.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Declarar variables de tipo int, double, String y bool.</li>
+                <li>Asignar valores a variables.</li>
+                <li>Concatenar Strings usando el operador <code>+</code>.</li>
+                <li>Concatenar Strings con variables de otros tipos usando <code>.toString()</code>.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por aprender un lenguaje de programación moderno.</li>
+                <li>Valora la importancia de la correcta manipulación de datos.</li>
+                <li>Participa activamente en la codificación y resolución de problemas.</li>
+                <li>Desarrolla una actitud meticulosa al escribir código.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué son las variables y qué tipos de datos existen en Dart?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y analogía.</p>
+            <p><span class="label">Descripción:</span> El docente introduce el concepto de variable usando una analogía con cajas o contenedores que guardan información. Se plantean preguntas:</p>
+            <ul>
+                <li>¿Qué tipos de datos crees que puede almacenar una variable?</li>
+                <li>¿Qué diferencia hay entre un número entero y un número decimal en programación?</li>
+                <li>¿Cómo crees que se unen textos en programación?</li>
+            </ul>
+            <p>Se presenta el lenguaje Dart y sus tipos de datos básicos.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo inicial en Dart:</span>
+                <div class="code-block">
+<span class="comment">// Declaración de variables en Dart</span>
+<span class="type">int</span> edad = 25;
+<span class="type">double</span> altura = <span class="number">1.75</span>;
+<span class="type">String</span> nombre = <span class="string">"Ana"</span>;
+<span class="type">bool</span> esEstudiante = <span class="boolean">true</span>;
+                </div>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los tipos básicos de Dart y reconoce la utilidad de las variables en programación.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la discusión inicial.</li>
+                <li>Reconoce los tipos de datos presentados.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Proyector / DartPad</li>
+                <li>Presentación con ejemplos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">40 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Tipos de datos y concatenación de Strings en Dart"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos en vivo y ejercicios prácticos.</p>
+
+            <!-- Tipos de datos -->
+            <h4>🔹 Tipos de datos básicos en Dart</h4>
+
+            <div class="dart-card" style="border-left-color: #ff6b6b;">
+                <strong>📌 int — Números enteros</strong>
+                <p>Representa números enteros sin parte decimal.</p>
+                <div class="code-block">
+<span class="type">int</span> edad = <span class="number">30</span>;
+<span class="type">int</span> temperatura = <span class="number">-5</span>;
+<span class="type">int</span> poblacion = <span class="number">8000000</span>;
+                </div>
+            </div>
+
+            <div class="dart-card" style="border-left-color: #4ecdc4;">
+                <strong>📌 double — Números con punto decimal</strong>
+                <p>Representa números con parte decimal (precisión doble).</p>
+                <div class="code-block">
+<span class="type">double</span> altura = <span class="number">1.82</span>;
+<span class="type">double</span> pi = <span class="number">3.1416</span>;
+<span class="type">double</span> peso = <span class="number">68.5</span>;
+                </div>
+            </div>
+
+            <div class="dart-card" style="border-left-color: #ffd93d;">
+                <strong>📌 String — Cadenas de texto</strong>
+                <p>Representa texto entre comillas simples o dobles.</p>
+                <div class="code-block">
+<span class="type">String</span> nombre = <span class="string">"Carlos"</span>;
+<span class="type">String</span> mensaje = <span class="string">'Hola mundo'</span>;
+<span class="type">String</span> saludo = <span class="string">"Bienvenido"</span>;
+                </div>
+            </div>
+
+            <div class="dart-card" style="border-left-color: #6c5ce7;">
+                <strong>📌 bool — Booleano (verdadero/falso)</strong>
+                <p>Representa valores lógicos: true o false.</p>
+                <div class="code-block">
+<span class="type">bool</span> esMayorEdad = <span class="boolean">true</span>;
+<span class="type">bool</span> tieneLicencia = <span class="boolean">false</span>;
+                </div>
+            </div>
+
+            <!-- Concatenación de Strings -->
+            <h4>🔹 Concatenación de Strings con el operador <code>+</code></h4>
+            <div class="def-block">
+                <strong>Concatenación:</strong> Unir dos o más Strings en uno solo usando el operador <code>+</code>.
+            </div>
+
+            <div class="dart-card" style="border-left-color: #ff6b6b;">
+                <strong>📌 Concatenación básica con <code>+</code></strong>
+                <p>Une dos o más Strings usando el operador <code>+</code>.</p>
+                <div class="code-block">
+<span class="type">String</span> nombre = <span class="string">"Carlos"</span>;
+<span class="type">String</span> apellido = <span class="string">"García"</span>;
+<span class="type">String</span> nombreCompleto = nombre + <span class="string">" "</span> + apellido;
+<span class="comment">// nombreCompleto = "Carlos García"</span>
+                </div>
+            </div>
+
+            <div class="dart-card" style="border-left-color: #4ecdc4;">
+                <strong>📌 Concatenar String con otros tipos usando <code>.toString()</code></strong>
+                <p>Para concatenar un String con un <code>int</code> o <code>double</code>, debemos convertir el número a String usando <code>.toString()</code>.</p>
+                <div class="code-block">
+<span class="type">String</span> nombre = <span class="string">"Ana"</span>;
+<span class="type">int</span> edad = <span class="number">25</span>;
+<span class="type">double</span> altura = <span class="number">1.68</span>;
+
+<span class="comment">// Concatenación con números usando .toString()</span>
+<span class="type">String</span> mensaje = <span class="string">"Mi nombre es "</span> + nombre + <span class="string">", tengo "</span> + edad.toString() + <span class="string">" años y mido "</span> + altura.toString() + <span class="string">" m"</span>;
+<span class="comment">// mensaje = "Mi nombre es Ana, tengo 25 años y mido 1.68 m"</span>
+                </div>
+            </div>
+
+            <div class="dart-card" style="border-left-color: #ffd93d;">
+                <strong>📌 Concatenar String con bool usando <code>.toString()</code></strong>
+                <p>Al igual que con los números, para concatenar un <code>bool</code> debemos usar <code>.toString()</code>.</p>
+                <div class="code-block">
+<span class="type">String</span> nombre = <span class="string">"Luis"</span>;
+<span class="type">bool</span> esActivo = <span class="boolean">true</span>;
+
+<span class="type">String</span> mensaje = <span class="string">"Usuario: "</span> + nombre + <span class="string">", Activo: "</span> + esActivo.toString();
+<span class="comment">// mensaje = "Usuario: Luis, Activo: true"</span>
+                </div>
+            </div>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo completo de concatenación:</span>
+                <div class="code-block">
+<span class="keyword">void</span> <span class="function">main</span>() {
+  <span class="type">String</span> nombre = <span class="string">"María"</span>;
+  <span class="type">String</span> apellido = <span class="string">"López"</span>;
+  <span class="type">int</span> edad = <span class="number">28</span>;
+  <span class="type">double</span> altura = <span class="number">1.78</span>;
+  <span class="type">bool</span> esEstudiante = <span class="boolean">true</span>;
+
+  <span class="comment">// Concatenación paso a paso</span>
+  <span class="type">String</span> nombreCompleto = nombre + <span class="string">" "</span> + apellido;
+  <span class="type">String</span> mensaje = <span class="string">"Hola, soy "</span> + nombreCompleto + <span class="string">". Tengo "</span> + edad.toString() + <span class="string">" años, mido "</span> + altura.toString() + <span class="string">" m y soy estudiante: "</span> + esEstudiante.toString();
+
+  <span class="function">print</span>(mensaje);
+  <span class="comment">// Salida: "Hola, soy María López. Tengo 28 años, mido 1.78 m y soy estudiante: true"</span>
+}
+                </div>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Ejercicios:</strong></p>
+                <ul>
+                    <li>1. Declara una variable <code>int</code> con tu edad.</li>
+                    <li>2. Declara una variable <code>double</code> con tu estatura.</li>
+                    <li>3. Declara una variable <code>String</code> con tu nombre.</li>
+                    <li>4. Declara una variable <code>String</code> con tu apellido.</li>
+                    <li>5. Declara una variable <code>bool</code> que indique si te gusta la programación.</li>
+                    <li>6. Usa <code>+</code> para concatenar tu nombre y apellido en una variable <code>nombreCompleto</code>.</li>
+                    <li>7. Usa <code>+</code> y <code>.toString()</code> para crear un mensaje que incluya tu nombre completo, edad y estatura.</li>
+                    <li>8. Usa <code>+</code> y <code>.toString()</code> para crear un mensaje que incluya el valor de la variable <code>bool</code>.</li>
+                    <li>9. Crea un mensaje que diga "El año que viene tendré X años" donde X sea tu edad + 1 (usa <code>.toString()</code>).</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es la diferencia entre <code>int</code> y <code>double</code>?</li>
+                    <li>¿Por qué necesitamos usar <code>.toString()</code> al concatenar números con Strings?</li>
+                    <li>¿Qué sucede si intentamos concatenar un <code>int</code> con un <code>String</code> sin usar <code>.toString()</code>?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante declara variables de todos los tipos básicos y aplica correctamente la concatenación de Strings usando el operador <code>+</code> y <code>.toString()</code>.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Declara correctamente variables de tipo int, double, String y bool.</li>
+                <li>Concatena Strings usando el operador <code>+</code>.</li>
+                <li>Concatena Strings con números usando <code>.toString()</code>.</li>
+                <li>Concatena Strings con bool usando <code>.toString()</code>.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>DartPad / entorno de desarrollo</li>
+                <li>Ejercicios impresos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas y discusión.</p>
+            <ul>
+                <li>¿Qué tipos de datos vimos en Dart?</li>
+                <li>¿Cómo se declara una variable de tipo <code>String</code>?</li>
+                <li>¿Cuál es la diferencia entre <code>int</code> y <code>double</code>?</li>
+                <li>¿Cómo concatenamos Strings en Dart?</li>
+                <li>¿Qué método usamos para convertir un número a String?</li>
+                <li>¿Qué método usamos para convertir un bool a String?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Escribe un programa en Dart que:</p>
+                <ul style="padding-left: 20px;">
+                    <li>Declare variables <code>String</code>, <code>int</code> y <code>double</code> con información sobre un producto (nombre, precio, cantidad).</li>
+                    <li>Declare una variable <code>bool</code> que indique si el producto está en oferta.</li>
+                    <li>Use concatenación con <code>+</code> y <code>.toString()</code> para mostrar un mensaje como: "Producto: Laptop · Precio: 1200.5 · Cantidad: 5 · En oferta: true".</li>
+                    <li>Use concatenación para mostrar el precio total (precio × cantidad) con <code>.toString()</code>.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de variables, tipos de datos y concatenación de Strings en Dart.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Resuelve el desafío final.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>DartPad</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para Dart:</strong></p>
+        <p>• <strong>int:</strong> números enteros (sin decimales).</p>
+        <p>• <strong>double:</strong> números con decimales.</p>
+        <p>• <strong>String:</strong> texto entre comillas simples o dobles.</p>
+        <p>• <strong>bool:</strong> true o false.</p>
+        <p>• <strong>Concatenación con +:</strong> une Strings, requiere <code>.toString()</code> para otros tipos.</p>
+        <p>• Usa <code>.toString()</code> para convertir <code>int</code>, <code>double</code> o <code>bool</code> a String antes de concatenar.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce los fundamentos de Dart, lenguaje base para Flutter.</p>
+        <p>• Enseña a manejar diferentes tipos de datos.</p>
+        <p>• Desarrolla habilidades prácticas en un entorno de codificación real.</p>
+        <p>• Prepara a los estudiantes para conceptos más avanzados de programación.</p>
+    </div>
+
+</div>
+</body>
+</html>

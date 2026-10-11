@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación de Clase · Integración SharePoint + Power Apps + Power
+      Automate
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .integracion-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin: 12px 0;
+      }
+      .integracion-item {
+        background: #f5f7fa;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-top: 4px solid #3f51b5;
+        text-align: center;
+      }
+      .integracion-item h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+      .integracion-item p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .integracion-item .icono {
+        font-size: 32px;
+        margin-bottom: 4px;
+      }
+      .integracion-item.sharepoint {
+        border-top-color: #0d47a1;
+      }
+      .integracion-item.powerapps {
+        border-top-color: #6c5ce7;
+      }
+      .integracion-item.powerautomate {
+        border-top-color: #2e7d32;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      .mock-lista {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        margin: 8px 0;
+      }
+      .mock-lista table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .mock-lista th {
+        background: #e8eaf6;
+        color: #1a237e;
+        padding: 8px 10px;
+        text-align: left;
+        font-weight: 600;
+      }
+      .mock-lista td {
+        padding: 6px 10px;
+        border-top: 1px solid #e0e0e0;
+      }
+      .estado-abierto {
+        background: #fff3e0;
+        color: #e65100;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .estado-progreso {
+        background: #e3f2fd;
+        color: #0d47a1;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .estado-resuelto {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .prioridad-alta {
+        background: #ffebee;
+        color: #c62828;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .prioridad-media {
+        background: #fff3e0;
+        color: #e65100;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .prioridad-baja {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .mock-app {
+        background: white;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        margin: 8px 0;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .mock-app .header {
+        background: #1a237e;
+        color: white;
+        padding: 10px 14px;
+        font-size: 15px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .mock-app .body {
+        padding: 12px 14px;
+        background: #f5f7fa;
+      }
+      .mock-app .incidente-item {
+        background: white;
+        padding: 10px 14px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        border-left: 4px solid #e65100;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+      .mock-app .incidente-item .titulo {
+        font-weight: 600;
+        font-size: 14px;
+        color: #1a237e;
+      }
+      .mock-app .incidente-item .detalle {
+        font-size: 12px;
+        color: #555;
+        margin-top: 2px;
+      }
+
+      .mock-correo {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 8px 0;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .mock-correo .header {
+        background: #f5f5f5;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 13px;
+        color: #555;
+      }
+      .mock-correo .header strong {
+        color: #1a237e;
+      }
+      .mock-correo .body {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .mock-correo .body .linea {
+        margin: 4px 0;
+      }
+      .mock-correo .body .destacado {
+        background: #fff3e0;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 8px 0;
+        border-left: 4px solid #e65100;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .integracion-grid {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔗 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Integración SharePoint + Power Apps + Power Automate · Sistema de
+        "Registro de Incidentes"
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante construye paso a paso un sistema integrado de "Registro
+          de Incidentes" utilizando SharePoint (lista de datos), Power Apps
+          (interfaz de usuario) y Power Automate (notificación automática),
+          comprendiendo cómo las tres herramientas se conectan para resolver un
+          caso de negocio real.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>
+              Comprende la arquitectura de integración entre SharePoint, Power
+              Apps y Power Automate.
+            </li>
+            <li>Reconoce el rol de cada herramienta en el sistema.</li>
+            <li>Identifica el flujo de datos entre las tres plataformas.</li>
+            <li>
+              Entiende la importancia de la integración para resolver problemas
+              reales.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Crear una lista de SharePoint para incidentes.</li>
+            <li>Diseñar una app de Power Apps con formularios y galerías.</li>
+            <li>
+              Crear un flujo de Power Automate que notifique al crear un
+              incidente.
+            </li>
+            <li>Conectar las tres herramientas en un sistema funcional.</li>
+            <li>Probar el sistema completo de registro y notificación.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra interés por la integración de herramientas.</li>
+            <li>Valora la importancia de resolver problemas con tecnología.</li>
+            <li>Participa activamente en la construcción del sistema.</li>
+            <li>Desarrolla visión de arquitectura de soluciones.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "¿Cómo construimos un sistema de registro de incidentes?"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Reflexión y
+            contextualización.
+          </p>
+          <p>
+            El docente presenta el escenario:
+            <em
+              >"Una empresa necesita un sistema para que los empleados reporten
+              incidentes (fallas de equipo, problemas de red, etc.), que queden
+              registrados y que el responsable reciba una notificación
+              automática."</em
+            >
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Arquitectura del sistema:</span>
+            <div class="integracion-grid">
+              <div class="integracion-item sharepoint">
+                <div class="icono">📋</div>
+                <h5>SharePoint</h5>
+                <p>Almacena los incidentes en una lista.</p>
+                <p><strong>Rol:</strong> Base de datos</p>
+              </div>
+              <div class="integracion-item powerapps">
+                <div class="icono">📱</div>
+                <h5>Power Apps</h5>
+                <p>
+                  Interfaz para que los usuarios registren y consulten
+                  incidentes.
+                </p>
+                <p><strong>Rol:</strong> Interfaz de usuario</p>
+              </div>
+              <div class="integracion-item powerautomate">
+                <div class="icono">⚡</div>
+                <h5>Power Automate</h5>
+                <p>Envía notificación al crear un nuevo incidente.</p>
+                <p><strong>Rol:</strong> Automatización</p>
+              </div>
+            </div>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende la arquitectura del sistema y el rol de cada
+            herramienta.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión.</li>
+            <li>Reconoce el rol de cada herramienta.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Acceso a SharePoint, Power Apps y Power Automate</li>
+            <li>Presentación con la arquitectura</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">60 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "Construcción paso a paso del sistema de registro de
+            incidentes"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes construyen).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PARTE 1: SHAREPOINT -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 1: Crear la lista de SharePoint</h4>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">1</span>
+            <h5>Crear la lista "Incidentes"</h5>
+            <p>
+              Ir al sitio de SharePoint y crear una
+              <strong>lista en blanco</strong> llamada
+              <strong>"Incidentes"</strong>.
+            </p>
+            <div class="captura-mock">
+              📋 SharePoint → + Nuevo → Lista → Lista en blanco → Nombre:
+              "Incidentes"
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">2</span>
+            <h5>Agregar las columnas necesarias</h5>
+            <p>Agregar las siguientes columnas:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Título</strong> (Texto) — Ya existe por defecto.</li>
+              <li>
+                <strong>Descripción</strong> (Texto — varias líneas) — Detalle
+                del incidente.
+              </li>
+              <li>
+                <strong>Reportado por</strong> (Persona o Grupo) — Quién
+                reporta.
+              </li>
+              <li>
+                <strong>Responsable</strong> (Persona o Grupo) — A quién se
+                asigna.
+              </li>
+              <li><strong>Prioridad</strong> (Elección: Alta, Media, Baja).</li>
+              <li>
+                <strong>Estatus</strong> (Elección: Abierto, En progreso,
+                Resuelto).
+              </li>
+              <li><strong>Fecha de reporte</strong> (Fecha).</li>
+            </ul>
+            <div class="captura-mock">
+              📝 Columnas: Título | Descripción | Reportado por | Responsable |
+              Prioridad | Estatus | Fecha de reporte
+            </div>
+          </div>
+
+          <div class="mock-lista">
+            <table>
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Reportado por</th>
+                  <th>Responsable</th>
+                  <th>Prioridad</th>
+                  <th>Estatus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Falla de red</td>
+                  <td>No hay internet en el piso 3</td>
+                  <td>Ana García</td>
+                  <td>Carlos López</td>
+                  <td><span class="prioridad-alta">Alta</span></td>
+                  <td><span class="estado-abierto">Abierto</span></td>
+                </tr>
+                <tr>
+                  <td>Impresora sin tóner</td>
+                  <td>Impresora del área contable</td>
+                  <td>María Torres</td>
+                  <td>Luis Ramírez</td>
+                  <td><span class="prioridad-media">Media</span></td>
+                  <td><span class="estado-progreso">En progreso</span></td>
+                </tr>
+                <tr>
+                  <td>PC lenta</td>
+                  <td>Equipo de diseño muy lento</td>
+                  <td>Carlos López</td>
+                  <td>Ana García</td>
+                  <td><span class="prioridad-baja">Baja</span></td>
+                  <td><span class="estado-resuelto">Resuelto</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo de la lista "Incidentes" con datos de prueba.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PARTE 2: POWER APPS -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 2: Crear la app en Power Apps</h4>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">3</span>
+            <h5>Crear la app desde SharePoint</h5>
+            <p>
+              En la lista "Incidentes", ir a <strong>"Integrar"</strong> →
+              <strong>"Power Apps"</strong> →
+              <strong>"Crear una aplicación"</strong>.
+            </p>
+            <div class="captura-mock">
+              📱 SharePoint → Integrar → Power Apps → Crear una aplicación
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Se generará automáticamente una app con pantallas Browse, Detail y
+              Edit.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">4</span>
+            <h5>Personalizar la pantalla Browse</h5>
+            <p>
+              Renombrar la pantalla a <strong>"BrowseScreen"</strong> y
+              configurar la galería para mostrar:
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Título:</strong> <code>ThisItem.Título</code></li>
+              <li>
+                <strong>Prioridad:</strong>
+                <code>ThisItem.Prioridad.Value</code>
+              </li>
+              <li>
+                <strong>Estatus:</strong> <code>ThisItem.Estatus.Value</code>
+              </li>
+            </ul>
+            <div class="captura-mock">
+              🖼️ Galería → Título | Prioridad | Estatus
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">5</span>
+            <h5>Configurar la pantalla Edit</h5>
+            <p>
+              Renombrar la pantalla a <strong>"EditScreen"</strong> y configurar
+              el EditForm con los campos:
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                Título, Descripción, Reportado por, Responsable, Prioridad,
+                Estatus, Fecha de reporte.
+              </li>
+            </ul>
+            <p>
+              Agregar los botones <strong>"Guardar"</strong> (<code
+                >SubmitForm(EditForm1); Back()</code
+              >) y <strong>"Cancelar"</strong> (<code
+                >ResetForm(EditForm1); Back()</code
+              >).
+            </p>
+            <div class="captura-mock">
+              ✏️ EditForm → Campos + Botón Guardar + Botón Cancelar
+            </div>
+          </div>
+
+          <div class="mock-app">
+            <div class="header">
+              <span>📋 Incidentes</span>
+              <span>🔍</span>
+            </div>
+            <div class="body">
+              <div class="incidente-item" style="border-left-color: #e65100">
+                <div class="titulo">Falla de red</div>
+                <div class="detalle">Prioridad: Alta | Estatus: Abierto</div>
+              </div>
+              <div class="incidente-item" style="border-left-color: #0d47a1">
+                <div class="titulo">Impresora sin tóner</div>
+                <div class="detalle">
+                  Prioridad: Media | Estatus: En progreso
+                </div>
+              </div>
+              <div class="incidente-item" style="border-left-color: #2e7d32">
+                <div class="titulo">PC lenta</div>
+                <div class="detalle">Prioridad: Baja | Estatus: Resuelto</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Vista de la app de incidentes en Power Apps.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PARTE 3: POWER AUTOMATE -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 3: Crear el flujo de notificación en Power Automate</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">6</span>
+            <h5>Crear flujo automatizado</h5>
+            <p>
+              Ir a <strong>make.powerautomate.com</strong> →
+              <strong>"Crear"</strong> → <strong>"Flujo automatizado"</strong>.
+            </p>
+            <p>Nombre: <strong>"Notificación de nuevo incidente"</strong>.</p>
+            <p>
+              Trigger: <strong>"Cuando se crea un elemento"</strong> →
+              SharePoint → Lista "Incidentes".
+            </p>
+            <div class="captura-mock">
+              ⚡ Crear → Flujo automatizado<br />
+              🎯 Trigger: "Cuando se crea un elemento" → Incidentes
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">7</span>
+            <h5>Agregar acción: Enviar correo al responsable</h5>
+            <p>
+              Agregar la acción
+              <strong>"Enviar un correo electrónico"</strong> (Office 365
+              Outlook).
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Para:</strong> Campo dinámico
+                <code>Responsable Email</code>.
+              </li>
+              <li>
+                <strong>Asunto:</strong>
+                <code>"Nuevo incidente asignado: "</code> + Título.
+              </li>
+              <li><strong>Cuerpo:</strong> Detalles del incidente.</li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📧 Para: Responsable Email<br />
+              📌 Asunto: "Nuevo incidente asignado: " + Título<br /><br />
+              Hola,<br /><br />
+              Se ha registrado un nuevo incidente:<br /><br />
+              <strong>Título:</strong> [Título]<br />
+              <strong>Descripción:</strong> [Descripción]<br />
+              <strong>Prioridad:</strong> [Prioridad Value]<br />
+              <strong>Reportado por:</strong> [Reportado por DisplayName]<br /><br />
+              Por favor, revisa el incidente y actualiza su estatus.<br /><br />
+              Saludos,<br />
+              Sistema de Registro de Incidentes
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">8</span>
+            <h5>Guardar el flujo</h5>
+            <p>
+              Hacer clic en <strong>"Guardar"</strong> y probarlo creando un
+              nuevo incidente desde Power Apps o desde la lista de SharePoint.
+            </p>
+            <div class="captura-mock">
+              💾 Guardar → Probar creando un incidente
+            </div>
+          </div>
+
+          <div class="mock-correo">
+            <div class="header">
+              <strong>De:</strong> Power Automate
+              &lt;no-reply@powerautomate.com&gt;<br />
+              <strong>Para:</strong> carlos.lopez@empresa.com<br />
+              <strong>Asunto:</strong> Nuevo incidente asignado: Falla de red
+            </div>
+            <div class="body">
+              <p class="linea">Hola,</p>
+              <p class="linea">Se ha registrado un nuevo incidente:</p>
+              <div class="destacado">
+                <p class="linea"><strong>Título:</strong> Falla de red</p>
+                <p class="linea">
+                  <strong>Descripción:</strong> No hay internet en el piso 3
+                </p>
+                <p class="linea"><strong>Prioridad:</strong> Alta</p>
+                <p class="linea"><strong>Reportado por:</strong> Ana García</p>
+              </div>
+              <p class="linea">
+                Por favor, revisa el incidente y actualiza su estatus.
+              </p>
+              <p class="linea">
+                Saludos,<br />Sistema de Registro de Incidentes
+              </p>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo del correo de notificación que recibe el responsable.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PARTE 4: PRUEBA INTEGRADA -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 4: Probar el sistema completo</h4>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">9</span>
+            <h5>Registrar un incidente desde Power Apps</h5>
+            <p>
+              Abrir la app en Power Apps, hacer clic en
+              <strong>"+ Nuevo"</strong>, completar el formulario y guardar.
+            </p>
+            <div class="captura-mock">
+              📱 Power Apps → + Nuevo → Completar formulario → Guardar
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">10</span>
+            <h5>Verificar el flujo y la notificación</h5>
+            <p>
+              Ir a Power Automate → <strong>"Mis flujos"</strong> → revisar el
+              <strong>historial de ejecuciones</strong>. Verificar que el correo
+              llegó al responsable.
+            </p>
+            <div class="captura-mock">
+              ✅ Mis flujos → Notificación de nuevo incidente → Historial:
+              Exitoso
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">11</span>
+            <h5>Verificar la lista de SharePoint</h5>
+            <p>
+              Ir a la lista "Incidentes" en SharePoint y confirmar que el nuevo
+              incidente aparece con los datos correctos.
+            </p>
+            <div class="captura-mock">
+              📋 SharePoint → Lista "Incidentes" → Nuevo incidente registrado
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- INTEGRACIÓN VISUAL -->
+          <!-- ============================================ -->
+          <h4>🔹 Integración completa del sistema</h4>
+
+          <div class="integracion-grid">
+            <div class="integracion-item sharepoint">
+              <div class="icono">📋</div>
+              <h5>SharePoint</h5>
+              <p><strong>Lista "Incidentes"</strong></p>
+              <p>Almacena los datos de cada incidente.</p>
+              <p style="font-size: 13px; color: #555">
+                Columnas: Título, Descripción, Reportado por, Responsable,
+                Prioridad, Estatus.
+              </p>
+            </div>
+            <div class="integracion-item powerapps">
+              <div class="icono">📱</div>
+              <h5>Power Apps</h5>
+              <p><strong>Interfaz de usuario</strong></p>
+              <p>Permite registrar, ver y editar incidentes.</p>
+              <p style="font-size: 13px; color: #555">
+                Pantallas: Browse, Detail, Edit.
+              </p>
+            </div>
+            <div class="integracion-item powerautomate">
+              <div class="icono">⚡</div>
+              <h5>Power Automate</h5>
+              <p><strong>Notificación automática</strong></p>
+              <p>Envía correo al responsable al crear un incidente.</p>
+              <p style="font-size: 13px; color: #555">
+                Trigger: Cuando se crea un elemento.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 Flujo de datos del sistema:</span
+            >
+            <ol style="padding-left: 20px; margin-top: 6px">
+              <li>
+                <strong>Usuario</strong> registra un incidente en
+                <strong>Power Apps</strong>.
+              </li>
+              <li>
+                Los datos se guardan en la <strong>lista de SharePoint</strong>.
+              </li>
+              <li>
+                <strong>Power Automate</strong> detecta el nuevo elemento
+                (trigger) y envía un <strong>correo al responsable</strong>.
+              </li>
+              <li>
+                El responsable recibe la notificación y actualiza el estatus en
+                <strong>Power Apps</strong> o <strong>SharePoint</strong>.
+              </li>
+            </ol>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Crea la lista <strong>"Incidentes"</strong> en SharePoint con
+                las columnas indicadas.
+              </li>
+              <li>
+                2. Crea una <strong>app en Power Apps</strong> desde la lista
+                "Incidentes" y personaliza la galería y el formulario.
+              </li>
+              <li>
+                3. Crea un <strong>flujo en Power Automate</strong> que envíe un
+                correo al responsable cuando se cree un incidente.
+              </li>
+              <li>
+                4. Prueba el sistema completo: registra un incidente desde Power
+                Apps.
+              </li>
+              <li>
+                5. Verifica que el incidente aparece en SharePoint y que el
+                correo llega al responsable.
+              </li>
+              <li>
+                6. Actualiza el estatus del incidente en Power Apps y verifica
+                que se refleja en SharePoint.
+              </li>
+              <li>
+                7. Si no tienes acceso, dibuja la arquitectura del sistema y
+                describe el flujo de datos.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>
+                ¿Qué ventaja tiene integrar las tres herramientas en un solo
+                sistema?
+              </li>
+              <li>¿Qué pasaría si una de las herramientas falla?</li>
+              <li>
+                ¿Cómo podrías ampliar el sistema para incluir aprobaciones?
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante construye un sistema integrado de registro de
+            incidentes usando SharePoint, Power Apps y Power Automate.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Crea la lista de SharePoint con las columnas correctas.</li>
+            <li>Desarrolla la app de Power Apps con galería y formulario.</li>
+            <li>Crea el flujo de notificación en Power Automate.</li>
+            <li>Prueba el sistema completo y verifica el flujo de datos.</li>
+            <li>Comprende la integración entre las tres herramientas.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Acceso a SharePoint, Power Apps y Power Automate</li>
+            <li>Pizarra</li>
+            <li>Guía de integración paso a paso</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso y preguntas finales"</h4>
+          <ul>
+            <li>¿Qué rol cumple SharePoint en el sistema?</li>
+            <li>¿Qué rol cumple Power Apps?</li>
+            <li>¿Qué rol cumple Power Automate?</li>
+            <li>
+              ¿Cuál es el flujo de datos desde que el usuario registra un
+              incidente hasta que el responsable recibe el correo?
+            </li>
+            <li>¿Cómo se conectan las tres herramientas entre sí?</li>
+            <li>¿Qué mejoras le harías al sistema?</li>
+          </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final:</span>
+            <p>
+              Amplía el sistema para incluir un
+              <strong>flujo de aprobación</strong>: cuando se registre un
+              incidente de prioridad "Alta", que se solicite aprobación al
+              gerente antes de asignarlo al responsable. ¿Qué cambios harías en
+              cada herramienta?
+            </p>
+            <p style="font-size: 13px; color: #555; margin-top: 4px">
+              Pista: agrega una condición en el flujo de Power Automate y usa la
+              acción "Iniciar y esperar una aprobación".
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida la integración de SharePoint, Power Apps y
+            Power Automate.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Comprende la arquitectura del sistema integrado.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Sistema construido</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p>
+          <strong
+            >💡 Tips clave para la integración SharePoint + Power Apps + Power
+            Automate:</strong
+          >
+        </p>
+        <p>
+          • <strong>SharePoint:</strong> Base de datos donde se almacenan los
+          incidentes.
+        </p>
+        <p>
+          • <strong>Power Apps:</strong> Interfaz de usuario para registrar, ver
+          y editar incidentes.
+        </p>
+        <p>
+          • <strong>Power Automate:</strong> Automatización que notifica al
+          responsable.
+        </p>
+        <p>
+          • <strong>Trigger del flujo:</strong> "Cuando se crea un elemento" en
+          la lista "Incidentes".
+        </p>
+        <p>
+          • <strong>Acción del flujo:</strong> "Enviar un correo electrónico" al
+          responsable.
+        </p>
+        <p>
+          • <strong>Campos dinámicos:</strong> Usar los datos del incidente en
+          el correo.
+        </p>
+        <p>
+          • <strong>Probar:</strong> Registrar un incidente desde Power Apps y
+          verificar el correo.
+        </p>
+        <p>
+          • <strong>Historial:</strong> Revisar ejecuciones en Power Automate
+          para confirmar el éxito.
+        </p>
+        <p>
+          • <strong>Integración:</strong> Las tres herramientas se conectan a
+          través de la lista de SharePoint.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>• Integra las tres herramientas principales de Power Platform.</p>
+        <p>• Resuelve un caso de negocio real de principio a fin.</p>
+        <p>• Prepara a los estudiantes para construir soluciones completas.</p>
+        <p>
+          • Desarrolla visión de arquitectura y flujo de datos entre
+          plataformas.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

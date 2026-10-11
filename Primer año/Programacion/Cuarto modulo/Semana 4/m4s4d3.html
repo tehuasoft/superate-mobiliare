@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Pantalla de Navegación (Browse) en Power Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+        }
+
+        .mock-app {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+            max-width: 340px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .mock-app .header {
+            background: #1a237e;
+            color: white;
+            padding: 10px 14px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mock-app .body {
+            padding: 12px 14px;
+            background: #f5f7fa;
+        }
+        .mock-app .galeria-item {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #1e88e5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .mock-app .galeria-item .titulo {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a237e;
+        }
+        .mock-app .galeria-item .detalle {
+            font-size: 13px;
+            color: #555;
+            margin-top: 2px;
+        }
+        .mock-app .galeria-item .estatus {
+            display: inline-block;
+            padding: 1px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .estado-activo { background: #e3f2fd; color: #0d47a1; }
+        .estado-pausado { background: #fff3e0; color: #e65100; }
+        .estado-cerrado { background: #e8f5e9; color: #2e7d32; }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📱 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Pantalla de Navegación (Browse) · Galería Vertical en Power Apps</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante diseña la pantalla de navegación (Browse) de una aplicación de Power Apps, insertando una galería vertical conectada a la lista "Proyectos" de SharePoint, y configurando los campos a mostrar (Título, Propietario, Estatus) para crear una experiencia de usuario clara y funcional.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende el propósito de una pantalla de navegación (Browse).</li>
+                <li>Reconoce los tipos de galerías disponibles en Power Apps.</li>
+                <li>Identifica las propiedades clave de una galería.</li>
+                <li>Entiende cómo vincular campos de una lista a controles de la galería.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Insertar una galería vertical en una pantalla en blanco.</li>
+                <li>Configurar el DataSource de la galería.</li>
+                <li>Personalizar la plantilla de la galería (imagen, título, subtítulo).</li>
+                <li>Mostrar los campos Título, Propietario y Estatus.</li>
+                <li>Ajustar el diseño y estilo de los elementos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por el diseño de interfaces de usuario.</li>
+                <li>Valora la importancia de una navegación clara y atractiva.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de personalización visual.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo mostramos una lista de proyectos al usuario?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Si tuvieras que mostrar una lista de proyectos en tu aplicación, ¿cómo lo harías? ¿Qué información debería ver el usuario primero?"</em> Se introduce el concepto de pantalla de navegación (Browse) y el uso de galerías.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es una pantalla de navegación (Browse)?</span>
+                <p>Es la pantalla donde el usuario <strong>explora y navega</strong> por los elementos de una lista. En Power Apps, se implementa típicamente con una <strong>galería</strong> que muestra un resumen de cada elemento.</p>
+                <ul>
+                    <li><strong>Galería:</strong> Control que muestra una colección de elementos de una fuente de datos.</li>
+                    <li><strong>Tipos:</strong> Vertical, horizontal, flexible, y más.</li>
+                    <li><strong>Objetivo:</strong> Permitir al usuario ver, seleccionar y navegar a los detalles.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende el propósito de la pantalla de navegación y el uso de galerías.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce el propósito de la galería.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a Power Apps Studio</li>
+                <li>Lista "Proyectos" conectada</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Diseño de la pantalla Browse con galería vertical"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- PASO 1: PANTALLA -->
+            <!-- ============================================ -->
+            <h4>🔹 Preparar la pantalla de navegación</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Renombrar la pantalla</h5>
+                <p>En Power Apps Studio, en el <strong>árbol de vista</strong> (View tree), seleccionar la pantalla en blanco y renombrarla como <strong>"BrowseScreen"</strong>.</p>
+                <div class="captura-mock">
+                    📱 Screen1 → Renombrar → BrowseScreen
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Nombrar las pantallas facilita la organización y navegación.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 2: INSERTAR GALERÍA -->
+            <!-- ============================================ -->
+            <h4>🔹 Insertar una galería vertical</h4>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Agregar galería vertical</h5>
+                <p>En la barra superior, ir a <strong>"Insertar"</strong> → <strong>"Galería"</strong> → seleccionar <strong>"Vertical"</strong>.</p>
+                <div class="captura-mock">
+                    🖼️ Insertar → Galería → Vertical
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Se insertará una galería con una plantilla predeterminada.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Asignar el DataSource</h5>
+                <p>Con la galería seleccionada, en el panel de propiedades (derecha), buscar <strong>"DataSource"</strong> y seleccionar <code>Proyectos</code>.</p>
+                <div class="captura-mock">
+                    🗄️ Propiedades → DataSource → Proyectos
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">La galería mostrará automáticamente los datos de la lista.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 4: PLANTILLA -->
+            <!-- ============================================ -->
+            <h4>🔹 Configurar la plantilla de la galería</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">4</span>
+                <h5>Ajustar el diseño de la plantilla</h5>
+                <p>Seleccionar la plantilla de la galería (el primer elemento) y elegir un diseño con <strong>imagen, título y subtítulo</strong>.</p>
+                <div class="captura-mock">
+                    🎨 Plantilla: Imagen + Título + Subtítulo
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Esto facilitará mostrar la información clave.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">5</span>
+                <h5>Configurar el campo Título</h5>
+                <p>Seleccionar el control de <strong>título</strong> dentro de la galería. En la barra de fórmulas, escribir: <code>ThisItem.Title</code> o <code>ThisItem.Título</code> según el nombre de la columna.</p>
+                <div class="captura-mock">
+                    📝 Texto: ThisItem.Título
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Mostrará el nombre del proyecto.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">6</span>
+                <h5>Configurar el campo Propietario</h5>
+                <p>Seleccionar el control de <strong>subtítulo</strong> dentro de la galería. En la barra de fórmulas, escribir: <code>ThisItem.Propietario.DisplayName</code>.</p>
+                <div class="captura-mock">
+                    👤 Texto: ThisItem.Propietario.DisplayName
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Mostrará el nombre del propietario del proyecto.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">7</span>
+                <h5>Configurar el campo Estatus</h5>
+                <p>Insertar una <strong>etiqueta</strong> (Label) adicional dentro de la galería. En la barra de fórmulas, escribir: <code>ThisItem.Estatus.Value</code>.</p>
+                <div class="captura-mock">
+                    🏷️ Texto: ThisItem.Estatus.Value
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Mostrará el estado del proyecto (Activo, Pausado, Cerrado).</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO VISUAL -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo visual de la pantalla Browse</h4>
+
+            <div class="mock-app">
+                <div class="header">
+                    <span>📋 Proyectos</span>
+                    <span>🔍</span>
+                </div>
+                <div class="body">
+                    <div class="galeria-item">
+                        <div class="titulo">E-commerce App</div>
+                        <div class="detalle">👤 Ana García</div>
+                        <span class="estatus estado-activo">Activo</span>
+                    </div>
+                    <div class="galeria-item">
+                        <div class="titulo">Intranet Corporativa</div>
+                        <div class="detalle">👤 Carlos López</div>
+                        <span class="estatus estado-activo">Activo</span>
+                    </div>
+                    <div class="galeria-item">
+                        <div class="titulo">CRM de Ventas</div>
+                        <div class="detalle">👤 María Torres</div>
+                        <span class="estatus estado-pausado">Pausado</span>
+                    </div>
+                    <div class="galeria-item">
+                        <div class="titulo">Migración de Datos</div>
+                        <div class="detalle">👤 Luis Ramírez</div>
+                        <span class="estatus estado-cerrado">Cerrado</span>
+                    </div>
+                    <div class="galeria-item">
+                        <div class="titulo">Dashboard de Métricas</div>
+                        <div class="detalle">👤 Ana García</div>
+                        <span class="estatus estado-activo">Activo</span>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Pantalla Browse con galería vertical mostrando Título, Propietario y Estatus.</p>
+
+            <!-- ============================================ -->
+            <!-- PERSONALIZACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Personalización visual de la galería</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>🎨 Colores y estilo</h5>
+                    <ul>
+                        <li><strong>Color de fondo:</strong> Cambiar en la propiedad <code>Fill</code> de la plantilla.</li>
+                        <li><strong>Borde:</strong> Ajustar <code>BorderColor</code> y <code>BorderThickness</code>.</li>
+                        <li><strong>Separación:</strong> Modificar <code>TemplatePadding</code> para dar aire entre elementos.</li>
+                    </ul>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📐 Tamaño y diseño</h5>
+                    <ul>
+                        <li><strong>Altura:</strong> Ajustar <code>Height</code> de la plantilla.</li>
+                        <li><strong>Ancho:</strong> Ajustar <code>Width</code> de la galería.</li>
+                        <li><strong>Diseño:</strong> Cambiar entre imagen + texto o solo texto.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. En tu app "Gestor de Proyectos", renombra la pantalla a <strong>"BrowseScreen"</strong>.</li>
+                    <li>2. Inserta una <strong>galería vertical</strong> y asígnale la lista <code>Proyectos</code> como DataSource.</li>
+                    <li>3. Configura la plantilla para mostrar:
+                        <ul>
+                            <li><strong>Título:</strong> <code>ThisItem.Título</code></li>
+                            <li><strong>Propietario:</strong> <code>ThisItem.Propietario.DisplayName</code></li>
+                            <li><strong>Estatus:</strong> <code>ThisItem.Estatus.Value</code></li>
+                        </ul>
+                    </li>
+                    <li>4. Personaliza los colores y el tamaño de la galería.</li>
+                    <li>5. Reproduce la app (F5) y verifica que se muestren los proyectos.</li>
+                    <li>6. Si no tienes acceso, dibuja cómo se vería la pantalla con 5 proyectos.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué campos son más importantes para mostrar en la pantalla de navegación?</li>
+                    <li>¿Cómo cambiarías el diseño de la galería para mostrar una imagen del proyecto?</li>
+                    <li>¿Qué función usarías para filtrar los proyectos por estatus?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante diseña la pantalla de navegación con una galería vertical, configurando los campos Título, Propietario y Estatus.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Inserta una galería vertical correctamente.</li>
+                <li>Asigna el DataSource de la lista "Proyectos".</li>
+                <li>Configura los campos Título, Propietario y Estatus.</li>
+                <li>Personaliza el diseño de la galería.</li>
+                <li>Comprende la estructura de la pantalla Browse.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a Power Apps Studio</li>
+                <li>Lista "Proyectos" en SharePoint</li>
+                <li>Pizarra</li>
+                <li>Guía de configuración de galería</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es una pantalla de navegación (Browse)?</li>
+                <li>¿Cómo se inserta una galería vertical en Power Apps?</li>
+                <li>¿Qué propiedad se debe configurar para vincular la galería a la lista?</li>
+                <li>¿Cómo se muestran los campos Título, Propietario y Estatus?</li>
+                <li>¿Qué propiedades se pueden personalizar en la galería?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Investiga cómo cambiar el color de fondo de los elementos de la galería según el Estatus del proyecto (ej. verde para Activo, naranja para Pausado, gris para Cerrado). Describe la fórmula que usarías en la propiedad <code>Fill</code>.</p>
+                <p style="font-size: 13px; color: #555; margin-top: 4px;">Pista: usa la función <code>Switch()</code> o <code>If()</code>.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el diseño de la pantalla de navegación con galería vertical.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la configuración de la galería.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Power Apps Studio</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para la pantalla Browse en Power Apps:</strong></p>
+        <p>• <strong>BrowseScreen:</strong> Pantalla de navegación donde se exploran los datos.</p>
+        <p>• <strong>Galería vertical:</strong> Muestra elementos en una lista desplazable verticalmente.</p>
+        <p>• <strong>DataSource:</strong> Fuente de datos (lista "Proyectos").</p>
+        <p>• <strong>ThisItem:</strong> Hace referencia al elemento actual de la galería.</p>
+        <p>• <strong>Título:</strong> <code>ThisItem.Título</code>.</p>
+        <p>• <strong>Propietario:</strong> <code>ThisItem.Propietario.DisplayName</code>.</p>
+        <p>• <strong>Estatus:</strong> <code>ThisItem.Estatus.Value</code>.</p>
+        <p>• <strong>Personalización:</strong> Ajusta colores, tamaño y diseño según necesidad.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a diseñar la pantalla principal de una app de gestión de datos.</p>
+        <p>• Desarrolla habilidades de configuración de galerías y vinculación de datos.</p>
+        <p>• Prepara a los estudiantes para crear interfaces de usuario funcionales.</p>
+        <p>• Conecta la teoría con la práctica en un entorno real de Microsoft.</p>
+    </div>
+
+</div>
+</body>
+</html>

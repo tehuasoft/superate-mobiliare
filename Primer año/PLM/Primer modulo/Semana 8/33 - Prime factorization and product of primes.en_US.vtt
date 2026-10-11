@@ -1,0 +1,474 @@
+WEBVTT
+
+1
+00:00:00.170 --> 00:00:01.003
+<v Krista>In this video,</v>
+
+2
+00:00:01.003 --> 00:00:02.670
+we're talking about prime factorization
+
+3
+00:00:02.670 --> 00:00:04.260
+and how to use prime factorization
+
+4
+00:00:04.260 --> 00:00:06.480
+to find the product of primes of a number.
+
+5
+00:00:06.480 --> 00:00:07.810
+We're going to do four examples.
+
+6
+00:00:07.810 --> 00:00:10.350
+The first one is the number 102,
+
+7
+00:00:10.350 --> 00:00:12.930
+and we want to find the prime factors of 102.
+
+8
+00:00:12.930 --> 00:00:15.230
+So remember that a prime number is a number
+
+9
+00:00:15.230 --> 00:00:17.610
+which is only divisible by one and itself.
+
+10
+00:00:17.610 --> 00:00:21.120
+So one is a special number, but two is a prime number.
+
+11
+00:00:21.120 --> 00:00:23.670
+The only factors of two are one and two.
+
+12
+00:00:23.670 --> 00:00:25.110
+Three is also a prime number
+
+13
+00:00:25.110 --> 00:00:27.410
+because it's only divisible by one and itself.
+
+14
+00:00:27.410 --> 00:00:31.010
+So you can only divide three evenly by one and three.
+
+15
+00:00:31.010 --> 00:00:32.590
+Four is not a prime number
+
+16
+00:00:32.590 --> 00:00:35.470
+because you can divide it by one and itself, one and four.
+
+17
+00:00:35.470 --> 00:00:38.020
+But you can also divide it by another number, two,
+
+18
+00:00:38.020 --> 00:00:40.390
+which means that four is a composite number.
+
+19
+00:00:40.390 --> 00:00:41.960
+So that's just a basic review,
+
+20
+00:00:41.960 --> 00:00:44.550
+but what we want to do here is find all of the prime numbers
+
+21
+00:00:44.550 --> 00:00:47.600
+that have to be multiplied together in order to get 102.
+
+22
+00:00:47.600 --> 00:00:49.650
+So when we're dealing with an even number, right,
+
+23
+00:00:49.650 --> 00:00:51.750
+102 is even, it's an even number,
+
+24
+00:00:51.750 --> 00:00:54.170
+when we're dealing with an even number, the easiest way
+
+25
+00:00:54.170 --> 00:00:56.420
+to start factoring is to divide by two.
+
+26
+00:00:56.420 --> 00:00:59.310
+Because we know that all even numbers are divisible by two,
+
+27
+00:00:59.310 --> 00:01:00.700
+and two is a prime number.
+
+28
+00:01:00.700 --> 00:01:02.360
+So we want to go ahead and divide by two.
+
+29
+00:01:02.360 --> 00:01:04.010
+And what we need to do is say
+
+30
+00:01:04.010 --> 00:01:07.340
+what do we have to multiply by two in order to get 102?
+
+31
+00:01:07.340 --> 00:01:10.160
+Or in other words, what's 102 divided by two?
+
+32
+00:01:10.160 --> 00:01:11.700
+Well, that's 51.
+
+33
+00:01:11.700 --> 00:01:15.170
+So we get two and 51 as the factors of 102.
+
+34
+00:01:15.170 --> 00:01:16.880
+Now we want to look at each of these numbers
+
+35
+00:01:16.880 --> 00:01:18.680
+and see if we can factor them further.
+
+36
+00:01:18.680 --> 00:01:20.720
+Well, we know two is already a prime number,
+
+37
+00:01:20.720 --> 00:01:22.500
+so we can't factor it any further.
+
+38
+00:01:22.500 --> 00:01:23.930
+But what about 51?
+
+39
+00:01:23.930 --> 00:01:28.850
+Well, 51 can be separated into factors of three and 17
+
+40
+00:01:28.850 --> 00:01:31.410
+because three times 17 is 51.
+
+41
+00:01:31.410 --> 00:01:32.700
+Three is a prime number
+
+42
+00:01:32.700 --> 00:01:34.900
+because it's only divisible by one and itself,
+
+43
+00:01:34.900 --> 00:01:35.940
+by one and three.
+
+44
+00:01:35.940 --> 00:01:37.450
+And 17 is a prime number
+
+45
+00:01:37.450 --> 00:01:40.960
+because it's only divisible by one and itself, one and 17,
+
+46
+00:01:40.960 --> 00:01:43.030
+which means that we can't factor any further.
+
+47
+00:01:43.030 --> 00:01:44.410
+Because once we've hit prime numbers
+
+48
+00:01:44.410 --> 00:01:46.210
+at the end of all of these paths,
+
+49
+00:01:46.210 --> 00:01:47.610
+we know we can't go any farther.
+
+50
+00:01:47.610 --> 00:01:49.840
+So we're done with our prime factorization.
+
+51
+00:01:49.840 --> 00:01:52.150
+And then if we want to find the product of primes,
+
+52
+00:01:52.150 --> 00:01:54.400
+all we do is take all of our prime factors
+
+53
+00:01:54.400 --> 00:01:55.670
+and multiply them together.
+
+54
+00:01:55.670 --> 00:01:58.350
+So two, three, and 17
+
+55
+00:01:58.350 --> 00:02:02.040
+are the prime factors that make up 102,
+
+56
+00:02:02.040 --> 00:02:04.770
+so we just say two times three times 17
+
+57
+00:02:04.770 --> 00:02:07.200
+is the product of primes for 102.
+
+58
+00:02:07.200 --> 00:02:09.940
+If we look at another example here, we have 84.
+
+59
+00:02:09.940 --> 00:02:11.410
+This is also an even number,
+
+60
+00:02:11.410 --> 00:02:13.970
+so let's go ahead and divide it first by two.
+
+61
+00:02:13.970 --> 00:02:16.050
+Two times 42
+
+62
+00:02:16.050 --> 00:02:17.280
+gives us 84,
+
+63
+00:02:17.280 --> 00:02:19.820
+so we'll divide 84 into two and 42.
+
+64
+00:02:19.820 --> 00:02:21.820
+Two is a prime number, but 42 isn't,
+
+65
+00:02:21.820 --> 00:02:25.310
+so we'll divide 42 into two and 21.
+
+66
+00:02:25.310 --> 00:02:27.350
+Two is a prime number, but 21 isn't.
+
+67
+00:02:27.350 --> 00:02:30.660
+21 can be divided into three and seven.
+
+68
+00:02:30.660 --> 00:02:34.940
+So now what we can see is that at the end of each road here,
+
+69
+00:02:34.940 --> 00:02:37.700
+at the end of each path, we got to a prime number.
+
+70
+00:02:37.700 --> 00:02:40.410
+Two, three, and seven are all prime numbers.
+
+71
+00:02:40.410 --> 00:02:41.570
+So we can't go any further.
+
+72
+00:02:41.570 --> 00:02:43.140
+This is the prime factorization.
+
+73
+00:02:43.140 --> 00:02:45.640
+And the product of primes is going to be two
+
+74
+00:02:45.640 --> 00:02:48.460
+times two times three times seven.
+
+75
+00:02:48.460 --> 00:02:51.070
+Now when we have multiple factors of the same prime number,
+
+76
+00:02:51.070 --> 00:02:52.920
+here we have two factors of two,
+
+77
+00:02:52.920 --> 00:02:56.830
+we can rewrite this as two squared, or two factors of two,
+
+78
+00:02:56.830 --> 00:02:58.720
+times three times seven.
+
+79
+00:02:58.720 --> 00:03:01.520
+And we always want to list our factors in ascending order,
+
+80
+00:03:01.520 --> 00:03:04.360
+so smallest factor first, up to the largest factor.
+
+81
+00:03:04.360 --> 00:03:06.870
+We had two and then three and then 17 here.
+
+82
+00:03:06.870 --> 00:03:08.750
+Here we have two and then three and then seven.
+
+83
+00:03:08.750 --> 00:03:11.420
+And we want to write our factors of two together like this.
+
+84
+00:03:11.420 --> 00:03:13.950
+Two factors of two is the same as two squared.
+
+85
+00:03:13.950 --> 00:03:16.280
+Looking at another example here, 24,
+
+86
+00:03:16.280 --> 00:03:19.420
+we could divide by two if we wanted and get two and 12.
+
+87
+00:03:19.420 --> 00:03:21.440
+But let's say instead that we maybe forget
+
+88
+00:03:21.440 --> 00:03:23.170
+that we have two and 12 as factors,
+
+89
+00:03:23.170 --> 00:03:26.770
+and we want to divide instead into four and six
+
+90
+00:03:26.770 --> 00:03:28.710
+because four times six is 24.
+
+91
+00:03:28.710 --> 00:03:32.640
+Then we could say four is divided into two and two,
+
+92
+00:03:32.640 --> 00:03:36.130
+and six is divided into two times three.
+
+93
+00:03:36.130 --> 00:03:39.700
+And now we can see that at the end of each path,
+
+94
+00:03:39.700 --> 00:03:42.040
+we have a prime number because two is prime
+
+95
+00:03:42.040 --> 00:03:43.470
+and three is prime.
+
+96
+00:03:43.470 --> 00:03:45.590
+So we know that we're done with our prime factorization,
+
+97
+00:03:45.590 --> 00:03:48.010
+and now we want to say that the product of primes
+
+98
+00:03:48.010 --> 00:03:51.400
+is two times two times two times three,
+
+99
+00:03:51.400 --> 00:03:55.250
+or we can rewrite it as two cubed times three,
+
+100
+00:03:55.250 --> 00:03:58.800
+which tells us three factors of two and one factor of three.
+
+101
+00:03:58.800 --> 00:04:01.450
+Now the first three examples here, we've had even numbers,
+
+102
+00:04:01.450 --> 00:04:03.430
+but sometimes we're going to have an odd number.
+
+103
+00:04:03.430 --> 00:04:04.620
+And with an odd number, we just know
+
+104
+00:04:04.620 --> 00:04:06.300
+that we're not going to be able to divide by two,
+
+105
+00:04:06.300 --> 00:04:08.150
+but that doesn't mean that we can't factor it.
+
+106
+00:04:08.150 --> 00:04:09.820
+So for example, 15 here,
+
+107
+00:04:09.820 --> 00:04:13.440
+we can divide into factors of three and five
+
+108
+00:04:13.440 --> 00:04:15.670
+because three times five gives us 15.
+
+109
+00:04:15.670 --> 00:04:18.420
+Three is prime, and five is prime.
+
+110
+00:04:18.420 --> 00:04:20.230
+So we know that we're done, and we can say
+
+111
+00:04:20.230 --> 00:04:24.450
+that the product of primes is three times five for 15.
+
+112
+00:04:24.450 --> 00:04:26.200
+In other words, no matter what the number,
+
+113
+00:04:26.200 --> 00:04:28.240
+you're just looking to break down the number
+
+114
+00:04:28.240 --> 00:04:30.480
+into irreducible prime factors.
+
+115
+00:04:30.480 --> 00:04:32.140
+So at the end of each path,
+
+116
+00:04:32.140 --> 00:04:33.930
+you should have only prime numbers,
+
+117
+00:04:33.930 --> 00:04:35.600
+and then you take all those prime numbers
+
+118
+00:04:35.600 --> 00:04:38.743
+and multiply them together to find the product of primes.
+

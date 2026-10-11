@@ -1,0 +1,521 @@
+WEBVTT
+
+0
+00:00.142 --> 00:02.071
+<v Krista>In this video we are talking about multiplication</v>
+
+1
+00:02.071 --> 00:03.048
+of signed numbers.
+
+2
+00:03.048 --> 00:04.458
+And when we say signed numbers,
+
+3
+00:04.458 --> 00:06.398
+we're just talking about numbers with either
+
+4
+00:06.398 --> 00:08.787
+a positive sign or a negative sign attached.
+
+5
+00:08.787 --> 00:11.505
+For example, in this expression we have here,
+
+6
+00:11.505 --> 00:14.099
+two is a positive number and three is a negative number
+
+7
+00:14.099 --> 00:15.957
+with the negative sign in front here.
+
+8
+00:15.957 --> 00:17.639
+So when we want to multiply either
+
+9
+00:17.639 --> 00:19.337
+two positive numbers together,
+
+10
+00:19.337 --> 00:20.982
+two negative numbers together,
+
+11
+00:20.982 --> 00:23.398
+or a mix of positive and negative numbers,
+
+12
+00:23.398 --> 00:25.606
+what will be the sign of the result?
+
+13
+00:25.606 --> 00:28.072
+Well, we have this chart here to help us remember
+
+14
+00:28.072 --> 00:29.870
+what the sign of the result will be.
+
+15
+00:29.870 --> 00:31.376
+What we're saying with this chart is that
+
+16
+00:31.376 --> 00:35.503
+if we multiply together a positive and a positive number,
+
+17
+00:35.503 --> 00:37.545
+we find the inner section of these two,
+
+18
+00:37.545 --> 00:39.139
+we're going to get a positive number.
+
+19
+00:39.139 --> 00:41.786
+Or if we multiply together a negative number and
+
+20
+00:41.786 --> 00:44.764
+a negative number, we're going to get a positive number.
+
+21
+00:44.764 --> 00:47.389
+If on the other hand we multiply a negative number
+
+22
+00:47.389 --> 00:50.149
+by a positive number, we get a negative number.
+
+23
+00:50.149 --> 00:52.465
+And if we multiply a positive number
+
+24
+00:52.465 --> 00:55.300
+by a negative number, we get a negative number.
+
+25
+00:55.300 --> 00:57.270
+Another way to remember this is that if we are
+
+26
+00:57.270 --> 00:58.971
+multiplying two numbers together
+
+27
+00:58.971 --> 01:02.376
+and they have the same sign, if the sign is the same,
+
+28
+01:02.376 --> 01:04.719
+then the result will be positive.
+
+29
+01:04.719 --> 01:06.639
+If we are multiplying two numbers together
+
+30
+01:06.639 --> 01:08.825
+and their signs are different,
+
+31
+01:08.825 --> 01:11.701
+the result will always be negative.
+
+32
+01:11.701 --> 01:14.218
+So two different signs, the result will always be negative.
+
+33
+01:14.218 --> 01:17.111
+Two of the same signs, the result will always be positive.
+
+34
+01:17.111 --> 01:19.465
+And it doesn't matter if we have two positive numbers
+
+35
+01:19.465 --> 01:20.668
+that are being multiplied together
+
+36
+01:20.668 --> 01:23.399
+or two negative numbers that are being multiplied together.
+
+37
+01:23.399 --> 01:26.211
+They have the same sign, so the result will be positive.
+
+38
+01:26.211 --> 01:28.812
+So, if we apply this logic to these expressions
+
+39
+01:28.812 --> 01:31.410
+we've been given here to find the result, what do we get?
+
+40
+01:31.410 --> 01:33.004
+Well, we have two times three.
+
+41
+01:33.004 --> 01:34.641
+Those are both positive numbers.
+
+42
+01:34.641 --> 01:37.053
+We have positive two times positive three.
+
+43
+01:37.053 --> 01:38.906
+The signs are the same, they are both positive.
+
+44
+01:38.906 --> 01:41.154
+So our result is going to be positive,
+
+45
+01:41.154 --> 01:43.064
+our result will be six.
+
+46
+01:43.064 --> 01:45.744
+Here we have positive two times a negative three.
+
+47
+01:45.744 --> 01:47.083
+We have a positive and a negative,
+
+48
+01:47.083 --> 01:48.227
+their signs are different.
+
+49
+01:48.227 --> 01:49.710
+We know that if we have different signs,
+
+50
+01:49.710 --> 01:51.121
+the result will be negative.
+
+51
+01:51.121 --> 01:52.832
+So, we get negative six.
+
+52
+01:52.832 --> 01:54.219
+Here we switch the order,
+
+53
+01:54.219 --> 01:56.118
+we have negative two and a positive three.
+
+54
+01:56.118 --> 01:58.316
+But the point is we have a negative number
+
+55
+01:58.316 --> 01:59.455
+and a positive number.
+
+56
+01:59.455 --> 02:01.542
+Different signs so the result is negative
+
+57
+02:01.542 --> 02:02.985
+and we get negative six.
+
+58
+02:02.985 --> 02:04.586
+And here we have two negative numbers
+
+59
+02:04.586 --> 02:06.431
+negative two and negative three,
+
+60
+02:06.431 --> 02:08.680
+the signs are the same, they're both negative.
+
+61
+02:08.680 --> 02:10.768
+So our result is positive.
+
+62
+02:10.768 --> 02:13.199
+Now keep in mind that this logic only applies
+
+63
+02:13.199 --> 02:16.973
+when you're multiplying together just two signed numbers.
+
+64
+02:16.973 --> 02:19.392
+If you're multiplying together more than two numbers,
+
+65
+02:19.392 --> 02:21.296
+you have three numbers that you're multiplying together,
+
+66
+02:21.296 --> 02:23.299
+or four numbers you're multiplying together,
+
+67
+02:23.299 --> 02:25.491
+this logic doesn't necessarily hold.
+
+68
+02:25.491 --> 02:28.115
+So, for example, if I want to multiply together
+
+69
+02:28.115 --> 02:32.508
+negative two, times negative three, times negative four,
+
+70
+02:32.508 --> 02:35.113
+or if I want to multiply together negative two,
+
+71
+02:35.113 --> 02:38.768
+times negative three, times negative four,
+
+72
+02:38.768 --> 02:42.592
+times negative five, our results are going to be different.
+
+73
+02:42.592 --> 02:45.602
+So here I have negative two, negative three, negative four.
+
+74
+02:45.602 --> 02:48.094
+You might say, well the signs are all the same,
+
+75
+02:48.094 --> 02:48.996
+they're all negative.
+
+76
+02:48.996 --> 02:50.837
+So my result is going to be positive,
+
+77
+02:50.837 --> 02:52.219
+because my signs are the same.
+
+78
+02:52.219 --> 02:53.349
+But that's not true.
+
+79
+02:53.349 --> 02:55.660
+The reason that this logic works when we have two numbers
+
+80
+02:55.660 --> 02:59.442
+is because for every two negative signs you have,
+
+81
+02:59.442 --> 03:00.560
+they're going to cancel each other out
+
+82
+03:00.560 --> 03:01.587
+and become a positive.
+
+83
+03:01.587 --> 03:03.666
+So here I have negative two, times negative three,
+
+84
+03:03.666 --> 03:04.946
+I have two negative signs.
+
+85
+03:04.946 --> 03:07.428
+So I can cancel out my two negative signs.
+
+86
+03:07.428 --> 03:09.487
+And I can turn them into positive signs
+
+87
+03:09.487 --> 03:11.859
+and now I have positive two, times positive three.
+
+88
+03:11.859 --> 03:14.186
+Which of course we know was the positive six.
+
+89
+03:14.186 --> 03:16.498
+The reason the result of these two examples
+
+90
+03:16.498 --> 03:20.127
+was a negative six, is because I had only one negative sign.
+
+91
+03:20.127 --> 03:22.829
+In other words, I had an odd number of negative signs,
+
+92
+03:22.829 --> 03:24.896
+and so my result was negative.
+
+93
+03:24.896 --> 03:26.911
+So really our conclusion needs to be,
+
+94
+03:26.911 --> 03:29.080
+if you have an even number
+
+95
+03:29.080 --> 03:33.858
+of negative signs, then the result is going to be positive.
+
+96
+03:33.858 --> 03:37.738
+If you have an odd number of negative signs,
+
+97
+03:37.738 --> 03:39.853
+then the result is going to be negative.
+
+98
+03:39.853 --> 03:41.683
+So here we can see why that works.
+
+99
+03:41.683 --> 03:43.752
+We have a negative two and a negative three.
+
+100
+03:43.752 --> 03:47.481
+We know that we can cancel out every two negative signs.
+
+101
+03:47.481 --> 03:49.609
+So we can turn both of these into positives.
+
+102
+03:49.609 --> 03:51.562
+This negative sign doesn't have another one
+
+103
+03:51.562 --> 03:52.795
+that we can cancel it with,
+
+104
+03:52.795 --> 03:54.107
+so it's just going to stay there.
+
+105
+03:54.107 --> 03:55.829
+We know two times three is six,
+
+106
+03:55.829 --> 03:59.271
+so we get six times a negative four,
+
+107
+03:59.271 --> 04:02.125
+and we know that that's going to be negative 24.
+
+108
+04:02.125 --> 04:03.993
+So you can see that the result was negative
+
+109
+04:03.993 --> 04:06.563
+because we had an odd number of negative signs.
+
+110
+04:06.563 --> 04:10.335
+We had one, two, three negative signs, an odd number.
+
+111
+04:10.335 --> 04:12.396
+Because we have an odd number of negative signs,
+
+112
+04:12.396 --> 04:13.795
+the result was negative.
+
+113
+04:13.795 --> 04:16.089
+In this case, negative two, times negative three,
+
+114
+04:16.089 --> 04:17.979
+times negative four, times negative five.
+
+115
+04:17.979 --> 04:19.919
+We have an even number of negative signs, right?
+
+116
+04:19.919 --> 04:22.984
+One, two, three, four negative signs.
+
+117
+04:22.984 --> 04:25.031
+So we expect our result to be positive.
+
+118
+04:25.031 --> 04:27.052
+And in fact, that's true because we can cancel
+
+119
+04:27.052 --> 04:28.438
+every two negative signs.
+
+120
+04:28.438 --> 04:30.969
+So one, two negative signs become a positive.
+
+121
+04:30.969 --> 04:33.519
+One, two negative signs become a positive.
+
+122
+04:33.519 --> 04:35.559
+And now we have all positive numbers.
+
+123
+04:35.559 --> 04:37.449
+So two times three is six.
+
+124
+04:37.449 --> 04:39.258
+Four times five is 20.
+
+125
+04:39.258 --> 04:43.008
+Six times 20 is 120, and that's positive 120.
+
+126
+04:44.515 --> 04:46.099
+So, our result is positive
+
+127
+04:46.099 --> 04:48.522
+because we had an even number of negative signs.
+
+128
+04:48.522 --> 04:50.605
+And that's how you deal with multiplication
+
+129
+04:50.605 --> 04:52.105
+of signed numbers.

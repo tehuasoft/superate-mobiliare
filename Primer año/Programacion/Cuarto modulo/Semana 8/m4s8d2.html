@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación de Clase · Mejoras Avanzadas · Relación entre Listas en
+      Power Automate
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .integracion-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin: 12px 0;
+      }
+      .integracion-item {
+        background: #f5f7fa;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-top: 4px solid #3f51b5;
+        text-align: center;
+      }
+      .integracion-item h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+      .integracion-item p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .integracion-item .icono {
+        font-size: 32px;
+        margin-bottom: 4px;
+      }
+      .integracion-item.sharepoint {
+        border-top-color: #0d47a1;
+      }
+      .integracion-item.powerapps {
+        border-top-color: #6c5ce7;
+      }
+      .integracion-item.powerautomate {
+        border-top-color: #2e7d32;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      .mock-lista {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        margin: 8px 0;
+      }
+      .mock-lista table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .mock-lista th {
+        background: #e8eaf6;
+        color: #1a237e;
+        padding: 8px 10px;
+        text-align: left;
+        font-weight: 600;
+      }
+      .mock-lista td {
+        padding: 6px 10px;
+        border-top: 1px solid #e0e0e0;
+      }
+      .estado-abierto {
+        background: #fff3e0;
+        color: #e65100;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .estado-progreso {
+        background: #e3f2fd;
+        color: #0d47a1;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .estado-resuelto {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .prioridad-alta {
+        background: #ffebee;
+        color: #c62828;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .prioridad-media {
+        background: #fff3e0;
+        color: #e65100;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .prioridad-baja {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .mock-correo {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 8px 0;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .mock-correo .header {
+        background: #f5f5f5;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 13px;
+        color: #555;
+      }
+      .mock-correo .header strong {
+        color: #1a237e;
+      }
+      .mock-correo .body {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .mock-correo .body .linea {
+        margin: 4px 0;
+      }
+      .mock-correo .body .destacado {
+        background: #fff3e0;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 8px 0;
+        border-left: 4px solid #e65100;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .integracion-grid {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚀 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Mejoras Avanzadas · Relación entre Listas · Búsqueda automática del
+        responsable
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante implementa una mejora avanzada en el sistema de
+          "Registro de Incidentes", agregando un flujo de Power Automate que, al
+          crearse un incidente desde Power Apps, busca automáticamente al
+          responsable en una segunda lista de SharePoint (relación entre listas)
+          y asigna al responsable correspondiente según la categoría del
+          incidente.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>Comprende el concepto de relación entre listas.</li>
+            <li>Reconoce la acción "Obtener elementos" con filtro OData.</li>
+            <li>Identifica cómo usar condiciones para asignar responsables.</li>
+            <li>
+              Entiende el uso de campos de búsqueda (lookup) en SharePoint.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Crear una segunda lista "Responsables" con categorías.</li>
+            <li>Agregar un campo de categoría a la lista "Incidentes".</li>
+            <li>
+              Configurar un flujo que busque al responsable según la categoría.
+            </li>
+            <li>Actualizar el incidente con el responsable encontrado.</li>
+            <li>Notificar al responsable automáticamente.</li>
+            <li>Probar el sistema completo con la búsqueda automática.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra interés por la automatización avanzada.</li>
+            <li>Valora la importancia de las relaciones entre datos.</li>
+            <li>Participa activamente en la mejora del sistema.</li>
+            <li>
+              Desarrolla pensamiento lógico para resolver problemas complejos.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "¿Cómo asignamos automáticamente al responsable
+            correcto?"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Reflexión y
+            contextualización.
+          </p>
+          <p>
+            El docente pregunta:
+            <em
+              >"Actualmente, cuando se registra un incidente, el responsable se
+              asigna manualmente. ¿Cómo podríamos asignarlo automáticamente
+              según la categoría del incidente? Por ejemplo: si es un problema
+              de red, que se asigne al equipo de redes."</em
+            >
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Mejora propuesta:</span>
+            <ul>
+              <li>
+                <strong>Problema actual:</strong> El responsable se asigna
+                manualmente al crear el incidente.
+              </li>
+              <li>
+                <strong>Solución:</strong> Crear una lista "Responsables" con la
+                relación categoría → responsable.
+              </li>
+              <li>
+                <strong>Flujo mejorado:</strong> Al crear un incidente, el flujo
+                busca en la lista "Responsables" quién corresponde según la
+                categoría y lo asigna automáticamente.
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende la mejora propuesta y su valor para el
+            sistema.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión.</li>
+            <li>Reconoce la necesidad de la relación entre listas.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Acceso a SharePoint, Power Apps y Power Automate</li>
+            <li>Sistema de registro de incidentes previamente creado</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">60 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "Implementación de la búsqueda automática del
+            responsable"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes construyen).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PARTE 1: LISTA DE RESPONSABLES -->
+          <!-- ============================================ -->
+          <h4>🔹 Parte 1: Crear la lista "Responsables" en SharePoint</h4>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">1</span>
+            <h5>Crear la lista "Responsables"</h5>
+            <p>
+              Ir al sitio de SharePoint y crear una
+              <strong>lista en blanco</strong> llamada
+              <strong>"Responsables"</strong>.
+            </p>
+            <div class="captura-mock">
+              📋 SharePoint → + Nuevo → Lista → Lista en blanco → Nombre:
+              "Responsables"
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">2</span>
+            <h5>Agregar las columnas necesarias</h5>
+            <p>Agregar las siguientes columnas:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Título</strong> (Texto) — Nombre del área o categoría
+                (ej. "Redes", "Hardware", "Software").
+              </li>
+              <li>
+                <strong>Responsable</strong> (Persona o Grupo) — Persona
+                asignada a esa categoría.
+              </li>
+              <li>
+                <strong>Email</strong> (Texto) — Correo del responsable
+                (opcional, para facilitar el flujo).
+              </li>
+            </ul>
+            <div class="captura-mock">
+              📝 Columnas: Título | Responsable | Email
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">3</span>
+            <h5>Cargar datos de ejemplo</h5>
+            <p>Agregar al menos 3 registros de ejemplo:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Redes</strong> → Responsable: Carlos López</li>
+              <li><strong>Hardware</strong> → Responsable: Ana García</li>
+              <li><strong>Software</strong> → Responsable: Luis Ramírez</li>
+            </ul>
+            <div class="captura-mock">
+              📋 Redes → Carlos López | Hardware → Ana García | Software → Luis
+              Ramírez
+            </div>
+          </div>
+
+          <div class="mock-lista">
+            <table>
+              <thead>
+                <tr>
+                  <th>Título (Categoría)</th>
+                  <th>Responsable</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Redes</td>
+                  <td>Carlos López</td>
+                  <td>carlos.lopez@empresa.com</td>
+                </tr>
+                <tr>
+                  <td>Hardware</td>
+                  <td>Ana García</td>
+                  <td>ana.garcia@empresa.com</td>
+                </tr>
+                <tr>
+                  <td>Software</td>
+                  <td>Luis Ramírez</td>
+                  <td>luis.ramirez@empresa.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Lista "Responsables" con la relación categoría → responsable.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PARTE 2: ACTUALIZAR LISTA DE INCIDENTES -->
+          <!-- ============================================ -->
+          <h4>
+            🔹 Parte 2: Agregar el campo "Categoría" a la lista "Incidentes"
+          </h4>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">4</span>
+            <h5>Agregar columna "Categoría"</h5>
+            <p>
+              Ir a la lista "Incidentes" y agregar una columna de tipo
+              <strong>"Elección"</strong> llamada
+              <strong>"Categoría"</strong> con las opciones: <code>Redes</code>,
+              <code>Hardware</code>, <code>Software</code>.
+            </p>
+            <div class="captura-mock">
+              📝 Columna: Categoría (Elección) → Opciones: Redes | Hardware |
+              Software
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">5</span>
+            <h5>Actualizar el formulario en Power Apps</h5>
+            <p>
+              En Power Apps, editar el <strong>EditForm</strong> y agregar el
+              campo <strong>"Categoría"</strong> para que los usuarios puedan
+              seleccionarla al crear un incidente.
+            </p>
+            <div class="captura-mock">
+              ✏️ Power Apps → EditScreen → EditForm → Agregar campo "Categoría"
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PARTE 3: FLUJO CON BÚSQUEDA -->
+          <!-- ============================================ -->
+          <h4>
+            🔹 Parte 3: Crear el flujo con búsqueda automática del responsable
+          </h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">6</span>
+            <h5>Crear flujo automatizado</h5>
+            <p>
+              Ir a <strong>make.powerautomate.com</strong> →
+              <strong>"Crear"</strong> → <strong>"Flujo automatizado"</strong>.
+            </p>
+            <p>
+              Nombre: <strong>"Asignación automática de responsable"</strong>.
+            </p>
+            <p>
+              Trigger: <strong>"Cuando se crea un elemento"</strong> →
+              SharePoint → Lista "Incidentes".
+            </p>
+            <div class="captura-mock">
+              ⚡ Crear → Flujo automatizado<br />
+              🎯 Trigger: "Cuando se crea un elemento" → Incidentes
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">7</span>
+            <h5>Agregar acción "Obtener elementos" de SharePoint</h5>
+            <p>
+              Agregar la acción <strong>"Obtener elementos"</strong> para buscar
+              en la lista "Responsables".
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Dirección del sitio:</strong> Mismo sitio.</li>
+              <li>
+                <strong>Nombre de la lista:</strong> <code>Responsables</code>.
+              </li>
+              <li>
+                <strong>Consulta de filtro:</strong>
+                <code>Título eq 'Valor de Categoría'</code>.
+              </li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📂 Lista: Responsables<br />
+              🔍 Consulta de filtro: Título eq 'Redes' (usando el campo dinámico
+              Categoría)
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              💡 Se debe usar el campo dinámico <code>Categoría Value</code> del
+              trigger para que el filtro sea dinámico.
+            </p>
+          </div>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 Filtro dinámico:</span
+            >
+            <p>
+              En lugar de escribir "Redes" directamente, usar el campo dinámico
+              <code>Categoría Value</code> del trigger. La expresión quedaría:
+            </p>
+            <div
+              class="captura-mock"
+              style="
+                font-family: &quot;Courier New&quot;, monospace;
+                margin-left: 0;
+              "
+            >
+              Título eq '@{triggerBody()?['Categoría']?['Value']}'
+            </div>
+            <p style="font-size: 13px; color: #555">
+              Esto busca en la lista "Responsables" el registro cuyo Título
+              coincida con la categoría del incidente.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">8</span>
+            <h5>
+              Agregar acción "Actualizar elemento" para asignar el responsable
+            </h5>
+            <p>
+              Agregar la acción <strong>"Actualizar elemento"</strong> de
+              SharePoint para actualizar el incidente con el responsable
+              encontrado.
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Dirección del sitio:</strong> Mismo sitio.</li>
+              <li>
+                <strong>Nombre de la lista:</strong> <code>Incidentes</code>.
+              </li>
+              <li>
+                <strong>Id.:</strong> Campo dinámico <code>ID</code> del
+                trigger.
+              </li>
+              <li>
+                <strong>Título:</strong> Campo dinámico <code>Título</code> del
+                trigger.
+              </li>
+              <li>
+                <strong>Responsable:</strong> Campo dinámico
+                <code>Responsable</code> de la acción "Obtener elementos".
+              </li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              ✅ Actualizar elemento:<br />
+              Id: @{triggerBody()?['ID']}<br />
+              Responsable:
+              @{first(outputs('Obtener_elementos')?['body/value'])?['Responsable']}
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              💡 Se usa <code>first()</code> para tomar el primer resultado de
+              la búsqueda.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">9</span>
+            <h5>Agregar acción "Enviar un correo electrónico"</h5>
+            <p>
+              Agregar la acción
+              <strong>"Enviar un correo electrónico"</strong> (Office 365
+              Outlook) para notificar al responsable asignado.
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Para:</strong> Campo dinámico <code>Email</code> de la
+                acción "Obtener elementos".
+              </li>
+              <li>
+                <strong>Asunto:</strong>
+                <code>"Nuevo incidente asignado: "</code> + Título.
+              </li>
+              <li><strong>Cuerpo:</strong> Detalles del incidente.</li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📧 Para:
+              @{first(outputs('Obtener_elementos')?['body/value'])?['Email']}<br />
+              📌 Asunto: "Nuevo incidente asignado:
+              @{triggerBody()?['Título']}"<br /><br />
+              Hola,<br /><br />
+              Se te ha asignado un nuevo incidente:<br /><br />
+              <strong>Título:</strong> @{triggerBody()?['Título']}<br />
+              <strong>Descripción:</strong>
+              @{triggerBody()?['Descripción']}<br />
+              <strong>Categoría:</strong>
+              @{triggerBody()?['Categoría']?['Value']}<br />
+              <strong>Prioridad:</strong>
+              @{triggerBody()?['Prioridad']?['Value']}<br />
+              <strong>Reportado por:</strong>
+              @{triggerBody()?['Reportado_x0020_por']?['DisplayName']}<br /><br />
+              Por favor, revisa el incidente y actualiza su estatus.<br /><br />
+              Saludos,<br />
+              Sistema de Registro de Incidentes
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">10</span>
+            <h5>Guardar el flujo</h5>
+            <p>
+              Hacer clic en <strong>"Guardar"</strong> y probarlo creando un
+              nuevo incidente desde Power Apps.
+            </p>
+            <div class="captura-mock">
+              💾 Guardar → Probar creando un incidente
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE CORREO -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo del correo de notificación</h4>
+
+          <div class="mock-correo">
+            <div class="header">
+              <strong>De:</strong> Power Automate
+              &lt;no-reply@powerautomate.com&gt;<br />
+              <strong>Para:</strong> carlos.lopez@empresa.com<br />
+              <strong>Asunto:</strong> Nuevo incidente asignado: Falla de red
+            </div>
+            <div class="body">
+              <p class="linea">Hola,</p>
+              <p class="linea">Se te ha asignado un nuevo incidente:</p>
+              <div class="destacado">
+                <p class="linea"><strong>Título:</strong> Falla de red</p>
+                <p class="linea">
+                  <strong>Descripción:</strong> No hay internet en el piso 3
+                </p>
+                <p class="linea"><strong>Categoría:</strong> Redes</p>
+                <p class="linea"><strong>Prioridad:</strong> Alta</p>
+                <p class="linea"><strong>Reportado por:</strong> Ana García</p>
+              </div>
+              <p class="linea">
+                Por favor, revisa el incidente y actualiza su estatus.
+              </p>
+              <p class="linea">
+                Saludos,<br />Sistema de Registro de Incidentes
+              </p>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo del correo que recibe el responsable asignado
+            automáticamente.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- INTEGRACIÓN VISUAL -->
+          <!-- ============================================ -->
+          <h4>🔹 Integración completa del sistema mejorado</h4>
+
+          <div class="integracion-grid">
+            <div class="integracion-item sharepoint">
+              <div class="icono">📋</div>
+              <h5>SharePoint</h5>
+              <p><strong>Lista "Incidentes"</strong></p>
+              <p>Almacena los incidentes con categoría.</p>
+              <p style="font-size: 13px; color: #555">
+                + Lista "Responsables" con la relación categoría → responsable.
+              </p>
+            </div>
+            <div class="integracion-item powerapps">
+              <div class="icono">📱</div>
+              <h5>Power Apps</h5>
+              <p><strong>Interfaz de usuario</strong></p>
+              <p>Permite registrar incidentes con categoría.</p>
+              <p style="font-size: 13px; color: #555">
+                El campo Categoría determina el responsable.
+              </p>
+            </div>
+            <div class="integracion-item powerautomate">
+              <div class="icono">⚡</div>
+              <h5>Power Automate</h5>
+              <p><strong>Asignación automática</strong></p>
+              <p>
+                Busca al responsable en la lista "Responsables" según la
+                categoría.
+              </p>
+              <p style="font-size: 13px; color: #555">
+                Actualiza el incidente y notifica.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="ejemplo-box"
+            style="background: #e8f5e9; border-left: 4px solid #2e7d32"
+          >
+            <span class="highlight" style="color: #2e7d32"
+              >📌 Flujo de datos mejorado:</span
+            >
+            <ol style="padding-left: 20px; margin-top: 6px">
+              <li>
+                <strong>Usuario</strong> registra un incidente en
+                <strong>Power Apps</strong> con una
+                <strong>categoría</strong> (ej. "Redes").
+              </li>
+              <li>
+                Los datos se guardan en la
+                <strong>lista de SharePoint "Incidentes"</strong>.
+              </li>
+              <li>
+                <strong>Power Automate</strong> detecta el nuevo elemento y
+                busca en la <strong>lista "Responsables"</strong> quién
+                corresponde a la categoría.
+              </li>
+              <li>
+                El flujo <strong>actualiza el incidente</strong> con el
+                responsable encontrado.
+              </li>
+              <li>
+                El flujo <strong>envía un correo</strong> al responsable
+                asignado automáticamente.
+              </li>
+            </ol>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Crea la lista <strong>"Responsables"</strong> en SharePoint
+                con las columnas Título, Responsable y Email.
+              </li>
+              <li>2. Agrega al menos 3 categorías con sus responsables.</li>
+              <li>
+                3. Agrega la columna <strong>"Categoría"</strong> a la lista
+                "Incidentes" (Elección: Redes, Hardware, Software).
+              </li>
+              <li>
+                4. Actualiza el formulario de Power Apps para incluir el campo
+                Categoría.
+              </li>
+              <li>
+                5. Crea el flujo
+                <strong>"Asignación automática de responsable"</strong> con:
+                <ul>
+                  <li>Trigger: Cuando se crea un elemento en "Incidentes".</li>
+                  <li>
+                    Acción 1: Obtener elementos de "Responsables" con filtro por
+                    categoría.
+                  </li>
+                  <li>
+                    Acción 2: Actualizar elemento de "Incidentes" con el
+                    responsable encontrado.
+                  </li>
+                  <li>Acción 3: Enviar correo al responsable.</li>
+                </ul>
+              </li>
+              <li>
+                6. Guarda el flujo y pruébalo creando un incidente con categoría
+                "Redes" y verificando que el responsable sea Carlos López.
+              </li>
+              <li>
+                7. Prueba con las otras categorías y verifica que el responsable
+                asignado sea el correcto.
+              </li>
+              <li>
+                8. Si no tienes acceso, dibuja la arquitectura del sistema
+                mejorado y describe el flujo de datos.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>
+                ¿Qué ventaja tiene usar una segunda lista en lugar de asignar el
+                responsable manualmente?
+              </li>
+              <li>
+                ¿Qué sucede si la categoría del incidente no coincide con
+                ninguna de la lista "Responsables"?
+              </li>
+              <li>
+                ¿Cómo podrías manejar el caso en que no se encuentre un
+                responsable?
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante implementa una mejora avanzada que busca
+            automáticamente al responsable en una segunda lista según la
+            categoría del incidente.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Crea la lista "Responsables" con las columnas correctas.</li>
+            <li>Agrega el campo "Categoría" a la lista "Incidentes".</li>
+            <li>
+              Configura el flujo con la acción "Obtener elementos" con filtro
+              dinámico.
+            </li>
+            <li>Actualiza el incidente con el responsable encontrado.</li>
+            <li>Envía la notificación al responsable asignado.</li>
+            <li>Prueba el sistema con diferentes categorías.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Acceso a SharePoint, Power Apps y Power Automate</li>
+            <li>Pizarra</li>
+            <li>Guía de integración paso a paso</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso y preguntas finales"</h4>
+          <ul>
+            <li>
+              ¿Por qué es útil tener una lista separada de "Responsables"?
+            </li>
+            <li>
+              ¿Cómo se relacionan las listas "Incidentes" y "Responsables"?
+            </li>
+            <li>¿Qué acción de Power Automate busca al responsable?</li>
+            <li>¿Cómo se configura el filtro dinámico en la búsqueda?</li>
+            <li>
+              ¿Qué sucede si no se encuentra un responsable para la categoría?
+            </li>
+            <li>¿Cómo podrías manejar ese caso en el flujo?</li>
+          </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final:</span>
+            <p>
+              Agrega una <strong>condición</strong> al flujo para que, si no se
+              encuentra un responsable en la lista "Responsables", se asigne
+              automáticamente a un responsable por defecto (ej. "Soporte
+              General") y se notifique al administrador del sistema.
+            </p>
+            <p style="font-size: 13px; color: #555; margin-top: 4px">
+              Pista: usa la condición <code>empty()</code> para verificar si la
+              búsqueda devolvió resultados.
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida la implementación de relaciones entre listas
+            y búsquedas automáticas en Power Automate.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Comprende la arquitectura del sistema mejorado.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Sistema mejorado construido</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p>
+          <strong
+            >💡 Tips clave para relaciones entre listas en Power
+            Automate:</strong
+          >
+        </p>
+        <p>
+          • <strong>Segunda lista:</strong> "Responsables" con la relación
+          categoría → responsable.
+        </p>
+        <p>
+          • <strong>Campo de relación:</strong> "Categoría" en la lista
+          "Incidentes".
+        </p>
+        <p>
+          • <strong>Acción de búsqueda:</strong> "Obtener elementos" con filtro
+          OData.
+        </p>
+        <p>
+          • <strong>Filtro dinámico:</strong>
+          <code>Título eq '@{triggerBody()?['Categoría']?['Value']}'</code>.
+        </p>
+        <p>
+          • <strong>Expresión first():</strong> Toma el primer resultado de la
+          búsqueda.
+        </p>
+        <p>
+          • <strong>Actualizar elemento:</strong> Asigna el responsable
+          encontrado al incidente.
+        </p>
+        <p>
+          • <strong>Notificación:</strong> Envía correo al responsable asignado.
+        </p>
+        <p>
+          • <strong>Manejo de errores:</strong> Usar condición
+          <code>empty()</code> si no se encuentra responsable.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>• Introduce el concepto de relación entre listas en SharePoint.</p>
+        <p>• Enseña a implementar búsquedas automáticas en Power Automate.</p>
+        <p>
+          • Prepara a los estudiantes para construir sistemas más inteligentes y
+          autónomos.
+        </p>
+        <p>
+          • Conecta SharePoint, Power Apps y Power Automate en una solución
+          avanzada.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

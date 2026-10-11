@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Hojas de Cálculo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .function-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 14px;
+            text-align: left;
+        }
+        .function-table th {
+            background: #3f51b5;
+            color: white;
+            padding: 8px 12px;
+            border: 1px solid #3f51b5;
+        }
+        .function-table td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+        .function-table tr:nth-child(even) {
+            background: #f5f7fa;
+        }
+        .function-table .func {
+            font-family: monospace;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Funciones de Fecha y Funciones de Texto en Excel
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Utiliza funciones de fecha y texto en Excel para manipular información y automatizar tareas comunes en hojas de cálculo, aplicando funciones como HOY, FECHA, DIAS, CONCATENAR, IZQUIERDA, DERECHA, EXTRAE y otras para el procesamiento eficiente de datos.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué son las funciones de fecha y texto en Excel.</li>
+                <li>Reconoce la sintaxis básica de las funciones.</li>
+                <li>Identifica las funciones de fecha más comunes: HOY, AHORA, FECHA, DIAS, MES, AÑO, DIA.</li>
+                <li>Identifica las funciones de texto más comunes: CONCATENAR, IZQUIERDA, DERECHA, EXTRAE, LARGO.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Usar la función HOY para insertar la fecha actual.</li>
+                <li>Crear fechas específicas con la función FECHA.</li>
+                <li>Calcular días entre dos fechas con DIAS.</li>
+                <li>Unir textos con CONCATENAR o &.</li>
+                <li>Extraer partes de un texto con IZQUIERDA, DERECHA y EXTRAE.</li>
+                <li>Obtener la longitud de un texto con LARGO.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por automatizar tareas con funciones.</li>
+                <li>Valora la importancia de las funciones para el procesamiento eficiente de datos.</li>
+                <li>Participa activamente en la creación y uso de funciones.</li>
+                <li>Reconoce la utilidad de las funciones en contextos académicos y profesionales.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo trabajar con fechas y textos en Excel?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y exploración.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas:</p>
+            <ul>
+                <li>¿Cómo puedes insertar la fecha actual en una celda?</li>
+                <li>¿Cómo puedes calcular cuántos días han pasado desde una fecha?</li>
+                <li>¿Cómo puedes unir el contenido de dos celdas en una sola?</li>
+                <li>¿Cómo puedes extraer los primeros 3 caracteres de un texto?</li>
+            </ul>
+            <p>Se introducen las <strong>funciones de fecha y texto</strong> como herramientas para manipular información y automatizar tareas en Excel.</p>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la utilidad de las funciones de fecha y texto.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona ejemplos de uso de funciones de fecha y texto.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con Excel</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Funciones de fecha y texto en Excel"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada y práctica.</p>
+
+            <!-- Funciones de fecha -->
+            <h4>🔹 Funciones de fecha</h4>
+            <p>Las funciones de fecha permiten trabajar con fechas y realizar cálculos basados en ellas.</p>
+
+            <table class="function-table">
+                <thead>
+                    <tr>
+                        <th>Función</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="func">=HOY()</td>
+                        <td>Devuelve la fecha actual</td>
+                        <td>=HOY()</td>
+                        <td>24/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=AHORA()</td>
+                        <td>Devuelve fecha y hora actual</td>
+                        <td>=AHORA()</td>
+                        <td>24/07/2025 10:30</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=FECHA(año, mes, día)</td>
+                        <td>Crea una fecha específica</td>
+                        <td>=FECHA(2025,12,25)</td>
+                        <td>25/12/2025</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=DIAS(fecha_fin, fecha_ini)</td>
+                        <td>Calcula días entre dos fechas</td>
+                        <td>=DIAS(FECHA(2025,12,25), HOY())</td>
+                        <td>154</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=MES(fecha)</td>
+                        <td>Devuelve el mes de una fecha</td>
+                        <td>=MES(FECHA(2025,7,24))</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=AÑO(fecha)</td>
+                        <td>Devuelve el año de una fecha</td>
+                        <td>=AÑO(FECHA(2025,7,24))</td>
+                        <td>2025</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=DIA(fecha)</td>
+                        <td>Devuelve el día de una fecha</td>
+                        <td>=DIA(FECHA(2025,7,24))</td>
+                        <td>24</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Funciones de texto -->
+            <h4>🔹 Funciones de texto</h4>
+            <p>Las funciones de texto permiten manipular y extraer información de cadenas de texto.</p>
+
+            <table class="function-table">
+                <thead>
+                    <tr>
+                        <th>Función</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="func">=CONCATENAR(texto1, texto2, ...)</td>
+                        <td>Une varios textos</td>
+                        <td>=CONCATENAR("Hola ", "mundo")</td>
+                        <td>Hola mundo</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=texto1 & texto2</td>
+                        <td>Une textos (alternativa)</td>
+                        <td>="Hola " & "mundo"</td>
+                        <td>Hola mundo</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=IZQUIERDA(texto, num_caracteres)</td>
+                        <td>Extrae caracteres desde la izquierda</td>
+                        <td>=IZQUIERDA("Excel", 2)</td>
+                        <td>Ex</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=DERECHA(texto, num_caracteres)</td>
+                        <td>Extrae caracteres desde la derecha</td>
+                        <td>=DERECHA("Excel", 2)</td>
+                        <td>el</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=EXTRAE(texto, pos_ini, num_caracteres)</td>
+                        <td>Extrae caracteres desde una posición</td>
+                        <td>=EXTRAE("Excel", 2, 2)</td>
+                        <td>xc</td>
+                    </tr>
+                    <tr>
+                        <td class="func">=LARGO(texto)</td>
+                        <td>Devuelve la longitud del texto</td>
+                        <td>=LARGO("Excel")</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Crea una hoja de cálculo en Excel y realiza lo siguiente:</strong></p>
+                <ul>
+                    <li><strong>Fecha actual:</strong> Usa <code>=HOY()</code> en la celda A1.</li>
+                    <li><strong>Fecha específica:</strong> Usa <code>=FECHA(2025,12,31)</code> en la celda B1.</li>
+                    <li><strong>Días hasta fin de año:</strong> Usa <code>=DIAS(B1, A1)</code> en la celda C1.</li>
+                    <li><strong>Mes y año:</strong> Usa <code>=MES(A1)</code> y <code>=AÑO(A1)</code> en las celdas D1 y E1.</li>
+                    <li><strong>Concatenar:</strong> En la celda F1, une el texto "Hoy es " con la fecha actual usando <code>=CONCATENAR("Hoy es ", A1)</code>.</li>
+                    <li><strong>Extraer:</strong> En la celda G1, escribe "Aprendiendo Excel" y usa <code>=IZQUIERDA(G1, 10)</code> para extraer "Aprendiendo".</li>
+                    <li><strong>Longitud:</strong> Usa <code>=LARGO(G1)</code> para saber cuántos caracteres tiene el texto.</li>
+                    <li>Guarda el archivo como <strong>"funciones_fecha_texto.xlsx"</strong>.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventaja tiene usar <code>=HOY()</code> en lugar de escribir la fecha manualmente?</li>
+                    <li>¿Cómo podrías usar la función <code>=EXTRAE</code> para extraer el apellido de un nombre completo?</li>
+                    <li>¿Qué otras funciones de texto o fecha crees que existen en Excel?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica funciones de fecha y texto en Excel para manipular información.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Usa correctamente funciones de fecha como HOY, FECHA, DIAS, MES, AÑO.</li>
+                <li>Usa correctamente funciones de texto como CONCATENAR, IZQUIERDA, DERECHA, EXTRAE, LARGO.</li>
+                <li>Guarda el archivo correctamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con Excel</li>
+                <li>Excel (versión de escritorio o web)</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de funciones"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué función devuelve la fecha actual? → <strong>=HOY()</strong></li>
+                <li>¿Qué función une varios textos? → <strong>=CONCATENAR()</strong> o <strong>&</strong></li>
+                <li>¿Qué función extrae caracteres desde la izquierda? → <strong>=IZQUIERDA()</strong></li>
+                <li>¿Qué función calcula días entre dos fechas? → <strong>=DIAS()</strong></li>
+                <li>¿Qué función devuelve el mes de una fecha? → <strong>=MES()</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de funciones de fecha y texto en Excel.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>=HOY()</strong> se actualiza automáticamente cada día.</p>
+        <p>• <strong>=FECHA(año, mes, día)</strong> permite crear fechas específicas.</p>
+        <p>• <strong>=CONCATENAR()</strong> o <strong>&</strong> une textos fácilmente.</p>
+        <p>• <strong>=IZQUIERDA()</strong>, <strong>=DERECHA()</strong> y <strong>=EXTRAE()</strong> extraen partes de un texto.</p>
+        <p>• <strong>=LARGO()</strong> cuenta los caracteres de un texto.</p>
+        <p>• <strong>Práctica:</strong> Combina funciones para resolver problemas más complejos.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a manejar fechas y textos, dos tipos de datos muy comunes.</p>
+        <p>• Desarrolla habilidades de automatización y procesamiento de información.</p>
+        <p>• Prepara a los estudiantes para trabajar con datos en contextos académicos y profesionales.</p>
+        <p>• Conecta con el uso de herramientas ofimáticas para la productividad.</p>
+    </div>
+
+</div>
+</body>
+</html>

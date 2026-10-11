@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Suma y Resta de Fracciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .fraction-visual {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+        }
+        .fraction-visual > div {
+            text-align: center;
+            background: #f5f7fa;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            min-width: 120px;
+        }
+        .fraction-visual .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #ffcc02;
+            margin: 0 auto 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .fraction-visual .circle .slice {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #e65100;
+        }
+        .fraction-visual .circle .slice-1 { clip-path: polygon(50% 50%, 100% 0, 100% 100%); }
+        .fraction-visual .circle .slice-2 { clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 50%); }
+        .fraction-visual .circle .slice-3 { clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 0 100%, 0 50%); }
+        .fraction-visual .circle .slice-4 { clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0); }
+        .fraction-visual .circle .slice-0 { display: none; }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 10px 0 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #3f51b5;
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 14px;
+        }
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+        .zero-note {
+            background: #fce4ec;
+            border-left: 6px solid #c62828;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .zero-note p {
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+            .fraction-visual { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Suma y Resta de Fracciones - Casos especiales y división entre cero
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Comprende y aplica los procedimientos para sumar y restar fracciones con igual y diferente denominador, utilizando la factorización prima para encontrar el MCM, y reconoce que el numerador cero da como resultado cero (no se tomaron pedazos), mientras que el denominador cero hace que la fracción sea indefinida porque no es posible dividir entre cero.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define la suma y resta de fracciones con igual denominador.</li>
+                <li>Comprende por qué se necesita un denominador común para sumar fracciones con diferente denominador.</li>
+                <li>Reconoce el uso del MCM para encontrar el denominador común.</li>
+                <li>Entiende que el numerador cero en una fracción es igual a cero.</li>
+                <li>Comprende que el denominador cero en una fracción es indefinido (no existe).</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Sumar y restar fracciones con igual denominador.</li>
+                <li>Calcular el MCM de los denominadores usando factorización prima.</li>
+                <li>Encontrar el factor que multiplica cada denominador para llegar al MCM.</li>
+                <li>Sumar y restar fracciones con diferente denominador.</li>
+                <li>Simplificar el resultado final.</li>
+                <li>Identificar fracciones con numerador cero y denominador cero.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por comprender el proceso de suma y resta de fracciones.</li>
+                <li>Valora la utilidad de las fracciones en situaciones cotidianas.</li>
+                <li>Participa activamente en la resolución de ejercicios.</li>
+                <li>Reconoce la importancia del MCM en la suma de fracciones.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo sumar pedazos de diferente tamaño?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y visualización.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas:</p>
+            <ul>
+                <li>Si tienes ¼ de pizza y ¼ de pizza, ¿cuánto tienes en total?</li>
+                <li>Si tienes ½ de pizza y ¼ de pizza, ¿cómo los sumas? ¿Son del mismo tamaño?</li>
+                <li>¿Por qué no puedes sumar directamente ½ + ¼?</li>
+                <li>¿Qué necesitas hacer para que los pedazos sean del mismo tamaño?</li>
+                <li>¿Qué significa 0/4? ¿Y 4/0?</li>
+            </ul>
+            <p>Se introduce la idea de que <strong>para sumar fracciones, los pedazos deben ser del mismo tamaño</strong> (mismo denominador).</p>
+
+            <div class="fraction-visual">
+                <div>
+                    <div class="circle">
+                        <div class="slice slice-2"></div>
+                    </div>
+                    <strong>½</strong><br>
+                    <span style="font-size: 13px;">Un medio</span>
+                </div>
+                <div>
+                    <div class="circle">
+                        <div class="slice slice-1"></div>
+                    </div>
+                    <strong>¼</strong><br>
+                    <span style="font-size: 13px;">Un cuarto</span>
+                </div>
+                <div>
+                    <div class="circle">
+                        <div class="slice slice-0"></div>
+                    </div>
+                    <strong>0/4 = 0</strong><br>
+                    <span style="font-size: 13px;">No se tomaron pedazos</span>
+                </div>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende que para sumar fracciones, los denominadores deben ser iguales.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Explica por qué no se pueden sumar fracciones con diferente denominador directamente.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Imágenes de pizzas/pasteles</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Suma y resta de fracciones y casos especiales"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos.</p>
+
+            <!-- Igual denominador -->
+            <h4>🔹 Suma y resta con igual denominador</h4>
+            <p>Cuando los denominadores son iguales, los pedazos son del <strong>mismo tamaño</strong>, por lo que solo se <strong>suman o restan los numeradores</strong> y se <strong>copia el denominador</strong>.</p>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplos:</span><br>
+                <strong>¼ + ¼ = 2/4 = ½</strong><br>
+                <strong>¾ + ¼ = 4/4 = 1</strong><br>
+                <strong>5/8 - 3/8 = 2/8 = ¼</strong><br>
+                <strong>7/10 - 2/10 = 5/10 = ½</strong>
+            </div>
+            <div style="background: #e8f5e9; padding: 8px 12px; border-radius: 6px; margin: 6px 0;">
+                <strong>Regla:</strong> Suma o resta los numeradores y conserva el denominador. Luego simplifica si es posible.
+            </div>
+
+            <!-- Diferente denominador -->
+            <h4>🔹 Suma y resta con diferente denominador</h4>
+            <p>Cuando los denominadores son diferentes, los pedazos son de <strong>diferente tamaño</strong>. Para sumarlos, debemos <strong>encontrar un denominador común</strong> (el MCM) y convertir ambas fracciones a ese denominador.</p>
+
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>✅ Pasos para sumar con diferente denominador</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Factorizar los denominadores en primos.</li>
+                        <li>Calcular el <strong>MCM</strong> de los denominadores.</li>
+                        <li>Convertir cada fracción al MCM.</li>
+                        <li>Sumar los numeradores y copiar el denominador común.</li>
+                        <li>Simplificar el resultado.</li>
+                    </ul>
+                </div>
+                <div style="background: #e3f2fd; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #0d47a1;">
+                    <strong>📌 Ejemplo: ½ + ¼</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Denominadores: 2 y 4</li>
+                        <li>MCM(2,4) = 4</li>
+                        <li>½ = 2/4 (multiplicar por 2)</li>
+                        <li>¼ = 1/4</li>
+                        <li>2/4 + 1/4 = 3/4</li>
+                        <li><strong>½ + ¼ = ¾</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ejemplo más complejo -->
+            <h4>🔹 Ejemplo: 2/3 + 3/5</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Factorizar denominadores:</strong><br>
+                3 = 3 &nbsp;|&nbsp; 5 = 5<br><br>
+                <strong>2. MCM(3,5):</strong> 3 × 5 = 15<br><br>
+                <strong>3. Convertir fracciones:</strong><br>
+                2/3 → multiplicar por 5 → <strong>10/15</strong><br>
+                3/5 → multiplicar por 3 → <strong>9/15</strong><br><br>
+                <strong>4. Sumar:</strong> 10/15 + 9/15 = <strong>19/15</strong><br><br>
+                <strong>5. Simplificar:</strong> 19/15 ya está simplificado (19 es primo).
+            </div>
+
+            <!-- Resta con diferente denominador -->
+            <h4>🔹 Resta con diferente denominador</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo: 3/4 - 1/6</span><br>
+                <strong>1. Factorizar:</strong> 4 = 2², 6 = 2 × 3<br>
+                <strong>2. MCM(4,6):</strong> 2² × 3 = 12<br>
+                <strong>3. Convertir:</strong><br>
+                3/4 = 9/12 (multiplicar por 3)<br>
+                1/6 = 2/12 (multiplicar por 2)<br>
+                <strong>4. Restar:</strong> 9/12 - 2/12 = <strong>7/12</strong>
+            </div>
+
+            <!-- Casos especiales: numerador cero y denominador cero -->
+            <h4>🔹 Casos especiales: Numerador cero y Denominador cero</h4>
+
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>✅ Numerador = 0</strong>
+                    <p style="font-size: 14px;">Cuando el <strong>numerador es cero</strong>, la fracción es igual a <strong>cero</strong> porque no se tomaron pedazos del entero.</p>
+                    <div style="background: #1a1a2e; color: #e0e0e0; padding: 6px; border-radius: 6px; font-family: monospace; font-size: 13px; margin-top: 4px;">
+                        0/5 = 0 &nbsp;|&nbsp; 0/100 = 0
+                    </div>
+                </div>
+                <div style="background: #fce4ec; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #c62828;">
+                    <strong>❌ Denominador = 0 (INDEFINIDO)</strong>
+                    <p style="font-size: 14px;">Cuando el <strong>denominador es cero</strong>, la fracción <strong>NO existe</strong>. No se puede dividir entre cero porque no se pueden tomar pedazos de donde no hay.</p>
+                    <div style="background: #1a1a2e; color: #e0e0e0; padding: 6px; border-radius: 6px; font-family: monospace; font-size: 13px; margin-top: 4px;">
+                        5/0 = ❌ INDEFINIDO &nbsp;|&nbsp; 10/0 = ❌ INDEFINIDO
+                    </div>
+                </div>
+            </div>
+
+            <div class="zero-note">
+                <p><strong>⚠️ Diferencia clave:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>0/5 = 0</strong> → No se tomaron pedazos, pero el entero sí se partió en 5 partes.</li>
+                    <li><strong>5/0 = INDEFINIDO</strong> → No se puede partir el entero en 0 partes. No tiene sentido.</li>
+                </ul>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Resuelve las siguientes operaciones:</strong></p>
+                <ul>
+                    <li><strong>Igual denominador:</strong> 3/7 + 2/7, 5/9 - 2/9, 4/11 + 6/11, 8/15 - 3/15</li>
+                    <li><strong>Diferente denominador:</strong> 1/2 + 1/3, 2/3 + 3/4, 3/4 - 1/6, 5/6 - 2/5</li>
+                    <li><strong>Con factorización:</strong> 2/5 + 3/7, 5/8 - 1/6, 3/10 + 4/15, 7/12 - 2/9</li>
+                    <li><strong>Casos especiales:</strong> 0/5, 0/12, 4/0, 7/0</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Por qué no se pueden sumar fracciones con diferente denominador directamente?</li>
+                    <li>¿Cómo se encuentra el MCM de dos denominadores?</li>
+                    <li>¿Cuál es la diferencia entre 0/5 y 5/0?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante suma y resta fracciones con igual y diferente denominador, usando factorización prima para encontrar el MCM, y comprende los casos especiales de numerador cero y denominador cero.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Suma y resta fracciones con igual denominador correctamente.</li>
+                <li>Calcula el MCM de denominadores usando factorización prima.</li>
+                <li>Convierte fracciones al denominador común.</li>
+                <li>Suma y resta fracciones con diferente denominador correctamente.</li>
+                <li>Explica que 0/a = 0 y que a/0 es indefinido.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejercicios impresos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de suma y resta de fracciones"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Cómo se suman fracciones con igual denominador? → <strong>Se suman los numeradores y se copia el denominador.</strong></li>
+                <li>¿Cómo se suman fracciones con diferente denominador? → <strong>Se encuentra el MCM y se convierten.</strong></li>
+                <li>¿Cuál es el MCM de 4 y 6? → <strong>12</strong></li>
+                <li>¿Cuánto es ¼ + ¼? → <strong>½</strong></li>
+                <li>¿Cuánto es ½ + ¼? → <strong>¾</strong></li>
+                <li>¿Cuánto es 0/5? → <strong>0</strong></li>
+                <li>¿Cuánto es 5/0? → <strong>Indefinido</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida la suma y resta de fracciones y los casos especiales.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Igual denominador:</strong> Suma o resta numeradores, copia el denominador.</p>
+        <p>• <strong>Diferente denominador:</strong> Encuentra el MCM, convierte y opera.</p>
+        <p>• <strong>MCM:</strong> Producto de los factores primos con mayor exponente.</p>
+        <p>• <strong>Simplifica:</strong> Siempre simplifica el resultado final.</p>
+        <p>• <strong>Numerador = 0:</strong> La fracción es igual a 0.</p>
+        <p>• <strong>Denominador = 0:</strong> La fracción es INDEFINIDA. No existe.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a operar con fracciones, habilidad fundamental en matemáticas.</p>
+        <p>• Conecta con temas de proporciones, porcentajes y álgebra.</p>
+        <p>• Desarrolla habilidades de cálculo y razonamiento proporcional.</p>
+        <p>• Prepara a los estudiantes para resolver problemas cotidianos con fracciones.</p>
+    </div>
+
+</div>
+</body>
+</html>

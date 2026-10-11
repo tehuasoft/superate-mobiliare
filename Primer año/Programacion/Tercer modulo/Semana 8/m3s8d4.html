@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · UX · User Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .ux-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .ux-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .ux-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .patron-demo {
+            background: #f0f4f8;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .patron-demo .area {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            flex: 1;
+            min-width: 120px;
+            border: 2px solid #e0e0e0;
+        }
+        .patron-demo .area.destacada {
+            border-color: #1e88e5;
+            background: #e3f2fd;
+        }
+
+        .dark-pattern-ejemplo {
+            background: #ffebee;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 8px 0;
+            border-left: 6px solid #c62828;
+        }
+        .dark-pattern-ejemplo h5 {
+            color: #c62828;
+            font-size: 16px;
+        }
+        .dark-pattern-ejemplo p {
+            font-size: 14px;
+        }
+        .dark-pattern-ejemplo .bueno {
+            background: #e8f5e9;
+            border-left: 6px solid #2e7d32;
+            padding: 10px 14px;
+            margin-top: 6px;
+            border-radius: 6px;
+        }
+        .dark-pattern-ejemplo .bueno h6 {
+            color: #2e7d32;
+        }
+
+        .empresa-ejemplo {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 4px 0;
+            border-left: 3px solid #3f51b5;
+        }
+        .empresa-ejemplo strong {
+            color: #1a237e;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🧠 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">UX · User Experience · Pilares, patrones de lectura y diseño ético</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende los fundamentos de la experiencia de usuario (UX), incluyendo sus pilares (simplicidad, consistencia), patrones de lectura (F-pattern, Z-pattern), diseño multiplataforma, y la importancia de evitar dark patterns, con ejemplos de empresas que aplican (o no) estos principios.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es UX y su importancia.</li>
+                <li>Reconoce los pilares: simplicidad y consistencia.</li>
+                <li>Identifica patrones de lectura: F-pattern y Z-pattern.</li>
+                <li>Reconoce dark patterns y sus consecuencias.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Diseñar interfaces simples y consistentes.</li>
+                <li>Aplicar patrones de lectura en el diseño.</li>
+                <li>Adaptar diseños para multiplataforma.</li>
+                <li>Identificar y evitar dark patterns.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la experiencia del usuario por encima de intereses comerciales.</li>
+                <li>Muestra interés por el diseño ético y centrado en el usuario.</li>
+                <li>Participa activamente en el análisis de interfaces.</li>
+                <li>Desarrolla empatía con el usuario.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué hace que una experiencia digital sea buena o mala?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"¿Alguna vez has usado una app o sitio web y te has sentido frustrado? ¿Qué causó esa frustración?"</em> Se introducen los conceptos de UX y su impacto en la percepción del usuario.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 UX vs UI:</span>
+                <p><strong>UX (User Experience):</strong> Cómo se siente el usuario al interactuar con un producto. Es la experiencia completa.</p>
+                <p><strong>UI (User Interface):</strong> Cómo se ve el producto. Es la parte visual.</p>
+                <p>✅ Un buen UI no sirve si la UX es mala. Ejemplo: una app bonita pero difícil de usar.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante distingue entre UX y UI y comprende la importancia de la experiencia del usuario.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce la diferencia entre UX y UI.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de apps con buena/mala UX</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">55 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Pilares de UX, patrones de lectura, multiplataforma y dark patterns"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos.</p>
+
+            <!-- ============================================ -->
+            <!-- PILAR 1: SIMPLICIDAD -->
+            <!-- ============================================ -->
+            <h4>🔹 Pilar 1: Simplicidad</h4>
+            <div class="ux-card">
+                <h5>📌 "Mientras más simple, mejor"</h5>
+                <p>Un diseño simple es fácil de entender y usar. Menos es más. Evita sobrecargar al usuario con información o elementos innecesarios.</p>
+                <p><strong>Beneficios:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>Reduce la carga cognitiva.</li>
+                    <li>Acelera las tareas del usuario.</li>
+                    <li>Disminuye la frustración.</li>
+                </ul>
+                <div class="empresa-ejemplo">
+                    <strong>✅ Empresa que aplica simplicidad:</strong> <strong>Google</strong> — Su página de inicio es solo un buscador. Sin distracciones. El usuario sabe exactamente qué hacer.
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PILAR 2: CONSISTENCIA -->
+            <!-- ============================================ -->
+            <h4>🔹 Pilar 2: Consistencia</h4>
+            <div class="ux-card" style="border-left-color: #e65100;">
+                <h5>📌 "El usuario no debe re-aprender a usar la página cada vez"</h5>
+                <p>Los elementos deben comportarse de la misma manera en toda la plataforma. Botones, colores, tipografías, ubicaciones, todo debe ser predecible.</p>
+                <p><strong>Beneficios:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>Genera confianza.</li>
+                    <li>Reduce la curva de aprendizaje.</li>
+                    <li>Mejora la eficiencia.</li>
+                </ul>
+                <div class="empresa-ejemplo">
+                    <strong>✅ Empresa que aplica consistencia:</strong> <strong>Apple</strong> — Todas sus apps y sistemas operativos tienen la misma lógica de navegación, botones y gestos. El usuario sabe qué esperar.
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PATRONES DE LECTURA -->
+            <!-- ============================================ -->
+            <h4>🔹 Patrones de lectura</h4>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0;">
+                <div style="background: #f5f7fa; padding: 14px; border-radius: 10px; border-top: 4px solid #1e88e5;">
+                    <h5 style="color: #1a237e;">📖 F-Pattern</h5>
+                    <p style="font-size: 14px;">El usuario lee en forma de <strong>F</strong>: primero una línea horizontal en la parte superior, luego una línea más corta en el medio, y finalmente escanea verticalmente el lado izquierdo.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Cuándo usar:</strong> Páginas con mucho texto, artículos, blogs.</p>
+                    <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 6px; font-size: 13px;">
+                        <div style="background: #e3f2fd; padding: 4px 8px; margin: 2px 0;">📌 Línea 1 — Título (lectura horizontal)</div>
+                        <div style="background: #e3f2fd; padding: 4px 8px; margin: 2px 0; width: 70%;">📌 Línea 2 — Subtítulo o introducción</div>
+                        <div style="background: #e3f2fd; padding: 4px 8px; margin: 2px 0; width: 30%;">📌 Línea 3 — Texto secundario</div>
+                        <div style="background: #e3f2fd; padding: 4px 8px; margin: 2px 0; width: 20%;">📌 Línea 4 — Texto menor</div>
+                    </div>
+                    <div class="empresa-ejemplo" style="margin-top: 6px;">
+                        <strong>✅ Ejemplo:</strong> <strong>Medium</strong> — Artículos largos con títulos destacados y texto en columnas que siguen el patrón F.
+                    </div>
+                </div>
+                <div style="background: #f5f7fa; padding: 14px; border-radius: 10px; border-top: 4px solid #e65100;">
+                    <h5 style="color: #1a237e;">⚡ Z-Pattern</h5>
+                    <p style="font-size: 14px;">El usuario recorre la pantalla en forma de <strong>Z</strong>: de izquierda a derecha en la parte superior, diagonal hacia abajo a la izquierda, y nuevamente de izquierda a derecha en la parte inferior.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Cuándo usar:</strong> Páginas con poco texto, landing pages, diseños minimalistas.</p>
+                    <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 6px; font-size: 13px; text-align: center;">
+                        <div style="display: flex; justify-content: space-between; padding: 4px 8px;">
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px;">📍 Logo</span>
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px;">📍 Menú</span>
+                        </div>
+                        <div style="padding: 8px;">↘️ (diagonal)</div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 8px;">
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px;">📍 CTA 1</span>
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px;">📍 CTA 2</span>
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px;">📍 CTA 3</span>
+                        </div>
+                    </div>
+                    <div class="empresa-ejemplo" style="margin-top: 6px;">
+                        <strong>✅ Ejemplo:</strong> <strong>Apple</strong> — Landing pages donde el logo está arriba a la izquierda, el producto en el centro y los botones de compra abajo a la derecha.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DISEÑO MULTIPLATAFORMA -->
+            <!-- ============================================ -->
+            <h4>🔹 Diseño multiplataforma (responsive)</h4>
+            <div class="ux-card" style="border-left-color: #2e7d32;">
+                <h5>📌 "El diseño debe lucir bien en pantallas grandes y pequeñas"</h5>
+                <p>Los usuarios acceden a los productos desde diferentes dispositivos: computadoras, tablets, teléfonos. El diseño debe adaptarse a cada tamaño de pantalla sin perder funcionalidad.</p>
+                <p><strong>Beneficios:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>Llega a más usuarios.</li>
+                    <li>Mejora la accesibilidad.</li>
+                    <li>Genera confianza.</li>
+                </ul>
+                <div class="empresa-ejemplo">
+                    <strong>✅ Empresa que aplica diseño multiplataforma:</strong> <strong>Spotify</strong> — Funciona igual de bien en escritorio, web y móvil. La experiencia es consistente en todos los dispositivos.
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- DARK PATTERNS -->
+            <!-- ============================================ -->
+            <h4>🔹 Dark Patterns — Diseños que NO benefician al usuario</h4>
+            <div class="ux-card" style="border-left-color: #c62828; background: #ffebee;">
+                <h5>🚫 ¿Qué son los dark patterns?</h5>
+                <p>Son trucos de diseño que benefician a la empresa <strong>a costa del usuario</strong>. Hacen que el usuario haga cosas que no quiere, como suscribirse, compartir datos o gastar dinero sin darse cuenta.</p>
+            </div>
+
+            <div class="dark-pattern-ejemplo">
+                <h5>1. Suscripciones difíciles de cancelar</h5>
+                <p>El botón de "suscribirse" es grande y visible, pero el de "cancelar" está oculto o es difícil de encontrar.</p>
+                <div class="bueno">
+                    <h6>✅ Lo correcto:</h6>
+                    <p>Hacer que cancelar sea tan fácil como suscribirse. Ejemplo: <strong>Netflix</strong> permite cancelar con unos pocos clics.</p>
+                </div>
+            </div>
+
+            <div class="dark-pattern-ejemplo">
+                <h5>2. Opciones pre-seleccionadas</h5>
+                <p>Casillas de verificación que ya vienen marcadas para aceptar correos publicitarios o compartir datos. El usuario debe desmarcarlas activamente.</p>
+                <div class="bueno">
+                    <h6>✅ Lo correcto:</h6>
+                    <p>Dejar que el usuario elija activamente. Ejemplo: <strong>GDPR</strong> obliga a que las opciones de privacidad sean opt-in (el usuario debe activarlas).</p>
+                </div>
+            </div>
+
+            <div class="dark-pattern-ejemplo">
+                <h5>3. Confirmación engañosa</h5>
+                <p>Mensajes como "¿Estás seguro de que quieres perder esta oferta?" cuando el usuario intenta salir, creando miedo o culpa.</p>
+                <div class="bueno">
+                    <h6>✅ Lo correcto:</h6>
+                    <p>Respetar la decisión del usuario. Ejemplo: <strong>Amazon</strong> muestra un mensaje claro pero no manipula emocionalmente.</p>
+                </div>
+            </div>
+
+            <div class="dark-pattern-ejemplo">
+                <h5>4. Precios engañosos</h5>
+                <p>Mostrar un precio bajo, pero al final del proceso añadir cargos ocultos o suscripciones obligatorias.</p>
+                <div class="bueno">
+                    <h6>✅ Lo correcto:</h6>
+                    <p>Ser transparente desde el principio. Ejemplo: <strong>App Store</strong> muestra el precio total con impuestos antes de la compra.</p>
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0; margin-top: 12px;">
+                <span class="highlight">📌 ¿Por qué evitar dark patterns?</span>
+                <ul>
+                    <li>Dañan la confianza del usuario.</li>
+                    <li>Generan frustración y abandono.</li>
+                    <li>Dañan la reputación de la marca a largo plazo.</li>
+                    <li>En muchos países, son ilegales (GDPR, leyes de protección al consumidor).</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Elige una app o sitio web que uses con frecuencia.</li>
+                    <li>2. Analiza su UX según los pilares:
+                        <ul>
+                            <li>¿Es simple o complicada?</li>
+                            <li>¿Es consistente en toda la plataforma?</li>
+                            <li>¿Sigue un patrón de lectura (F o Z)?</li>
+                            <li>¿Se adapta bien a móvil y escritorio?</li>
+                            <li>¿Tiene dark patterns? Identifica al menos uno si existe.</li>
+                        </ul>
+                    </li>
+                    <li>3. Comparte tu análisis con la clase.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Por qué la simplicidad mejora la experiencia del usuario?</li>
+                    <li>¿Qué pasa si un diseño no es consistente?</li>
+                    <li>¿Por qué los dark patterns son éticamente cuestionables?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende los pilares de UX, los patrones de lectura, la importancia del diseño multiplataforma y reconoce dark patterns.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Identifica simplicidad y consistencia en diseños.</li>
+                <li>Reconoce patrones F y Z en interfaces.</li>
+                <li>Comprende la importancia del diseño responsive.</li>
+                <li>Detecta dark patterns en ejemplos reales.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de interfaces reales</li>
+                <li>Artículos sobre UX</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué significa UX?</li>
+                <li>¿Cuáles son los dos pilares principales de UX?</li>
+                <li>¿Qué es el F-pattern?</li>
+                <li>¿Qué es el Z-pattern?</li>
+                <li>¿Qué es un dark pattern?</li>
+                <li>¿Por qué es importante el diseño multiplataforma?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Rediseña mentalmente una página de inicio de sesión de una app que use un dark pattern (por ejemplo, ocultar la opción de "no recordar contraseña" o pre-seleccionar suscripciones). Propón una versión ética y centrada en el usuario.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de UX y su aplicación práctica.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la importancia del diseño ético.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de interfaces</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para UX:</strong></p>
+        <p>• <strong>Simplicidad:</strong> Menos es más. El usuario no debe pensar demasiado.</p>
+        <p>• <strong>Consistencia:</strong> Los elementos deben comportarse igual en toda la plataforma.</p>
+        <p>• <strong>F-pattern:</strong> Ideal para páginas con mucho texto (blogs, artículos).</p>
+        <p>• <strong>Z-pattern:</strong> Ideal para landing pages y diseños minimalistas.</p>
+        <p>• <strong>Multiplataforma:</strong> El diseño debe adaptarse a todos los dispositivos.</p>
+        <p>• <strong>Dark patterns:</strong> Evítalos. Dañan la confianza y la reputación.</p>
+        <p>• <strong>El usuario siempre primero:</strong> Diseña para ayudar, no para confundir.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a diseñar pensando en el usuario.</p>
+        <p>• Desarrolla empatía y criterio ético.</p>
+        <p>• Prepara a los estudiantes para crear experiencias digitales positivas.</p>
+        <p>• Conecta el diseño con la psicología del usuario.</p>
+    </div>
+
+</div>
+</body>
+</html>

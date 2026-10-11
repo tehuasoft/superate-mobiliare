@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planificador · Gestión de clases</title>
+  <!-- Font Awesome (iconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .app-container {
+      max-width: 1400px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      padding: 2rem 2rem 2.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 1.5rem;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      background: linear-gradient(145deg, #1e293b, #334155);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header h1 i {
+      background: #3b82f6;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2rem;
+    }
+
+    .header-badge {
+      background: #eef2ff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      color: #1e293b;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .header-badge i {
+      color: #4f46e5;
+    }
+
+    .year-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.75rem;
+    }
+
+    .year-btn {
+      background: transparent;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 60px;
+      color: #475569;
+      transition: all 0.2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .year-btn i {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .year-btn:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .year-btn.active {
+      background: #1e293b;
+      color: white;
+      box-shadow: 0 8px 16px -8px rgba(30, 41, 59, 0.3);
+    }
+
+    .year-btn.active i {
+      color: #cbd5e1;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .subject-card {
+      background: #f8fafc;
+      border-radius: 28px;
+      padding: 1.5rem 1.5rem 1.8rem;
+      transition: all 0.2s ease;
+      border: 1px solid #eef2f6;
+      box-shadow: 0 4px 8px -4px rgba(0,0,0,0.02);
+    }
+
+    .subject-card:hover {
+      background: #ffffff;
+      border-color: #d1d9e6;
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
+    }
+
+    .subject-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px dashed #dce2ec;
+      padding-bottom: 0.8rem;
+    }
+
+    .subject-header i {
+      font-size: 1.8rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 16px;
+      color: #1e293b;
+      box-shadow: 0 4px 8px -4px rgba(0,0,0,0.04);
+    }
+
+    .subject-header h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.7rem;
+    }
+
+    .module-btn {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 60px;
+      padding: 0.5rem 0.2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.15s;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .module-btn i {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+
+    .module-btn:hover {
+      background: #f1f5f9;
+      border-color: #b9c7da;
+      transform: scale(1.02);
+    }
+
+    .module-btn.active-module {
+      background: #1e293b;
+      border-color: #1e293b;
+      color: white;
+    }
+
+    .module-btn.active-module i {
+      color: #cbd5e1;
+    }
+
+    .weeks-panel {
+      background: #f1f5f9;
+      border-radius: 32px;
+      padding: 1.8rem 1.8rem 2rem;
+      margin-top: 0.8rem;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .panel-header h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-header h3 i {
+      color: #4f46e5;
+      font-size: 1.2rem;
+    }
+
+    .week-indicator {
+      background: white;
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1e293b;
+      border: 1px solid #d1d9e6;
+    }
+
+    .weeks-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      align-items: center;
+    }
+
+    .week-item {
+      background: white;
+      border-radius: 60px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1e293b;
+      border: 1px solid #dce2ec;
+      transition: all 0.15s;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px -2px rgba(0,0,0,0.02);
+    }
+
+    .week-item i {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+
+    .week-item:hover {
+      background: #eef2f6;
+      border-color: #b9c7da;
+    }
+
+    .week-item.active-week {
+      background: #1e293b;
+      border-color: #1e293b;
+      color: white;
+    }
+
+    .week-item.active-week i {
+      color: #cbd5e1;
+    }
+
+    .files-section {
+      margin-top: 1.8rem;
+      background: white;
+      border-radius: 24px;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .files-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #475569;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #eef2f6;
+      padding-bottom: 0.7rem;
+    }
+
+    .files-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+    }
+
+    .file-link {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 60px;
+      padding: 0.35rem 1.2rem 0.35rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #0f172a;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .file-link i {
+      color: #4f46e5;
+      font-size: 0.8rem;
+    }
+
+    .file-link:hover {
+      background: #eef2ff;
+      border-color: #818cf8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px -4px rgba(79, 70, 229, 0.15);
+    }
+
+    .file-empty {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.3rem 0;
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px solid #eef2f6;
+      padding-top: 1.8rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note i {
+      color: #4f46e5;
+    }
+
+    @media (max-width: 680px) {
+      .app-container { padding: 1.5rem; }
+      .header h1 { font-size: 1.6rem; }
+      .module-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .module-grid { grid-template-columns: 1fr; }
+      .subject-card { padding: 1.2rem; }
+      .weeks-panel { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+
+  <div class="header">
+    <h1><i class="fas fa-calendar-check"></i> ¡Superate! Mobiliare · Planificación de clases</h1>
+    <div class="header-badge">
+      <i class="fas fa-folder-open"></i> 2 materias · 3 años
+    </div>
+  </div>
+
+  <div class="year-tabs" id="yearTabs">
+    <button class="year-btn active" data-year="1"><i class="fas fa-graduation-cap"></i> Primer año</button>
+    <button class="year-btn" data-year="2"><i class="fas fa-graduation-cap"></i> Segundo año</button>
+    <button class="year-btn" data-year="3"><i class="fas fa-graduation-cap"></i> Tercer año</button>
+  </div>
+
+  <div class="subjects-grid" id="subjectsGrid">
+    <div class="subject-card" data-subject="programacion">
+      <div class="subject-header">
+        <i class="fas fa-code"></i>
+        <h2>Programación</h2>
+      </div>
+      <div class="module-grid" id="modulosProgramacion"></div>
+    </div>
+    <div class="subject-card" data-subject="plm">
+      <div class="subject-header">
+        <i class="fas fa-pencil-ruler"></i>
+        <h2>PLM</h2>
+      </div>
+      <div class="module-grid" id="modulosPlm"></div>
+    </div>
+  </div>
+
+  <div class="weeks-panel" id="weeksPanel">
+    <div class="panel-header">
+      <h3><i class="fas fa-list-ul"></i> <span id="panelTitle">Semanas · Módulo 1</span></h3>
+      <span class="week-indicator" id="weekIndicator"><i class="far fa-calendar-alt"></i> Semana 1</span>
+    </div>
+    <div class="weeks-grid" id="weeksGrid"></div>
+    <div class="files-section" id="filesSection">
+      <div class="files-title"><i class="fas fa-file-code"></i> Archivos disponibles (click para abrir)</div>
+      <div class="files-grid" id="filesGrid"></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <i class="fas fa-arrow-right"></i> Haz clic en módulo y semana para explorar <i class="fas fa-arrow-left"></i>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ----------------------------------------------------------------
+    // ESTRUCTURA DE DATOS
+    // ----------------------------------------------------------------
+    const DATA = {
+      1: {
+        programacion: {
+          modulos: 4,
+          semanasPorModulo: [8, 8, 8, 8],
+          diasPorSemana: 4
+        },
+        plm: {
+          modulos: 4,
+          semanasPorModulo: [8, 8, 8, 8],
+          diasPorSemana: 1
+        }
+      },
+      2: {
+        programacion: {
+          modulos: 4,
+          semanasPorModulo: [8, 8, 8, 8],
+          diasPorSemana: 4
+        },
+        plm: {
+          modulos: 4,
+          semanasPorModulo: [8, 8, 8, 8],
+          diasPorSemana: 1
+        }
+      },
+      3: {
+        programacion: {
+          modulos: 4,
+          semanasPorModulo: [8, 8, 8, 8],
+          diasPorSemana: 4
+        },
+        plm: {
+          modulos: 4,
+          semanasPorModulo: [8, 8, 8, 8],
+          diasPorSemana: 1
+        }
+      }
+    };
+
+    // Mapeo de nombres de año
+    const YEAR_NAMES = {
+      1: 'Primer año',
+      2: 'Segundo año',
+      3: 'Tercer año'
+    };
+
+    // Mapeo de nombres de módulo
+    const MODULE_NAMES = {
+      1: 'Primer modulo',
+      2: 'Segundo modulo',
+      3: 'Tercer modulo',
+      4: 'Cuarto modulo'
+    };
+
+    // Estado actual
+    let currentYear = 1;
+    let currentSubject = 'programacion';
+    let currentModule = 1;
+    let currentWeek = 1;
+
+    // Elementos DOM
+    const yearTabs = document.getElementById('yearTabs');
+    const modulosProg = document.getElementById('modulosProgramacion');
+    const modulosPlm = document.getElementById('modulosPlm');
+    const weeksGrid = document.getElementById('weeksGrid');
+    const filesGrid = document.getElementById('filesGrid');
+    const panelTitle = document.getElementById('panelTitle');
+    const weekIndicator = document.getElementById('weekIndicator');
+
+    // ------------------------------------------------------------------
+    // CONSTRUIR RUTA DEL ARCHIVO
+    // ------------------------------------------------------------------
+    function buildFilePath(year, subject, moduleNum, weekNum, dayNum = null) {
+      const yearName = YEAR_NAMES[year];
+      const subjectName = subject === 'programacion' ? 'Programacion' : 'PLM';
+      const moduleName = MODULE_NAMES[moduleNum];
+      const semanaNombre = `Semana ${weekNum}`;
+
+      let fileName;
+      if (subject === 'programacion') {
+        // Programación: m<modulo>s<semana>d<dia>.html
+        fileName = `m${moduleNum}s${weekNum}d${dayNum}.html`;
+      } else {
+        // PLM: m<modulo>s<semana>.html
+        fileName = `m${moduleNum}s${weekNum}.html`;
+      }
+
+      // Construir ruta: Primer año/Programacion/Primer modulo/Semana 2/m1s2d1.html
+      return `./${yearName}/${subjectName}/${moduleName}/${semanaNombre}/${fileName}`;
+    }
+
+    // ------------------------------------------------------------------
+    // RENDERIZADO
+    // ------------------------------------------------------------------
+
+    function renderModules(subject, container) {
+      const yearData = DATA[currentYear];
+      if (!yearData) return;
+      const subjectData = yearData[subject];
+      if (!subjectData) return;
+      const numModulos = subjectData.modulos;
+
+      container.innerHTML = '';
+      for (let m = 1; m <= numModulos; m++) {
+        const btn = document.createElement('button');
+        btn.className = `module-btn ${m === currentModule && subject === currentSubject ? 'active-module' : ''}`;
+        btn.innerHTML = `<i class="fas fa-cube"></i> M${m}`;
+        btn.dataset.module = m;
+        btn.dataset.subject = subject;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const module = parseInt(btn.dataset.module);
+          currentModule = module;
+          currentSubject = subject;
+          currentWeek = 1;
+          updateAll();
+        });
+        container.appendChild(btn);
+      }
+    }
+
+    function renderWeeks() {
+      const yearData = DATA[currentYear];
+      if (!yearData) return;
+      const subjectData = yearData[currentSubject];
+      if (!subjectData) return;
+      const semanas = subjectData.semanasPorModulo[currentModule - 1] || 8;
+
+      weeksGrid.innerHTML = '';
+      for (let w = 1; w <= semanas; w++) {
+        const weekBtn = document.createElement('span');
+        weekBtn.className = `week-item ${w === currentWeek ? 'active-week' : ''}`;
+        weekBtn.innerHTML = `<i class="far fa-calendar-alt"></i> Semana ${w}`;
+        weekBtn.dataset.week = w;
+        weekBtn.addEventListener('click', () => {
+          currentWeek = w;
+          updateAll();
+        });
+        weeksGrid.appendChild(weekBtn);
+      }
+
+      weekIndicator.innerHTML = `<i class="far fa-calendar-alt"></i> Semana ${currentWeek}`;
+      panelTitle.textContent = `Semanas · Módulo ${currentModule}`;
+    }
+
+    function renderFiles() {
+      const yearData = DATA[currentYear];
+      if (!yearData) {
+        filesGrid.innerHTML = `<span class="file-empty">No hay datos para este año</span>`;
+        return;
+      }
+      const subjectData = yearData[currentSubject];
+      if (!subjectData) {
+        filesGrid.innerHTML = `<span class="file-empty">Materia sin datos</span>`;
+        return;
+      }
+
+      const diasPorSemana = subjectData.diasPorSemana;
+      filesGrid.innerHTML = '';
+
+      if (diasPorSemana === 1) {
+        // PLM: solo un archivo
+        const fileName = `m${currentModule}s${currentWeek}.html`;
+        const filePath = buildFilePath(currentYear, currentSubject, currentModule, currentWeek);
+        const link = document.createElement('a');
+        link.className = 'file-link';
+        link.innerHTML = `<i class="fas fa-file-alt"></i> ${fileName}`;
+        link.href = filePath;
+        link.target = '_blank';
+        link.title = `Abrir ${filePath}`;
+        filesGrid.appendChild(link);
+      } else {
+        // Programación: 4 archivos
+        for (let d = 1; d <= 4; d++) {
+          const fileName = `m${currentModule}s${currentWeek}d${d}.html`;
+          const filePath = buildFilePath(currentYear, currentSubject, currentModule, currentWeek, d);
+          const link = document.createElement('a');
+          link.className = 'file-link';
+          link.innerHTML = `<i class="fas fa-file-code"></i> ${fileName}`;
+          link.href = filePath;
+          link.target = '_blank';
+          link.title = `Abrir ${filePath}`;
+          filesGrid.appendChild(link);
+        }
+      }
+    }
+
+    function updateAll() {
+      renderModules('programacion', modulosProg);
+      renderModules('plm', modulosPlm);
+
+      document.querySelectorAll('.module-btn').forEach(btn => {
+        const subject = btn.dataset.subject;
+        const module = parseInt(btn.dataset.module);
+        if (subject === currentSubject && module === currentModule) {
+          btn.classList.add('active-module');
+        } else {
+          btn.classList.remove('active-module');
+        }
+      });
+
+      renderWeeks();
+      renderFiles();
+    }
+
+    function setYear(year) {
+      currentYear = year;
+      currentModule = 1;
+      currentWeek = 1;
+      document.querySelectorAll('.year-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.year) === year);
+      });
+      currentSubject = 'programacion';
+      updateAll();
+    }
+
+    function initYearTabs() {
+      document.querySelectorAll('.year-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const year = parseInt(btn.dataset.year);
+          setYear(year);
+        });
+      });
+    }
+
+    function init() {
+      setYear(1);
+      initYearTabs();
+    }
+
+    init();
+  })();
+</script>
+</body>
+</html>

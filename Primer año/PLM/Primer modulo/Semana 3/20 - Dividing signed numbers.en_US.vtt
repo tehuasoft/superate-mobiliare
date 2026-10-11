@@ -1,0 +1,677 @@
+WEBVTT
+
+0
+00:00.260 --> 00:01.450
+<v Krista>In this video, we're talking about</v>
+
+1
+00:01.450 --> 00:04.080
+division of signed numbers, and this is going to be
+
+2
+00:04.080 --> 00:07.280
+really, really similar to multiplication of signed numbers.
+
+3
+00:07.280 --> 00:08.750
+We have the same chart here that we had
+
+4
+00:08.750 --> 00:10.225
+in our multiplication of signed numbers video,
+
+5
+00:10.225 --> 00:12.338
+except that instead of multiplication,
+
+6
+00:12.338 --> 00:13.830
+we have division here.
+
+7
+00:13.830 --> 00:15.320
+And what this tells us is that
+
+8
+00:15.320 --> 00:18.068
+if we divide a positive number by a positive number,
+
+9
+00:18.068 --> 00:19.810
+we're going to get a positive answer.
+
+10
+00:19.810 --> 00:21.928
+If we divide a negative number by a negative number,
+
+11
+00:21.928 --> 00:23.870
+we're going to get a positive answer.
+
+12
+00:23.870 --> 00:26.030
+If, on the other hand, we divide a negative number
+
+13
+00:26.030 --> 00:28.700
+by a positive number, or a positive number
+
+14
+00:28.700 --> 00:31.380
+by a negative number, we're going to get a negative answer.
+
+15
+00:31.380 --> 00:33.421
+In other words, if our signs are the same,
+
+16
+00:33.421 --> 00:35.190
+we're going to get a positive answer.
+
+17
+00:35.190 --> 00:36.530
+If our signs are different,
+
+18
+00:36.530 --> 00:38.020
+we're going to get a negative answer.
+
+19
+00:38.020 --> 00:40.131
+But keep in mind that this logic only works
+
+20
+00:40.131 --> 00:42.670
+when we have just two numbers involved.
+
+21
+00:42.670 --> 00:45.290
+So we'll talk about more than two numbers in a second.
+
+22
+00:45.290 --> 00:46.560
+But let's go ahead and apply this
+
+23
+00:46.560 --> 00:48.170
+to some of the examples we have here.
+
+24
+00:48.170 --> 00:49.550
+So we have six divided by three.
+
+25
+00:49.550 --> 00:52.320
+This is a positive six, and a positive three.
+
+26
+00:52.320 --> 00:53.540
+Both of our numbers are positive.
+
+27
+00:53.540 --> 00:54.550
+If we look at our chart here,
+
+28
+00:54.550 --> 00:56.585
+we have a positive and a positive,
+
+29
+00:56.585 --> 00:59.230
+which is going to give us a positive result,
+
+30
+00:59.230 --> 01:02.080
+and that should make sense because the signs are the same.
+
+31
+01:02.080 --> 01:04.140
+They're both positive, and we know from looking at this
+
+32
+01:04.140 --> 01:06.460
+that if the signs are the same, we'll get a positive result.
+
+33
+01:06.460 --> 01:08.394
+So positive six divided by positive three
+
+34
+01:08.394 --> 01:10.800
+is going to be a positive two.
+
+35
+01:10.800 --> 01:12.370
+If we go down to our last example,
+
+36
+01:12.370 --> 01:15.890
+and we take a negative six divided by a negative three,
+
+37
+01:15.890 --> 01:17.440
+we have a negative by a negative,
+
+38
+01:17.440 --> 01:19.100
+that's going to give us a positive.
+
+39
+01:19.100 --> 01:21.130
+That should make sense because the signs are the same,
+
+40
+01:21.130 --> 01:22.860
+so we know our result is positive.
+
+41
+01:22.860 --> 01:25.130
+So again we're going to get a positive two.
+
+42
+01:25.130 --> 01:27.000
+If, on the other hand, our signs are different,
+
+43
+01:27.000 --> 01:29.359
+we have a negative six and a positive three.
+
+44
+01:29.359 --> 01:31.890
+Negative six divided by a positive three
+
+45
+01:31.890 --> 01:34.000
+is going to give us a negative result
+
+46
+01:34.000 --> 01:37.070
+because we have a negative divided by a positive.
+
+47
+01:37.070 --> 01:38.400
+Those are different signs.
+
+48
+01:38.400 --> 01:39.770
+The result's going to be negative.
+
+49
+01:39.770 --> 01:42.750
+Here we have a positive six and a negative three.
+
+50
+01:42.750 --> 01:44.850
+Different signs, one positive, one negative.
+
+51
+01:44.850 --> 01:46.886
+So a positive six divided by a negative three
+
+52
+01:46.886 --> 01:49.260
+is also going to give us negative two
+
+53
+01:49.260 --> 01:50.430
+because the signs are different,
+
+54
+01:50.430 --> 01:51.940
+we're going to get a negative answer.
+
+55
+01:51.940 --> 01:53.910
+You can also think about these, instead of using
+
+56
+01:53.910 --> 01:55.970
+this division sign, as fractions.
+
+57
+01:55.970 --> 01:57.584
+So we know that six divided by three
+
+58
+01:57.584 --> 02:00.146
+is the same as six over three.
+
+59
+02:00.146 --> 02:02.540
+We know that negative six divided by three
+
+60
+02:02.540 --> 02:05.520
+is the same as negative six divided by three,
+
+61
+02:05.520 --> 02:07.600
+that six divided by negative three
+
+62
+02:07.600 --> 02:10.055
+is the same as six over negative three,
+
+63
+02:10.055 --> 02:12.370
+and that negative six divided by negative three
+
+64
+02:12.370 --> 02:15.020
+is negative six over negative three.
+
+65
+02:15.020 --> 02:17.450
+We can see here that we have two positives.
+
+66
+02:17.450 --> 02:19.970
+Six over three, we know that's going to be equal to two.
+
+67
+02:19.970 --> 02:22.891
+In this case, we have negative six over positive three.
+
+68
+02:22.891 --> 02:25.390
+We have this single negative sign here.
+
+69
+02:25.390 --> 02:27.130
+We can factor that negative sign
+
+70
+02:27.130 --> 02:28.470
+out in front of the fraction
+
+71
+02:28.470 --> 02:31.135
+and get negative six over three.
+
+72
+02:31.135 --> 02:35.229
+And now this six over three looks just like this did here.
+
+73
+02:35.229 --> 02:36.910
+We know this is going to be two.
+
+74
+02:36.910 --> 02:38.960
+But we have to apply our negative sign here.
+
+75
+02:38.960 --> 02:40.681
+So this is going to be negative two.
+
+76
+02:40.681 --> 02:42.070
+We can do the same thing here.
+
+77
+02:42.070 --> 02:44.297
+We can factor out the negative sign from the denominator,
+
+78
+02:44.297 --> 02:47.670
+and get negative six over three,
+
+79
+02:47.670 --> 02:49.520
+when we pull that negative sign out in front.
+
+80
+02:49.520 --> 02:52.040
+Six over three is two, and applying the negative sign,
+
+81
+02:52.040 --> 02:53.371
+we get negative two.
+
+82
+02:53.371 --> 02:56.890
+Or in this case, pulling both negative signs out in front,
+
+83
+02:56.890 --> 03:00.284
+what we end up with is negative one over negative one
+
+84
+03:00.284 --> 03:03.200
+times six over three.
+
+85
+03:03.200 --> 03:05.350
+So pulling both negatives out in front,
+
+86
+03:05.350 --> 03:06.520
+we have this other fraction.
+
+87
+03:06.520 --> 03:08.370
+Negative one divided by negative one
+
+88
+03:08.370 --> 03:10.810
+is going to be a positive one.
+
+89
+03:10.810 --> 03:12.660
+Because we have two negative signs,
+
+90
+03:12.660 --> 03:15.250
+they'll cancel with each other to become a positive.
+
+91
+03:15.250 --> 03:17.360
+And so we have one times six thirds,
+
+92
+03:17.360 --> 03:20.410
+or just six thirds, which we know is two.
+
+93
+03:20.410 --> 03:22.900
+So this same and different sign system
+
+94
+03:22.900 --> 03:25.350
+works great if we have just two numbers involved.
+
+95
+03:25.350 --> 03:27.600
+We're dividing one number by another number.
+
+96
+03:27.600 --> 03:29.760
+But what if we have more than two numbers involved?
+
+97
+03:29.760 --> 03:31.340
+What if we have, for example,
+
+98
+03:31.340 --> 03:34.289
+negative two times a negative three,
+
+99
+03:34.289 --> 03:36.960
+divided by a positive six?
+
+100
+03:36.960 --> 03:38.590
+Here we have three numbers involved,
+
+101
+03:38.590 --> 03:41.210
+negative two, negative three, and a positive six.
+
+102
+03:41.210 --> 03:43.470
+In this case, we have different signs involved.
+
+103
+03:43.470 --> 03:45.630
+We have a negative, a negative, and a positive.
+
+104
+03:45.630 --> 03:46.800
+So those are different signs.
+
+105
+03:46.800 --> 03:48.108
+And so maybe we would look at this and say,
+
+106
+03:48.108 --> 03:49.407
+"Oh, they're different signs,
+
+107
+03:49.407 --> 03:50.990
+"so the result's going to be negative."
+
+108
+03:50.990 --> 03:52.440
+But, in fact, that's not true.
+
+109
+03:52.440 --> 03:55.741
+This same and different sign logic doesn't apply
+
+110
+03:55.741 --> 03:58.059
+when we have more than two numbers involved.
+
+111
+03:58.059 --> 03:59.760
+When we have more than two numbers involved,
+
+112
+03:59.760 --> 04:01.754
+we have to sort of upgrade our understanding,
+
+113
+04:01.754 --> 04:05.526
+and say instead, that, "An even number of negative signs,
+
+114
+04:05.526 --> 04:07.744
+"will always give us a positive result,
+
+115
+04:07.744 --> 04:10.227
+"and an odd number of negative signs
+
+116
+04:10.227 --> 04:12.330
+"will always give us a negative result."
+
+117
+04:12.330 --> 04:15.040
+And this even/odd logic works for division
+
+118
+04:15.040 --> 04:16.490
+of just two numbers as well.
+
+119
+04:16.490 --> 04:18.970
+For example, you can see here, we had positive six
+
+120
+04:18.970 --> 04:20.410
+divided by a negative three.
+
+121
+04:20.410 --> 04:21.772
+We have zero negative signs.
+
+122
+04:21.772 --> 04:24.280
+That's an even number of negative signs.
+
+123
+04:24.280 --> 04:26.190
+So, we have an even number of negative signs,
+
+124
+04:26.190 --> 04:27.820
+we know our result is going to be positive,
+
+125
+04:27.820 --> 04:29.100
+and in fact, it was positive.
+
+126
+04:29.100 --> 04:30.130
+It was positive two.
+
+127
+04:30.130 --> 04:31.790
+Here, we have one negative sign.
+
+128
+04:31.790 --> 04:33.588
+We have negative six and a positive three.
+
+129
+04:33.588 --> 04:36.634
+One negative sign is an odd number of negative signs,
+
+130
+04:36.634 --> 04:38.910
+so if we look down here, an odd number of negative signs,
+
+131
+04:38.910 --> 04:41.760
+we should get a negative result, and in fact, we did.
+
+132
+04:41.760 --> 04:42.880
+We got a negative two.
+
+133
+04:42.880 --> 04:45.471
+So this even and odd number of negative signs logic
+
+134
+04:45.471 --> 04:48.070
+always works, regardless of the number of values
+
+135
+04:48.070 --> 04:48.970
+that you have involved.
+
+136
+04:48.970 --> 04:50.900
+So we can apply that here to our
+
+137
+04:50.900 --> 04:52.580
+three value division problem.
+
+138
+04:52.580 --> 04:55.420
+When we take times a negative three,
+
+139
+04:55.420 --> 04:57.650
+we know from multiplication of signed numbers
+
+140
+04:57.650 --> 04:59.764
+that we're going to get a positive six.
+
+141
+04:59.764 --> 05:01.559
+We have six in our denominator,
+
+142
+05:01.559 --> 05:04.321
+and we know that six divided by six is one.
+
+143
+05:04.321 --> 05:06.354
+We get a positive result.
+
+144
+05:06.354 --> 05:07.370
+And that should make sense,
+
+145
+05:07.370 --> 05:09.894
+because if we count the number of negative signs we have,
+
+146
+05:09.894 --> 05:12.910
+we have one negative sign, two negative signs.
+
+147
+05:12.910 --> 05:14.710
+That's an even number of negative signs,
+
+148
+05:14.710 --> 05:16.860
+and if we look down here, we see that an even number
+
+149
+05:16.860 --> 05:19.750
+of negative signs should give us a positive result.
+
+150
+05:19.750 --> 05:21.340
+What if we have a different example down here?
+
+151
+05:21.340 --> 05:25.203
+What if we have negative seven times a positive one
+
+152
+05:25.203 --> 05:27.933
+divided by a positive seven?
+
+153
+05:27.933 --> 05:30.820
+In this case, we have one negative sign,
+
+154
+05:30.820 --> 05:32.420
+just the negative seven there.
+
+155
+05:32.420 --> 05:34.250
+That's an odd number of negative signs,
+
+156
+05:34.250 --> 05:36.110
+so our result should be negative.
+
+157
+05:36.110 --> 05:37.460
+And if we do the arithmetic here,
+
+158
+05:37.460 --> 05:39.275
+we see we get negative seven times one
+
+159
+05:39.275 --> 05:41.753
+is going to be negative seven in our numerator.
+
+160
+05:41.753 --> 05:43.745
+We have seven in our denominator.
+
+161
+05:43.745 --> 05:47.524
+Negative seven divided by seven we know is a negative one,
+
+162
+05:47.524 --> 05:49.570
+and we get a negative result
+
+163
+05:49.570 --> 05:51.800
+because we had an odd number of negative signs.
+
+164
+05:51.800 --> 05:54.910
+So when it comes to dealing with division of signed numbers
+
+165
+05:54.910 --> 05:56.988
+just remember an even number of negative signs
+
+166
+05:56.988 --> 05:59.021
+will give you a positive result.
+
+167
+05:59.021 --> 06:01.054
+An odd number of negative signs
+
+168
+06:01.054 --> 06:03.683
+will give you a negative result.

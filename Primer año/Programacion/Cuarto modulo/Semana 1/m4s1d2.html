@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Proyectos Colaborativos y SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .sharepoint-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .sharepoint-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .sharepoint-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+        .tag-equipo { background: #e3f2fd; color: #0d47a1; }
+        .tag-comunicacion { background: #e8f5e9; color: #2e7d32; }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📋 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Proyectos colaborativos · SharePoint Online · Sitios de Comunicación vs Sitios de Equipo</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende el concepto de "proyecto" en entornos colaborativos, conoce SharePoint Online como plataforma de gestión de contenido y colaboración, y distingue entre Sitios de Comunicación y Sitios de Equipo, identificando cuándo usar cada tipo de sitio.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es un proyecto en entornos colaborativos.</li>
+                <li>Reconoce SharePoint Online como herramienta de gestión de contenido.</li>
+                <li>Distingue entre Sitios de Comunicación y Sitios de Equipo.</li>
+                <li>Identifica casos de uso para cada tipo de sitio.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Clasificar proyectos según el tipo de colaboración requerida.</li>
+                <li>Seleccionar el tipo de sitio SharePoint adecuado para un proyecto.</li>
+                <li>Identificar características clave de Sitios de Comunicación y Sitios de Equipo.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la importancia de la planificación colaborativa.</li>
+                <li>Muestra interés por herramientas de gestión de proyectos.</li>
+                <li>Participa activamente en el análisis de casos.</li>
+                <li>Desarrolla una visión estratégica del trabajo en equipo.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué es un proyecto colaborativo?"</h4>
+            <p><span class="label">Metodología:</span> Lluvia de ideas y reflexión.</p>
+            <p>El docente pregunta: <em>"¿Qué elementos necesita un equipo para trabajar en un proyecto de manera efectiva?"</em> Se introducen conceptos como comunicación, documentos compartidos, tareas y roles.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Definición de "Proyecto" en entornos colaborativos:</span>
+                <p>Un <strong>proyecto</strong> es un esfuerzo temporal y organizado para lograr un objetivo específico, que involucra a un equipo de personas que colaboran, comparten información y trabajan de manera coordinada.</p>
+                <p><strong>Elementos clave:</strong> Comunicación, documentos, tareas, plazos, roles y responsabilidades.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la definición de proyecto y la importancia de la colaboración.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la lluvia de ideas.</li>
+                <li>Reconoce los elementos clave de un proyecto.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de proyectos reales</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "SharePoint Online y tipos de sitios"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos y análisis de casos.</p>
+
+            <!-- ============================================ -->
+            <!-- INTRODUCCIÓN A SHAREPOINT -->
+            <!-- ============================================ -->
+            <h4>🔹 Introducción a SharePoint Online</h4>
+            <div class="sharepoint-card">
+                <h5>📌 ¿Qué es SharePoint Online?</h5>
+                <p>Es una plataforma de colaboración y gestión de contenido basada en la nube (parte de Microsoft 365). Permite a los equipos crear sitios donde compartir documentos, información y aplicaciones. </p>
+                <p><strong>Usos principales:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>Gestión de documentos y versiones.</li>
+                    <li>Portales de equipo e intranets.</li>
+                    <li>Flujos de trabajo y aprobaciones.</li>
+                    <li>Integración con otras herramientas de Microsoft 365 (Teams, OneDrive, Power Automate).</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- SITIOS DE EQUIPO VS SITIOS DE COMUNICACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Sitios de Equipo vs Sitios de Comunicación</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>🏢 Sitio de Equipo <span class="tag tag-equipo">Colaboración</span></h5>
+                    <p><strong>Propósito:</strong> Espacio de trabajo colaborativo para un equipo o proyecto específico.</p>
+                    <p><strong>Audiencia:</strong> Miembros del equipo (internos).</p>
+                    <p><strong>Características:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li>Permisos granulares por usuario.</li>
+                        <li>Bibliotecas de documentos compartidas.</li>
+                        <li>Listas de tareas y calendarios.</li>
+                        <li>Se conecta con Microsoft Teams (crea un canal automáticamente).</li>
+                        <li>Puede ser privado o público.</li>
+                    </ul>
+                    <div class="ejemplo-box" style="margin-top: 8px; padding: 8px 12px; background: #e3f2fd;">
+                        <strong>✅ Ejemplo de uso:</strong> Equipo de desarrollo de un nuevo producto que necesita compartir documentos, planificar sprints y gestionar tareas.
+                    </div>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📣 Sitio de Comunicación <span class="tag tag-comunicacion">Difusión</span></h5>
+                    <p><strong>Propósito:</strong> Compartir información y noticias con una audiencia amplia.</p>
+                    <p><strong>Audiencia:</strong> Toda la organización o un grupo grande.</p>
+                    <p><strong>Características:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li>Diseño atractivo, ideal para intranets.</li>
+                        <li>Gestión de noticias y publicaciones.</li>
+                        <li>Permisos basados en roles (todos pueden leer, pocos editar).</li>
+                        <li>Integración con Teams (para comentarios y reacciones).</li>
+                        <li>Pensado para contenido que se consume, no se edita.</li>
+                    </ul>
+                    <div class="ejemplo-box" style="margin-top: 8px; padding: 8px 12px; background: #e8f5e9;">
+                        <strong>✅ Ejemplo de uso:</strong> Portal de recursos humanos con noticias de la empresa, políticas, eventos y actualizaciones.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- COMPARACIÓN RÁPIDA -->
+            <!-- ============================================ -->
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Comparación rápida:</span>
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <thead>
+                        <tr style="background: #f5f5f5;">
+                            <th style="padding: 6px; border: 1px solid #ddd; text-align: left;">Característica</th>
+                            <th style="padding: 6px; border: 1px solid #ddd; text-align: left;">Sitio de Equipo</th>
+                            <th style="padding: 6px; border: 1px solid #ddd; text-align: left;">Sitio de Comunicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Propósito</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Colaboración activa</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Difusión de información</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Audiencia</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Equipo específico</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Organización amplia</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Permisos</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Granulares (por persona)</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Basados en roles</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Diseño</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Funcional</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Atractivo, visual</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Integración con Teams</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Crea un canal automático</td>
+                            <td style="padding: 6px; border: 1px solid #ddd;">Solo para comentarios</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLOS VISUALES -->
+            <!-- ============================================ -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0;">
+                <div style="background: #e3f2fd; padding: 14px; border-radius: 10px; border: 1px solid #bbdefb;">
+                    <h5 style="color: #0d47a1;">🏢 Sitio de Equipo</h5>
+                    <p style="font-size: 14px;">Tiene una navegación lateral con enlaces a documentos, listas y bibliotecas. El contenido está organizado por carpetas y listas.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Ejemplo visual:</strong> 📁 Documentos | 📋 Tareas | 📅 Calendario | 🔄 Flujos de trabajo</p>
+                </div>
+                <div style="background: #e8f5e9; padding: 14px; border-radius: 10px; border: 1px solid #c8e6c9;">
+                    <h5 style="color: #2e7d32;">📣 Sitio de Comunicación</h5>
+                    <p style="font-size: 14px;">Tiene un diseño más visual con banners, noticias destacadas, y secciones organizadas en columnas.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Ejemplo visual:</strong> 🖼️ Banner principal | 📰 Noticias | 📊 Estadísticas | 📌 Avisos</p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Elige uno de los siguientes escenarios:
+                        <ul>
+                            <li><strong>A)</strong> Una empresa necesita un portal para que todos los empleados vean noticias y políticas de la compañía.</li>
+                            <li><strong>B)</strong> Un equipo de 8 personas está desarrollando una nueva aplicación y necesita compartir documentos y gestionar tareas.</li>
+                            <li><strong>C)</strong> Un departamento de marketing quiere publicar actualizaciones y campañas para toda la organización.</li>
+                        </ul>
+                    </li>
+                    <li>2. Decide qué tipo de sitio SharePoint es el más adecuado.</li>
+                    <li>3. Justifica tu respuesta explicando las características del sitio elegido y por qué se ajusta al escenario.</li>
+                    <li>4. Opcional: Dibuja un esquema básico de cómo organizarías el sitio (estructura de navegación, bibliotecas, etc.).</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué tipo de sitio usarías para una intranet corporativa?</li>
+                    <li>¿Qué tipo de sitio usarías para un proyecto de investigación?</li>
+                    <li>¿Por qué es importante elegir el tipo de sitio correcto?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante distingue entre Sitios de Comunicación y Sitios de Equipo en SharePoint, seleccionando el adecuado según el caso de uso.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Define correctamente qué es un proyecto colaborativo.</li>
+                <li>Identifica las características de SharePoint Online.</li>
+                <li>Diferencia entre Sitios de Comunicación y Sitios de Equipo.</li>
+                <li>Selecciona el tipo de sitio adecuado para un escenario dado.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos visuales de SharePoint</li>
+                <li>Documentación de Microsoft</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es un proyecto en un entorno colaborativo?</li>
+                <li>¿Qué es SharePoint Online y para qué se usa?</li>
+                <li>¿Cuál es la diferencia principal entre un Sitio de Equipo y un Sitio de Comunicación?</li>
+                <li>¿Qué tipo de sitio usarías para un equipo de desarrollo de software?</li>
+                <li>¿Qué tipo de sitio usarías para un portal de noticias de la empresa?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Describe un proyecto real o ficticio en tu organización o escuela. Explica qué tipo de sitio SharePoint usarías y por qué. Incluye qué bibliotecas, listas o características necesitarías.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de proyectos colaborativos y SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la aplicación práctica de SharePoint.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre proyectos colaborativos y SharePoint:</strong></p>
+        <p>• Un <strong>proyecto</strong> requiere comunicación, documentos, tareas y roles.</p>
+        <p>• <strong>SharePoint</strong> es la plataforma de colaboración de Microsoft 365.</p>
+        <p>• <strong>Sitio de Equipo</strong> → colaboración activa, permisos granulares, integración con Teams.</p>
+        <p>• <strong>Sitio de Comunicación</strong> → difusión de información, diseño visual, audiencia amplia.</p>
+        <p>• Elegir el tipo correcto depende del <strong>propósito</strong> y la <strong>audiencia</strong>.</p>
+        <p>• SharePoint se integra con <strong>Power Automate</strong> y <strong>Power Apps</strong> para automatizar procesos.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce los fundamentos de trabajo colaborativo.</p>
+        <p>• Presenta SharePoint como herramienta de gestión de proyectos.</p>
+        <p>• Prepara a los estudiantes para entornos laborales que usan Microsoft 365.</p>
+        <p>• Conecta la teoría de proyectos con la práctica en plataformas digitales.</p>
+    </div>
+
+</div>
+</body>
+</html>

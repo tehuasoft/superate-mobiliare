@@ -1,0 +1,20 @@
+# Videos — synced manually via USB
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.webm
+videos/
+Videos/
+
+# OS junk
+.DS_Store
+Thumbs.db
+*~
+
+# Editor / temp
+.vscode/
+.idea/
+*.swp

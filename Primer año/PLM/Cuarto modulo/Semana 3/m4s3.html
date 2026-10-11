@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Expresiones Radicales Combinadas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .radical-card {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 8px;
+        }
+        .radical-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .radical-card p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+            color: #333;
+        }
+        .radical-card .example {
+            font-size: 13px;
+            color: #555;
+            background: #e8eaf6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .radical-card .formula {
+            font-family: monospace;
+            font-size: 15px;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 10px 0 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #3f51b5;
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 14px;
+        }
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Expresiones Radicales Combinadas - Suma, resta, multiplicación y división
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Resuelve expresiones radicales que combinan suma, resta, multiplicación y división, aplicando correctamente las propiedades de los radicales y el orden de las operaciones para simplificar completamente el resultado.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Reconoce las propiedades de suma, resta, multiplicación y división de radicales.</li>
+                <li>Comprende la importancia de simplificar radicales antes de operar.</li>
+                <li>Identifica radicales semejantes para sumar y restar.</li>
+                <li>Reconoce el orden de las operaciones en expresiones combinadas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Simplificar radicales antes de operar.</li>
+                <li>Sumar y restar radicales semejantes.</li>
+                <li>Multiplicar y dividir radicales.</li>
+                <li>Aplicar el orden de las operaciones en expresiones con radicales.</li>
+                <li>Racionalizar denominadores cuando sea necesario.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por resolver expresiones complejas con radicales.</li>
+                <li>Valora la importancia de la simplificación en matemáticas.</li>
+                <li>Participa activamente en la resolución de ejercicios.</li>
+                <li>Reconoce la utilidad de las propiedades de los radicales.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo resolver expresiones con múltiples operaciones?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y reflexión.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas:</p>
+            <ul>
+                <li>¿Qué operaciones se pueden hacer con radicales?</li>
+                <li>¿Cómo se combina la suma y la multiplicación de radicales?</li>
+                <li>¿Qué se hace primero en una expresión como 2√3 + √5 × √2?</li>
+                <li>¿Cómo se simplifica una expresión que tiene raíces en el denominador?</li>
+            </ul>
+            <p>Se introduce la idea de que las expresiones radicales se resuelven siguiendo el <strong>orden de las operaciones</strong> y aplicando las propiedades de los radicales.</p>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica el orden de las operaciones en expresiones con radicales.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona el orden de las operaciones en expresiones con radicales.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Resolviendo expresiones radicales combinadas"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos.</p>
+
+            <!-- Resumen de propiedades -->
+            <h4>🔹 Resumen de propiedades de radicales</h4>
+            <div class="grid-2">
+                <div class="radical-card" style="border-left-color: #2e7d32;">
+                    <strong>✅ Suma/Resta</strong>
+                    <p>Solo radicales semejantes (mismo índice y radicando).</p>
+                    <span class="example">📌 2√3 + 3√3 = 5√3</span>
+                </div>
+                <div class="radical-card" style="border-left-color: #0d47a1;">
+                    <strong>✅ Multiplicación</strong>
+                    <p>√a × √b = √(a × b).</p>
+                    <span class="example">📌 √2 × √3 = √6</span>
+                </div>
+                <div class="radical-card" style="border-left-color: #f9a825;">
+                    <strong>✅ División</strong>
+                    <p>√a / √b = √(a/b).</p>
+                    <span class="example">📌 √8 / √2 = √4 = 2</span>
+                </div>
+                <div class="radical-card" style="border-left-color: #c62828;">
+                    <strong>✅ Simplificación</strong>
+                    <p>Factorizar el radicando para extraer factores.</p>
+                    <span class="example">📌 √18 = 3√2</span>
+                </div>
+            </div>
+
+            <!-- Orden de operaciones -->
+            <h4>🔹 Orden de operaciones</h4>
+            <ul>
+                <li><strong>1. Paréntesis</strong> (si los hay).</li>
+                <li><strong>2. Multiplicación y división</strong> (de izquierda a derecha).</li>
+                <li><strong>3. Suma y resta</strong> (de izquierda a derecha).</li>
+                <li><strong>4. Simplificar</strong> siempre al final.</li>
+            </ul>
+
+            <!-- Ejemplo 1 -->
+            <h4>🔹 Ejemplo 1: 2√3 + √5 × √2</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Multiplicación primero:</strong> √5 × √2 = √10<br>
+                <strong>2. Expresión:</strong> 2√3 + √10<br>
+                <strong>3. No son semejantes:</strong> se deja como 2√3 + √10<br>
+                <strong>Resultado:</strong> <strong>2√3 + √10</strong>
+            </div>
+
+            <!-- Ejemplo 2 -->
+            <h4>🔹 Ejemplo 2: √18 + √8 - √2</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Simplificar:</strong> √18 = 3√2, √8 = 2√2<br>
+                <strong>2. Suma y resta:</strong> 3√2 + 2√2 - √2 = 4√2<br>
+                <strong>Resultado:</strong> <strong>4√2</strong>
+            </div>
+
+            <!-- Ejemplo 3 -->
+            <h4>🔹 Ejemplo 3: (√2 + √3)(√2 - √3)</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Multiplicar (diferencia de cuadrados):</strong> (√2)² - (√3)²<br>
+                <strong>2. Simplificar:</strong> 2 - 3 = -1<br>
+                <strong>Resultado:</strong> <strong>-1</strong>
+            </div>
+
+            <!-- Ejemplo 4 -->
+            <h4>🔹 Ejemplo 4: (2√5) × (3√2) + √10</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Multiplicar:</strong> (2√5)(3√2) = 6√10<br>
+                <strong>2. Sumar:</strong> 6√10 + √10 = 7√10<br>
+                <strong>Resultado:</strong> <strong>7√10</strong>
+            </div>
+
+            <!-- Ejemplo 5 -->
+            <h4>🔹 Ejemplo 5: (√8 × √3) / √6</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Multiplicar numerador:</strong> √8 × √3 = √24<br>
+                <strong>2. Dividir:</strong> √24 / √6 = √(24/6) = √4 = 2<br>
+                <strong>Resultado:</strong> <strong>2</strong>
+            </div>
+
+            <!-- Ejemplo 6 -->
+            <h4>🔹 Ejemplo 6: (√12 + √3) / √3</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Simplificar √12:</strong> √12 = 2√3<br>
+                <strong>2. Sumar:</strong> 2√3 + √3 = 3√3<br>
+                <strong>3. Dividir:</strong> 3√3 / √3 = 3<br>
+                <strong>Resultado:</strong> <strong>3</strong>
+            </div>
+
+            <!-- Ejemplo 7 -->
+            <h4>🔹 Ejemplo 7: (√5 + 2) / √5 (racionalización)</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Paso a paso:</span><br>
+                <strong>1. Racionalizar:</strong> (√5 + 2)/√5 × √5/√5 = (5 + 2√5)/5<br>
+                <strong>Resultado:</strong> <strong>(5 + 2√5)/5</strong>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Resuelve las siguientes expresiones radicales combinadas:</strong></p>
+                <ul>
+                    <li><strong>1.</strong> √20 + √45 - √5 → <strong>4√5</strong></li>
+                    <li><strong>2.</strong> √2 × √6 + √3 → <strong>2√3 + √3 = 3√3</strong></li>
+                    <li><strong>3.</strong> (√3 + √2)(√3 - √2) → <strong>1</strong></li>
+                    <li><strong>4.</strong> (2√3)(4√2) - √6 → <strong>8√6 - √6 = 7√6</strong></li>
+                    <li><strong>5.</strong> (√18 × √2) / √3 → <strong>2√3</strong></li>
+                    <li><strong>6.</strong> (√27 + √12) / √3 → <strong>5</strong></li>
+                    <li><strong>7.</strong> (√8 + 3) / √2 → <strong>2 + (3√2)/2</strong></li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es el orden de las operaciones en expresiones con radicales?</li>
+                    <li>¿Cómo se simplifica una expresión con suma y multiplicación de radicales?</li>
+                    <li>¿Qué se hace cuando hay una raíz en el denominador?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante resuelve expresiones radicales combinadas aplicando todas las propiedades.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Simplifica radicales antes de operar.</li>
+                <li>Suma y resta radicales semejantes.</li>
+                <li>Multiplica y divide radicales correctamente.</li>
+                <li>Aplica el orden de las operaciones.</li>
+                <li>Racionaliza denominadores cuando sea necesario.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejercicios impresos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de expresiones radicales combinadas"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué se hace primero en 2√3 + √5 × √2? → <strong>Multiplicación.</strong></li>
+                <li>¿Cuánto es √18 + √8 - √2? → <strong>4√2.</strong></li>
+                <li>¿Cuánto es (√2 + √3)(√2 - √3)? → <strong>-1.</strong></li>
+                <li>¿Cuánto es (√8 × √3) / √6? → <strong>2.</strong></li>
+                <li>¿Cómo se racionaliza (√5 + 2)/√5? → <strong>(5 + 2√5)/5.</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida la resolución de expresiones radicales combinadas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Orden:</strong> Multiplicación/División primero, luego Suma/Resta.</p>
+        <p>• <strong>Simplifica</strong> siempre antes de sumar o restar.</p>
+        <p>• <strong>Solo semejantes</strong> se suman o restan.</p>
+        <p>• <strong>Racionaliza</strong> si hay raíz en el denominador.</p>
+        <p>• <strong>Propiedades:</strong> √a × √b = √(ab), √a / √b = √(a/b).</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Integra todas las operaciones con radicales en un solo tema.</p>
+        <p>• Desarrolla habilidades de simplificación y razonamiento.</p>
+        <p>• Prepara a los estudiantes para álgebra y ecuaciones con radicales.</p>
+        <p>• Conecta con temas de geometría y trigonometría.</p>
+    </div>
+
+</div>
+</body>
+</html>

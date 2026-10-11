@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Informática</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 10px 0 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #3f51b5;
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 14px;
+        }
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .tools-grid > div {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+        }
+        .tools-grid > div strong {
+            color: #1a237e;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: PowerPoint - Fondo, temas, transiciones, hipervínculos, animaciones e intervalos
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Aplica herramientas de diseño y animación en PowerPoint para crear presentaciones dinámicas, utilizando fondos, temas, transiciones, hipervínculos e intervalos de forma adecuada para mejorar la experiencia visual y la navegación.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define los conceptos de fondo, tema, transición, animación e hipervínculo.</li>
+                <li>Comprende la diferencia entre transiciones y animaciones.</li>
+                <li>Reconoce la utilidad de los intervalos para presentaciones automáticas.</li>
+                <li>Identifica el uso de hipervínculos para navegación no lineal.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Aplicar fondos y temas de diseño a diapositivas.</li>
+                <li>Agregar transiciones entre diapositivas.</li>
+                <li>Insertar y configurar animaciones en elementos.</li>
+                <li>Crear hipervínculos a otras diapositivas o sitios web.</li>
+                <li>Configurar intervalos de tiempo para presentaciones automáticas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra creatividad al aplicar efectos visuales.</li>
+                <li>Valora la importancia de la estética y la usabilidad en presentaciones.</li>
+                <li>Participa activamente en la creación de presentaciones dinámicas.</li>
+                <li>Reconoce el impacto de las animaciones y transiciones en la comunicación.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Diseño dinámico en PowerPoint"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y presentación.</p>
+            <p><span class="label">Descripción:</span> El docente pregunta:</p>
+            <ul>
+                <li>¿Qué hace que una presentación sea atractiva?</li>
+                <li>¿Has visto presentaciones con movimientos o efectos? ¿Qué te parecieron?</li>
+                <li>¿Cómo crees que se puede hacer una presentación interactiva?</li>
+            </ul>
+            <p>Se introducen los conceptos de <strong>fondo, temas, transiciones, animaciones, hipervínculos e intervalos</strong> como herramientas para hacer presentaciones más dinámicas y profesionales.</p>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica las herramientas de diseño y animación de PowerPoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona herramientas de diseño y animación en PowerPoint.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con PowerPoint</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Aplicando efectos y navegación en PowerPoint"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada y práctica.</p>
+
+            <!-- Fondo y temas -->
+            <h4>🔹 Fondo y temas</h4>
+            <ul>
+                <li><strong>Temas:</strong> Conjuntos de colores, fuentes y efectos prediseñados. Se aplican desde la pestaña <strong>"Diseño"</strong> .</li>
+                <li><strong>Fondo:</strong> Se puede personalizar el fondo de una diapositiva específica desde <strong>"Diseño" → "Formato de fondo"</strong>. Permite cambiar color, imagen o patrón .</li>
+                <li><strong>Recomendación:</strong> Usar temas consistentes para mantener la coherencia visual en toda la presentación.</li>
+            </ul>
+
+            <!-- Transiciones -->
+            <h4>🔹 Transiciones</h4>
+            <ul>
+                <li>Las <strong>transiciones</strong> son efectos que ocurren al pasar de una diapositiva a otra .</li>
+                <li>Se aplican desde la pestaña <strong>"Transiciones"</strong>.</li>
+                <li>Opciones de transición: Desvanecimiento, Push, Wipe, etc.</li>
+                <li>Se puede ajustar la <strong>duración</strong> y el <strong>sonido</strong> de la transición.</li>
+                <li>Configurar <strong>"Avanzar diapositiva"</strong> para transición automática después de un tiempo.</li>
+            </ul>
+
+            <!-- Animaciones -->
+            <h4>🔹 Animaciones</h4>
+            <ul>
+                <li>Las <strong>animaciones</strong> son efectos aplicados a elementos individuales dentro de una diapositiva (texto, imágenes, formas) .</li>
+                <li>Se aplican desde la pestaña <strong>"Animaciones"</strong>.</li>
+                <li>Tipos de animaciones:
+                    <ul>
+                        <li><strong>Entrada:</strong> Aparecen en la diapositiva.</li>
+                        <li><strong>Énfasis:</strong> Llaman la atención sobre el elemento.</li>
+                        <li><strong>Salida:</strong> Desaparecen de la diapositiva.</li>
+                        <li><strong>Trayectorias:</strong> Se mueven a lo largo de un camino.</li>
+                    </ul>
+                </li>
+                <li>Se puede configurar el <strong>inicio</strong> (al hacer clic, con la anterior, después de la anterior), la <strong>duración</strong> y la <strong>demora</strong>.</li>
+            </ul>
+
+            <!-- Hipervínculos -->
+            <h4>🔹 Hipervínculos</h4>
+            <ul>
+                <li>Los <strong>hipervínculos</strong> permiten saltar a otra diapositiva, a un sitio web, a un archivo o a una dirección de correo .</li>
+                <li>Se insertan desde la pestaña <strong>"Insertar" → "Vínculo"</strong> .</li>
+                <li>Usos comunes:
+                    <ul>
+                        <li>Crear un <strong>menú interactivo</strong> o índice en la presentación.</li>
+                        <li>Enlazar a sitios web o recursos externos.</li>
+                        <li>Navegar entre secciones de la presentación.</li>
+                    </ul>
+                </li>
+                <li>Se aplica sobre texto, imágenes o formas.</li>
+            </ul>
+
+            <!-- Intervalos -->
+            <h4>🔹 Intervalos</h4>
+            <ul>
+                <li>Los <strong>intervalos</strong> permiten que la presentación avance automáticamente después de un tiempo definido .</li>
+                <li>Se configuran en la pestaña <strong>"Transiciones"</strong> en la sección <strong>"Avanzar diapositiva"</strong>.</li>
+                <li>Se puede configurar la presentación para que avance <strong>"Después de"</strong> un número de segundos.</li>
+                <li>Esto es útil para <strong>presentaciones automáticas</strong> en stands o exposiciones.</li>
+            </ul>
+
+            <div class="tools-grid">
+                <div style="border-left-color: #2e7d32;">
+                    <strong>🎨 Temas y fondos</strong>
+                    <ul style="font-size: 13px; padding-left: 16px;">
+                        <li>Pestaña "Diseño".</li>
+                        <li>Unifica colores y fuentes.</li>
+                    </ul>
+                </div>
+                <div style="border-left-color: #0d47a1;">
+                    <strong>🔄 Transiciones</strong>
+                    <ul style="font-size: 13px; padding-left: 16px;">
+                        <li>Pestaña "Transiciones".</li>
+                        <li>Efectos entre diapositivas.</li>
+                    </ul>
+                </div>
+                <div style="border-left-color: #f9a825;">
+                    <strong>🎬 Animaciones</strong>
+                    <ul style="font-size: 13px; padding-left: 16px;">
+                        <li>Pestaña "Animaciones".</li>
+                        <li>Efectos en elementos.</li>
+                    </ul>
+                </div>
+                <div style="border-left-color: #c62828;">
+                    <strong>🔗 Hipervínculos</strong>
+                    <ul style="font-size: 13px; padding-left: 16px;">
+                        <li>Pestaña "Insertar" → "Vínculo".</li>
+                        <li>Navegación no lineal.</li>
+                    </ul>
+                </div>
+                <div style="border-left-color: #6a1b9a;">
+                    <strong>⏱️ Intervalos</strong>
+                    <ul style="font-size: 13px; padding-left: 16px;">
+                        <li>Pestaña "Transiciones".</li>
+                        <li>Avance automático.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Realiza los siguientes pasos en PowerPoint:</strong></p>
+                <ul>
+                    <li>Crea una presentación de <strong>5 diapositivas</strong> sobre un tema de tu elección.</li>
+                    <li>Aplica un <strong>tema</strong> de diseño coherente.</li>
+                    <li>Cambia el <strong>fondo</strong> de una diapositiva (usa un color o imagen).</li>
+                    <li>Agrega una <strong>transición</strong> entre diapositivas (desvanecimiento, push, etc.).</li>
+                    <li>Aplica <strong>animaciones</strong> a al menos 3 elementos en diferentes diapositivas (texto, imágenes).</li>
+                    <li>Inserta un <strong>hipervínculo</strong> en una diapositiva que lleve a otra diapositiva de la presentación.</li>
+                    <li>Configura los <strong>intervalos</strong> para que las diapositivas avancen automáticamente cada 5 segundos.</li>
+                    <li>Guarda la presentación como <strong>"presentacion_dinamica"</strong>.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué efecto visual crees que mejora más una presentación?</li>
+                    <li>¿Cómo pueden ayudar los hipervínculos a hacer una presentación interactiva?</li>
+                    <li>¿En qué situaciones sería útil usar intervalos automáticos?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica herramientas de diseño, animación e interactividad en PowerPoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Aplica temas y fondos a diapositivas.</li>
+                <li>Agrega transiciones y animaciones adecuadas.</li>
+                <li>Inserta hipervínculos funcionales.</li>
+                <li>Configura intervalos de tiempo para la presentación.</li>
+                <li>Guarda la presentación correctamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con PowerPoint instalado</li>
+                <li>PowerPoint (versión de escritorio o web)</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de herramientas"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué pestaña usas para aplicar temas? → <strong>"Diseño"</strong>.</li>
+                <li>¿Qué pestaña usas para agregar transiciones? → <strong>"Transiciones"</strong>.</li>
+                <li>¿Cuál es la diferencia entre transición y animación? → <strong>La transición es entre diapositivas; la animación es en elementos dentro de una diapositiva.</strong></li>
+                <li>¿Cómo insertas un hipervínculo? → <strong>Pestaña "Insertar" → "Vínculo".</strong></li>
+                <li>¿Dónde configuras el avance automático de diapositivas? → <strong>En "Transiciones" → "Avanzar diapositiva" → "Después de".</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de herramientas de diseño y animación en PowerPoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Temas:</strong> Aplica un tema consistente para dar un aspecto profesional.</p>
+        <p>• <strong>Transiciones:</strong> Usa transiciones suaves y evita efectos excesivos que distraigan.</p>
+        <p>• <strong>Animaciones:</strong> Úsalas para resaltar información clave, no para decorar en exceso.</p>
+        <p>• <strong>Hipervínculos:</strong> Crea menús interactivos para mejorar la navegación.</p>
+        <p>• <strong>Intervalos:</strong> Úsalos para presentaciones automatizadas, pero ensaya los tiempos.</p>
+        <p>• <strong>Equilibrio:</strong> No satures la presentación con demasiados efectos visuales.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a crear presentaciones más atractivas y dinámicas.</p>
+        <p>• Desarrolla habilidades de diseño y comunicación visual.</p>
+        <p>• Introduce herramientas de interactividad y automatización.</p>
+        <p>• Prepara a los estudiantes para presentaciones profesionales.</p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Falacias Lógicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .fallacy-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 8px;
+        }
+        .fallacy-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .fallacy-card p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+            color: #333;
+        }
+        .fallacy-card .example {
+            font-size: 13px;
+            color: #555;
+            background: #e8eaf6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Falacias lógicas - Ad populum, Ad hominem, Hombre de paja, Falso dilema, Ad ignorantiam, Ad verecundiam
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Identifica y analiza las principales falacias lógicas utilizadas en argumentos cotidianos y académicos, desarrollando habilidades de pensamiento crítico para evaluar la validez de los razonamientos y construir argumentos sólidos.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es una falacia lógica y su impacto en la argumentación.</li>
+                <li>Identifica las características de cada falacia estudiada: Ad populum, Ad hominem, Hombre de paja, Falso dilema, Ad ignorantiam, Ad verecundiam.</li>
+                <li>Comprende por qué estas falacias son consideradas errores de razonamiento.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Reconocer falacias en discursos, debates y textos argumentativos.</li>
+                <li>Diferenciar entre argumentos válidos y falacias.</li>
+                <li>Construir contraargumentos para refutar falacias.</li>
+                <li>Evaluar la calidad de un argumento identificando posibles falacias.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra pensamiento crítico al analizar argumentos.</li>
+                <li>Valora la importancia de la argumentación lógica y fundamentada.</li>
+                <li>Participa activamente en el análisis de ejemplos y ejercicios.</li>
+                <li>Reconoce la utilidad de identificar falacias en la vida cotidiana y académica.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué es una falacia lógica?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y presentación.</p>
+            <p><span class="label">Descripción:</span> El docente introduce el tema de las falacias lógicas.</p>
+
+            <p><strong>🔹 ¿Qué es una falacia lógica?</strong></p>
+            <p>Una <strong>falacia lógica</strong> es un error en el razonamiento que hace que un argumento parezca válido cuando en realidad no lo es. Las falacias pueden ser persuasivas, pero no son lógicamente sólidas porque se basan en premisas débiles o irrelevantes .</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">💡 ¿Por qué es importante reconocer falacias?</span><br>
+                ✔ Permite evaluar críticamente discursos y debates.<br>
+                ✔ Ayuda a construir argumentos más sólidos y fundamentados.<br>
+                ✔ Previene ser manipulado por argumentos engañosos.<br>
+                ✔ Desarrolla el pensamiento crítico y la capacidad analítica.
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende qué es una falacia lógica y su importancia en la argumentación.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Define qué es una falacia lógica.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejemplos de argumentos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Explorando las falacias lógicas"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos.</p>
+
+            <!-- Falacia 1: Ad populum -->
+            <h4>🔹 Falacia Ad populum (Apelación a la popularidad)</h4>
+            <div class="fallacy-card" style="border-left-color: #2e7d32;">
+                <strong>📌 Ad populum</strong>
+                <p>Se argumenta que algo es verdadero o correcto porque muchas personas lo creen o lo hacen .</p>
+                <span class="example">📌 Ejemplo: "Miles de personas usan esta crema, así que debe ser la mejor."</span>
+            </div>
+
+            <!-- Falacia 2: Ad hominem -->
+            <h4>🔹 Falacia Ad hominem (Ataque personal)</h4>
+            <div class="fallacy-card" style="border-left-color: #c62828;">
+                <strong>📌 Ad hominem</strong>
+                <p>Se ataca a la persona que presenta el argumento en lugar de refutar el argumento mismo .</p>
+                <span class="example">📌 Ejemplo: "No puedes confiar en lo que dice Juan sobre el cambio climático porque no tiene título universitario."</span>
+            </div>
+
+            <!-- Falacia 3: Hombre de paja -->
+            <h4>🔹 Falacia Hombre de paja (Straw man)</h4>
+            <div class="fallacy-card" style="border-left-color: #f9a825;">
+                <strong>📌 Hombre de paja</strong>
+                <p>Se distorsiona o exagera el argumento del oponente para refutarlo más fácilmente .</p>
+                <span class="example">📌 Ejemplo: "Los defensores de los derechos de los animales quieren que todos seamos veganos y prohibir la carne."</span>
+            </div>
+
+            <!-- Falacia 4: Falso dilema -->
+            <h4>🔹 Falacia Falso dilema (Falsa dicotomía)</h4>
+            <div class="fallacy-card" style="border-left-color: #e65100;">
+                <strong>📌 Falso dilema</strong>
+                <p>Se presentan solo dos opciones como si fueran las únicas posibles, ignorando otras alternativas .</p>
+                <span class="example">📌 Ejemplo: "O estás con nosotros o estás contra nosotros."</span>
+            </div>
+
+            <!-- Falacia 5: Ad ignorantiam -->
+            <h4>🔹 Falacia Ad ignorantiam (Apelación a la ignorancia)</h4>
+            <div class="fallacy-card" style="border-left-color: #6a1b9a;">
+                <strong>📌 Ad ignorantiam</strong>
+                <p>Se argumenta que algo es verdadero porque no se ha demostrado que sea falso (o viceversa) .</p>
+                <span class="example">📌 Ejemplo: "No hay pruebas de que los extraterrestres no existan, así que deben existir."</span>
+            </div>
+
+            <!-- Falacia 6: Ad verecundiam -->
+            <h4>🔹 Falacia Ad verecundiam (Apelación a la autoridad)</h4>
+            <div class="fallacy-card" style="border-left-color: #0d47a1;">
+                <strong>📌 Ad verecundiam</strong>
+                <p>Se cita a una autoridad en un campo para respaldar una afirmación, pero la autoridad no es experta en el tema o la evidencia no es relevante .</p>
+                <span class="example">📌 Ejemplo: "Un famoso actor dice que este producto es milagroso, así que debe funcionar."</span>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Identifica la falacia en cada uno de los siguientes argumentos:</strong></p>
+                <ul>
+                    <li><strong>1.</strong> "Todos mis amigos usan esta red social, así que es la mejor." → <strong>Ad populum</strong></li>
+                    <li><strong>2.</strong> "No deberías escuchar a María sobre economía porque es muy joven." → <strong>Ad hominem</strong></li>
+                    <li><strong>3.</strong> "Los que están a favor del control de armas quieren quitarnos todas las armas y dejarnos indefensos." → <strong>Hombre de paja</strong></li>
+                    <li><strong>4.</strong> "O apruebas esta ley o el país caerá en el caos." → <strong>Falso dilema</strong></li>
+                    <li><strong>5.</strong> "No se ha demostrado que los medicamentos homeopáticos no funcionen, así que son efectivos." → <strong>Ad ignorantiam</strong></li>
+                    <li><strong>6.</strong> "Un famoso deportista recomienda este suplemento, así que es bueno para la salud." → <strong>Ad verecundiam</strong></li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué falacia crees que es más común en los debates políticos? ¿Por qué?</li>
+                    <li>¿Cómo puedes identificar una falacia cuando escuchas un argumento?</li>
+                    <li>¿Por qué es importante reconocer las falacias en la vida cotidiana?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica las principales falacias lógicas y las reconoce en diferentes contextos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Define correctamente cada falacia.</li>
+                <li>Identifica falacias en ejemplos dados.</li>
+                <li>Explica por qué una falacia es un error de razonamiento.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejemplos de argumentos</li>
+                <li>Computadora (opcional)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de falacias"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué falacia se comete al atacar a la persona en lugar del argumento? → <strong>Ad hominem</strong></li>
+                <li>¿Qué falacia se comete al distorsionar el argumento del oponente? → <strong>Hombre de paja</strong></li>
+                <li>¿Qué falacia se comete al afirmar que algo es verdadero porque mucha gente lo cree? → <strong>Ad populum</strong></li>
+                <li>¿Qué falacia se comete al presentar solo dos opciones cuando hay más? → <strong>Falso dilema</strong></li>
+                <li>¿Qué falacia se comete al citar a una autoridad que no es experta en el tema? → <strong>Ad verecundiam</strong></li>
+                <li>¿Qué falacia se comete al argumentar que algo es verdadero porque no se ha demostrado lo contrario? → <strong>Ad ignorantiam</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el reconocimiento de las falacias lógicas estudiadas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para identificar falacias:</strong></p>
+        <p>• <strong>Ad populum:</strong> ¿La popularidad es evidencia de verdad? → No necesariamente.</p>
+        <p>• <strong>Ad hominem:</strong> ¿El ataque a la persona invalida el argumento? → No.</p>
+        <p>• <strong>Hombre de paja:</strong> ¿Se está exagerando o distorsionando el argumento? → Esa es la falacia.</p>
+        <p>• <strong>Falso dilema:</strong> ¿Hay solo dos opciones? → A menudo hay más alternativas.</p>
+        <p>• <strong>Ad ignorantiam:</strong> ¿La falta de prueba es evidencia? → No, la carga de la prueba recae en quien afirma.</p>
+        <p>• <strong>Ad verecundiam:</strong> ¿La autoridad citada es realmente experta en el tema? → Verifica la relevancia.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Desarrolla habilidades de pensamiento crítico y análisis argumentativo.</p>
+        <p>• Prepara a los estudiantes para identificar errores de razonamiento en debates y discursos.</p>
+        <p>• Conecta con la importancia de la argumentación lógica en la vida académica y cotidiana.</p>
+        <p>• Fortalece la capacidad de construir argumentos sólidos y fundamentados.</p>
+    </div>
+
+</div>
+</body>
+</html>

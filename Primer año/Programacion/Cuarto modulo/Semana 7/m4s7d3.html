@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación de Clase · Flujo que Actualiza la Lista según la Aprobación
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      .flujo-estructura {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: #f5f7fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 12px 0;
+      }
+      .flujo-estructura .bloque {
+        background: white;
+        border: 2px solid #1a237e;
+        border-radius: 10px;
+        padding: 12px 20px;
+        text-align: center;
+        min-width: 140px;
+      }
+      .flujo-estructura .bloque.trigger {
+        border-color: #e65100;
+        background: #fff3e0;
+      }
+      .flujo-estructura .bloque.aprobacion {
+        border-color: #6c5ce7;
+        background: #f3e5f5;
+      }
+      .flujo-estructura .bloque.condicion {
+        border-color: #0d47a1;
+        background: #e3f2fd;
+      }
+      .flujo-estructura .bloque.accion-si {
+        border-color: #2e7d32;
+        background: #e8f5e9;
+      }
+      .flujo-estructura .bloque.accion-no {
+        border-color: #c62828;
+        background: #ffebee;
+      }
+      .flujo-estructura .bloque .titulo {
+        font-weight: 600;
+        font-size: 15px;
+        color: #1a237e;
+      }
+      .flujo-estructura .bloque .subtitulo {
+        font-size: 12px;
+        color: #555;
+        margin-top: 2px;
+      }
+      .flujo-estructura .flecha {
+        font-size: 28px;
+        color: #3f51b5;
+      }
+
+      .rama-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 12px 0;
+      }
+      .rama {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        border-top: 4px solid #3f51b5;
+      }
+      .rama.aprobado {
+        border-top-color: #2e7d32;
+        background: #e8f5e9;
+      }
+      .rama.rechazado {
+        border-top-color: #c62828;
+        background: #ffebee;
+      }
+      .rama h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      .rama p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .rama ul {
+        padding-left: 20px;
+        font-size: 14px;
+      }
+      .rama .etiqueta {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 2px 0;
+      }
+      .etiqueta-activo {
+        background: #e3f2fd;
+        color: #0d47a1;
+      }
+      .etiqueta-pausado {
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      .mock-correo {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 8px 0;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .mock-correo .header {
+        background: #f5f5f5;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 13px;
+        color: #555;
+      }
+      .mock-correo .header strong {
+        color: #1a237e;
+      }
+      .mock-correo .body {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .mock-correo .body .linea {
+        margin: 4px 0;
+      }
+      .mock-correo .body .destacado {
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 8px 0;
+        border-left: 4px solid #1e88e5;
+      }
+      .mock-correo .body .destacado.verde {
+        background: #e8f5e9;
+        border-left-color: #2e7d32;
+      }
+      .mock-correo .body .destacado.naranja {
+        background: #fff3e0;
+        border-left-color: #e65100;
+      }
+
+      .mock-lista {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        margin: 8px 0;
+      }
+      .mock-lista table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      .mock-lista th {
+        background: #e8eaf6;
+        color: #1a237e;
+        padding: 8px 12px;
+        text-align: left;
+        font-weight: 600;
+      }
+      .mock-lista td {
+        padding: 6px 12px;
+        border-top: 1px solid #e0e0e0;
+      }
+      .mock-lista .etiqueta-estado {
+        display: inline-block;
+        padding: 2px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .estado-activo {
+        background: #e3f2fd;
+        color: #0d47a1;
+      }
+      .estado-pausado {
+        background: #fff3e0;
+        color: #e65100;
+      }
+      .estado-cerrado {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+        .flujo-estructura {
+          flex-direction: column;
+        }
+        .rama-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔄 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Flujo que actualiza la lista según la respuesta de aprobación
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante crea un flujo de aprobación en Power Automate que
+          actualiza automáticamente el estatus del proyecto en SharePoint según
+          la respuesta del gerente: si se aprueba, cambia a "Activo"; si se
+          rechaza, cambia a "Pausado" y notifica al creador del proyecto.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>Comprende el flujo completo de aprobación y actualización.</li>
+            <li>Reconoce la acción "Actualizar elemento" de SharePoint.</li>
+            <li>Identifica el campo dinámico "Resultado" de la aprobación.</li>
+            <li>Entiende el uso de condiciones para bifurcar acciones.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Configurar la acción "Actualizar elemento" en cada rama.</li>
+            <li>Cambiar el estatus a "Activo" si se aprueba.</li>
+            <li>Cambiar el estatus a "Pausado" si se rechaza.</li>
+            <li>Notificar al creador del proyecto con el resultado.</li>
+            <li>Probar el flujo con ambos escenarios (aprobado/rechazado).</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra interés por la automatización de decisiones.</li>
+            <li>Valora la importancia de notificar a los involucrados.</li>
+            <li>Participa activamente en la práctica guiada.</li>
+            <li>Desarrolla pensamiento lógico para flujos de decisión.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "¿Cómo actualizamos la lista según la respuesta del
+            gerente?"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Reflexión y
+            contextualización.
+          </p>
+          <p>
+            El docente pregunta:
+            <em
+              >"Cuando el gerente aprueba o rechaza un proyecto, ¿qué debería
+              pasar con el estatus en SharePoint? ¿Cómo podríamos actualizarlo
+              automáticamente y avisar al creador?"</em
+            >
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Objetivo del flujo:</span>
+            <ul>
+              <li>
+                <strong>Trigger:</strong> "Cuando se crea un elemento" en la
+                lista "Proyectos".
+              </li>
+              <li>
+                <strong>Acción 1:</strong> Iniciar y esperar una aprobación
+                (destinatario: gerente).
+              </li>
+              <li><strong>Condición:</strong> ¿Resultado = "Aprobar"?</li>
+              <li>
+                <strong>Rama Si:</strong> Actualizar estatus a
+                <strong>"Activo"</strong> y notificar al propietario.
+              </li>
+              <li>
+                <strong>Rama No:</strong> Actualizar estatus a
+                <strong>"Pausado"</strong> y notificar al propietario (creador).
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende el objetivo y la estructura del flujo de
+            actualización según aprobación.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión.</li>
+            <li>Reconoce los pasos del flujo.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "Creación del flujo de actualización según aprobación"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes siguen).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- ESTRUCTURA DEL FLUJO -->
+          <!-- ============================================ -->
+          <h4>🔹 Estructura del flujo</h4>
+
+          <div class="flujo-estructura">
+            <div class="bloque trigger">
+              <div class="titulo">🎯 TRIGGER</div>
+              <div class="subtitulo">Cuando se crea un elemento</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                SharePoint → "Proyectos"
+              </div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="bloque aprobacion">
+              <div class="titulo">✅ APROBACIÓN</div>
+              <div class="subtitulo">Iniciar y esperar</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                Gerente
+              </div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="bloque condicion">
+              <div class="titulo">🔀 CONDICIÓN</div>
+              <div class="subtitulo">¿Resultado = "Aprobar"?</div>
+            </div>
+            <div class="flecha">→</div>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <div class="bloque accion-si">
+                <div class="titulo">✅ SI</div>
+                <div class="subtitulo">Estatus → "Activo"</div>
+              </div>
+              <div class="bloque accion-no">
+                <div class="titulo">❌ NO</div>
+                <div class="subtitulo">Estatus → "Pausado"</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 1: CREAR FLUJO -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 1: Crear el flujo automatizado</h4>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">1</span>
+            <h5>Acceder a Power Automate</h5>
+            <p>
+              Ingresar a <strong>make.powerautomate.com</strong> →
+              <strong>"Crear"</strong> → <strong>"Flujo automatizado"</strong>.
+            </p>
+            <div class="captura-mock">
+              🌐 make.powerautomate.com → Crear → Flujo automatizado
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">2</span>
+            <h5>Configurar trigger</h5>
+            <p>
+              Asignar nombre:
+              <strong>"Actualizar estatus según aprobación de proyecto"</strong
+              >.
+            </p>
+            <p>
+              Trigger: <strong>"Cuando se crea un elemento"</strong> →
+              SharePoint.
+            </p>
+            <div class="captura-mock">
+              📝 Nombre: "Actualizar estatus según aprobación de proyecto"<br />
+              🎯 Trigger: "Cuando se crea un elemento" → SharePoint
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">3</span>
+            <h5>Configurar el trigger</h5>
+            <p>
+              Seleccionar la <strong>Dirección del sitio</strong> y la lista
+              <strong>"Proyectos"</strong>.
+            </p>
+            <div class="captura-mock">
+              📂 Dirección: https://[tenant].sharepoint.com/sites/[sitio]<br />
+              📋 Lista: Proyectos
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 2: AGREGAR APROBACIÓN -->
+          <!-- ============================================ -->
+          <h4>
+            🔹 Paso 2: Agregar la acción "Iniciar y esperar una aprobación"
+          </h4>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">4</span>
+            <h5>Agregar la acción de Aprobaciones</h5>
+            <p>
+              Hacer clic en <strong>"Nuevo paso"</strong> y buscar
+              <strong>"Iniciar y esperar una aprobación"</strong>.
+            </p>
+            <div class="captura-mock">
+              ✅ Nuevo paso → Buscar: "Iniciar y esperar una aprobación"
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">5</span>
+            <h5>Configurar el tipo y destinatario</h5>
+            <p>Configurar:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Tipo:</strong> "Aprobar/Rechazar - Primera respuesta".
+              </li>
+              <li>
+                <strong>Asignado a:</strong> Correo del gerente (ej.
+                gerente@empresa.com).
+              </li>
+              <li>
+                <strong>Título:</strong>
+                <code>"Aprobación de proyecto: "</code> + Título.
+              </li>
+              <li>
+                <strong>Detalles:</strong> Descripción, propietario, fecha de
+                inicio.
+              </li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              🔘 Tipo: Aprobar/Rechazar - Primera respuesta<br />
+              👤 Asignado a: gerente@empresa.com<br />
+              📌 Título: "Aprobación de proyecto: " + Título<br />
+              📝 Detalles: Proyecto: [Título] | Propietario: [Propietario
+              DisplayName]
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 3: AGREGAR CONDICIÓN -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 3: Agregar la acción "Condición"</h4>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">6</span>
+            <h5>Agregar la acción Condición</h5>
+            <p>
+              Hacer clic en <strong>"Nuevo paso"</strong> y buscar
+              <strong>"Condición"</strong> en la sección
+              <strong>"Control"</strong>.
+            </p>
+            <div class="captura-mock">
+              🔀 Nuevo paso → Buscar: "Condición" → Control
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">7</span>
+            <h5>Configurar la condición</h5>
+            <p>En el panel de la condición, configurar:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Elegir un valor:</strong> Campo dinámico
+                <strong>"Resultado"</strong> de la aprobación.
+              </li>
+              <li><strong>Operador:</strong> "es igual a".</li>
+              <li><strong>Valor:</strong> Escribir <code>Aprobar</code>.</li>
+            </ul>
+            <div class="captura-mock">
+              🔀 Condición:<br />
+              Resultado <strong>es igual a</strong> "Aprobar"
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 4: RAMA "SI" (APROBADO) -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 4: Configurar la rama "Si" (Aprobado)</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">8</span>
+            <h5>Acción 1: Actualizar estatus a "Activo"</h5>
+            <p>
+              Dentro del bloque <strong>"Si"</strong>, agregar la acción
+              <strong>"Actualizar elemento"</strong> de SharePoint.
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Dirección del sitio:</strong> Mismo sitio.</li>
+              <li>
+                <strong>Nombre de la lista:</strong> <code>Proyectos</code>.
+              </li>
+              <li>
+                <strong>Id.:</strong> Campo dinámico <code>ID</code> del
+                trigger.
+              </li>
+              <li>
+                <strong>Título:</strong> Campo dinámico <code>Título</code>.
+              </li>
+              <li>
+                <strong>Estatus Value:</strong> Escribir <code>Activo</code>.
+              </li>
+            </ul>
+            <div class="captura-mock">
+              ✅ Actualizar elemento → Estatus Value: "Activo"
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">9</span>
+            <h5>Acción 2: Notificar al propietario (correo)</h5>
+            <p>
+              Agregar la acción
+              <strong>"Enviar un correo electrónico"</strong> (Office 365
+              Outlook).
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Para:</strong> Campo dinámico
+                <code>Propietario Email</code>.
+              </li>
+              <li>
+                <strong>Asunto:</strong> <code>"¡Proyecto Aprobado! "</code> +
+                Título.
+              </li>
+              <li>
+                <strong>Cuerpo:</strong> Mensaje indicando que el proyecto fue
+                aprobado y está activo.
+              </li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📧 Para: Propietario Email<br />
+              📌 Asunto: "¡Proyecto Aprobado! " + Título<br /><br />
+              Hola,<br /><br />
+              Tu proyecto <strong>[Título]</strong> ha sido
+              <strong>APROBADO</strong>.<br /><br />
+              El estatus ha cambiado a <strong>"Activo"</strong>. ¡Mucho
+              éxito!<br /><br />
+              Saludos,<br />
+              Equipo de Gestión de Proyectos
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 5: RAMA "NO" (RECHAZADO) -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 5: Configurar la rama "No" (Rechazado)</h4>
+
+          <div class="paso-card" style="border-left-color: #c62828">
+            <span class="numero">10</span>
+            <h5>Acción 1: Actualizar estatus a "Pausado"</h5>
+            <p>
+              Dentro del bloque <strong>"No"</strong>, agregar la acción
+              <strong>"Actualizar elemento"</strong> de SharePoint.
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Dirección del sitio:</strong> Mismo sitio.</li>
+              <li>
+                <strong>Nombre de la lista:</strong> <code>Proyectos</code>.
+              </li>
+              <li>
+                <strong>Id.:</strong> Campo dinámico <code>ID</code> del
+                trigger.
+              </li>
+              <li>
+                <strong>Título:</strong> Campo dinámico <code>Título</code>.
+              </li>
+              <li>
+                <strong>Estatus Value:</strong> Escribir <code>Pausado</code>.
+              </li>
+            </ul>
+            <div class="captura-mock">
+              ❌ Actualizar elemento → Estatus Value: "Pausado"
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #c62828">
+            <span class="numero">11</span>
+            <h5>Acción 2: Notificar al creador (correo)</h5>
+            <p>
+              Agregar la acción
+              <strong>"Enviar un correo electrónico"</strong> (Office 365
+              Outlook).
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Para:</strong> Campo dinámico
+                <code>Propietario Email</code> (o
+                <code>Creado por Email</code> si se quiere notificar al creador
+                original).
+              </li>
+              <li>
+                <strong>Asunto:</strong> <code>"Proyecto Rechazado: "</code> +
+                Título.
+              </li>
+              <li>
+                <strong>Cuerpo:</strong> Mensaje indicando que el proyecto fue
+                rechazado y está pausado.
+              </li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📧 Para: Propietario Email<br />
+              📌 Asunto: "Proyecto Rechazado: " + Título<br /><br />
+              Hola,<br /><br />
+              Tu proyecto <strong>[Título]</strong> ha sido
+              <strong>RECHAZADO</strong>.<br /><br />
+              El estatus ha cambiado a <strong>"Pausado"</strong>. Por favor,
+              contacta al gerente para más información.<br /><br />
+              Saludos,<br />
+              Equipo de Gestión de Proyectos
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE RAMAS -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo de las dos ramas del flujo</h4>
+
+          <div class="rama-container">
+            <div class="rama aprobado">
+              <h5>✅ Rama "Si" — Resultado = "Aprobar"</h5>
+              <p>
+                <strong>Acción 1:</strong> Actualizar Estatus →
+                <span class="etiqueta etiqueta-activo">Activo</span>
+              </p>
+              <p>
+                <strong>Acción 2:</strong> Enviar correo "¡Proyecto Aprobado!".
+              </p>
+            </div>
+            <div class="rama rechazado">
+              <h5>❌ Rama "No" — Resultado = "Rechazar"</h5>
+              <p>
+                <strong>Acción 1:</strong> Actualizar Estatus →
+                <span class="etiqueta etiqueta-pausado">Pausado</span>
+              </p>
+              <p>
+                <strong>Acción 2:</strong> Enviar correo "Proyecto Rechazado".
+              </p>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE LA LISTA ACTUALIZADA -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo de la lista actualizada según la respuesta</h4>
+
+          <div class="mock-lista">
+            <table>
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Propietario</th>
+                  <th>Estatus antes</th>
+                  <th>Respuesta</th>
+                  <th>Estatus después</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>E-commerce App</td>
+                  <td>Ana García</td>
+                  <td>
+                    <span class="etiqueta-estado estado-pausado">Pausado</span>
+                  </td>
+                  <td>✅ Aprobado</td>
+                  <td>
+                    <span class="etiqueta-estado estado-activo">Activo</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CRM de Ventas</td>
+                  <td>María Torres</td>
+                  <td>
+                    <span class="etiqueta-estado estado-pausado">Pausado</span>
+                  </td>
+                  <td>❌ Rechazado</td>
+                  <td>
+                    <span class="etiqueta-estado estado-pausado">Pausado</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Dashboard de Métricas</td>
+                  <td>Ana García</td>
+                  <td>
+                    <span class="etiqueta-estado estado-pausado">Pausado</span>
+                  </td>
+                  <td>✅ Aprobado</td>
+                  <td>
+                    <span class="etiqueta-estado estado-activo">Activo</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ La lista se actualiza automáticamente según la respuesta del
+            gerente.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE CORREOS -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo de correos enviados</h4>
+
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              gap: 16px;
+              justify-content: center;
+            "
+          >
+            <div class="mock-correo" style="max-width: 320px">
+              <div class="header">
+                <strong>Asunto:</strong> ¡Proyecto Aprobado! E-commerce App
+              </div>
+              <div class="body">
+                <p class="linea">Hola,</p>
+                <p class="linea">
+                  Tu proyecto <strong>E-commerce App</strong> ha sido
+                  <strong>APROBADO</strong>.
+                </p>
+                <div class="destacado verde">
+                  <p class="linea">
+                    El estatus ha cambiado a <strong>"Activo"</strong>. ¡Mucho
+                    éxito!
+                  </p>
+                </div>
+                <p class="linea">
+                  Saludos,<br />Equipo de Gestión de Proyectos
+                </p>
+              </div>
+            </div>
+            <div class="mock-correo" style="max-width: 320px">
+              <div class="header">
+                <strong>Asunto:</strong> Proyecto Rechazado: CRM de Ventas
+              </div>
+              <div class="body">
+                <p class="linea">Hola,</p>
+                <p class="linea">
+                  Tu proyecto <strong>CRM de Ventas</strong> ha sido
+                  <strong>RECHAZADO</strong>.
+                </p>
+                <div class="destacado naranja">
+                  <p class="linea">
+                    El estatus ha cambiado a <strong>"Pausado"</strong>.
+                    Contacta al gerente para más información.
+                  </p>
+                </div>
+                <p class="linea">
+                  Saludos,<br />Equipo de Gestión de Proyectos
+                </p>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Correos enviados al propietario según la respuesta de aprobación.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PASO 6: GUARDAR Y PROBAR -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 6: Guardar y probar el flujo</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">12</span>
+            <h5>Guardar el flujo</h5>
+            <p>
+              Hacer clic en <strong>"Guardar"</strong> en la parte superior
+              derecha.
+            </p>
+            <div class="captura-mock">💾 Guardar</div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">13</span>
+            <h5>Probar con aprobación</h5>
+            <p>
+              Crear un nuevo proyecto en la lista. Cuando el gerente reciba la
+              solicitud, <strong>aprobar</strong>. Verificar que el estatus
+              cambia a "Activo" y llega el correo.
+            </p>
+            <div class="captura-mock">
+              ✅ Crear proyecto → Gerente aprueba → Estatus "Activo" → Correo
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #c62828">
+            <span class="numero">14</span>
+            <h5>Probar con rechazo</h5>
+            <p>
+              Crear otro proyecto. Cuando el gerente reciba la solicitud,
+              <strong>rechazar</strong>. Verificar que el estatus cambia a
+              "Pausado" y llega el correo.
+            </p>
+            <div class="captura-mock">
+              ❌ Crear proyecto → Gerente rechaza → Estatus "Pausado" → Correo
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">15</span>
+            <h5>Verificar el historial</h5>
+            <p>
+              En Power Automate, ir a <strong>"Mis flujos"</strong> → revisar el
+              <strong>historial de ejecuciones</strong> para confirmar que ambas
+              ramas funcionaron.
+            </p>
+            <div class="captura-mock">
+              📊 Mis flujos → Actualizar estatus según aprobación → Historial
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Accede a make.powerautomate.com y crea un
+                <strong>flujo automatizado</strong> llamado "Actualizar estatus
+                según aprobación de proyecto".
+              </li>
+              <li>
+                2. Configura el trigger
+                <strong>"Cuando se crea un elemento"</strong> en la lista
+                "Proyectos".
+              </li>
+              <li>
+                3. Agrega la acción
+                <strong>"Iniciar y esperar una aprobación"</strong> con
+                destinatario el gerente.
+              </li>
+              <li>
+                4. Agrega la acción <strong>"Condición"</strong> para evaluar si
+                el resultado es "Aprobar".
+              </li>
+              <li>
+                5. En la rama <strong>"Si"</strong>, actualiza el estatus a
+                <strong>"Activo"</strong> y envía correo de aprobación.
+              </li>
+              <li>
+                6. En la rama <strong>"No"</strong>, actualiza el estatus a
+                <strong>"Pausado"</strong> y envía correo de rechazo.
+              </li>
+              <li>
+                7. Guarda el flujo y pruébalo con ambos escenarios (aprobar y
+                rechazar).
+              </li>
+              <li>
+                8. Verifica que la lista se actualiza correctamente y que llegan
+                los correos.
+              </li>
+              <li>
+                9. Si no tienes acceso, escribe los pasos y dibuja la estructura
+                del flujo.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>
+                ¿Qué diferencia hay entre notificar al propietario o al creador
+                del proyecto?
+              </li>
+              <li>¿Qué sucede si el gerente no responde la solicitud?</li>
+              <li>
+                ¿Cómo podrías agregar un tercer estado para cuando el proyecto
+                sea rechazado pero pueda reintentarse?
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante crea un flujo que actualiza el estatus del proyecto
+            según la respuesta de aprobación y notifica al propietario.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Configura la acción "Iniciar y esperar una aprobación".</li>
+            <li>Configura la condición para evaluar el resultado.</li>
+            <li>Actualiza el estatus a "Activo" si se aprueba.</li>
+            <li>Actualiza el estatus a "Pausado" si se rechaza.</li>
+            <li>Envía notificación al propietario con el resultado.</li>
+            <li>Prueba el flujo con ambos escenarios.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+            <li>Pizarra</li>
+            <li>Guía de flujos de aprobación</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso y preguntas finales"</h4>
+          <ul>
+            <li>¿Qué tipo de flujo creamos?</li>
+            <li>¿Cuál fue el Trigger utilizado?</li>
+            <li>¿Qué acción de aprobación usamos?</li>
+            <li>¿Cómo se evalúa la respuesta del gerente?</li>
+            <li>¿Qué estatus se asigna si se aprueba?</li>
+            <li>¿Qué estatus se asigna si se rechaza?</li>
+            <li>¿Cómo se notifica al propietario?</li>
+            <li>¿Cómo verificamos que el flujo funciona correctamente?</li>
+          </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final:</span>
+            <p>
+              Modifica el flujo para que, si el proyecto es
+              <strong>rechazado</strong>, además de actualizar el estatus a
+              "Pausado", se
+              <strong>agregue un comentario en la lista</strong> con el motivo
+              del rechazo (usando el campo "Comentarios" de la aprobación). ¿Qué
+              acción agregarías?
+            </p>
+            <p style="font-size: 13px; color: #555; margin-top: 4px">
+              Pista: en la acción "Actualizar elemento", puedes agregar el campo
+              dinámico "Comentarios" de la aprobación.
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida la creación de flujos de aprobación con
+            actualización de la lista.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Comprende la estructura del flujo creado.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Power Automate</li>
+            <li>SharePoint</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p>
+          <strong
+            >💡 Tips clave sobre flujos de aprobación con actualización de
+            lista:</strong
+          >
+        </p>
+        <p>
+          • <strong>Trigger:</strong> "Cuando se crea un elemento" en
+          SharePoint.
+        </p>
+        <p>
+          • <strong>Aprobación:</strong> "Iniciar y esperar una aprobación"
+          (Aprobar/Rechazar).
+        </p>
+        <p>
+          • <strong>Condición:</strong> Evaluar el campo dinámico "Resultado".
+        </p>
+        <p>
+          • <strong>Rama Si (Aprobado):</strong> Actualizar Estatus → "Activo" +
+          correo.
+        </p>
+        <p>
+          • <strong>Rama No (Rechazado):</strong> Actualizar Estatus → "Pausado"
+          + correo.
+        </p>
+        <p>
+          • <strong>Actualizar elemento:</strong> Usar el ID del trigger para
+          identificar el proyecto.
+        </p>
+        <p>
+          • <strong>Notificación:</strong> Enviar correo al propietario o
+          creador del proyecto.
+        </p>
+        <p>
+          • <strong>Probar:</strong> Crear un proyecto y responder la aprobación
+          de ambas formas.
+        </p>
+        <p>
+          • <strong>Historial:</strong> Revisar ejecuciones en "Mis flujos".
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>
+          • Cierra el ciclo de aprobación con la actualización automática de
+          datos.
+        </p>
+        <p>• Enseña a conectar decisiones con acciones en SharePoint.</p>
+        <p>
+          • Prepara a los estudiantes para crear flujos de trabajo completos y
+          funcionales.
+        </p>
+        <p>
+          • Conecta SharePoint, Outlook y el conector de Aprobaciones en un
+          flujo integrado.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

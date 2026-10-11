@@ -1,0 +1,697 @@
+WEBVTT
+
+00:00.000 --> 00:01.680
+When we're dealing
+with decimal numbers,
+
+00:01.680 --> 00:04.400
+rounding is an important tool
+that we need to know how to use.
+
+00:04.400 --> 00:06.160
+And in order to see why,
+
+00:06.160 --> 00:08.560
+let's take a look at
+an extreme example.
+
+00:08.560 --> 00:10.880
+So let's say we've been given
+this decimal number here.
+
+00:10.880 --> 00:13.280
+It's one hundred two
+point three seven four,
+
+00:13.280 --> 00:14.955
+then a bunch of zeros,
+
+00:14.955 --> 00:18.315
+and then this little one hanging
+out all the way at the end.
+
+00:18.315 --> 00:22.635
+And what we should notice is
+that this one only makes a
+
+00:22.635 --> 00:26.635
+tiny, tiny, tiny, tiny, tiny
+difference to the value of this
+
+00:26.635 --> 00:28.395
+overall number as a whole.
+
+00:28.395 --> 00:31.890
+So writing out all these extra
+zeros just for the sake of
+
+00:31.890 --> 00:35.410
+including this one doesn't
+make that much sense.
+
+00:35.410 --> 00:39.090
+It'd be a lot more practical
+instead to write this number as
+
+00:39.090 --> 00:42.530
+just approximately one
+hundred two point three
+
+00:42.530 --> 00:46.015
+seven four and drop all these
+extra zeros and this tiny
+
+00:46.015 --> 00:50.335
+little one that really has very little
+effect on the value of this number.
+
+00:50.335 --> 00:52.975
+This number here, one zero
+two point three seven four,
+
+00:52.975 --> 00:55.855
+is so close to the actual
+number that it doesn't even
+
+00:55.855 --> 00:57.100
+really make a difference.
+
+00:57.100 --> 00:58.380
+So when we're rounding,
+
+00:58.380 --> 01:01.820
+what we're doing is
+approximating a decimal number
+
+01:01.820 --> 01:05.100
+with fewer than the number of
+digits in the actual value.
+
+01:05.100 --> 01:07.820
+And the reason we do that is
+because it saves us a lot of
+
+01:07.820 --> 01:12.355
+time and lets us express really long
+numbers as shorter simpler ones.
+
+01:12.355 --> 01:16.755
+Now when we round, we always
+round to a certain decimal place.
+
+01:16.755 --> 01:18.755
+So we've already looked
+at decimal places.
+
+01:18.755 --> 01:20.035
+We know what they are.
+
+01:20.035 --> 01:23.075
+So here, if we're asked
+to round to, for example,
+
+01:23.075 --> 01:24.320
+the hundredths place,
+
+01:24.320 --> 01:27.280
+what that means is that we want
+the last digit in the number to
+
+01:27.280 --> 01:28.960
+be the digit in the
+hundredths place.
+
+01:28.960 --> 01:31.280
+So if we were rounding
+this decimal number to the
+
+01:31.280 --> 01:34.560
+hundredths place, we would
+identify the hundredths place here,
+
+01:34.560 --> 01:37.840
+and we would want the last
+digit in the rounded number to
+
+01:37.840 --> 01:39.280
+be the digit in that spot.
+
+01:39.280 --> 01:42.615
+We wouldn't wanna see any other
+digits after the hundreds place.
+
+01:42.615 --> 01:46.535
+So when we rounded this number to one
+hundred two point three seven four,
+
+01:46.535 --> 01:49.095
+we were rounding to the
+thousands place because that's
+
+01:49.095 --> 01:50.535
+where the four is sitting,
+
+01:50.535 --> 01:53.980
+and that's the last digit
+that appears in the rounded number.
+
+01:53.980 --> 01:56.700
+Now our rule for rounding
+is always the same.
+
+01:56.700 --> 01:58.140
+It's this rule here.
+
+01:58.140 --> 02:01.100
+So if the next digit
+is less than five,
+
+02:01.100 --> 02:03.260
+we round the
+previous digit down.
+
+02:03.260 --> 02:06.700
+If it's five or greater, we
+round the previous digit up.
+
+02:06.700 --> 02:10.435
+In other words, we can just
+remember this, less than five,
+
+02:10.435 --> 02:11.875
+we round down.
+
+02:11.875 --> 02:14.595
+Five or greater, we round up.
+
+02:14.595 --> 02:17.155
+So here's what that
+means in practicality.
+
+02:17.155 --> 02:19.635
+Let's say we're actually this
+time starting with this number
+
+02:19.635 --> 02:21.795
+here, one hundred two
+point three seven four,
+
+02:21.795 --> 02:25.800
+and we've been asked to round to the
+hundreds place like we said before.
+
+02:25.800 --> 02:28.600
+That's the place where we
+currently see the seven.
+
+02:28.600 --> 02:31.320
+So if we're rounding
+to the hundreds place,
+
+02:31.320 --> 02:32.840
+we look at the next digit,
+
+02:32.840 --> 02:34.520
+the digit that follows
+the hundreds place,
+
+02:34.520 --> 02:37.835
+which in this case is the digit
+in the thousands place, the four.
+
+02:37.835 --> 02:40.235
+Now we look at that four
+and we ask ourselves,
+
+02:40.235 --> 02:43.675
+is that number less than five,
+or is it five or greater?
+
+02:43.675 --> 02:45.675
+Is it equal to five
+or greater than five?
+
+02:45.675 --> 02:47.755
+Well, four is less than five,
+
+02:47.755 --> 02:49.835
+which means that
+we're rounding down.
+
+02:49.835 --> 02:53.060
+Now here's what it means
+to round down or round up.
+
+02:53.060 --> 02:55.760
+When we're rounding down,
+
+02:56.100 --> 02:59.280
+that means that we're
+leaving the digit
+
+03:00.100 --> 03:01.200
+unchanged.
+
+03:01.380 --> 03:06.865
+When we're rounding up, we
+increase the digit by one unit
+
+03:06.865 --> 03:08.705
+or we add one to the digit.
+
+03:08.705 --> 03:11.505
+So because here four
+is less than five,
+
+03:11.505 --> 03:12.865
+that means we're rounding down.
+
+03:12.865 --> 03:15.745
+And to round down means
+to leave the digit unchanged.
+
+03:15.745 --> 03:20.710
+So we leave the seven unchanged
+and the rounded number when we
+
+03:20.710 --> 03:24.070
+round one zero two point three
+seven four to the hundredths place,
+
+03:24.070 --> 03:27.110
+we leave the seven unchanged
+because we were rounding down
+
+03:27.110 --> 03:31.270
+and the rounded number is one
+zero two point three seven.
+
+03:31.270 --> 03:32.230
+If on the other hand,
+
+03:32.230 --> 03:37.085
+we had started with one zero
+two point three seven eight
+
+03:37.085 --> 03:40.205
+and we were again asked to
+round to the hundreds place,
+
+03:40.205 --> 03:42.525
+we would look at the digit that
+follows the hundreds place.
+
+03:42.525 --> 03:43.965
+In this case, it's an eight.
+
+03:43.965 --> 03:46.765
+We would see that eight
+is five or greater.
+
+03:46.765 --> 03:47.885
+And because it's
+five or greater,
+
+03:47.885 --> 03:49.540
+that means we have to round up,
+
+03:49.540 --> 03:52.900
+which means we have to
+increase the seven by one.
+
+03:52.900 --> 03:56.500
+And therefore, this
+number rounds to one
+
+03:56.500 --> 04:00.420
+hundred two point three
+eight when we're rounding
+
+04:00.420 --> 04:01.780
+to the hundreds place.
+
+04:01.780 --> 04:03.895
+So So let's go ahead and look
+at a couple more examples.
+
+04:03.895 --> 04:07.575
+Let's say that we've been given the
+number three point one four one five nine,
+
+04:07.575 --> 04:10.455
+and we've been asked to round
+it to the nearest hundredth.
+
+04:10.455 --> 04:14.150
+So the first thing we do is identify
+the digit in the hundredth place.
+
+04:14.150 --> 04:16.630
+In this case, that's
+this four right here.
+
+04:16.630 --> 04:18.310
+Now that we've
+identified the digit,
+
+04:18.310 --> 04:19.910
+we look at the next digit.
+
+04:19.910 --> 04:22.790
+In this case, it's this
+one that follows the four.
+
+04:22.790 --> 04:25.510
+We ask ourselves, is
+one less than five,
+
+04:25.510 --> 04:27.190
+or is one five or greater?
+
+04:27.190 --> 04:29.125
+Well, one is less than five,
+
+04:29.125 --> 04:30.805
+which means we're rounding down,
+
+04:30.805 --> 04:33.685
+which means we leave
+the four unchanged.
+
+04:33.685 --> 04:38.565
+So this number gets
+rounded to three point one
+
+04:38.565 --> 04:41.045
+four when we're rounding
+to the hundredths place.
+
+04:41.045 --> 04:44.660
+If we were rounding instead,
+let's say to this place here,
+
+04:44.660 --> 04:47.380
+where the five is, we would
+look at the next digit,
+
+04:47.380 --> 04:48.980
+we would see that it's nine.
+
+04:48.980 --> 04:52.180
+Nine is five or greater,
+which means we round up,
+
+04:52.180 --> 04:54.820
+which means that we
+change the five to a six,
+
+04:54.820 --> 04:59.220
+and that number would round
+to three point one four
+
+04:59.220 --> 05:00.715
+one six.
+
+05:00.715 --> 05:02.635
+Let's do one more example.
+
+05:02.635 --> 05:05.755
+This time, we have one hundred
+thirty thousand eight hundred seventy
+
+05:05.755 --> 05:06.955
+four point six two,
+
+05:06.955 --> 05:09.675
+and we've been asked to
+round to the nearest hundred.
+
+05:09.675 --> 05:12.475
+Not the hundredths place,
+but the hundredths place,
+
+05:12.475 --> 05:14.420
+which is this place right here.
+
+05:14.420 --> 05:17.460
+The four is in the units place,
+the seven is in the tens place,
+
+05:17.460 --> 05:19.300
+the eight is in
+the hundreds place.
+
+05:19.300 --> 05:23.140
+So, again, we look at the next
+digit that follows the eight,
+
+05:23.140 --> 05:25.380
+that's this seven here
+in the tens place,
+
+05:25.380 --> 05:26.740
+and we ask ourselves,
+
+05:26.740 --> 05:29.675
+is seven less than five
+or five or greater?
+
+05:29.675 --> 05:32.875
+It's obviously five or greater,
+which means we're rounding up,
+
+05:32.875 --> 05:35.435
+which means we add
+one to the eight,
+
+05:35.435 --> 05:39.655
+which means we round to one hundred
+thirty thousand nine hundred.
+
+05:39.995 --> 05:43.940
+Notice how when we round to a
+digit that sits to the right of
+
+05:43.940 --> 05:44.740
+the decimal point,
+
+05:44.740 --> 05:47.220
+like we did here when we
+rounded to the hundredths place
+
+05:47.220 --> 05:49.460
+or we rounded to the
+ten thousandths place,
+
+05:49.460 --> 05:52.900
+we made that digit the
+last digit in the number.
+
+05:52.900 --> 05:54.260
+Here, on the other hand,
+
+05:54.260 --> 05:57.695
+when we rounded to a digit that
+sat to the left of the decimal
+
+05:57.695 --> 06:00.175
+point, here the eight sat to
+the left of the decimal point,
+
+06:00.175 --> 06:01.295
+we rounded to that number.
+
+06:01.295 --> 06:04.095
+So we looked at whether or not
+we needed to change the value
+
+06:04.095 --> 06:06.335
+of the eight based on
+the value of the seven,
+
+06:06.335 --> 06:10.030
+but then we kept zeros all
+the way to the units place,
+
+06:10.030 --> 06:11.710
+and that's always what we'll do.
+
+06:11.710 --> 06:14.190
+You wouldn't round one hundred
+thirty thousand eight hundred
+
+06:14.190 --> 06:17.550
+and seventy four to just one
+three zero nine or one thousand
+
+06:17.550 --> 06:18.670
+three hundred nine.
+
+06:18.670 --> 06:18.910
+No.
+
+06:18.910 --> 06:20.430
+We're rounding to
+the nearest hundred,
+
+06:20.430 --> 06:22.955
+so one hundred thirty thousand
+eight hundred and seventy four.
+
+06:22.955 --> 06:26.475
+The closest hundred to that is one
+hundred thirty thousand nine hundred.
+
+06:26.475 --> 06:29.755
+So we fill in the rest of the
+digits that are to the left of
+
+06:29.755 --> 06:31.995
+the decimal point with zeros.
+
+06:31.995 --> 06:33.915
+And that is where we stop.
+
+06:33.915 --> 06:36.930
+We don't keep any digits to
+the right of the decimal point.
+
+06:36.930 --> 06:39.970
+And then there's one last thing
+we wanna say about rounding and
+
+06:39.970 --> 06:42.370
+we can illustrate it by
+changing this number here.
+
+06:42.370 --> 06:45.170
+So instead of this one hundred
+thirty thousand eight seventy
+
+06:45.170 --> 06:48.690
+four, let's say we had one
+hundred thirty thousand nine
+
+06:48.690 --> 06:52.125
+hundred seventy four instead of
+eight hundred and seventy four
+
+06:52.125 --> 06:53.485
+point six two.
+
+06:53.485 --> 06:57.405
+And again, we were asked to round
+this number to the nearest hundred.
+
+06:57.405 --> 06:59.245
+So same hundreds place,
+
+06:59.245 --> 07:01.965
+we would again look at this
+seven that's sitting just to
+
+07:01.965 --> 07:03.090
+the right of the nine.
+
+07:03.090 --> 07:05.250
+We would see that seven
+is five or greater,
+
+07:05.250 --> 07:08.610
+and so we would need to round
+up the nine by increasing that
+
+07:08.610 --> 07:09.730
+digit by one.
+
+07:09.730 --> 07:12.130
+But we can't round
+a nine to a ten.
+
+07:12.130 --> 07:14.130
+That would be replacing
+one digit with two,
+
+07:14.130 --> 07:15.330
+which doesn't work.
+
+07:15.330 --> 07:18.745
+So what we do in the special
+case where we're rounding up a
+
+07:18.745 --> 07:23.065
+nine is we change that nine to
+a zero and increase the next
+
+07:23.065 --> 07:24.425
+digit by one.
+
+07:24.425 --> 07:28.105
+So this nine here is
+gonna become a zero,
+
+07:28.105 --> 07:31.385
+and we're going to increase
+the digit to the left of it,
+
+07:31.385 --> 07:33.530
+this zero right here, by one.
+
+07:33.530 --> 07:35.370
+So instead of one
+hundred thirty thousand,
+
+07:35.370 --> 07:38.010
+this is gonna become one
+hundred thirty one thousand.
+
+07:38.010 --> 07:42.250
+So rounding this up, we get
+one hundred thirty one thousand
+
+07:42.250 --> 07:45.335
+and then again, the
+nine becomes a zero.
+
+07:45.335 --> 07:47.895
+All the digits to the right
+of the nine up to the decimal
+
+07:47.895 --> 07:50.535
+place get filled in with
+zeros just like before,
+
+07:50.535 --> 07:53.415
+and we don't include any digits
+to the right of the decimal
+
+07:53.415 --> 07:56.375
+point, and we end up with one
+hundred thirty one thousand.
+
+07:56.375 --> 07:58.370
+So those are our
+rules for rounding.
+
+07:58.370 --> 08:01.170
+The biggest thing here is to
+remember that if that next
+
+08:01.170 --> 08:03.330
+digit is less than
+five, we round down.
+
+08:03.330 --> 08:05.170
+If it's five or
+greater, we round up.
+
+08:05.170 --> 08:07.490
+And rounding down means
+we leave the digit we're
+
+08:07.490 --> 08:08.930
+interested in unchanged.
+
+08:08.930 --> 08:12.750
+Rounding up means we
+increase it by one.

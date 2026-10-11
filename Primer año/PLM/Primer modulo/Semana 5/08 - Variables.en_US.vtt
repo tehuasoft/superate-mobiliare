@@ -1,0 +1,370 @@
+WEBVTT
+
+00:00.210 --> 00:03.750
+Up to this point through lower level math and pre-algebra.
+
+00:03.750 --> 00:10.020
+We've really just been working with regular numbers like three or zero or negative seven plus maybe
+
+00:10.020 --> 00:11.770
+some fractions in decimals.
+
+00:11.790 --> 00:16.050
+Now, in algebra, we're really going to need to start working with variables.
+
+00:16.050 --> 00:19.530
+And a variable is a symbol for a number that we don't know yet.
+
+00:19.540 --> 00:25.820
+So for instance, we most commonly use X or maybe Y to indicate a variable.
+
+00:25.830 --> 00:30.300
+So if before algebra we were using almost exclusively constants.
+
+00:30.300 --> 00:31.920
+So think about something like this.
+
+00:31.920 --> 00:38.190
+Three plus two equals five in this equation, three, two and five are all constants.
+
+00:38.190 --> 00:39.540
+They're regular numbers.
+
+00:39.720 --> 00:48.390
+If instead of this we replace the three in this equation with the variable x, we can say x plus two
+
+00:48.780 --> 00:49.860
+equals five.
+
+00:49.890 --> 00:53.880
+It's the same thing, except that now we have a variable in our equation.
+
+00:53.880 --> 00:59.370
+And just by matching these up and because we know that we swapped X out for three, we know that the
+
+00:59.370 --> 01:01.790
+value of x has to be three.
+
+01:01.800 --> 01:04.770
+That's the value that makes this equation two, right?
+
+01:04.770 --> 01:06.960
+What do we have to add to two to get five?
+
+01:06.960 --> 01:08.910
+Well, that value is three.
+
+01:08.940 --> 01:14.880
+We'll talk much, much more later on about how to solve equations like this one and more complicated
+
+01:14.880 --> 01:15.570
+equations.
+
+01:15.570 --> 01:22.680
+But the idea for now is just that we're going to be using variables like X and Y going forward as placeholders
+
+01:22.680 --> 01:24.540
+for values that we don't know.
+
+01:24.540 --> 01:30.150
+So in the future we might be presented with something like this just X plus two equals five and ask
+
+01:30.150 --> 01:32.280
+to find the value of x.
+
+01:32.280 --> 01:38.100
+So at this point, all we want to do with this lesson is define some key vocabulary terms.
+
+01:38.100 --> 01:40.980
+So we've already talked about this idea of variables.
+
+01:40.980 --> 01:47.910
+We usually use X or Y to represent a variable, but technically we can use any letter that we want.
+
+01:47.910 --> 01:49.710
+These are just the most common.
+
+01:49.710 --> 01:55.740
+We also want to say that constants are the kinds of real numbers that we're used to seeing like three
+
+01:55.740 --> 02:00.870
+or negative seven or in this equation over here, three or two or five are all constants.
+
+02:00.870 --> 02:06.180
+The next thing we want to define is the idea of an equation like this one that we wrote here.
+
+02:06.180 --> 02:07.680
+X plus two equals five.
+
+02:07.680 --> 02:12.990
+And equation is just this mathematical statement here that contains an equal sign.
+
+02:12.990 --> 02:18.300
+And what it tells us is that the value on the left side of the equal sign is equal to or equivalent
+
+02:18.300 --> 02:21.210
+to the value on the right side of the equal sign.
+
+02:21.210 --> 02:27.810
+So like we already looked at in this example, if this left side has to be equal to this right side
+
+02:27.810 --> 02:33.810
+because we've set up this equation, then we can start to solve for the value of the variable x, because
+
+02:33.810 --> 02:35.790
+we know these two things have to be equal.
+
+02:35.790 --> 02:40.890
+And so what we're trying to figure out is how we make this left hand side equal to five and the only
+
+02:40.890 --> 02:44.940
+value of x that makes this left hand side equal to five is x equals three.
+
+02:44.940 --> 02:46.980
+And so we can solve for the value of that variable.
+
+02:46.980 --> 02:50.760
+But we define this kind of mathematical expression as an equation.
+
+02:50.760 --> 02:55.740
+If it has an equal sign, it's an equation that implies that the left and right hand sides are equivalent
+
+02:55.740 --> 02:56.760
+or equal to each other.
+
+02:56.760 --> 02:57.990
+They have an equal value.
+
+02:58.020 --> 03:02.440
+We also want to define at this point the idea of a coefficient.
+
+03:02.460 --> 03:05.160
+So we talked about variables as x and Y.
+
+03:05.160 --> 03:09.270
+Here we looked at the variable in the equation, x plus two equals five.
+
+03:09.270 --> 03:16.530
+Well, we can have a coefficient in front of the variable like we're showing here three x, so maybe
+
+03:16.530 --> 03:21.540
+we write a different equation, let's call it three x minus ten equals eight.
+
+03:21.540 --> 03:27.840
+So in this equation, three is a coefficient on the x variable, and when we have a coefficient on the
+
+03:27.840 --> 03:32.070
+variable, it's implied that the coefficient and the variable are multiplied together.
+
+03:32.070 --> 03:36.000
+So this three x means three times x or three multiplied by x.
+
+03:36.000 --> 03:41.400
+We'll also sometimes see coefficients that aren't real numbers like this three is.
+
+03:41.400 --> 03:43.890
+So instead we might see something like this.
+
+03:43.890 --> 03:49.320
+Let's say a x squared plus b x plus C.
+
+03:49.320 --> 03:53.160
+We know that the variable in this expression is the x variable.
+
+03:53.160 --> 04:01.380
+So we have x here and x squared x is the variable, but A and B here are coefficients on the x squared
+
+04:01.380 --> 04:02.850
+and X variables.
+
+04:02.850 --> 04:09.930
+So A and B represent constant coefficients because A is kind of acting like the three is acting up.
+
+04:09.930 --> 04:13.410
+Here it's a coefficient on x squared, it multiplies x squared.
+
+04:13.410 --> 04:18.840
+So this is a times x squared and a is just holding the place for some constant.
+
+04:18.840 --> 04:21.210
+So is B, it is a constant coefficient.
+
+04:21.210 --> 04:27.870
+On x, we usually use letters at the beginning of the alphabet like A and B to represent constants or
+
+04:27.870 --> 04:33.570
+constant coefficients, in contrast with usually using letters near the end of the alphabet to represent
+
+04:33.570 --> 04:34.380
+variables.
+
+04:34.380 --> 04:37.500
+So we have variables, constants, equations, coefficients.
+
+04:37.500 --> 04:43.440
+We also have here expressions and we can kind of think about expressions in contrast with equations.
+
+04:43.470 --> 04:47.250
+Equations always contain an equal sign, expressions don't.
+
+04:47.250 --> 04:51.390
+So an expression is really just a group of terms.
+
+04:51.390 --> 04:55.710
+In this expression we have three x as a term and we have ten as a term.
+
+04:55.710 --> 04:59.760
+The negative sign, the subtraction is an operator between the two.
+
+04:59.820 --> 05:00.480
+Terms.
+
+05:00.480 --> 05:03.840
+So we have this three x term minus this ten term.
+
+05:03.840 --> 05:09.450
+Putting them together creates an expression, and expression is a very broad term.
+
+05:09.450 --> 05:13.650
+We usually use it to identify just any kind of mathematical expression.
+
+05:13.650 --> 05:16.830
+That's not explicitly an equation with an equal sign.
+
+05:16.830 --> 05:20.820
+So even within this equation we could say x plus two is an expression.
+
+05:20.820 --> 05:26.460
+Usually we use expression to indicate more than one term, but we can still use it to indicate a single
+
+05:26.460 --> 05:26.730
+term.
+
+05:26.730 --> 05:29.760
+So we could even say that five is a mathematical expression.
+
+05:29.760 --> 05:31.530
+X plus two is an expression.
+
+05:31.530 --> 05:33.300
+Three x minus ten is an expression.
+
+05:33.300 --> 05:37.200
+We could say that a x squared plus b x plus C is an expression.
+
+05:37.200 --> 05:38.340
+There's no equal sign here.
+
+05:38.340 --> 05:39.450
+This is not an equation.
+
+05:39.480 --> 05:41.820
+B, X plus C is also an expression.
+
+05:41.850 --> 05:43.680
+A x squared plus B x is an expression.
+
+05:43.680 --> 05:46.230
+So expression is this very general term.
+
+05:46.230 --> 05:50.670
+It's just what we use whenever we don't explicitly have an equation with an equal sign.
+
+05:50.670 --> 05:55.560
+And we've also now introduced this other language, this other definition, which is the definition
+
+05:55.560 --> 06:02.190
+of a term, and a term is just any single number or variable or numbers and variables multiplied together.
+
+06:02.190 --> 06:09.270
+So in this expression here, a x squared is one term, B x is a term, C is a term in this equation,
+
+06:09.270 --> 06:12.780
+three x is a term ten is a term eight is a term.
+
+06:12.780 --> 06:14.010
+Over here we have examples.
+
+06:14.010 --> 06:16.770
+Three x squared could be a term, be x could be a term negative.
+
+06:16.770 --> 06:23.850
+One is a term of either a number or a variable or a number and variable multiplied together or a constant
+
+06:23.850 --> 06:25.200
+and variable multiplied together.
+
+06:25.200 --> 06:26.550
+That is a term.
+
+06:26.550 --> 06:33.120
+So just as an example, if we were to consider this equation, three x minus ten equals eight and walk
+
+06:33.120 --> 06:39.150
+through all of these new definitions that we have, what can we say about this equation given that we
+
+06:39.150 --> 06:41.310
+now have all this new vocabulary?
+
+06:41.310 --> 06:45.810
+Well, we could say that in this equation we have an X variable.
+
+06:45.810 --> 06:48.210
+We know that that X right there is a variable.
+
+06:48.210 --> 06:50.730
+We could say that this whole thing is an equation.
+
+06:50.730 --> 06:55.980
+So three x minus ten equals eight is the equation.
+
+06:55.980 --> 07:02.550
+In contrast with that, we could say that three x minus ten is an expression.
+
+07:02.550 --> 07:07.260
+We could even list any one of these terms individually as an expression.
+
+07:07.260 --> 07:10.830
+But again, typically an expression is a collection of more than one term.
+
+07:10.830 --> 07:17.070
+So calling three x minus ten and expression from this equation is probably the best use of expression
+
+07:17.070 --> 07:18.840
+when we're looking at this equation.
+
+07:18.840 --> 07:25.020
+But we can also identify the individual terms three, x, ten and eight.
+
+07:25.020 --> 07:27.450
+Those are all terms in this equation.
+
+07:27.450 --> 07:34.290
+We could recognize that the coefficient is three, the coefficient on the variable is three, and that
+
+07:34.290 --> 07:42.690
+we have constants here of ten and eight, because individually here we have ten and eight in the equation.
+
+07:42.690 --> 07:48.960
+So all we want to take away here is this idea that we're going to start replacing real numbers with
+
+07:48.960 --> 07:52.680
+letters instead, and that we call those letters variables.
+
+07:52.680 --> 07:58.650
+Variables are attached to this idea of constants because we distinguish between a variable and a constant.
+
+07:58.650 --> 08:04.110
+We see variables appearing in equations and expressions, and we now know the difference between an
+
+08:04.110 --> 08:05.520
+equation and an expression.
+
+08:05.520 --> 08:12.120
+We see coefficients attached to variables, coefficients that multiply variables, and we know that
+
+08:12.120 --> 08:18.330
+variables can be part of individual terms, but that terms don't necessarily have to contain a variable.
+
+08:18.420 --> 08:24.210
+A term can be just a variable, just a constant or a constant multiplied by a variable.

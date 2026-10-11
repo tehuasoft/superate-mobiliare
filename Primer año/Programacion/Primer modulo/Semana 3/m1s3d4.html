@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Teoría del Color</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .color-card {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 8px;
+        }
+        .color-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .color-card p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+            color: #333;
+        }
+        .color-card .example {
+            font-size: 13px;
+            color: #555;
+            background: #e8eaf6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .color-demo {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .hex-explanation {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+        }
+        .hex-explanation .red { color: #ff6b6b; }
+        .hex-explanation .green { color: #51cf66; }
+        .hex-explanation .blue { color: #4dabf7; }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Rueda de colores, teoría del color y códigos hexadecimales
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Comprende los fundamentos de la teoría del color, incluyendo la rueda de colores, las relaciones cromáticas (análogos, complementarios, triada, cuadrado y compuestos), los conceptos de hue, saturación, lightness y opacidad, así como el funcionamiento de los códigos hexadecimales y su relación con el modelo RGB.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define los conceptos de hue, saturación, lightness y opacidad.</li>
+                <li>Identifica las relaciones cromáticas: análogos, complementarios, triada, cuadrado y compuestos.</li>
+                <li>Comprende el funcionamiento de los códigos hexadecimales en el modelo RGB.</li>
+                <li>Reconoce la estructura de un color hexadecimal: RRGGBB.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Identificar colores análogos, complementarios, triada, cuadrado y compuestos en la rueda de colores.</li>
+                <li>Interpretar y modificar códigos hexadecimales.</li>
+                <li>Aplicar conceptos de saturación y luminosidad en la elección de colores.</li>
+                <li>Utilizar herramientas digitales para explorar combinaciones de colores.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por la teoría del color y su aplicación en diseño.</li>
+                <li>Valora la importancia del color en la comunicación visual.</li>
+                <li>Participa activamente en la identificación y combinación de colores.</li>
+                <li>Reconoce la utilidad de los códigos hexadecimales en el diseño digital.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué es el color y cómo lo usamos?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y presentación.</p>
+            <p><span class="label">Descripción:</span> El docente introduce el tema del color.</p>
+
+            <p><strong>🔹 ¿Qué es el color?</strong></p>
+            <ul>
+                <li>El color es una percepción visual que se produce en el cerebro al interpretar las señales que envían los conos de la retina.</li>
+                <li>En el diseño digital, el color se representa mediante modelos como <strong>RGB</strong> (Red, Green, Blue) y <strong>HSL</strong> (Hue, Saturation, Lightness).</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">💡 Importancia del color:</span><br>
+                ✔ Transmite emociones y mensajes.<br>
+                ✔ Ayuda a organizar y jerarquizar información.<br>
+                ✔ Mejora la estética y la usabilidad.<br>
+                ✔ Es fundamental en el branding y la identidad visual.
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la importancia del color en el diseño y la comunicación visual.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Explica por qué el color es importante en el diseño.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con herramientas de color</li>
+                <li>Rueda de colores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Teoría del color y códigos hexadecimales"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada y práctica.</p>
+
+            <!-- Rueda de colores -->
+            <h4>🔹 Rueda de colores</h4>
+            <p>La <strong>rueda de colores</strong> es una representación circular de los colores organizados según su relación cromática.</p>
+            <ul>
+                <li><strong>Colores primarios:</strong> Rojo, Amarillo, Azul (en el modelo tradicional). En RGB: Rojo, Verde, Azul.</li>
+                <li><strong>Colores secundarios:</strong> Verde, Naranja, Violeta.</li>
+                <li><strong>Colores terciarios:</strong> Combinaciones de primarios y secundarios.</li>
+            </ul>
+
+            <!-- Relaciones cromáticas -->
+            <h4>🔹 Relaciones cromáticas</h4>
+
+            <div class="grid-2">
+                <div class="color-card" style="border-left-color: #2e7d32;">
+                    <strong>🎨 Colores análogos</strong>
+                    <p>Colores adyacentes en la rueda de colores. Transmiten armonía y cohesión.</p>
+                    <span class="example">📌 Ejemplo: Azul, Azul-verde, Verde.</span>
+                </div>
+                <div class="color-card" style="border-left-color: #c62828;">
+                    <strong>🎨 Colores complementarios</strong>
+                    <p>Colores opuestos en la rueda. Crean contraste y energía.</p>
+                    <span class="example">📌 Ejemplo: Rojo y Verde.</span>
+                </div>
+                <div class="color-card" style="border-left-color: #f9a825;">
+                    <strong>🎨 Triada del color</strong>
+                    <p>Tres colores equidistantes en la rueda (120° entre sí).</p>
+                    <span class="example">📌 Ejemplo: Rojo, Amarillo, Azul.</span>
+                </div>
+                <div class="color-card" style="border-left-color: #6a1b9a;">
+                    <strong>🎨 Cuadrado del color</strong>
+                    <p>Cuatro colores equidistantes (90° entre sí).</p>
+                    <span class="example">📌 Ejemplo: Rojo, Amarillo-verde, Verde-azul, Magenta.</span>
+                </div>
+                <div class="color-card" style="border-left-color: #e65100;">
+                    <strong>🎨 Colores compuestos</strong>
+                    <p>Tres colores donde uno es complementario de los otros dos.</p>
+                    <span class="example">📌 Ejemplo: Naranja, Verde, Violeta.</span>
+                </div>
+            </div>
+
+            <!-- HSL -->
+            <h4>🔹 HSL: Hue, Saturación, Lightness</h4>
+            <ul>
+                <li><strong>Hue (Tono):</strong> El color en sí mismo (0°-360° en la rueda).</li>
+                <li><strong>Saturación:</strong> Intensidad del color (0% = gris, 100% = color puro).</li>
+                <li><strong>Lightness (Luminosidad):</strong> Claridad u oscuridad del color (0% = negro, 100% = blanco).</li>
+                <li><strong>Opacidad:</strong> Nivel de transparencia del color (0 = transparente, 1 = opaco).</li>
+            </ul>
+
+            <!-- Colores hexadecimales -->
+            <h4>🔹 Colores hexadecimales</h4>
+            <p>Los <strong>códigos hexadecimales</strong> son una forma de representar colores en diseño digital usando el sistema hexadecimal (base 16).</p>
+
+            <div class="hex-explanation">
+                <span style="color: #888;">// Estructura de un color hexadecimal</span><br>
+                <span class="red">#FF</span><span class="green">66</span><span class="blue">00</span><br>
+                <span style="color: #888;">  ↑    ↑    ↑</span><br>
+                <span style="color: #888;">  R    G    B</span><br><br>
+                <span style="color: #888;">// Cada par de dígitos representa la intensidad de un color</span><br>
+                <span class="red">FF</span> <span style="color: #888;">→ 255 en decimal (rojo puro)</span><br>
+                <span class="green">66</span> <span style="color: #888;">→ 102 en decimal (verde medio)</span><br>
+                <span class="blue">00</span> <span style="color: #888;">→ 0 en decimal (sin azul)</span>
+            </div>
+
+            <ul>
+                <li><strong>Los números hexadecimales (base 16)</strong> usan dígitos del 0 al 9 y letras de la A a la F.</li>
+                <li><strong>En RGB:</strong> Cada color (Rojo, Verde, Azul) se representa con un valor de 0 a 255 (00 a FF en hex).</li>
+                <li><strong>Ejemplo:</strong> <code>#FF0000</code> = rojo puro, <code>#00FF00</code> = verde puro, <code>#0000FF</code> = azul puro.</li>
+                <li><strong>Blanco:</strong> <code>#FFFFFF</code>, <strong>Negro:</strong> <code>#000000</code>.</li>
+            </ul>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Realiza las siguientes actividades:</strong></p>
+                <ul>
+                    <li><strong>Identifica relaciones:</strong> En la rueda de colores, encuentra un par de colores análogos, complementarios y una triada.</li>
+                    <li><strong>Modifica un color:</strong> Toma el color <code>#336699</code> y modifica su saturación y luminosidad mentalmente.</li>
+                    <li><strong>Interpreta códigos:</strong> ¿Qué color representa <code>#FF6600</code>? (Pista: busca los valores de rojo, verde y azul).</li>
+                    <li><strong>Usa una herramienta:</strong> Abre un selector de colores (ej: en Canva, Photoshop o en línea) y explora la relación entre HSL y códigos hexadecimales.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cómo influye la saturación en la percepción de un color?</li>
+                    <li>¿Qué combinación de colores usarías para un sitio web corporativo?</li>
+                    <li>¿Cuál es la relación entre los números hexadecimales y RGB?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la teoría del color y los códigos hexadecimales.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Identifica relaciones cromáticas en la rueda de colores.</li>
+                <li>Explica los conceptos de hue, saturación, lightness y opacidad.</li>
+                <li>Interpreta códigos hexadecimales y su relación con RGB.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con herramientas de color</li>
+                <li>Rueda de colores</li>
+                <li>Selector de colores en línea</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de conceptos"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué son los colores análogos? → <strong>Colores adyacentes en la rueda.</strong></li>
+                <li>¿Qué son los colores complementarios? → <strong>Colores opuestos en la rueda.</strong></li>
+                <li>¿Qué significa la saturación? → <strong>Intensidad del color.</strong></li>
+                <li>¿Qué es un código hexadecimal? → <strong>Representación de color en base 16 (RRGGBB).</strong></li>
+                <li>¿Qué colores forman la triada? → <strong>Tres colores equidistantes (120°).</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de teoría del color y códigos hexadecimales.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Hue:</strong> El color en sí (0°-360°).</p>
+        <p>• <strong>Saturación:</strong> Intensidad (0% = gris, 100% = puro).</p>
+        <p>• <strong>Lightness:</strong> Claridad (0% = negro, 100% = blanco).</p>
+        <p>• <strong>Opacidad:</strong> Transparencia (0 = invisible, 1 = opaco).</p>
+        <p>• <strong>Hexadecimal:</strong> #RRGGBB → Rojo, Verde, Azul en valores 00-FF.</p>
+        <p>• <strong>Complementarios:</strong> Opuestos en la rueda (ej: Rojo ↔ Verde).</p>
+        <p>• <strong>Análogos:</strong> Adyacentes en la rueda (ej: Azul, Azul-verde, Verde).</p>
+        <p>• <strong>Triada:</strong> Tres colores equidistantes (120°).</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Sienta las bases para la selección y uso de colores en diseño digital.</p>
+        <p>• Conecta la teoría del color con la práctica en herramientas de diseño.</p>
+        <p>• Prepara a los estudiantes para trabajar con códigos de color en desarrollo web y diseño gráfico.</p>
+        <p>• Desarrolla habilidades de percepción y aplicación del color.</p>
+    </div>
+
+</div>
+</body>
+</html>

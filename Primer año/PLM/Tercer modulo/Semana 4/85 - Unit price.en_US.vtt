@@ -1,0 +1,410 @@
+WEBVTT
+
+1
+00:00:00.210 --> 00:00:02.260
+<v Krista>In this video, we're talking about unit price,</v>
+
+2
+00:00:02.260 --> 00:00:04.850
+and how to compare unit prices to figure out which
+
+3
+00:00:04.850 --> 00:00:06.630
+of two options is a better value.
+
+4
+00:00:06.630 --> 00:00:08.050
+So, in this particular problem,
+
+5
+00:00:08.050 --> 00:00:09.930
+we have two purchases we can make.
+
+6
+00:00:09.930 --> 00:00:13.360
+We can buy 24 ounces of something for $3.60,
+
+7
+00:00:13.360 --> 00:00:16.900
+or 88 ounces of the same thing for $14.
+
+8
+00:00:16.900 --> 00:00:19.860
+We want to figure out which of these is a better value.
+
+9
+00:00:19.860 --> 00:00:22.180
+So, what we want to do is compare the unit price.
+
+10
+00:00:22.180 --> 00:00:24.160
+So, because we have two different sizes,
+
+11
+00:00:24.160 --> 00:00:26.350
+and two different prices, it's hard to compare
+
+12
+00:00:26.350 --> 00:00:28.500
+the value of these two purchases.
+
+13
+00:00:28.500 --> 00:00:32.550
+We have 24 ounces for $3.60, here we have a much larger
+
+14
+00:00:32.550 --> 00:00:35.927
+size, 88 ounces, but for a much larger price,
+
+15
+00:00:35.927 --> 00:00:38.220
+$14 instead of $3.60.
+
+16
+00:00:38.220 --> 00:00:42.270
+If we look at this first option here, 24 ounces for $3.60,
+
+17
+00:00:42.270 --> 00:00:44.990
+if we can figure out the price per one ounce,
+
+18
+00:00:44.990 --> 00:00:48.790
+instead of here we know it's $3.60 for 24 ounces,
+
+19
+00:00:48.790 --> 00:00:51.540
+if we can figure out what the price is for one ounce,
+
+20
+00:00:51.540 --> 00:00:54.680
+then we could multiply that price by 88 ounces,
+
+21
+00:00:54.680 --> 00:00:56.900
+and compare the result to $14.
+
+22
+00:00:56.900 --> 00:00:58.260
+So, here's what that's going to look like.
+
+23
+00:00:58.260 --> 00:01:02.240
+If the price for 24 ounces is $3.60, and we want
+
+24
+00:01:02.240 --> 00:01:05.720
+price per ounce, then we need to divide price by ounce.
+
+25
+00:01:05.720 --> 00:01:08.800
+When we say price per ounce, it means divide price by ounce.
+
+26
+00:01:08.800 --> 00:01:13.800
+So, we're going to say $3.60 divided by 24 ounces.
+
+27
+00:01:15.060 --> 00:01:17.290
+We have a decimal point here, we're going to move it
+
+28
+00:01:17.290 --> 00:01:20.800
+straight up into the quotient here, put our decimal.
+
+29
+00:01:20.800 --> 00:01:22.270
+And then, we're going to say, how many times
+
+30
+00:01:22.270 --> 00:01:24.030
+does 24 go into three?
+
+31
+00:01:24.030 --> 00:01:25.880
+Zero times, so we get zero there,
+
+32
+00:01:25.880 --> 00:01:27.930
+when we multiply zero by 24.
+
+33
+00:01:27.930 --> 00:01:31.190
+We get three, and we bring down the six here.
+
+34
+00:01:31.190 --> 00:01:33.560
+How many times does 24 go into 36?
+
+35
+00:01:33.560 --> 00:01:37.300
+One time, when we multiply one by 24 we get 24.
+
+36
+00:01:37.300 --> 00:01:41.020
+And then, 36 minus 24 will give us 12.
+
+37
+00:01:41.020 --> 00:01:43.440
+Bringing down the zero here,
+
+38
+00:01:43.440 --> 00:01:46.240
+how many times does 24 go into 120?
+
+39
+00:01:46.240 --> 00:01:48.010
+Well, exactly five times.
+
+40
+00:01:48.010 --> 00:01:51.210
+When we multiply five by 24, we get 120.
+
+41
+00:01:51.210 --> 00:01:53.310
+We subtract, we get a remainder of zero.
+
+42
+00:01:53.310 --> 00:01:54.640
+So, we know that price per ounce
+
+43
+00:01:54.640 --> 00:01:58.340
+is exactly 15 cents in this first option.
+
+44
+00:01:58.340 --> 00:02:01.570
+If the price per ounce of this option is 15 cents,
+
+45
+00:02:01.570 --> 00:02:05.110
+then we can take that value, and multiply it by 88 ounces.
+
+46
+00:02:05.110 --> 00:02:07.680
+If we get a dollar amount that's greater than 14,
+
+47
+00:02:07.680 --> 00:02:09.720
+then we know that this is the better deal.
+
+48
+00:02:09.720 --> 00:02:12.120
+If we get a dollar amount that's less than 14,
+
+49
+00:02:12.120 --> 00:02:14.650
+then we know that this first option is a better deal.
+
+50
+00:02:14.650 --> 00:02:17.640
+So, let's take 15 cents and multiply it by 88 ounces.
+
+51
+00:02:17.640 --> 00:02:20.050
+So, we're going to say 88 ounces multiplied
+
+52
+00:02:20.050 --> 00:02:22.990
+by .15 for 15 cents.
+
+53
+00:02:22.990 --> 00:02:25.210
+We'll do five times eight, gives us 40.
+
+54
+00:02:25.210 --> 00:02:27.510
+We get 40 here, 44.
+
+55
+00:02:27.510 --> 00:02:30.300
+Bring down our zero, one times eight is eight.
+
+56
+00:02:30.300 --> 00:02:32.050
+One times eight is eight.
+
+57
+00:02:32.050 --> 00:02:36.609
+And then, when we add these, zero, 12, 12, 13,
+
+58
+00:02:36.609 --> 00:02:37.650
+we get 13, 20.
+
+59
+00:02:37.650 --> 00:02:40.510
+We have our decimal point here.
+
+60
+00:02:40.510 --> 00:02:43.110
+So, we have to go over one, two, to get to that decimal
+
+61
+00:02:43.110 --> 00:02:45.090
+point, which means we have to go over one, two,
+
+62
+00:02:45.090 --> 00:02:47.210
+and put in our decimal point here.
+
+63
+00:02:47.210 --> 00:02:49.303
+So, we get $13.20.
+
+64
+00:02:50.360 --> 00:02:53.740
+In other words, at the rate of 15 cents per ounce,
+
+65
+00:02:53.740 --> 00:02:57.540
+88 ounces will cost us $13.20.
+
+66
+00:02:57.540 --> 00:03:01.700
+But, we're being charged $14 for it, instead of $13.20,
+
+67
+00:03:01.700 --> 00:03:03.380
+or something less than that.
+
+68
+00:03:03.380 --> 00:03:05.610
+So, this actually doesn't turn out to be a good deal,
+
+69
+00:03:05.610 --> 00:03:09.320
+so we should just buy the 24 ounce package for $3.60,
+
+70
+00:03:09.320 --> 00:03:12.010
+and if we want more quantity, we should buy more
+
+71
+00:03:12.010 --> 00:03:16.530
+of these instead of one 88 ounce package for $14 because
+
+72
+00:03:16.530 --> 00:03:19.330
+this is a better price per ounce, it's a better value.
+
+73
+00:03:19.330 --> 00:03:21.300
+The other way we could do this, instead of with long
+
+74
+00:03:21.300 --> 00:03:25.040
+division and multiplication, we could set up a proportion.
+
+75
+00:03:25.040 --> 00:03:28.700
+We could say 24 ounces for $3.60, we could put this
+
+76
+00:03:28.700 --> 00:03:30.530
+into a ratio, a fraction like this.
+
+77
+00:03:30.530 --> 00:03:33.860
+24 ounces for $3.60, should be
+
+78
+00:03:33.860 --> 00:03:37.830
+equal to 88 ounces for x dollars.
+
+79
+00:03:37.830 --> 00:03:39.900
+This works because we've got ounces and ounces
+
+80
+00:03:39.900 --> 00:03:42.610
+in the numerator, and price and price in the denominator.
+
+81
+00:03:42.610 --> 00:03:45.020
+And, since we've set up a proportion now, we just
+
+82
+00:03:45.020 --> 00:03:49.560
+cross multiply 24 times x, and $3.60 times 88,
+
+83
+00:03:49.560 --> 00:03:54.560
+and we get 24x is equal to 3.6 time 88, which is 316.8.
+
+84
+00:03:56.830 --> 00:03:57.980
+Then, to solve for x, we need
+
+85
+00:03:57.980 --> 00:04:01.510
+to divide both sides by 24, like this.
+
+86
+00:04:01.510 --> 00:04:04.690
+We would get 24 to cancel in the numerator and denominator
+
+87
+00:04:04.690 --> 00:04:08.440
+on the left hand side, leaving us with just x is equal to.
+
+88
+00:04:08.440 --> 00:04:11.900
+And, if we do 316.8 divided by 24, we're going to
+
+89
+00:04:11.900 --> 00:04:15.320
+get the same answer we got before, which is 13.2.
+
+90
+00:04:15.320 --> 00:04:18.510
+So, we know that the price is $13.20.
+
+91
+00:04:18.510 --> 00:04:20.900
+So, whether you want to do it this way, figure out
+
+92
+00:04:20.900 --> 00:04:23.470
+a price per ounce on option number one,
+
+93
+00:04:23.470 --> 00:04:26.330
+get that price per ounce right here, the 15 cents,
+
+94
+00:04:26.330 --> 00:04:28.580
+and then multiply that unit price by the amount
+
+95
+00:04:28.580 --> 00:04:31.870
+from the other option, and them compare this price here
+
+96
+00:04:31.870 --> 00:04:34.710
+to this price, and make a determination about value.
+
+97
+00:04:34.710 --> 00:04:36.410
+Or, whether you want to set up a proportion
+
+98
+00:04:36.410 --> 00:04:37.870
+like this and solve for x.
+
+99
+00:04:37.870 --> 00:04:39.210
+Either way, it doesn't matter, you're going to get
+
+100
+00:04:39.210 --> 00:04:42.040
+the same answer as long as you do the math correctly.
+
+101
+00:04:42.040 --> 00:04:44.700
+So, that's how you figure out unit price and use it
+
+102
+00:04:44.700 --> 00:04:48.033
+to determine which of two options is a better value.
+

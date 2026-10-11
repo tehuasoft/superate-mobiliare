@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Clipchamp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 10px 0 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #3f51b5;
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 14px;
+        }
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+        .effect-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 8px;
+        }
+        .effect-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .effect-card p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+            color: #333;
+        }
+        .effect-card .use {
+            font-size: 13px;
+            color: #555;
+            background: #e8eaf6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Efectos y transiciones en Clipchamp (pantalla verde, filtros, transiciones)
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Aplica efectos, filtros y transiciones en Clipchamp para mejorar la calidad visual de videos, utilizando herramientas creativas como pantalla verde y edición avanzada básica para lograr proyectos audiovisuales más profesionales.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define el concepto de efectos visuales, filtros y transiciones en edición de video.</li>
+                <li>Comprende el funcionamiento de la pantalla verde (chroma key).</li>
+                <li>Reconoce la utilidad de cada herramienta para mejorar la narrativa visual.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Aplicar filtros de color y corrección a clips en Clipchamp.</li>
+                <li>Agregar transiciones entre clips para una edición más fluida.</li>
+                <li>Usar la función de pantalla verde para reemplazar fondos.</li>
+                <li>Ajustar la intensidad de los efectos aplicados.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra creatividad al aplicar efectos visuales.</li>
+                <li>Valora la importancia de la postproducción en la calidad del video.</li>
+                <li>Participa activamente en las actividades prácticas.</li>
+                <li>Reconoce el potencial de Clipchamp para la creación de contenido.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Mejorando videos con efectos y transiciones"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y exploración.</p>
+            <p><span class="label">Descripción:</span> El docente introduce el tema y explica la importancia de los efectos visuales en la edición de video.</p>
+
+            <p><strong>🔹 ¿Por qué usar efectos y transiciones?</strong></p>
+            <ul>
+                <li>Mejoran la calidad visual del video.</li>
+                <li>Permiten transmitir emociones y mantener la atención del espectador.</li>
+                <li>Facilitan la transición entre escenas y clips.</li>
+                <li>La <strong>pantalla verde (chroma key)</strong> permite reemplazar fondos y crear efectos especiales.</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">💡 Clipchamp incluye:</span><br>
+                ✔ Filtros de color (sépia, blanco y negro, tonos cálidos/fríos).<br>
+                ✔ Transiciones (desvanecimiento, barrido, zoom).<br>
+                ✔ Chroma key (pantalla verde) para reemplazar fondos .
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica las herramientas de efectos y transiciones en Clipchamp.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona al menos 3 tipos de efectos disponibles en Clipchamp.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con Clipchamp</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Aplicando efectos, filtros, transiciones y pantalla verde"</h4>
+            <p><span class="label">Metodología:</span> Demostración guiada y práctica.</p>
+
+            <!-- Filtros -->
+            <h4>🔹 Filtros de color</h4>
+            <p>Los filtros permiten cambiar el aspecto visual de un video de manera rápida . En Clipchamp se encuentran en la pestaña <strong>"Ajustes" → "Filtros"</strong> .</p>
+            <div class="grid-3">
+                <div class="effect-card" style="border-left-color: #2e7d32;">
+                    <strong>🎨 Filtros de color</strong>
+                    <p>Aplican un tono general al video. Ejemplos: Sépia, Blanco y negro, Cálido, Frío.</p>
+                    <span class="use">📌 Uso: Cambiar el estado de ánimo del video.</span>
+                </div>
+                <div class="effect-card" style="border-left-color: #0d47a1;">
+                    <strong>🔆 Corrección de color</strong>
+                    <p>Ajusta brillo, contraste, saturación y temperatura de color.</p>
+                    <span class="use">📌 Uso: Corregir problemas de iluminación.</span>
+                </div>
+                <div class="effect-card" style="border-left-color: #f9a825;">
+                    <strong>🎞️ Estilos cinematográficos</strong>
+                    <p>Simulan la apariencia de películas o géneros específicos.</p>
+                    <span class="use">📌 Uso: Dar un toque profesional.</span>
+                </div>
+            </div>
+
+            <!-- Transiciones -->
+            <h4>🔹 Transiciones</h4>
+            <p>Las transiciones son efectos que se aplican entre dos clips para crear un cambio suave . En Clipchamp se encuentran en la pestaña <strong>"Transiciones"</strong> .</p>
+            <ul>
+                <li><strong>Desvanecimiento:</strong> Fundido a negro o a blanco.</li>
+                <li><strong>Barrido:</strong> Una imagen empuja a la otra.</li>
+                <li><strong>Zoom:</strong> Efecto de acercamiento o alejamiento.</li>
+            </ul>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Cómo agregar una transición?</span><br>
+                1. Seleccionar la pestaña <strong>"Transiciones"</strong> .<br>
+                2. Arrastrar una transición entre dos clips en la línea de tiempo.<br>
+                3. Ajustar su duración arrastrando los bordes de la transición .
+            </div>
+
+            <!-- Pantalla verde -->
+            <h4>🔹 Pantalla verde (Chroma Key)</h4>
+            <p>La función de pantalla verde permite eliminar un color de fondo (generalmente verde o azul) y reemplazarlo con una imagen o video .</p>
+
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>✅ Pasos para usar pantalla verde:</strong>
+                    <ol style="font-size: 14px; padding-left: 16px;">
+                        <li>Grabar o importar un video con fondo verde.</li>
+                        <li>Agregar un video o imagen de fondo en la línea de tiempo (debajo del clip principal).</li>
+                        <li>Seleccionar el clip de pantalla verde y abrir el panel de <strong>"Efectos"</strong> .</li>
+                        <li>Hacer clic en <strong>"Chroma key"</strong> y seleccionar el color verde con el cuentagotas .</li>
+                        <li>Ajustar la tolerancia para eliminar sombras y detalles .</li>
+                    </ol>
+                </div>
+                <div style="background: #e3f2fd; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #0d47a1;">
+                    <strong>📌 Consejos para un buen chroma key:</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Iluminación uniforme del fondo verde.</li>
+                        <li>Evitar sombras en el sujeto.</li>
+                        <li>No usar ropa verde o azul si se usa ese fondo .</li>
+                        <li>Grabar en buena calidad (720p a 30 fps) para que Clipchamp procese rápido.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Realiza los siguientes pasos en Clipchamp:</strong></p>
+                <ul>
+                    <li>Crea un nuevo proyecto y añade un video de prueba (puede ser el grabado en la clase anterior).</li>
+                    <li>Aplica un <strong>filtro</strong> de color (por ejemplo, "Cálido" o "Blanco y negro").</li>
+                    <li>Agrega una <strong>transición</strong> entre dos clips (desvanecimiento o barrido).</li>
+                    <li>Si tienes un video con pantalla verde, reemplaza el fondo con una imagen o video de Clipchamp usando <strong>Chroma Key</strong>.</li>
+                    <li>Experimenta con la intensidad de los efectos y ajusta la transición para que sea suave.</li>
+                    <li>Previsualiza el resultado.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cómo cambia el video al aplicar un filtro?</li>
+                    <li>¿Qué transición te pareció más útil y por qué?</li>
+                    <li>¿Qué se necesita para que la pantalla verde funcione correctamente?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica efectos, filtros, transiciones y pantalla verde en Clipchamp.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Aplica filtros de color a clips.</li>
+                <li>Agrega transiciones entre clips en la línea de tiempo.</li>
+                <li>Usa la función de pantalla verde para reemplazar fondos.</li>
+                <li>Ajusta la intensidad de los efectos.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con acceso a internet</li>
+                <li>Clipchamp (cuenta personal o institucional)</li>
+                <li>Videos de prueba (con y sin pantalla verde)</li>
+                <li>Imágenes o videos para fondo (en Clipchamp o subidos)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Compartiendo resultados"</h4>
+            <p><span class="label">Metodología:</span> Exhibición y retroalimentación.</p>
+            <ul>
+                <li>¿Qué filtro aplicaste y por qué?</li>
+                <li>¿Cómo usaste la transición entre clips?</li>
+                <li>¿Qué aprendiste sobre la pantalla verde?</li>
+            </ul>
+            <p>El docente refuerza conceptos clave:</p>
+            <ul>
+                <li><strong>Los filtros</strong> cambian el tono y estilo visual del video.</li>
+                <li><strong>Las transiciones</strong> suavizan los cambios entre clips.</li>
+                <li><strong>El chroma key</strong> permite crear efectos profesionales con pantalla verde.</li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante valora el uso de efectos y transiciones en la edición de video.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Comparte su experiencia con los efectos aplicados.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Filtros:</strong> Úsalos para dar un estilo consistente a todo el video.</p>
+        <p>• <strong>Transiciones:</strong> No abuses de ellas; menos es más.</p>
+        <p>• <strong>Pantalla verde:</strong> Ilumina uniformemente y evita sombras para un chroma key perfecto.</p>
+        <p>• <strong>Previsualiza:</strong> Siempre revisa el resultado antes de exportar.</p>
+        <p>• <strong>Experimenta:</strong> Prueba diferentes combinaciones de efectos y transiciones.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce herramientas creativas para mejorar la calidad visual de videos.</p>
+        <p>• Desarrolla habilidades de postproducción y edición audiovisual.</p>
+        <p>• Prepara a los estudiantes para crear contenido más profesional.</p>
+        <p>• Conecta con técnicas utilizadas en la industria del video.</p>
+    </div>
+
+</div>
+</body>
+</html>

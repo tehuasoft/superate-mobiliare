@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Personalización Visual en Power Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+            font-family: 'Courier New', monospace;
+        }
+
+        .paleta-colores {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+        .paleta-colores .color {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        .mock-app {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .mock-app .header {
+            background: #1a237e;
+            color: white;
+            padding: 10px 14px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mock-app .body {
+            padding: 12px 14px;
+            background: #f5f7fa;
+        }
+        .mock-app .galeria-item {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #1e88e5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .mock-app .galeria-item .titulo {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a237e;
+        }
+        .mock-app .galeria-item .detalle {
+            font-size: 13px;
+            color: #555;
+            margin-top: 2px;
+        }
+        .mock-app .galeria-item .estatus {
+            display: inline-block;
+            padding: 1px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .estado-activo { background: #e3f2fd; color: #0d47a1; }
+        .estado-pausado { background: #fff3e0; color: #e65100; }
+        .estado-cerrado { background: #e8f5e9; color: #2e7d32; }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🎨 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Personalización Visual en Power Apps · Colores, Fuentes, Íconos y Formas</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aplica principios de personalización visual en una aplicación de Power Apps, utilizando colores corporativos, fuentes adecuadas, tamaños y paddings consistentes, así como íconos y formas para mejorar la experiencia de usuario y la identidad visual de la aplicación.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende la importancia de la identidad visual en las aplicaciones.</li>
+                <li>Reconoce los elementos de personalización: colores, fuentes, tamaños, paddings.</li>
+                <li>Identifica el uso de íconos y formas para comunicar visualmente.</li>
+                <li>Entiende los principios de consistencia visual.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Aplicar colores corporativos a la aplicación.</li>
+                <li>Configurar fuentes, tamaños y paddings consistentes.</li>
+                <li>Insertar íconos y formas para mejorar la interfaz.</li>
+                <li>Usar formas para crear separadores y fondos.</li>
+                <li>Mantener la consistencia visual en todas las pantallas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por la estética y la identidad visual.</li>
+                <li>Valora la importancia de una interfaz atractiva y funcional.</li>
+                <li>Participa activamente en la personalización de la app.</li>
+                <li>Desarrolla criterio visual y atención al detalle.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué hace que una app se vea profesional?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente muestra dos versiones de una misma app: una sin personalización (colores por defecto, fuentes inconsistentes) y otra con identidad visual. Pregunta: <em>"¿Cuál se ve más profesional? ¿Qué elementos marcan la diferencia?"</em></p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Elementos de personalización visual en Power Apps:</span>
+                <ul>
+                    <li><strong>Colores corporativos:</strong> Paleta de colores alineada con la marca.</li>
+                    <li><strong>Fuentes:</strong> Tipografía consistente en toda la app.</li>
+                    <li><strong>Tamaños:</strong> Jerarquía visual mediante tamaños de texto.</li>
+                    <li><strong>Paddings:</strong> Espaciado interno para dar aire a los elementos.</li>
+                    <li><strong>Íconos:</strong> Comunicación visual rápida y universal.</li>
+                    <li><strong>Formas:</strong> Separadores, fondos, bordes redondeados.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la importancia de la personalización visual en las aplicaciones.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los elementos de personalización visual.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a Power Apps Studio</li>
+                <li>App "Gestor de Proyectos"</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Aplicando personalización visual a la app"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- COLORES -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 1: Colores corporativos</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Definir la paleta de colores</h5>
+                <p>Elegir una paleta de 3-4 colores que representen la identidad de la marca. Ejemplo:</p>
+                <div class="paleta-colores">
+                    <div class="color" style="background: #1a237e;">#1A237E (Principal)</div>
+                    <div class="color" style="background: #3f51b5;">#3F51B5 (Secundario)</div>
+                    <div class="color" style="background: #e8eaf6; color: #1a237e;">#E8EAF6 (Fondo)</div>
+                    <div class="color" style="background: #ffffff; color: #333; border: 1px solid #ddd;">#FFFFFF (Superficie)</div>
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Aplicar colores a los elementos</h5>
+                <p>Cambiar la propiedad <code>Fill</code> (fondo) y <code>Color</code> (texto) de los controles principales:</p>
+                <div class="captura-mock">
+                    🎨 Pantalla: Fill = #E8EAF6<br>
+                    🎨 Encabezado: Fill = #1A237E, Color = White<br>
+                    🎨 Botón Guardar: Fill = #2E7D32, Color = White
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Consejo:</span>
+                <p>Usa variables globales para definir los colores de la marca y poder cambiarlos fácilmente en toda la app.</p>
+                <div class="captura-mock" style="font-family: 'Courier New', monospace; margin-left: 0;">
+                    Set(varColorPrimario, ColorValue("#1A237E"));<br>
+                    Set(varColorSecundario, ColorValue("#3F51B5"))
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- FUENTES -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 2: Fuentes y tamaños</h4>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Configurar la fuente</h5>
+                <p>Seleccionar todos los controles de texto y cambiar la propiedad <code>Font</code> a una fuente consistente. Ejemplo: <strong>Segoe UI</strong> (predeterminada) o <strong>Open Sans</strong>.</p>
+                <div class="captura-mock">
+                    🔤 Font: Segoe UI
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">4</span>
+                <h5>Configurar tamaños (jerarquía visual)</h5>
+                <p>Asignar tamaños según la importancia del texto:</p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li><strong>Título de pantalla:</strong> 24-28 px.</li>
+                    <li><strong>Título en galería:</strong> 16-18 px.</li>
+                    <li><strong>Subtítulo / detalle:</strong> 13-14 px.</li>
+                    <li><strong>Texto secundario:</strong> 11-12 px.</li>
+                </ul>
+                <div class="captura-mock">
+                    📏 Título: Size = 24 | Subtítulo: Size = 14
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">5</span>
+                <h5>Configurar paddings</h5>
+                <p>Ajustar la propiedad <code>PaddingTop</code>, <code>PaddingBottom</code>, <code>PaddingLeft</code>, <code>PaddingRight</code> para dar aire a los elementos.</p>
+                <div class="captura-mock">
+                    📐 Padding: 8-12 px en controles de la galería<br>
+                    📐 Padding: 16 px en contenedores principales
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ÍCONOS -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 3: Íconos para mejorar la experiencia</h4>
+
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">6</span>
+                <h5>Insertar íconos</h5>
+                <p>Ir a <strong>"Insertar"</strong> → <strong>"Íconos"</strong> y elegir los apropiados:</p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li><strong>🔍 Lupa:</strong> Junto al cuadro de búsqueda.</li>
+                    <li><strong>👤 Usuario:</strong> Junto al propietario.</li>
+                    <li><strong>📅 Calendario:</strong> Junto a fechas.</li>
+                    <li><strong>✏️ Lápiz:</strong> En el botón de editar.</li>
+                    <li><strong>💾 Disco:</strong> En el botón de guardar.</li>
+                    <li><strong>❌ Cruz:</strong> En el botón de cancelar.</li>
+                </ul>
+                <div class="captura-mock">
+                    🔣 Insertar → Íconos → Search | User | Calendar | Edit | Save | Cancel
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #e8f5e9;">
+                <span class="highlight" style="color: #2e7d32;">📌 Ejemplo de uso de íconos en la galería:</span>
+                <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 6px; font-size: 14px;">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #eee;">
+                        <span>📄</span> <strong>E-commerce App</strong>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #eee;">
+                        <span>👤</span> Ana García
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 0;">
+                        <span>🏷️</span> Activo
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- FORMAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 4: Formas para mejorar el diseño</h4>
+
+            <div class="paso-card" style="border-left-color: #00838f;">
+                <span class="numero">7</span>
+                <h5>Insertar formas</h5>
+                <p>Ir a <strong>"Insertar"</strong> → <strong>"Formas"</strong> y elegir las apropiadas:</p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li><strong>Rectángulo:</strong> Para fondos, encabezados o separadores.</li>
+                    <li><strong>Círculo:</strong> Para avatares o indicadores de estado.</li>
+                    <li><strong>Línea:</strong> Para separar secciones.</li>
+                    <li><strong>Rectángulo redondeado:</strong> Para tarjetas y contenedores.</li>
+                </ul>
+                <div class="captura-mock">
+                    🔷 Insertar → Formas → Rectángulo | Círculo | Línea | Rectángulo redondeado
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Ejemplo de formas en la interfaz:</span>
+                <ul>
+                    <li><strong>Encabezado:</strong> Rectángulo con Fill = color principal.</li>
+                    <li><strong>Tarjetas de proyecto:</strong> Rectángulo redondeado con sombra.</li>
+                    <li><strong>Separadores:</strong> Línea horizontal entre secciones.</li>
+                    <li><strong>Indicador de estatus:</strong> Círculo de color (verde = activo, naranja = pausado, gris = cerrado).</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO VISUAL -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo visual de la app personalizada</h4>
+
+            <div class="mock-app">
+                <div class="header" style="background: #1a237e;">
+                    <span>📋 Proyectos</span>
+                    <span>🔍</span>
+                </div>
+                <div class="body">
+                    <div class="galeria-item" style="border-left-color: #2e7d32;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span>📄</span>
+                            <div class="titulo">E-commerce App</div>
+                        </div>
+                        <div class="detalle" style="display: flex; align-items: center; gap: 6px;">
+                            <span>👤</span> Ana García
+                        </div>
+                        <span class="estatus estado-activo">● Activo</span>
+                    </div>
+                    <div class="galeria-item" style="border-left-color: #e65100;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span>📄</span>
+                            <div class="titulo">CRM de Ventas</div>
+                        </div>
+                        <div class="detalle" style="display: flex; align-items: center; gap: 6px;">
+                            <span>👤</span> María Torres
+                        </div>
+                        <span class="estatus estado-pausado">● Pausado</span>
+                    </div>
+                    <div class="galeria-item" style="border-left-color: #757575;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span>📄</span>
+                            <div class="titulo">Migración de Datos</div>
+                        </div>
+                        <div class="detalle" style="display: flex; align-items: center; gap: 6px;">
+                            <span>👤</span> Luis Ramírez
+                        </div>
+                        <span class="estatus estado-cerrado">● Cerrado</span>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ App con colores corporativos, íconos, formas y paddings consistentes.</p>
+
+            <!-- ============================================ -->
+            <!-- BUENAS PRÁCTICAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Buenas prácticas de personalización visual</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>✅ Qué hacer</h5>
+                    <ul>
+                        <li>Usar máximo 3-4 colores principales.</li>
+                        <li>Mantener la misma fuente en toda la app.</li>
+                        <li>Usar tamaños consistentes para jerarquía.</li>
+                        <li>Dejar suficiente espacio (padding) entre elementos.</li>
+                        <li>Usar íconos reconocibles y consistentes.</li>
+                        <li>Redondear bordes para un look moderno.</li>
+                    </ul>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #c62828;">
+                    <h5>❌ Qué evitar</h5>
+                    <ul>
+                        <li>Usar demasiados colores (más de 5).</li>
+                        <li>Mezclar múltiples fuentes sin criterio.</li>
+                        <li>Texto demasiado pequeño o demasiado grande.</li>
+                        <li>Elementos pegados sin espacio.</li>
+                        <li>Íconos que no se entienden o son ambiguos.</li>
+                        <li>Bordes cuadrados en exceso (look anticuado).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. En tu app "Gestor de Proyectos", define una paleta de colores corporativos (3-4 colores).</li>
+                    <li>2. Aplica los colores al encabezado, fondo y botones principales.</li>
+                    <li>3. Configura la fuente de todos los textos a <strong>Segoe UI</strong> con tamaños consistentes (títulos 18-24 px, detalles 13-14 px).</li>
+                    <li>4. Ajusta los paddings de los elementos de la galería (8-12 px).</li>
+                    <li>5. Inserta íconos junto al propietario (👤), fecha (📅) y estatus (🏷️).</li>
+                    <li>6. Agrega formas: rectángulo para encabezado, rectángulo redondeado para tarjetas, línea para separadores.</li>
+                    <li>7. Prueba la app y verifica la consistencia visual en todas las pantallas.</li>
+                    <li>8. Si no tienes acceso, describe los cambios que aplicarías y por qué.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cómo afecta la personalización visual a la percepción de profesionalismo?</li>
+                    <li>¿Por qué es importante mantener la consistencia en colores y fuentes?</li>
+                    <li>¿Qué íconos son más útiles para tu aplicación y por qué?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica personalización visual a su app usando colores, fuentes, tamaños, paddings, íconos y formas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Aplica colores corporativos consistentes.</li>
+                <li>Configura fuentes y tamaños con jerarquía visual.</li>
+                <li>Ajusta paddings para dar aire a los elementos.</li>
+                <li>Inserta íconos relevantes y comprensibles.</li>
+                <li>Usa formas para mejorar el diseño (separadores, fondos, tarjetas).</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a Power Apps Studio</li>
+                <li>App "Gestor de Proyectos"</li>
+                <li>Pizarra</li>
+                <li>Guía de personalización visual</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué elementos de personalización visual aplicamos?</li>
+                <li>¿Cómo se definen y aplican los colores corporativos?</li>
+                <li>¿Qué tamaños de fuente usarías para títulos y detalles?</li>
+                <li>¿Para qué sirven los paddings?</li>
+                <li>¿Qué íconos insertaste y por qué?</li>
+                <li>¿Cómo usaste las formas para mejorar el diseño?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Investiga cómo crear un <strong>tema personalizado</strong> en Power Apps que se aplique automáticamente a todos los controles. Describe el proceso.</p>
+                <p style="font-size: 13px; color: #555; margin-top: 4px;">Pista: busca "Temas" en la configuración de la app.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los principios de personalización visual en Power Apps.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la importancia de la identidad visual.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Power Apps Studio</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para personalización visual en Power Apps:</strong></p>
+        <p>• <strong>Colores:</strong> Usa 3-4 colores corporativos consistentes.</p>
+        <p>• <strong>Fuentes:</strong> Una sola familia tipográfica para toda la app.</p>
+        <p>• <strong>Tamaños:</strong> Jerarquía visual (24 px título, 14 px detalle).</p>
+        <p>• <strong>Paddings:</strong> 8-16 px para dar aire a los elementos.</p>
+        <p>• <strong>Íconos:</strong> Comunican rápido y mejoran la usabilidad.</p>
+        <p>• <strong>Formas:</strong> Rectángulos, círculos y líneas para organizar visualmente.</p>
+        <p>• <strong>Consistencia:</strong> Misma paleta y fuentes en todas las pantallas.</p>
+        <p>• <strong>Variables:</strong> Usa <code>Set()</code> para definir colores reutilizables.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a dar identidad visual a las aplicaciones.</p>
+        <p>• Desarrolla criterio estético y atención al detalle.</p>
+        <p>• Prepara a los estudiantes para crear apps atractivas y profesionales.</p>
+        <p>• Conecta la teoría del diseño con la práctica en Power Apps.</p>
+    </div>
+
+</div>
+</body>
+</html>

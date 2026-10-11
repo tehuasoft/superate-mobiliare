@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Conectar Power Apps a SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+        }
+
+        .mock-app {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .mock-app .header {
+            background: #1a237e;
+            color: white;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mock-app .body {
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+        .mock-app .tree {
+            background: #f5f7fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            border: 1px solid #e0e0e0;
+        }
+        .mock-app .tree span {
+            display: block;
+            padding: 2px 0;
+        }
+        .mock-app .tree span.indent {
+            padding-left: 16px;
+        }
+        .mock-app .tree span.indent2 {
+            padding-left: 32px;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🔌 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Conectar Power Apps a SharePoint · DataSource de la lista "Proyectos"</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a conectar Power Apps con SharePoint, creando una aplicación de Lienzo en blanco y agregando la lista "Proyectos" como fuente de datos (DataSource), comprendiendo el flujo de trabajo desde el entorno de diseño hasta la vinculación de datos externos.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es un DataSource en Power Apps.</li>
+                <li>Reconoce los tipos de conectores disponibles (SharePoint).</li>
+                <li>Identifica la estructura de una app de Lienzo.</li>
+                <li>Entiende la relación entre SharePoint Lists y Power Apps.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear una app de Lienzo en blanco desde make.powerapps.com.</li>
+                <li>Conectar a SharePoint como fuente de datos.</li>
+                <li>Seleccionar la lista "Proyectos" como DataSource.</li>
+                <li>Explorar la lista en Power Apps Studio.</li>
+                <li>Insertar una galería o formulario básico vinculado a los datos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por la integración de servicios de Microsoft.</li>
+                <li>Valora la importancia de conectar aplicaciones con datos reales.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de exploración y configuración.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo alimentamos una app con datos reales?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y contextualización.</p>
+            <p>El docente pregunta: <em>"Ya creamos una lista 'Proyectos' en SharePoint. ¿Cómo podemos hacer que una aplicación de Power Apps muestre y gestione esos proyectos?"</em> Se introduce el concepto de DataSource como puente entre la app y los datos.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es un DataSource en Power Apps?</span>
+                <p>Un <strong>DataSource</strong> (fuente de datos) es una conexión a un servicio externo que proporciona datos a la aplicación. Power Apps puede conectarse a SharePoint, Excel, Dataverse, SQL Server, y más de 200 conectores .</p>
+                <ul>
+                    <li><strong>SharePoint:</strong> Conector nativo para listas y bibliotecas .</li>
+                    <li><strong>Ventaja:</strong> Los datos se mantienen actualizados y sincronizados.</li>
+                    <li><strong>Uso:</strong> Permite leer, crear, modificar y eliminar elementos de la lista.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende el concepto de DataSource y su importancia para conectar apps con datos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce el propósito de un DataSource.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a make.powerapps.com</li>
+                <li>Lista "Proyectos" en SharePoint</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación de app en blanco y conexión a SharePoint"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- PASO 1: CREAR APP -->
+            <!-- ============================================ -->
+            <h4>🔹 Crear una app de Lienzo en blanco</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Acceder a make.powerapps.com</h5>
+                <p>Ingresar al portal con la cuenta organizativa de Microsoft 365.</p>
+                <div class="captura-mock">
+                    🌐 https://make.powerapps.com
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Iniciar creación de app</h5>
+                <p>Hacer clic en <strong>"Crear"</strong> en el menú izquierdo.</p>
+                <p>Seleccionar <strong>"Lienzo en blanco"</strong> (Blank canvas app) .</p>
+                <div class="captura-mock">
+                    🚀 Crear → Lienzo en blanco → Asignar nombre: "Gestor de Proyectos"
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Configurar formato de pantalla</h5>
+                <p>Elegir el formato: <strong>Teléfono</strong> o <strong>Tablet</strong>. Para este ejemplo, seleccionar <strong>Teléfono</strong> (vertical).</p>
+                <div class="captura-mock">
+                    📱 Formato: Teléfono (vertical) → Crear
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Se abrirá <strong>Power Apps Studio</strong> con una pantalla en blanco.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 4: CONECTAR A SHAREPOINT -->
+            <!-- ============================================ -->
+            <h4>🔹 Conectar a SharePoint como DataSource</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">4</span>
+                <h5>Agregar fuente de datos</h5>
+                <p>En el panel izquierdo, hacer clic en <strong>"Datos"</strong> (icono de base de datos).</p>
+                <p>Seleccionar <strong>"Agregar datos"</strong> → buscar y elegir <strong>"SharePoint"</strong> .</p>
+                <div class="captura-mock">
+                    🗄️ Datos → Agregar datos → SharePoint
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">5</span>
+                <h5>Seleccionar el sitio de SharePoint</h5>
+                <p>Elegir <strong>"Conectar directamente"</strong> e ingresar la URL del sitio de SharePoint donde se encuentra la lista "Proyectos".</p>
+                <div class="captura-mock">
+                    🔗 Conectar directamente → URL: https://[tenant].sharepoint.com/sites/[sitio]
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Hacer clic en <strong>"Ir"</strong> y autenticarse si es necesario.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">6</span>
+                <h5>Seleccionar la lista "Proyectos"</h5>
+                <p>En la lista de sitios y listas disponibles, buscar y seleccionar <strong>"Proyectos"</strong>.</p>
+                <div class="captura-mock">
+                    📋 Seleccionar: Proyectos → Conectar
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">La lista aparecerá en el panel de Datos como <code>Proyectos</code> .</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 7: EXPLORAR DATOS -->
+            <!-- ============================================ -->
+            <h4>🔹 Explorar la lista conectada</h4>
+
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">7</span>
+                <h5>Ver la estructura de datos</h5>
+                <p>En el panel de Datos, expandir <code>Proyectos</code> para ver las columnas disponibles (Título, Propietario, Fecha de Inicio, Estatus, etc.).</p>
+                <div class="captura-mock">
+                    📂 Proyectos → Título | Propietario | Fecha de Inicio | Estatus | Descripción
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Power Apps expone automáticamente todas las columnas de la lista.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 8: INSERTAR GALERÍA -->
+            <!-- ============================================ -->
+            <h4>🔹 Insertar una galería vinculada a los datos</h4>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">8</span>
+                <h5>Agregar una galería</h5>
+                <p>En la barra superior, ir a <strong>"Insertar"</strong> → <strong>"Galería"</strong> → elegir <strong>"Vertical"</strong> o <strong>"Horizontal"</strong>.</p>
+                <p>En el panel de propiedades de la galería, cambiar el <strong>DataSource</strong> a <code>Proyectos</code>.</p>
+                <div class="captura-mock">
+                    🖼️ Insertar → Galería → Vertical → DataSource: Proyectos
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">La galería mostrará los datos de la lista automáticamente.</p>
+            </div>
+
+            <div class="mock-app">
+                <div class="header">
+                    <span>📱 Gestor de Proyectos</span>
+                    <span>🔍</span>
+                </div>
+                <div class="body">
+                    <div style="background: #e3f2fd; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px;">
+                        <strong>E-commerce App</strong><br>
+                        <span style="font-size: 13px; color: #555;">Propietario: Ana García | Estatus: Activo</span>
+                    </div>
+                    <div style="background: #e3f2fd; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px;">
+                        <strong>Intranet Corporativa</strong><br>
+                        <span style="font-size: 13px; color: #555;">Propietario: Carlos López | Estatus: Activo</span>
+                    </div>
+                    <div style="background: #e3f2fd; padding: 8px 12px; border-radius: 6px;">
+                        <strong>CRM de Ventas</strong><br>
+                        <span style="font-size: 13px; color: #555;">Propietario: María Torres | Estatus: Pausado</span>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Vista previa de la galería con los datos de la lista "Proyectos".</p>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Accede a make.powerapps.com y crea una app de Lienzo en blanco llamada <strong>"Gestor de Proyectos"</strong>.</li>
+                    <li>2. Conecta a SharePoint y selecciona la lista <strong>"Proyectos"</strong> como DataSource.</li>
+                    <li>3. Explora las columnas disponibles en el panel de Datos.</li>
+                    <li>4. Inserta una <strong>galería vertical</strong> y asígnale la lista <code>Proyectos</code> como DataSource.</li>
+                    <li>5. Personaliza los campos que se muestran en la galería (Título, Propietario, Estatus).</li>
+                    <li>6. Si no tienes acceso, describe los pasos y dibuja cómo se vería la galería.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventaja tiene conectar Power Apps a SharePoint en lugar de usar datos locales?</li>
+                    <li>¿Qué columnas de la lista "Proyectos" se expusieron automáticamente?</li>
+                    <li>¿Cómo cambiarías el DataSource de la galería si quisieras usar otra lista?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea una app de Lienzo, conecta SharePoint como DataSource y vincula una galería a la lista "Proyectos".</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Crea una app de Lienzo en blanco correctamente.</li>
+                <li>Conecta SharePoint como fuente de datos.</li>
+                <li>Selecciona la lista "Proyectos" como DataSource.</li>
+                <li>Inserta una galería y la vincula a los datos.</li>
+                <li>Comprende el flujo de conexión de datos.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a make.powerapps.com</li>
+                <li>Lista "Proyectos" en SharePoint</li>
+                <li>Pizarra</li>
+                <li>Guía de conexión a SharePoint</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es un DataSource en Power Apps?</li>
+                <li>¿Cómo se crea una app de Lienzo en blanco?</li>
+                <li>¿Qué pasos se siguen para conectar SharePoint como fuente de datos?</li>
+                <li>¿Cómo se inserta una galería y se vincula a la lista "Proyectos"?</li>
+                <li>¿Qué columnas se exponen automáticamente al conectar una lista?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Una vez conectada la lista "Proyectos", ¿cómo harías para que la galería muestre solo los proyectos con Estatus = "Activo"? Investiga la función <code>Filter()</code> en Power Apps y describe cómo la usarías.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida la conexión de Power Apps con SharePoint y la vinculación de datos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende el flujo de conexión de datos.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Power Apps Studio</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para conectar Power Apps a SharePoint:</strong></p>
+        <p>• <strong>DataSource:</strong> Conexión a un servicio externo que proporciona datos.</p>
+        <p>• <strong>SharePoint:</strong> Conector nativo para listas y bibliotecas.</p>
+        <p>• <strong>App de Lienzo:</strong> Se inicia en blanco y se personaliza.</p>
+        <p>• <strong>make.powerapps.com:</strong> Portal de creación de apps.</p>
+        <p>• <strong>Galería:</strong> Control que muestra los datos de una lista.</p>
+        <p>• <strong>Filter():</strong> Función para filtrar datos en Power Apps.</p>
+        <p>• <strong>Autenticación:</strong> Requiere cuenta organizativa de Microsoft 365.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a conectar aplicaciones con datos reales de SharePoint.</p>
+        <p>• Desarrolla habilidades de integración de servicios de Microsoft.</p>
+        <p>• Prepara a los estudiantes para crear soluciones que gestionen información empresarial.</p>
+        <p>• Conecta la teoría con la práctica en un entorno real de Microsoft.</p>
+    </div>
+
+</div>
+</body>
+</html>

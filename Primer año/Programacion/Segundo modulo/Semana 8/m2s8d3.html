@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Repaso de Excel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .topic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .topic-card {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+        }
+        .topic-card strong {
+            color: #1a237e;
+        }
+        .topic-card p {
+            font-size: 13px;
+            margin: 4px 0 0 0;
+            color: #555;
+        }
+        .topic-card .icon {
+            font-size: 24px;
+        }
+        .exam-tip {
+            background: #fce4ec;
+            border-left: 6px solid #c62828;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .exam-tip p {
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+            .topic-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Repaso de Excel - Preparación para examen
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Revisa y consolida todos los conceptos y herramientas de Excel vistos durante el mes, preparándose para el examen de la siguiente clase mediante ejercicios prácticos y repaso de funciones clave.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Recuerda los conceptos básicos de Excel: celdas, filas, columnas, hojas, rangos.</li>
+                <li>Identifica las funciones estadísticas, lógicas y de texto más importantes.</li>
+                <li>Comprende el uso de gráficos, formato de tablas y configuración de página.</li>
+                <li>Reconoce las herramientas de organización: ordenar, inmovilizar paneles.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear y dar formato a tablas en Excel.</li>
+                <li>Usar funciones como SUMA, PROMEDIO, CONTAR, CONTARA, MAX, MIN, MEDIANA, MODA.UNICO.</li>
+                <li>Usar funciones lógicas IF, AND, OR.</li>
+                <li>Crear gráficos estadísticos (barras, líneas, circulares).</li>
+                <li>Ordenar datos, inmovilizar paneles y configurar página para impresión.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra disposición para repasar y consolidar conocimientos.</li>
+                <li>Valora la importancia de la preparación para el examen.</li>
+                <li>Participa activamente en los ejercicios de repaso.</li>
+                <li>Reconoce la utilidad de Excel en contextos académicos y profesionales.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso general de Excel"</h4>
+            <p><span class="label">Metodología:</span> Recapitulación y organización.</p>
+            <p><span class="label">Descripción:</span> El docente guía un repaso de todos los temas vistos durante el mes.</p>
+
+            <p><strong>🔹 Temas cubiertos en el mes:</strong></p>
+
+            <div class="topic-grid">
+                <div class="topic-card" style="border-left-color: #2e7d32;">
+                    <div class="icon">📊</div>
+                    <strong>Conceptos básicos</strong>
+                    <p>Entorno de Excel, celdas, filas, columnas, hojas, rangos.</p>
+                </div>
+                <div class="topic-card" style="border-left-color: #0d47a1;">
+                    <div class="icon">📋</div>
+                    <strong>Formato de tablas</strong>
+                    <p>Fuentes, bordes, rellenos, alineación, estilos de tabla.</p>
+                </div>
+                <div class="topic-card" style="border-left-color: #f9a825;">
+                    <div class="icon">🧮</div>
+                    <strong>Funciones estadísticas</strong>
+                    <p>SUMA, PROMEDIO, CONTAR, CONTARA, MAX, MIN, MEDIANA, MODA.UNICO.</p>
+                </div>
+                <div class="topic-card" style="border-left-color: #c62828;">
+                    <div class="icon">🔀</div>
+                    <strong>Funciones lógicas</strong>
+                    <p>IF, AND, OR (en español e inglés).</p>
+                </div>
+                <div class="topic-card" style="border-left-color: #6a1b9a;">
+                    <div class="icon">📈</div>
+                    <strong>Gráficos estadísticos</strong>
+                    <p>Barras, columnas, líneas, circulares.</p>
+                </div>
+                <div class="topic-card" style="border-left-color: #e65100;">
+                    <div class="icon">🖨️</div>
+                    <strong>Organización e impresión</strong>
+                    <p>Ordenar, inmovilizar paneles, configurar página, área de impresión.</p>
+                </div>
+            </div>
+
+            <div class="exam-tip">
+                <p><strong>📝 Examen de la próxima clase:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>✔ Preguntas teóricas sobre conceptos de Excel.</li>
+                    <li>✔ Ejercicios prácticos usando funciones y herramientas.</li>
+                    <li>✔ Creación de tablas, gráficos y análisis de datos.</li>
+                    <li>✔ Uso de funciones lógicas y estadísticas.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante recuerda los temas clave y se prepara para el examen.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Identifica los temas cubiertos durante el mes.</li>
+                <li>Participa en la organización del repaso.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con Excel</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Ejercicios prácticos de repaso"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada y resolución de ejercicios.</p>
+
+            <p><strong>🔹 Ejercicio 1: Formato y funciones básicas</strong></p>
+            <ul>
+                <li>Crea una tabla con 10 estudiantes, con columnas: Nombre, Edad, Ciudad, Calificación.</li>
+                <li>Aplica formato de tabla (bordes, colores, encabezados en negrita).</li>
+                <li>Calcula: promedio de edad, calificación máxima, calificación mínima, cantidad de estudiantes.</li>
+            </ul>
+
+            <p><strong>🔹 Ejercicio 2: Funciones lógicas (IF, AND, OR)</strong></p>
+            <ul>
+                <li>Agrega una columna "Estado" que muestre "Aprobado" si calificación >= 70, "Reprobado" si es menor.</li>
+                <li>Agrega una columna "Bono" que muestre "Sí" si calificación >= 90 y edad >= 20.</li>
+                <li>Agrega una columna "Premio" que muestre "Sí" si calificación >= 85 O ciudad = "Ciudad de México".</li>
+            </ul>
+
+            <p><strong>🔹 Ejercicio 3: Gráficos estadísticos</strong></p>
+            <ul>
+                <li>Crea un gráfico de barras que compare las calificaciones de los estudiantes.</li>
+                <li>Crea un gráfico circular que muestre la distribución por ciudad.</li>
+                <li>Agrega títulos y etiquetas a los gráficos.</li>
+            </ul>
+
+            <p><strong>🔹 Ejercicio 4: Organización e impresión</strong></p>
+            <ul>
+                <li>Ordena la tabla por calificación de forma descendente.</li>
+                <li>Inmoviliza la primera fila para que los encabezados siempre estén visibles.</li>
+                <li>Configura la página para imprimir con orientación horizontal y márgenes estrechos.</li>
+                <li>Agrega un encabezado con el título "Reporte de Estudiantes".</li>
+            </ul>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Durante la clase, realiza los siguientes ejercicios de repaso:</strong></p>
+                <ul>
+                    <li><strong>Ejercicio 1:</strong> Crea la tabla de estudiantes con formato.</li>
+                    <li><strong>Ejercicio 2:</strong> Usa IF, AND y OR para las columnas adicionales.</li>
+                    <li><strong>Ejercicio 3:</strong> Genera gráficos de barras y circulares.</li>
+                    <li><strong>Ejercicio 4:</strong> Ordena, inmoviliza y configura la página.</li>
+                    <li><strong>Revisión:</strong> Verifica que todos los ejercicios estén completos.</li>
+                    <li>Guarda el archivo como <strong>"repaso_excel_examen.xlsx"</strong>.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué función de Excel te resultó más difícil de recordar?</li>
+                    <li>¿Qué herramienta crees que será más importante en el examen?</li>
+                    <li>¿Qué duda tienes sobre algún tema visto?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante practica y consolida los conocimientos de Excel para el examen.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Completa los ejercicios de repaso.</li>
+                <li>Usa correctamente las funciones y herramientas de Excel.</li>
+                <li>Guarda el archivo correctamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con Excel</li>
+                <li>Excel (versión de escritorio o web)</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Preguntas y respuestas"</h4>
+            <p><span class="label">Metodología:</span> Discusión y resolución de dudas.</p>
+            <ul>
+                <li>¿Qué temas te parecen más difíciles?</li>
+                <li>¿Qué dudas tienes sobre las funciones o herramientas?</li>
+                <li>¿Qué recomendaciones darías para preparar el examen?</li>
+            </ul>
+            <p>El docente refuerza conceptos clave:</p>
+            <ul>
+                <li><strong>Funciones estadísticas:</strong> SUMA, PROMEDIO, CONTAR, CONTARA, MAX, MIN, MEDIANA, MODA.UNICO.</li>
+                <li><strong>Funciones lógicas:</strong> IF, AND, OR.</li>
+                <li><strong>Gráficos:</strong> Barras, líneas, circulares.</li>
+                <li><strong>Organización:</strong> Ordenar, inmovilizar, configurar página.</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Recordatorio:</span><br>
+                El examen será en la <strong>próxima clase</strong>. Asegúrate de practicar y repasar los ejercicios realizados hoy.
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante despeja dudas y se siente preparado para el examen.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Plantea preguntas sobre los temas vistos.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para el examen:</strong></p>
+        <p>• <strong>Repasa las funciones:</strong> SUMA, PROMEDIO, CONTAR, CONTARA, MAX, MIN, MEDIANA, MODA.UNICO.</p>
+        <p>• <strong>Practica IF, AND y OR:</strong> Son fundamentales para la toma de decisiones.</p>
+        <p>• <strong>Gráficos:</strong> Recuerda cómo crear y personalizar gráficos.</p>
+        <p>• <strong>Formato:</strong> Aplica bordes, colores y estilos a las tablas.</p>
+        <p>• <strong>Organización:</strong> Ordena datos e inmoviliza paneles.</p>
+        <p>• <strong>Configuración de página:</strong> Márgenes, orientación y área de impresión.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Consolida todos los conocimientos de Excel vistos durante el mes.</p>
+        <p>• Prepara a los estudiantes para el examen de la siguiente clase.</p>
+        <p>• Refuerza habilidades prácticas y teóricas.</p>
+        <p>• Conecta con la importancia de la preparación y la práctica.</p>
+    </div>
+
+</div>
+</body>
+</html>

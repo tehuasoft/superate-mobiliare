@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Importar/Exportar desde Excel a SharePoint Lists</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+        .paso-card .nota {
+            font-size: 13px;
+            color: #555;
+            margin: 4px 0 4px 36px;
+            font-style: italic;
+        }
+
+        .mock-lista {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .mock-lista table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .mock-lista th {
+            background: #e8eaf6;
+            color: #1a237e;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .mock-lista td {
+            padding: 6px 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📊 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Importar/Exportar datos desde Excel a SharePoint Lists · Edición masiva</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a transferir datos entre Excel y listas de SharePoint mediante exportación, creación de listas desde tablas de Excel, y edición masiva usando la función "Editar en cuadrícula", entendiendo las limitaciones y mejores prácticas para cada método.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende la relación entre Excel y SharePoint Lists.</li>
+                <li>Reconoce las limitaciones de importación directa a listas existentes.</li>
+                <li>Identifica los métodos disponibles para mover datos entre ambas herramientas.</li>
+                <li>Entiende la función de Editar en cuadrícula y sus casos de uso.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Exportar una lista de SharePoint a Excel.</li>
+                <li>Crear una nueva lista de SharePoint desde una tabla de Excel.</li>
+                <li>Usar Editar en cuadrícula para edición masiva (copiar/pegar desde Excel).</li>
+                <li>Solucionar problemas comunes de formato y tipos de datos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la eficiencia en la transferencia de datos.</li>
+                <li>Muestra interés por las herramientas de edición masiva.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de gestión de datos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo mover datos entre Excel y SharePoint?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Si tienes datos en Excel y quieres llevarlos a una lista de SharePoint, ¿cómo lo harías? ¿Y si necesitas editar muchos registros a la vez?"</em> Se introduce la importancia de la interoperabilidad.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Métodos principales para mover datos:</span>
+                <ul>
+                    <li><strong>Exportar a Excel:</strong> Descargar datos de una lista a un archivo Excel (<code>.iqy</code>).</li>
+                    <li><strong>Crear lista desde Excel:</strong> Crear una nueva lista a partir de una tabla de Excel.</li>
+                    <li><strong>Editar en cuadrícula:</strong> Modo de edición masiva que permite copiar/pegar desde Excel.</li>
+                </ul>
+                <p style="margin-top: 6px; font-size: 14px; color: #555;">⚠️ <strong>Limitación:</strong> No existe una función nativa para importar datos a una <strong>lista existente</strong> desde Excel. Se debe usar Power Automate o copiar/pegar manualmente .</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los métodos disponibles para mover datos entre Excel y SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los métodos principales.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a SharePoint (demo)</li>
+                <li>Excel con datos de ejemplo</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Exportación, importación y edición masiva con Excel"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- MÉTODO 1: EXPORTAR -->
+            <!-- ============================================ -->
+            <h4>🔹 Método 1: Exportar una lista a Excel</h4>
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Exportar lista a Excel</h5>
+                <p>En la lista de SharePoint, ir a la cinta de opciones y seleccionar <strong>"Exportar"</strong> → <strong>"Exportar a Excel"</strong> .</p>
+                <div class="captura-mock">
+                    📂 Lista → Exportar → Exportar a Excel
+                </div>
+                <p class="nota">Se descargará un archivo <code>.iqy</code> que al abrirlo en Excel mostrará los datos de la lista.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- MÉTODO 2: IMPORTAR (NUEVA LISTA) -->
+            <!-- ============================================ -->
+            <h4>🔹 Método 2: Crear lista desde Excel (nueva lista)</h4>
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">2</span>
+                <h5>Crear una nueva lista desde una tabla de Excel</h5>
+                <p><strong>Opción A:</strong> Desde la interfaz web de SharePoint, al crear una lista, seleccionar <strong>"Desde Excel"</strong> .</p>
+                <p><strong>Opción B:</strong> En Excel, convertir los datos en tabla (<em>Insertar > Tabla</em>) y usar <strong>"Exportar tabla a lista de SharePoint"</strong> en la pestaña <strong>"Diseño"</strong> de tabla .</p>
+                <div class="captura-mock">
+                    📊 Excel → Insertar > Tabla → Diseño → Exportar tabla a lista de SharePoint
+                </div>
+                <p class="nota">El sistema pedirá la URL del sitio de SharePoint y el nombre de la lista.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- MÉTODO 3: EDITAR EN CUADRÍCULA -->
+            <!-- ============================================ -->
+            <h4>🔹 Método 3: Editar en cuadrícula (edición masiva)</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>📌 ¿Qué es "Editar en cuadrícula"?</h5>
+                    <p>Es un modo de edición que transforma la vista de la lista en una <strong>hoja de cálculo editable</strong>, permitiendo editar múltiples celdas a la vez, pegar desde Excel y arrastrar valores .</p>
+                    <p><strong>Casos de uso comunes:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li>Importar datos desde Excel (copiar/pegar).</li>
+                        <li>Actualizaciones masivas de estado, propietario o fechas.</li>
+                        <li>Limpieza de metadatos después de migraciones.</li>
+                    </ul>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📌 Beneficios clave</h5>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li><strong>Velocidad:</strong> Mucho más rápido que editar elemento por elemento .</li>
+                        <li><strong>Interoperabilidad:</strong> Copiar y pegar desde Excel funciona sin problemas .</li>
+                        <li><strong>Deshacer/Rehacer:</strong> Atajos de teclado como Ctrl+Z y Ctrl+Y están disponibles .</li>
+                        <li><strong>Validación:</strong> Las reglas de columna y lista se aplican durante la edición .</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">3</span>
+                <h5>Uso de "Editar en cuadrícula"</h5>
+                <p><strong>Paso a paso:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li>En la lista, hacer clic en <strong>"Editar en cuadrícula"</strong> (o "Quick Edit" en versiones clásicas) .</li>
+                    <li>La vista se convierte en un grid editable similar a Excel.</li>
+                    <li>Para <strong>pegar desde Excel</strong>: copiar los datos en Excel, seleccionar la celda de inicio en el grid y presionar <kbd>Ctrl+V</kbd> .</li>
+                    <li>Para <strong>rellenar</strong>: arrastrar el controlador de la celda para copiar el valor hacia abajo .</li>
+                    <li>Los cambios se guardan automáticamente al moverse por el grid .</li>
+                </ul>
+                <div class="captura-mock">
+                    📋 Lista → Editar en cuadrícula → Copiar datos de Excel → Pegar en el grid
+                </div>
+                <p class="nota">⚠️ <strong>Importante:</strong> El orden de las columnas en Excel debe coincidir con el orden en el grid de SharePoint .</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- LIMITACIONES Y CONSEJOS -->
+            <!-- ============================================ -->
+            <h4>🔹 Limitaciones y consejos importantes</h4>
+
+            <div class="ejemplo-box" style="background: #ffebee; border-left: 4px solid #c62828;">
+                <span class="highlight" style="color: #c62828;">⚠️ Limitaciones a tener en cuenta</span>
+                <ul>
+                    <li><strong>No se puede importar directamente a listas existentes</strong> desde Excel de forma nativa .</li>
+                    <li><strong>Columnas calculadas</strong> son de solo lectura en el grid .</li>
+                    <li><strong>Texto enriquecido (Rich Text)</strong> no se puede editar en el grid .</li>
+                    <li><strong>Adjuntos</strong> no se pueden agregar desde el grid .</li>
+                    <li>Si la lista tiene <strong>agrupaciones</strong>, el botón "Editar en cuadrícula" desaparece. Se debe usar una vista sin agrupación .</li>
+                    <li><strong>Grandes volúmenes:</strong> Para listas muy grandes, puede ser lento. Se recomienda hacerlo en lotes pequeños .</li>
+                </ul>
+            </div>
+
+            <div class="ejemplo-box" style="background: #e8f5e9; border-left: 4px solid #2e7d32;">
+                <span class="highlight" style="color: #2e7d32;">✅ Buenas prácticas</span>
+                <ul>
+                    <li>Asegurar que los <strong>nombres de columnas</strong> coincidan entre Excel y la lista.</li>
+                    <li>Verificar que los <strong>tipos de datos</strong> sean compatibles (fechas, números, texto) .</li>
+                    <li>Para importar a una lista existente, usar <strong>Power Automate</strong> como alternativa a copiar/pegar .</li>
+                    <li>Crear una vista simple (sin agrupaciones) antes de usar Editar en cuadrícula .</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, crea una lista "Productos" con columnas: <strong>Título</strong> (Texto), <strong>Precio</strong> (Número), <strong>Categoría</strong> (Elección).</li>
+                    <li>2. Exporta la lista a Excel y observa el archivo generado.</li>
+                    <li>3. En Excel, agrega 5 nuevos productos y guarda el archivo.</li>
+                    <li>4. Usa <strong>Editar en cuadrícula</strong> en SharePoint y pega los nuevos productos desde Excel.</li>
+                    <li>5. Si no tienes acceso, escribe los pasos que seguirías y explica qué precauciones tomarías.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventaja tiene Editar en cuadrícula frente a editar elemento por elemento?</li>
+                    <li>¿Qué precauciones debes tomar al pegar desde Excel?</li>
+                    <li>¿Cómo resolverías la importación a una lista existente si tuvieras que hacerlo diariamente?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante transfiere datos entre Excel y SharePoint usando exportación, creación desde Excel y edición masiva con Editar en cuadrícula.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Exporta una lista a Excel correctamente.</li>
+                <li>Crea una lista desde una tabla de Excel.</li>
+                <li>Usa Editar en cuadrícula para pegar datos desde Excel.</li>
+                <li>Identifica limitaciones y aplica buenas prácticas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Excel con datos de ejemplo</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cómo se exporta una lista de SharePoint a Excel?</li>
+                <li>¿Cómo se crea una lista desde una tabla de Excel?</li>
+                <li>¿Qué función permite editar múltiples elementos a la vez?</li>
+                <li>¿Qué limitaciones tiene Editar en cuadrícula?</li>
+                <li>¿Qué se debe verificar antes de pegar datos desde Excel?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña un flujo de trabajo para actualizar diariamente una lista de SharePoint con nuevos datos desde Excel. Describe los pasos, herramientas y precauciones que usarías.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los métodos para transferir datos entre Excel y SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la aplicación práctica de las herramientas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre Excel y SharePoint Lists:</strong></p>
+        <p>• <strong>Exportar a Excel:</strong> Obtén una copia de los datos de la lista.</p>
+        <p>• <strong>Crear lista desde Excel:</strong> Genera una nueva lista a partir de una tabla.</p>
+        <p>• <strong>Editar en cuadrícula:</strong> Edición masiva, copiar/pegar desde Excel.</p>
+        <p>• <strong>Coincidencia de columnas:</strong> Verifica nombres y tipos de datos.</p>
+        <p>• <strong>Sin importación directa:</strong> No hay función nativa para agregar a listas existentes.</p>
+        <p>• <strong>Agrupaciones:</strong> Quita agrupaciones para usar Editar en cuadrícula.</p>
+        <p>• <strong>Alternativas:</strong> Power Automate para automatizar importaciones.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a integrar Excel con SharePoint, dos herramientas fundamentales.</p>
+        <p>• Desarrolla habilidades de edición masiva y gestión de datos.</p>
+        <p>• Prepara a los estudiantes para escenarios reales de trabajo.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

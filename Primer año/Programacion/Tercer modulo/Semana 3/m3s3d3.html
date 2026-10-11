@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · var, final y const en Dart · Type Inference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .code-block {
+            background: #1e1e2e;
+            color: #d4d4d4;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 2;
+            border: 1px solid #333;
+        }
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .type { color: #4ec9b0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .operator { color: #d4d4d4; }
+        .code-block .punctuation { color: #d4d4d4; }
+        .code-block .variable { color: #9cdcfe; }
+        .code-block .boolean { color: #569cd6; }
+
+        .def-block {
+            background: #f5f5f5;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin: 6px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .def-block strong {
+            color: #1a237e;
+        }
+        .dart-card {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #00b4d8;
+            margin-bottom: 8px;
+        }
+        .dart-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .dart-card p {
+            margin: 4px 0;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparison-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparison-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparison-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Tema: var, final y const en Dart · Type Inference (Inferencia de tipos)</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende las diferencias entre <code>var</code>, <code>final</code> y <code>const</code> en Dart, y aplica la inferencia de tipos (type inference) para declarar variables de manera eficiente y segura.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es la inferencia de tipos (type inference) en Dart.</li>
+                <li>Reconoce la diferencia entre <code>var</code>, <code>final</code> y <code>const</code>.</li>
+                <li>Identifica cuándo usar cada palabra clave según el contexto.</li>
+                <li>Comprende que <code>var</code> permite cambiar el valor pero no el tipo.</li>
+                <li>Entiende que <code>final</code> y <code>const</code> son inmutables.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Declarar variables con <code>var</code> usando inferencia de tipos.</li>
+                <li>Declarar variables inmutables con <code>final</code>.</li>
+                <li>Declarar constantes en tiempo de compilación con <code>const</code>.</li>
+                <li>Diferenciar cuándo usar <code>var</code>, <code>final</code> o <code>const</code>.</li>
+                <li>Intentar reasignar una variable <code>final</code> o <code>const</code> y observar el error.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por comprender la tipificación en Dart.</li>
+                <li>Valora la importancia de la claridad y seguridad en el código.</li>
+                <li>Participa activamente en la codificación y resolución de problemas.</li>
+                <li>Desarrolla una actitud meticulosa al escribir código.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo declaramos variables en Dart?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y reflexión.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas para introducir los conceptos:</p>
+            <ul>
+                <li>¿Qué significa que Dart infiera el tipo de una variable?</li>
+                <li>¿Qué diferencia hay entre una variable que puede cambiar su valor y una que no?</li>
+                <li>¿Por qué es útil tener variables que no cambian?</li>
+            </ul>
+            <p>Se presentan las tres palabras clave principales: <code>var</code>, <code>final</code> y <code>const</code>.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo inicial:</span>
+                <div class="code-block">
+<span class="comment">// Inferencia de tipos con var</span>
+<span class="keyword">var</span> nombre = <span class="string">"Ana"</span>; <span class="comment">// String</span>
+<span class="keyword">var</span> edad = <span class="number">25</span>; <span class="comment">// int</span>
+
+<span class="comment">// Valores inmutables</span>
+<span class="keyword">final</span> <span class="type">String</span> apellido = <span class="string">"García"</span>;
+<span class="keyword">const</span> <span class="type">double</span> PI = <span class="number">3.14159</span>;
+                </div>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica las diferentes formas de declarar variables y comprende la utilidad de la inferencia de tipos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la discusión inicial.</li>
+                <li>Reconoce las diferencias entre var, final y const.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Proyector / DartPad</li>
+                <li>Presentación con ejemplos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">40 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "var, final, const y Type Inference"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos en vivo y ejercicios prácticos.</p>
+
+            <!-- Type inference -->
+            <h4>🔹 Type Inference (Inferencia de tipos) con <code>var</code></h4>
+            <div class="def-block">
+                <strong>Type inference:</strong> Dart deduce automáticamente el tipo de la variable según el valor asignado. Esto permite escribir código más limpio sin especificar el tipo explícitamente.
+            </div>
+            <div class="code-block">
+<span class="comment">// Inferencia de tipos con var</span>
+<span class="keyword">var</span> nombre = <span class="string">"Carlos"</span>; <span class="comment">// String</span>
+<span class="keyword">var</span> edad = <span class="number">30</span>; <span class="comment">// int</span>
+<span class="keyword">var</span> altura = <span class="number">1.75</span>; <span class="comment">// double</span>
+<span class="keyword">var</span> activo = <span class="boolean">true</span>; <span class="comment">// bool</span>
+
+<span class="comment">// Una vez inferido el tipo, no se puede cambiar</span>
+<span class="comment">// nombre = 42; // Error: no se puede asignar int a String</span>
+
+<span class="comment">// Pero SÍ se puede cambiar el valor, siempre que sea del mismo tipo</span>
+nombre = <span class="string">"Ana"</span>; <span class="comment">// Válido: sigue siendo String</span>
+edad = <span class="number">31</span>; <span class="comment">// Válido: sigue siendo int</span>
+            </div>
+
+            <!-- var -->
+            <h4>🔹 <code>var</code> — Variables mutables con inferencia</h4>
+            <div class="def-block">
+                <strong>var:</strong> Declara una variable cuyo tipo es inferido por Dart. Puede cambiar su valor (reasignarse), pero NO puede cambiar su tipo.
+            </div>
+            <div class="code-block">
+<span class="comment">// Ejemplos con var</span>
+<span class="keyword">var</span> ciudad = <span class="string">"Madrid"</span>; <span class="comment">// String</span>
+ciudad = <span class="string">"Barcelona"</span>; <span class="comment">// ✅ Válido: cambia el valor</span>
+<span class="comment">// ciudad = 42; // ❌ Error: no se puede cambiar el tipo</span>
+
+<span class="keyword">var</span> temperatura = <span class="number">22.5</span>; <span class="comment">// double</span>
+temperatura = <span class="number">23.0</span>; <span class="comment">// ✅ Válido</span>
+<span class="comment">// temperatura = "cálido"; // ❌ Error: no se puede cambiar el tipo</span>
+            </div>
+
+            <!-- final -->
+            <h4>🔹 <code>final</code> — Variables que se asignan una sola vez</h4>
+            <div class="def-block">
+                <strong>final:</strong> Una variable <code>final</code> solo puede ser asignada una vez. Se determina en tiempo de ejecución (runtime).<br>
+                <strong>Importante:</strong> Una vez asignada, NO se puede reasignar.
+            </div>
+            <div class="code-block">
+<span class="keyword">final</span> <span class="type">String</span> nombre = <span class="string">"María"</span>;
+<span class="comment">// nombre = "Laura"; // ❌ Error: no se puede reasignar</span>
+
+<span class="keyword">final</span> edad = <span class="number">28</span>; <span class="comment">// inferido como int</span>
+<span class="comment">// edad = 29; // ❌ Error: no se puede reasignar</span>
+
+<span class="keyword">final</span> altura = <span class="number">1.78</span>; <span class="comment">// inferido como double</span>
+
+<span class="comment">// final se puede usar con tipos explícitos o con inferencia</span>
+<span class="keyword">final</span> <span class="type">String</span> apellido = <span class="string">"García"</span>;
+<span class="keyword">final</span> pais = <span class="string">"Argentina"</span>; <span class="comment">// inferido como String</span>
+            </div>
+
+            <!-- const -->
+            <h4>🔹 <code>const</code> — Constantes en tiempo de compilación</h4>
+            <div class="def-block">
+                <strong>const:</strong> Una variable <code>const</code> es una constante que se define en tiempo de compilación (compile-time). Debe asignarse con un valor conocido en el momento de compilación.<br>
+                <strong>Importante:</strong> NO se puede reasignar.
+            </div>
+            <div class="code-block">
+<span class="keyword">const</span> <span class="type">double</span> pi = <span class="number">3.14159</span>;
+<span class="keyword">const</span> <span class="type">int</span> diasSemana = <span class="number">7</span>;
+<span class="keyword">const</span> <span class="type">String</span> mensaje = <span class="string">"Bienvenido"</span>;
+
+<span class="comment">// const no se puede reasignar</span>
+<span class="comment">// PI = 3.14; // ❌ Error: no se puede reasignar una constante</span>
+
+<span class="comment">// Error: no se puede usar const con valores que no son constantes</span>
+<span class="comment">// const fecha = DateTime.now(); // ❌ Error: DateTime.now() no es constante</span>
+
+<span class="comment">// const también infiere el tipo</span>
+<span class="keyword">const</span> gravedad = <span class="number">9.8</span>; <span class="comment">// inferido como double</span>
+<span class="keyword">const</span> nombreApp = <span class="string">"MiApp"</span>; <span class="comment">// inferido como String</span>
+            </div>
+
+            <!-- Comparación -->
+            <h4>🔹 Comparación entre <code>var</code>, <code>final</code> y <code>const</code></h4>
+            <div class="comparison-grid">
+                <div class="comparison-item" style="border-top-color: #4ecdc4;">
+                    <h5>var</h5>
+                    <p><strong>Mutabilidad:</strong> Variable mutable.</p>
+                    <p><strong>¿Puede cambiar el valor?</strong> ✅ Sí</p>
+                    <p><strong>¿Puede cambiar el tipo?</strong> ❌ No (una vez inferido)</p>
+                    <p><strong>Asignación:</strong> Puede reasignarse.</p>
+                    <p><strong>Inferencia:</strong> Sí, infiere el tipo.</p>
+                    <p><strong>Tiempo de asignación:</strong> En tiempo de ejecución.</p>
+                </div>
+                <div class="comparison-item" style="border-top-color: #ffd93d;">
+                    <h5>final</h5>
+                    <p><strong>Mutabilidad:</strong> Inmutable (se asigna una vez).</p>
+                    <p><strong>¿Puede cambiar el valor?</strong> ❌ No</p>
+                    <p><strong>¿Puede cambiar el tipo?</strong> ❌ No</p>
+                    <p><strong>Asignación:</strong> Solo una vez.</p>
+                    <p><strong>Inferencia:</strong> Sí, infiere el tipo.</p>
+                    <p><strong>Tiempo de asignación:</strong> En tiempo de ejecución.</p>
+                </div>
+                <div class="comparison-item" style="border-top-color: #ff6b6b;">
+                    <h5>const</h5>
+                    <p><strong>Mutabilidad:</strong> Constante (compile-time).</p>
+                    <p><strong>¿Puede cambiar el valor?</strong> ❌ No</p>
+                    <p><strong>¿Puede cambiar el tipo?</strong> ❌ No</p>
+                    <p><strong>Asignación:</strong> Valor conocido en compilación.</p>
+                    <p><strong>Inferencia:</strong> Sí, infiere el tipo.</p>
+                    <p><strong>Tiempo de asignación:</strong> En tiempo de compilación.</p>
+                </div>
+            </div>
+
+            <!-- Énfasis en la mutabilidad y la inferencia -->
+            <h4>🔹 Mutabilidad e inferencia de tipos</h4>
+            <div class="def-block" style="border-left-color: #e65100;">
+                <strong>Puntos clave:</strong><br>
+                • <code>var</code>: permite cambiar el valor, pero NO el tipo.<br>
+                • <code>final</code>: NO permite cambiar el valor (inmutable en runtime).<br>
+                • <code>const</code>: NO permite cambiar el valor (constante en compile-time).<br>
+                • Los tres usan inferencia de tipos: Dart deduce el tipo automáticamente.
+            </div>
+            <div class="code-block">
+<span class="comment">// var permite cambiar el valor, pero no el tipo</span>
+<span class="keyword">var</span> nombre = <span class="string">"Carlos"</span>; <span class="comment">// String</span>
+nombre = <span class="string">"Ana"</span>; <span class="comment">// ✅ Válido: cambia el valor, sigue siendo String</span>
+<span class="comment">// nombre = 42; // ❌ Error: no se puede cambiar el tipo</span>
+
+<span class="comment">// final NO permite cambiar el valor</span>
+<span class="keyword">final</span> <span class="type">String</span> apellido = <span class="string">"García"</span>;
+<span class="comment">// apellido = "López"; // ❌ Error: no se puede reasignar</span>
+
+<span class="comment">// const NO permite cambiar el valor</span>
+<span class="keyword">const</span> <span class="type">double</span> pi = <span class="number">3.14159</span>;
+<span class="comment">// PI = 3.14; // ❌ Error: no se puede reasignar</span>
+
+<span class="comment">// Todos usan inferencia de tipos</span>
+<span class="keyword">var</span> x = <span class="number">10</span>; <span class="comment">// int</span>
+<span class="keyword">final</span> y = <span class="number">20</span>; <span class="comment">// int</span>
+<span class="keyword">const</span> z = <span class="number">30</span>; <span class="comment">// int</span>
+            </div>
+
+            <!-- Cuándo usar cada uno -->
+            <h4>🔹 ¿Cuándo usar cada uno?</h4>
+            <div class="def-block">
+                <strong>Usa <code>var</code>:</strong> Cuando necesitas una variable que va a cambiar su valor (pero mantiene el mismo tipo).<br>
+                <strong>Usa <code>final</code>:</strong> Cuando necesitas una variable que se asigna una vez y no cambia (por ejemplo, valores calculados en runtime).<br>
+                <strong>Usa <code>const</code>:</strong> Cuando necesitas un valor que es constante en tiempo de compilación (por ejemplo, pi, días de la semana, mensajes fijos).
+            </div>
+
+            <!-- Ejemplo completo -->
+            <h4>🔹 Ejemplo completo con var, final y const</h4>
+            <div class="code-block">
+<span class="keyword">void</span> <span class="function">main</span>() {
+  <span class="comment">// var: inferencia y mutabilidad (cambia el valor, no el tipo)</span>
+  <span class="keyword">var</span> nombre = <span class="string">"Carlos"</span>;
+  nombre = <span class="string">"Carlos Pérez"</span>; <span class="comment">// ✅ Se puede reasignar (mismo tipo)</span>
+  <span class="comment">// nombre = 42; // ❌ Error: no se puede cambiar el tipo</span>
+  
+  <span class="keyword">var</span> edad = <span class="number">28</span>;
+  edad = <span class="number">29</span>; <span class="comment">// ✅ Se puede reasignar</span>
+
+  <span class="comment">// final: inmutable en runtime (NO se puede reasignar)</span>
+  <span class="keyword">final</span> <span class="type">String</span> apellido = <span class="string">"García"</span>;
+  <span class="comment">// apellido = "López"; // ❌ Error: no se puede reasignar</span>
+  
+  <span class="keyword">final</span> <span class="type">double</span> altura = <span class="number">1.78</span>;
+  <span class="comment">// altura = 1.80; // ❌ Error: no se puede reasignar</span>
+
+  <span class="comment">// const: constante en compile-time (NO se puede reasignar)</span>
+  <span class="keyword">const</span> <span class="type">double</span> pi = <span class="number">3.14159</span>;
+  <span class="keyword">const</span> <span class="type">String</span> mensaje = <span class="string">"Hola mundo"</span>;
+  <span class="keyword">const</span> <span class="type">int</span> dias = <span class="number">7</span>;
+  <span class="comment">// pi = 3.14; // ❌ Error: no se puede reasignar</span>
+  <span class="comment">// mensaje = "Hola"; // ❌ Error: no se puede reasignar</span>
+
+  <span class="comment">// Inferencia de tipos con todos</span>
+  <span class="keyword">var</span> ciudad = <span class="string">"Madrid"</span>; <span class="comment">// String</span>
+  <span class="keyword">final</span> pais = <span class="string">"España"</span>; <span class="comment">// String</span>
+  <span class="keyword">const</span> continente = <span class="string">"Europa"</span>; <span class="comment">// String</span>
+
+  <span class="function">print</span>(<span class="string">"Nombre: <span class="interpolation">$nombre</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Apellido: <span class="interpolation">$apellido</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Edad: <span class="interpolation">$edad</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Altura: <span class="interpolation">$altura</span>"</span>);
+  <span class="function">print</span>(<span class="string">"pi: <span class="interpolation">$pi</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Mensaje: <span class="interpolation">$MENSAJE</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Días: <span class="interpolation">$DIAS</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Ciudad: <span class="interpolation">$ciudad</span>, País: <span class="interpolation">$pais</span>, Continente: <span class="interpolation">$CONTINENTE</span>"</span>);
+}
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Ejercicios:</strong></p>
+                <ul>
+                    <li>1. Declara una variable <code>var</code> con tu nombre (inferencia de tipo).</li>
+                    <li>2. Declara una variable <code>var</code> con tu edad y luego reasígnala.</li>
+                    <li>3. Declara una variable <code>final</code> con tu fecha de nacimiento (puede ser un String).</li>
+                    <li>4. Declara una variable <code>final</code> con tu estatura.</li>
+                    <li>5. Declara una constante <code>const</code> con el número de meses del año.</li>
+                    <li>6. Declara una constante <code>const</code> con el nombre de tu país.</li>
+                    <li>7. Intenta reasignar una variable <code>final</code> y observa el error (mentalmente o en código).</li>
+                    <li>8. Intenta cambiar el tipo de una variable <code>var</code> y observa el error.</li>
+                    <li>9. Usa <code>var</code> para declarar una variable con un número decimal.</li>
+                    <li>10. Usa <code>final</code> con inferencia para una variable booleana.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuándo usarías <code>var</code> en lugar de <code>final</code>?</li>
+                    <li>¿Cuál es la diferencia entre <code>final</code> y <code>const</code>?</li>
+                    <li>¿Qué sucede si intentas reasignar una variable <code>final</code>?</li>
+                    <li>¿Qué sucede si intentas cambiar el tipo de una variable <code>var</code>?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende las diferencias entre <code>var</code>, <code>final</code> y <code>const</code>, y aplica la inferencia de tipos correctamente en Dart.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Declara variables con <code>var</code> usando inferencia de tipos.</li>
+                <li>Declara variables inmutables con <code>final</code>.</li>
+                <li>Declara constantes con <code>const</code>.</li>
+                <li>Diferencia cuándo usar cada palabra clave.</li>
+                <li>Comprende que <code>var</code> permite cambiar el valor pero no el tipo.</li>
+                <li>Comprende que <code>final</code> y <code>const</code> no permiten reasignación.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>DartPad / entorno de desarrollo</li>
+                <li>Ejercicios impresos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas y discusión.</p>
+            <ul>
+                <li>¿Qué es la inferencia de tipos en Dart?</li>
+                <li>¿Cuándo usamos <code>var</code>?</li>
+                <li>¿Cuándo usamos <code>final</code>?</li>
+                <li>¿Cuándo usamos <code>const</code>?</li>
+                <li>¿Cuál es la diferencia entre <code>final</code> y <code>const</code>?</li>
+                <li>¿Puede una variable <code>var</code> cambiar su tipo?</li>
+                <li>¿Puede una variable <code>final</code> cambiar su valor?</li>
+                <li>¿Puede una variable <code>const</code> cambiar su valor?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Escribe un programa en Dart que:</p>
+                <ul style="padding-left: 20px;">
+                    <li>Declare una variable <code>var</code> con el nombre de un producto.</li>
+                    <li>Declare una variable <code>final</code> con el precio del producto.</li>
+                    <li>Declare una constante <code>const</code> con el IVA (21%).</li>
+                    <li>Declare una variable <code>var</code> con la cantidad de productos.</li>
+                    <li>Calcule el precio total (precio * cantidad) y el precio con IVA.</li>
+                    <li>Muestre todos los valores usando <code>print</code>.</li>
+                    <li>Intente reasignar el precio (variable <code>final</code>) y observe el error.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de <code>var</code>, <code>final</code>, <code>const</code> y type inference.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Resuelve el desafío final.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>DartPad</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para Dart:</strong></p>
+        <p>• <strong>var:</strong> variable mutable con inferencia de tipo. Puede cambiar el valor, pero NO el tipo.</p>
+        <p>• <strong>final:</strong> variable inmutable (se asigna una vez en runtime). NO se puede reasignar.</p>
+        <p>• <strong>const:</strong> constante en tiempo de compilación. NO se puede reasignar.</p>
+        <p>• <strong>Type inference:</strong> Dart deduce automáticamente el tipo de la variable.</p>
+        <p>• Usa <code>var</code> para variables que cambian, <code>final</code> para valores que se asignan una vez, y <code>const</code> para constantes de compilación.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña las diferentes formas de declarar variables en Dart.</p>
+        <p>• Explica la inferencia de tipos, una característica fundamental de Dart.</p>
+        <p>• Explica claramente la mutabilidad y la inmutabilidad.</p>
+        <p>• Prepara a los estudiantes para escribir código más claro y eficiente.</p>
+        <p>• Sienta las bases para programación en Flutter.</p>
+    </div>
+
+</div>
+</body>
+</html>

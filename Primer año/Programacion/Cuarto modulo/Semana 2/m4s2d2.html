@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Listas de SharePoint (PowerLists)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .lista-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .lista-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .lista-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item .ventaja {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .comparacion-item .desventaja {
+            color: #c62828;
+            font-weight: 600;
+        }
+
+        .mock-lista {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .mock-lista table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .mock-lista th {
+            background: #e8eaf6;
+            color: #1a237e;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .mock-lista td {
+            padding: 6px 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .mock-lista .etiqueta-estado {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .estado-pendiente { background: #fff3e0; color: #e65100; }
+        .estado-progreso { background: #e3f2fd; color: #0d47a1; }
+        .estado-completado { background: #e8f5e9; color: #2e7d32; }
+
+        .plantilla-ejemplo {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-left: 4px solid #2e7d32;
+        }
+        .plantilla-ejemplo h6 {
+            color: #1a237e;
+        }
+        .plantilla-ejemplo .campo {
+            display: inline-block;
+            background: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin: 2px 4px 2px 0;
+            border: 1px solid #ddd;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📋 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Listas de SharePoint (PowerLists) · Creación desde plantilla "Seguimiento de tareas"</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende qué son las listas de SharePoint (PowerLists), su propósito y ventajas frente a Excel. Aprende a crear una lista a partir de una plantilla predefinida, específicamente la plantilla "Seguimiento de tareas", y entiende su aplicación en entornos colaborativos.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es una lista de SharePoint.</li>
+                <li>Reconoce la diferencia entre una lista de SharePoint y una hoja de Excel.</li>
+                <li>Identifica los casos de uso de las listas en entornos colaborativos.</li>
+                <li>Conoce las plantillas disponibles en SharePoint para listas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear una lista desde una plantilla (Seguimiento de tareas).</li>
+                <li>Configurar columnas básicas (título, asignado a, estado, fecha de vencimiento).</li>
+                <li>Agregar elementos a la lista.</li>
+                <li>Usar la lista como herramienta de seguimiento colaborativo.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la utilidad de las listas para la organización de tareas.</li>
+                <li>Muestra interés por la gestión colaborativa de información.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de organización y seguimiento.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo organizamos información en equipo?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"¿Cómo llevan el seguimiento de tareas en su equipo? ¿Usan Excel, hojas impresas, o alguna herramienta digital?"</em> Se introduce el concepto de listas de SharePoint como alternativa colaborativa.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es una lista de SharePoint (PowerList)?</span>
+                <p>Es una <strong>base de datos estructurada</strong> dentro de SharePoint que permite almacenar, organizar y compartir información de manera colaborativa. Cada elemento de la lista es como una "fila" con columnas que definen los datos.</p>
+                <p><strong>Usos comunes:</strong></p>
+                <ul>
+                    <li>Seguimiento de tareas y proyectos.</li>
+                    <li>Gestión de solicitudes y aprobaciones.</li>
+                    <li>Inventario de recursos.</li>
+                    <li>Registro de contactos y clientes.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende qué son las listas de SharePoint y su utilidad.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los casos de uso de las listas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de listas en SharePoint</li>
+                <li>Acceso a SharePoint (demo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación de lista desde plantilla 'Seguimiento de tareas'"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- COMPARATIVA EXCEL VS SHAREPOINT LIST -->
+            <!-- ============================================ -->
+            <h4>🔹 Comparativa: Lista de SharePoint vs Excel</h4>
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>📊 Excel</h5>
+                    <p><strong>Ventajas:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li class="ventaja">✅ Fácil de usar para análisis y cálculos.</li>
+                        <li class="ventaja">✅ Herramienta conocida por casi todos.</li>
+                        <li class="ventaja">✅ Funciones avanzadas (gráficos, fórmulas).</li>
+                    </ul>
+                    <p><strong>Desventajas:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li class="desventaja">❌ No es colaborativo en tiempo real (requiere guardar y compartir archivos).</li>
+                        <li class="desventaja">❌ Puede haber conflictos de versiones.</li>
+                        <li class="desventaja">❌ Sin historial de cambios ni permisos granulares.</li>
+                    </ul>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📋 Lista de SharePoint</h5>
+                    <p><strong>Ventajas:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li class="ventaja">✅ Colaboración en tiempo real (varios usuarios editando).</li>
+                        <li class="ventaja">✅ Permisos por fila o columna.</li>
+                        <li class="ventaja">✅ Historial de cambios y versiones.</li>
+                        <li class="ventaja">✅ Integración con Power Automate, Power Apps, Teams.</li>
+                        <li class="ventaja">✅ Alertas y notificaciones automáticas.</li>
+                    </ul>
+                    <p><strong>Desventajas:</strong></p>
+                    <ul style="padding-left: 20px; font-size: 14px;">
+                        <li class="desventaja">❌ Menos funcionalidades de análisis que Excel.</li>
+                        <li class="desventaja">❌ Curva de aprendizaje inicial.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PLANTILLAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Plantillas de listas en SharePoint</h4>
+            <div class="lista-card">
+                <h5>📌 Plantillas predefinidas</h5>
+                <p>SharePoint ofrece varias plantillas para crear listas rápidamente. Algunas de las más comunes:</p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li><strong>Seguimiento de tareas:</strong> Gestiona asignaciones, fechas y estados.</li>
+                    <li><strong>Calendario:</strong> Eventos y fechas importantes.</li>
+                    <li><strong>Contactos:</strong> Gestión de personas y organizaciones.</li>
+                    <li><strong>Inventario:</strong> Seguimiento de productos o recursos.</li>
+                    <li><strong>Problemas:</strong> Registro y seguimiento de incidencias.</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASOS PARA CREAR LA LISTA -->
+            <!-- ============================================ -->
+            <h4>🔹 Creación de lista desde la plantilla "Seguimiento de tareas"</h4>
+
+            <div class="plantilla-ejemplo">
+                <h6>📌 Plantilla: Seguimiento de tareas</h6>
+                <p><strong>Columnas predefinidas:</strong></p>
+                <div>
+                    <span class="campo">📝 Título</span>
+                    <span class="campo">👤 Asignado a</span>
+                    <span class="campo">📊 Estado</span>
+                    <span class="campo">📅 Fecha de vencimiento</span>
+                    <span class="campo">📝 Descripción</span>
+                    <span class="campo">⏱️ % completado</span>
+                </div>
+                <p style="font-size: 13px; color: #555; margin-top: 4px;">Incluye columnas clave para gestionar tareas de forma colaborativa.</p>
+            </div>
+
+            <div style="margin: 12px 0;">
+                <p><strong>Pasos para crear la lista:</strong></p>
+                <ol style="padding-left: 20px; font-size: 14px; line-height: 1.8;">
+                    <li>Ir al sitio de SharePoint donde se creará la lista.</li>
+                    <li>Hacer clic en <strong>"+ Nuevo"</strong> → <strong>"Lista"</strong>.</li>
+                    <li>En el panel, seleccionar <strong>"Desde una plantilla"</strong>.</li>
+                    <li>Elegir la plantilla <strong>"Seguimiento de tareas"</strong>.</li>
+                    <li>Asignar un nombre a la lista (ej. "Tareas del Proyecto Alpha").</li>
+                    <li>Hacer clic en <strong>"Crear"</strong>.</li>
+                </ol>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO VISUAL DE LA LISTA -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo de lista creada</h4>
+            <div class="mock-lista">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Asignado a</th>
+                            <th>Estado</th>
+                            <th>Fecha vencimiento</th>
+                            <th>% completado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Redactar informe</td>
+                            <td>Ana García</td>
+                            <td><span class="etiqueta-estado estado-pendiente">Pendiente</span></td>
+                            <td>15/03/2025</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>Revisar presupuesto</td>
+                            <td>Carlos López</td>
+                            <td><span class="etiqueta-estado estado-progreso">En progreso</span></td>
+                            <td>20/03/2025</td>
+                            <td>60%</td>
+                        </tr>
+                        <tr>
+                            <td>Preparar presentación</td>
+                            <td>María Torres</td>
+                            <td><span class="etiqueta-estado estado-completado">Completado</span></td>
+                            <td>10/03/2025</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Ejemplo de lista "Seguimiento de tareas" con 3 elementos.</p>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, crea una lista usando la plantilla <strong>"Seguimiento de tareas"</strong>.</li>
+                    <li>2. Asígnale un nombre relacionado con un proyecto ficticio (ej. "Tareas del Proyecto Innovación").</li>
+                    <li>3. Agrega al menos <strong>5 tareas</strong> con diferentes asignados, estados y fechas de vencimiento.</li>
+                    <li>4. Comparte la lista con un compañero (simula colaboración) y edita una tarea.</li>
+                    <li>5. Si no tienes acceso, dibuja en papel la estructura de la lista con 5 tareas ficticias.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventajas tiene usar una lista de SharePoint en lugar de Excel para seguimiento de tareas?</li>
+                    <li>¿Cómo ayudan las columnas (estado, asignado a, fecha) a organizar el trabajo?</li>
+                    <li>¿Qué otras plantillas de listas crees que serían útiles en una empresa?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea una lista de SharePoint desde una plantilla y comprende su utilidad para el seguimiento colaborativo.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Identifica las diferencias entre Excel y una lista de SharePoint.</li>
+                <li>Crea una lista desde la plantilla "Seguimiento de tareas".</li>
+                <li>Agrega elementos con datos coherentes.</li>
+                <li>Comprende el propósito de las columnas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Guía de plantillas de listas</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es una lista de SharePoint?</li>
+                <li>¿Qué ventajas tiene frente a Excel?</li>
+                <li>¿Qué plantilla usamos para seguimiento de tareas?</li>
+                <li>¿Qué columnas incluye la plantilla "Seguimiento de tareas"?</li>
+                <li>¿Para qué sirve la columna "Estado"?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña una lista de SharePoint para el seguimiento de un proyecto escolar. Define:</p>
+                <ul>
+                    <li>Nombre de la lista.</li>
+                    <li>Columnas que necesitarías (mínimo 5).</li>
+                    <li>3 tareas de ejemplo con datos ficticios.</li>
+                    <li>Explica por qué elegiste esas columnas y cómo ayudan al seguimiento.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el concepto de listas de SharePoint y su aplicación práctica.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la utilidad de las listas para la gestión de información.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre listas de SharePoint:</strong></p>
+        <p>• Una lista es una base de datos colaborativa en SharePoint.</p>
+        <p>• A diferencia de Excel, permite edición simultánea y permisos granulares.</p>
+        <p>• Las plantillas ahorran tiempo al crear listas comunes.</p>
+        <p>• La plantilla "Seguimiento de tareas" es ideal para gestión de proyectos.</p>
+        <p>• Columnas clave: Título, Asignado a, Estado, Fecha de vencimiento.</p>
+        <p>• Las listas se integran con Teams, Power Automate y Power Apps.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce una herramienta fundamental para la colaboración en equipo.</p>
+        <p>• Enseña a organizar información de manera estructurada.</p>
+        <p>• Prepara a los estudiantes para gestionar proyectos y tareas en entornos profesionales.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

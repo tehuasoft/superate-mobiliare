@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.080 --> 00:03.200
+So we already know how to take the absolute value of a number.
+
+00:03.200 --> 00:10.280
+For instance, the absolute value of negative two we know is equal to positive two.
+
+00:10.280 --> 00:16.550
+And similarly, we know that the absolute value of positive two is also equal to two.
+
+00:16.550 --> 00:21.410
+And remember that the reason we know that is because the absolute value is really asking us for the
+
+00:21.410 --> 00:23.440
+distance from zero.
+
+00:23.450 --> 00:31.610
+So if we sketch here a simple number line and we position zero at the center, well then we know that
+
+00:31.610 --> 00:36.850
+negative two might be right about here and positive two is here.
+
+00:36.860 --> 00:42.110
+And when we're saying let's take the absolute value of negative two, what we're asking for there is
+
+00:42.110 --> 00:44.810
+the distance from negative two.
+
+00:45.550 --> 00:46.150
+To zero.
+
+00:46.150 --> 00:48.460
+And we know that that is two units.
+
+00:48.490 --> 00:51.970
+Well, in the same way, the distance from 0 to 2.
+
+00:53.230 --> 01:01.360
+Is two units, so both negative two and positive two have a distance of two units from zero, which
+
+01:01.360 --> 01:07.210
+is why the absolute value of both negative two and positive two turns out to be positive two.
+
+01:07.240 --> 01:11.290
+It's two units or a distance of two units from zero.
+
+01:11.320 --> 01:18.010
+So we already know how to address absolute value when we have a single number like this.
+
+01:18.010 --> 01:21.620
+But what about when we have an expression like this one?
+
+01:21.640 --> 01:26.380
+This is the absolute value of the expression negative three minus four.
+
+01:26.410 --> 01:33.100
+Well, when we change from just a single number to an expression, the only thing that changes is that
+
+01:33.100 --> 01:36.460
+we have to evaluate the expression first.
+
+01:36.460 --> 01:42.110
+And then only once we've finished evaluating the expression do we apply the absolute value.
+
+01:42.130 --> 01:43.690
+It's never the other order.
+
+01:43.690 --> 01:48.530
+We never start by taking the absolute value and then simplifying the inside.
+
+01:48.550 --> 01:52.600
+We always start by simplifying the inside first and then second.
+
+01:52.630 --> 01:54.960
+We apply the absolute value at the end.
+
+01:54.980 --> 02:00.710
+In other words, with an expression like this one, we want to think about just what's on the inside
+
+02:00.710 --> 02:01.070
+here.
+
+02:01.070 --> 02:07.130
+So just the negative three minus four, Let's in other words, completely ignore that we have an absolute
+
+02:07.130 --> 02:10.070
+value at all and just look at negative three minus four.
+
+02:10.070 --> 02:13.190
+So we know that negative three minus four is negative seven.
+
+02:13.830 --> 02:21.480
+Which means this whole expression simplifies to negative seven and therefore that we can rewrite this
+
+02:21.510 --> 02:26.130
+absolute value here as the absolute value of negative seven.
+
+02:26.370 --> 02:33.450
+And we already know that that is equal to positive seven, which means this expression here is equivalent
+
+02:33.450 --> 02:36.330
+to or simplifies to positive seven.
+
+02:36.330 --> 02:41.380
+And just realize that we simplify first and then apply the absolute value at the end.
+
+02:41.400 --> 02:43.180
+So let's do one more example.
+
+02:43.200 --> 02:47.250
+Again, we'll simplify first, then apply the absolute value at the end.
+
+02:47.280 --> 02:55.500
+So here we have two plus the absolute value of five minus nine, minus the absolute value of negative
+
+02:55.500 --> 02:56.170
+three.
+
+02:56.190 --> 03:00.930
+So we can simplify that five minus nine, five minus nine is negative four.
+
+03:01.140 --> 03:03.660
+So let's rewrite this as two plus.
+
+03:03.690 --> 03:07.980
+We'll leave the absolute value and we'll just simplify what's inside it.
+
+03:07.980 --> 03:10.140
+So five minus nine becomes negative four.
+
+03:10.290 --> 03:13.280
+Negative three is already simplified as much as it can be.
+
+03:13.290 --> 03:15.760
+We can't simplify just a single number.
+
+03:15.760 --> 03:18.430
+So let's also go ahead and leave that.
+
+03:18.460 --> 03:24.970
+Now we have all of the expressions inside the absolute values simplified, which means now we can go
+
+03:24.970 --> 03:28.970
+ahead and actually apply the absolute value to the number inside.
+
+03:28.990 --> 03:35.860
+So we can say two plus the absolute value of negative four is four and the absolute value of negative
+
+03:35.860 --> 03:36.700
+three is three.
+
+03:36.700 --> 03:43.030
+So we keep the subtraction here or the minus and we say absolute value of negative three is three.
+
+03:43.180 --> 03:51.130
+And so now we have two plus four is six and six minus three is three, which means that this original
+
+03:51.130 --> 03:56.290
+expression here, two plus the absolute value of five minus nine, minus the absolute value of negative
+
+03:56.290 --> 03:59.710
+three, that is equivalent to just three.
+
+03:59.710 --> 04:03.580
+Or we can simplify that expression to just positive three.
+
+04:03.610 --> 04:09.010
+So again, the takeaway here is whenever we're taking the absolute value of some expression instead
+
+04:09.010 --> 04:15.250
+of just a single number, we always remember to first simplify the expression as much as possible,
+
+04:15.250 --> 04:20.470
+then at the end apply the absolute value, not the other way around.

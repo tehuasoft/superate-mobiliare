@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación de Clase · Flujo Programado (Recurrencia) en Power Automate
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      .flujo-estructura {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: #f5f7fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 12px 0;
+      }
+      .flujo-estructura .bloque {
+        background: white;
+        border: 2px solid #1a237e;
+        border-radius: 10px;
+        padding: 12px 20px;
+        text-align: center;
+        min-width: 160px;
+      }
+      .flujo-estructura .bloque.trigger {
+        border-color: #2e7d32;
+        background: #e8f5e9;
+      }
+      .flujo-estructura .bloque.action {
+        border-color: #0d47a1;
+        background: #e3f2fd;
+      }
+      .flujo-estructura .bloque .titulo {
+        font-weight: 600;
+        font-size: 15px;
+        color: #1a237e;
+      }
+      .flujo-estructura .bloque .subtitulo {
+        font-size: 12px;
+        color: #555;
+        margin-top: 2px;
+      }
+      .flujo-estructura .flecha {
+        font-size: 28px;
+        color: #3f51b5;
+      }
+
+      .mock-correo {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 8px 0;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .mock-correo .header {
+        background: #f5f5f5;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 13px;
+        color: #555;
+      }
+      .mock-correo .header strong {
+        color: #1a237e;
+      }
+      .mock-correo .body {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .mock-correo .body .linea {
+        margin: 4px 0;
+      }
+      .mock-correo .body .destacado {
+        background: #e3f2fd;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 8px 0;
+        border-left: 4px solid #1e88e5;
+      }
+      .mock-correo .body table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin: 8px 0;
+      }
+      .mock-correo .body table th {
+        background: #e8eaf6;
+        color: #1a237e;
+        padding: 6px 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+      .mock-correo .body table td {
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+        .flujo-estructura {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📅 PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Flujo Programado (Recurrencia) · Reporte diario de proyectos creados
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante crea un flujo programado (recurrencia) en Power Automate
+          que se ejecuta cada mañana, consulta los proyectos creados el día
+          anterior en la lista "Proyectos" de SharePoint y envía un correo
+          electrónico con el listado de esos proyectos, comprendiendo el uso de
+          expresiones de fecha, filtros OData y acciones de Outlook.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>
+              Comprende qué es un flujo programado y su trigger de recurrencia.
+            </li>
+            <li>Reconoce la acción "Obtener elementos" de SharePoint.</li>
+            <li>
+              Identifica el uso de filtros OData con expresiones de fecha.
+            </li>
+            <li>
+              Entiende cómo usar el contenido de las acciones en el correo.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Crear un flujo programado con recurrencia diaria.</li>
+            <li>Configurar la hora de ejecución (7:00 AM).</li>
+            <li>Agregar la acción "Obtener elementos" con filtro de fecha.</li>
+            <li>
+              Usar expresiones <code>addDays()</code> y <code>utcNow()</code>.
+            </li>
+            <li>Configurar un correo con la tabla de proyectos.</li>
+            <li>Probar el flujo manualmente.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra interés por la automatización de reportes.</li>
+            <li>Valora la eficiencia de los reportes programados.</li>
+            <li>Participa activamente en la práctica guiada.</li>
+            <li>Desarrolla pensamiento analítico para filtros de datos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "¿Cómo recibir un reporte diario automático?"</h4>
+          <p>
+            <span class="label">Metodología:</span> Reflexión y
+            contextualización.
+          </p>
+          <p>
+            El docente pregunta:
+            <em
+              >"¿Cómo podríamos recibir cada mañana un correo con los proyectos
+              que se crearon el día anterior, sin tener que revisar manualmente
+              la lista?"</em
+            >
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Objetivo del flujo:</span>
+            <ul>
+              <li>
+                <strong>Trigger:</strong> Recurrencia diaria a las 7:00 AM.
+              </li>
+              <li>
+                <strong>Acción 1:</strong> Obtener los elementos creados el día
+                anterior en la lista "Proyectos".
+              </li>
+              <li>
+                <strong>Acción 2:</strong> Enviar un correo con el listado de
+                proyectos.
+              </li>
+              <li>
+                <strong>Resultado:</strong> El usuario recibe un correo cada
+                mañana con los proyectos nuevos del día anterior.
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende el objetivo y la estructura del flujo
+            programado.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión.</li>
+            <li>Reconoce el trigger y las acciones del flujo.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Creación paso a paso del flujo programado"</h4>
+          <p>
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes siguen).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- ESTRUCTURA DEL FLUJO -->
+          <!-- ============================================ -->
+          <h4>🔹 Estructura del flujo</h4>
+
+          <div class="flujo-estructura">
+            <div class="bloque trigger">
+              <div class="titulo">📅 TRIGGER</div>
+              <div class="subtitulo">Recurrencia</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                Todos los días a las 7:00 AM
+              </div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="bloque action">
+              <div class="titulo">⚙️ ACTION 1</div>
+              <div class="subtitulo">Obtener elementos</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                Filtro: creados ayer
+              </div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="bloque action">
+              <div class="titulo">⚙️ ACTION 2</div>
+              <div class="subtitulo">Enviar correo</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                Con el listado
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 1: CREAR FLUJO -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 1: Crear el flujo programado</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">1</span>
+            <h5>Acceder a Power Automate</h5>
+            <p>
+              Ingresar a <strong>make.powerautomate.com</strong> y hacer clic en
+              <strong>"Crear"</strong>.
+            </p>
+            <div class="captura-mock">
+              🌐 https://make.powerautomate.com → Crear
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">2</span>
+            <h5>Seleccionar "Flujo programado"</h5>
+            <p>
+              Elegir la opción <strong>"Flujo programado"</strong> (Scheduled
+              cloud flow).
+            </p>
+            <div class="captura-mock">📅 Crear → Flujo programado</div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">3</span>
+            <h5>Configurar el nombre y la recurrencia</h5>
+            <p>
+              Asignar un nombre:
+              <strong>"Reporte diario de proyectos nuevos"</strong>.
+            </p>
+            <p>Configurar la recurrencia:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Intervalo:</strong> 1</li>
+              <li><strong>Frecuencia:</strong> Día</li>
+              <li>
+                <strong>Zona horaria:</strong> (GMT-06:00) América Central
+              </li>
+              <li><strong>Hora:</strong> 7:00 AM</li>
+            </ul>
+            <div class="captura-mock">
+              🔄 Repetir cada: 1 Día<br />
+              🕖 A las: 07:00<br />
+              🌎 Zona horaria: (GMT-06:00) América Central
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Hacer clic en <strong>"Crear"</strong>.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 2: OBTENER ELEMENTOS -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 2: Agregar la acción "Obtener elementos"</h4>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">4</span>
+            <h5>Agregar acción de SharePoint</h5>
+            <p>
+              Hacer clic en <strong>"Nuevo paso"</strong> y buscar
+              <strong>"Obtener elementos"</strong> de SharePoint.
+            </p>
+            <div class="captura-mock">
+              📋 Buscar: "Obtener elementos" → SharePoint
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">5</span>
+            <h5>Configurar la acción</h5>
+            <p>Configurar:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Dirección del sitio:</strong> URL del sitio de
+                SharePoint.
+              </li>
+              <li>
+                <strong>Nombre de la lista:</strong> <code>Proyectos</code>.
+              </li>
+              <li>
+                <strong>Consulta de filtro:</strong>
+                <code>Created ge 'YYYY-MM-DD'</code> (creados ayer).
+              </li>
+            </ul>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📂 Dirección: https://[tenant].sharepoint.com/sites/[sitio]<br />
+              📋 Lista: Proyectos<br />
+              🔍 Consulta de filtro: Created ge 'addDays(utcNow(), -1)'
+            </div>
+          </div>
+
+          <div class="ejemplo-box" style="background: #fff3e0">
+            <span class="highlight" style="color: #e65100"
+              >📌 Nota sobre el filtro de fecha:</span
+            >
+            <p>
+              El filtro OData de SharePoint no acepta expresiones directamente
+              en el campo de consulta, por lo que se debe usar una
+              <strong>expresión de Power Automate</strong> en el campo de
+              filtro. Se puede escribir en el modo de expresión:
+            </p>
+            <div
+              class="captura-mock"
+              style="
+                font-family: &quot;Courier New&quot;, monospace;
+                margin-left: 0;
+              "
+            >
+              Created ge 'addDays(utcNow(), -1, 'yyyy-MM-dd')'
+            </div>
+            <p style="font-size: 13px; color: #555">
+              Esto filtra los elementos creados desde ayer (fecha actual menos 1
+              día).
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 3: ENVIAR CORREO -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 3: Agregar la acción "Enviar un correo electrónico"</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">6</span>
+            <h5>Agregar acción de Outlook</h5>
+            <p>
+              Hacer clic en <strong>"Nuevo paso"</strong> y buscar
+              <strong>"Enviar un correo electrónico"</strong> de Office 365
+              Outlook.
+            </p>
+            <div class="captura-mock">
+              📧 Buscar: "Enviar un correo electrónico" → Office 365 Outlook
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">7</span>
+            <h5>Configurar el destinatario</h5>
+            <p>
+              En el campo <strong>"Para"</strong>, escribir el correo del
+              destinatario (puede ser tu propio correo para probar, o el del
+              equipo).
+            </p>
+            <div class="captura-mock">
+              👤 Para: equipo-proyectos@empresa.com
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">8</span>
+            <h5>Configurar el asunto</h5>
+            <p>
+              En el campo <strong>"Asunto"</strong>, escribir:
+              <strong>"Reporte diario de proyectos nuevos - </strong> y
+              seleccionar la expresión
+              <code>formatDateTime(utcNow(), 'dd/MM/yyyy')</code>.
+            </p>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              📌 Asunto: "Reporte diario de proyectos nuevos -
+              @{formatDateTime(utcNow(), 'dd/MM/yyyy')}"
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">9</span>
+            <h5>Configurar el cuerpo del correo</h5>
+            <p>
+              En el campo <strong>"Cuerpo"</strong>, escribir el mensaje con una
+              tabla HTML que liste los proyectos:
+            </p>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              Buenos días,<br /><br />
+              Estos son los proyectos creados ayer:<br /><br />
+              &lt;table&gt;<br />
+              &lt;tr&gt;&lt;th&gt;Título&lt;/th&gt;&lt;th&gt;Propietario&lt;/th&gt;&lt;th&gt;Fecha
+              de Inicio&lt;/th&gt;&lt;/tr&gt;<br />
+              [Se inserta un "Aplicar a cada uno" sobre los elementos]<br />
+              &lt;/table&gt;<br /><br />
+              Saludos,<br />
+              Sistema de Reportes
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              💡 Para generar la tabla dinámica, se puede usar la acción
+              <strong>"Crear tabla HTML"</strong> antes del correo.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 4: CREAR TABLA HTML (OPCIONAL) -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 4: (Opcional) Usar "Crear tabla HTML"</h4>
+
+          <div class="paso-card" style="border-left-color: #00897b">
+            <span class="numero">10</span>
+            <h5>Agregar acción "Crear tabla HTML"</h5>
+            <p>
+              Entre "Obtener elementos" y "Enviar correo", agregar la acción
+              <strong>"Crear tabla HTML"</strong> de
+              <strong>Data Operation</strong>.
+            </p>
+            <div class="captura-mock">
+              📊 Buscar: "Crear tabla HTML" → Data Operation
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Configurar el campo "Desde" con el <strong>valor</strong> de
+              "Obtener elementos" (lista de proyectos).
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">11</span>
+            <h5>Insertar la tabla en el correo</h5>
+            <p>
+              En el cuerpo del correo, insertar el campo dinámico
+              <strong>"Salida"</strong> de la acción "Crear tabla HTML".
+            </p>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              &lt;p&gt;Estos son los proyectos creados ayer:&lt;/p&gt;<br />
+              @{body('Crear_tabla_HTML')}
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE CORREO -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo del correo que se enviará</h4>
+
+          <div class="mock-correo">
+            <div class="header">
+              <strong>De:</strong> Power Automate
+              &lt;no-reply@powerautomate.com&gt;<br />
+              <strong>Para:</strong> equipo-proyectos@empresa.com<br />
+              <strong>Asunto:</strong> Reporte diario de proyectos nuevos -
+              06/10/2025
+            </div>
+            <div class="body">
+              <p class="linea">Buenos días,</p>
+              <p class="linea">Estos son los proyectos creados ayer:</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Propietario</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Estatus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>E-commerce App</td>
+                    <td>Ana García</td>
+                    <td>01/02/2025</td>
+                    <td>Activo</td>
+                  </tr>
+                  <tr>
+                    <td>Intranet Corporativa</td>
+                    <td>Carlos López</td>
+                    <td>15/01/2025</td>
+                    <td>Activo</td>
+                  </tr>
+                  <tr>
+                    <td>Dashboard de Métricas</td>
+                    <td>Ana García</td>
+                    <td>05/04/2025</td>
+                    <td>Activo</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="linea">Saludos,<br />Sistema de Reportes</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo del correo con la tabla de proyectos creados el día
+            anterior.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PASO 5: GUARDAR Y PROBAR -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 5: Guardar y probar el flujo</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">12</span>
+            <h5>Guardar el flujo</h5>
+            <p>
+              Hacer clic en <strong>"Guardar"</strong> en la parte superior
+              derecha.
+            </p>
+            <div class="captura-mock">💾 Guardar</div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">13</span>
+            <h5>Probar el flujo manualmente</h5>
+            <p>
+              Hacer clic en <strong>"Probar"</strong> →
+              <strong>"Manualmente"</strong> →
+              <strong>"Ejecutar flujo"</strong>.
+            </p>
+            <div class="captura-mock">
+              ▶️ Probar → Manualmente → Ejecutar flujo
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Verificar que el correo llega con la tabla de proyectos.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">14</span>
+            <h5>Verificar la ejecución</h5>
+            <p>
+              En Power Automate, ir a <strong>"Mis flujos"</strong> →
+              seleccionar el flujo → revisar el
+              <strong>historial de ejecuciones</strong>.
+            </p>
+            <div class="captura-mock">
+              📊 Mis flujos → Reporte diario de proyectos → Historial de
+              ejecuciones
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Accede a make.powerautomate.com y crea un
+                <strong>flujo programado</strong> llamado "Reporte diario de
+                proyectos nuevos".
+              </li>
+              <li>
+                2. Configura la recurrencia:
+                <strong>cada 1 día a las 7:00 AM</strong> (zona horaria local).
+              </li>
+              <li>
+                3. Agrega la acción <strong>"Obtener elementos"</strong> de
+                SharePoint y configura la lista "Proyectos" con filtro de fecha
+                para obtener los creados ayer.
+              </li>
+              <li>
+                4. Agrega la acción <strong>"Crear tabla HTML"</strong> para dar
+                formato a la lista.
+              </li>
+              <li>
+                5. Agrega la acción
+                <strong>"Enviar un correo electrónico"</strong> con el asunto y
+                el cuerpo que incluya la tabla HTML.
+              </li>
+              <li>6. Guarda el flujo y pruébalo manualmente.</li>
+              <li>
+                7. Verifica el historial de ejecuciones y el correo recibido.
+              </li>
+              <li>
+                8. Si no tienes acceso, escribe los pasos y dibuja la estructura
+                del flujo.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>
+                ¿Qué diferencia hay entre un flujo programado y uno
+                automatizado?
+              </li>
+              <li>¿Qué sucede si no hay proyectos creados el día anterior?</li>
+              <li>¿Cómo podrías cambiar la frecuencia a semanal?</li>
+              <li>¿Qué otras acciones podrías agregar al flujo?</li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante crea un flujo programado que envía un reporte diario
+            de proyectos creados el día anterior.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Crea el flujo programado correctamente.</li>
+            <li>Configura la recurrencia diaria a las 7:00 AM.</li>
+            <li>
+              Configura la acción "Obtener elementos" con filtro de fecha.
+            </li>
+            <li>Usa "Crear tabla HTML" para dar formato.</li>
+            <li>Configura el correo con la tabla de proyectos.</li>
+            <li>Prueba el flujo y verifica su ejecución.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+            <li>Pizarra</li>
+            <li>Guía de configuración de flujos programados</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso y preguntas finales"</h4>
+          <ul>
+            <li>¿Qué tipo de flujo creamos?</li>
+            <li>¿Cuál fue el Trigger utilizado?</li>
+            <li>¿Cuáles fueron las Acciones ejecutadas?</li>
+            <li>
+              ¿Cómo se configura el filtro para obtener los proyectos creados
+              ayer?
+            </li>
+            <li>¿Qué función se usa para dar formato a la fecha?</li>
+            <li>¿Para qué sirve la acción "Crear tabla HTML"?</li>
+            <li>¿Cómo verificamos que el flujo se ejecutó correctamente?</li>
+          </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final:</span>
+            <p>
+              Modifica el flujo para que el reporte sea
+              <strong>semanal</strong> (cada lunes a las 8:00 AM) y que incluya
+              los proyectos creados en los últimos 7 días. ¿Qué cambiarías en la
+              recurrencia y en el filtro de fecha?
+            </p>
+            <p style="font-size: 13px; color: #555; margin-top: 4px">
+              Pista: usa <code>addDays(utcNow(), -7)</code> en el filtro y
+              cambia la recurrencia a semanal.
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida la creación de flujos programados con
+            recurrencia y acciones de SharePoint + Outlook.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Comprende la estructura del flujo creado.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Power Automate</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p>
+          <strong
+            >💡 Tips clave para flujos programados en Power Automate:</strong
+          >
+        </p>
+        <p>
+          • <strong>Tipo de flujo:</strong> Programado (se ejecuta según
+          horario).
+        </p>
+        <p>
+          • <strong>Trigger:</strong> Recurrencia (intervalo + frecuencia +
+          hora).
+        </p>
+        <p>
+          • <strong>Acción 1:</strong> "Obtener elementos" de SharePoint con
+          filtro de fecha.
+        </p>
+        <p>
+          • <strong>Filtro OData:</strong>
+          <code>Created ge 'addDays(utcNow(), -1, 'yyyy-MM-dd')'</code>.
+        </p>
+        <p>
+          • <strong>Acción 2:</strong> "Crear tabla HTML" para dar formato a la
+          lista.
+        </p>
+        <p>
+          • <strong>Acción 3:</strong> "Enviar un correo electrónico" con la
+          tabla HTML.
+        </p>
+        <p>
+          • <strong>Expresión de fecha:</strong>
+          <code>formatDateTime(utcNow(), 'dd/MM/yyyy')</code>.
+        </p>
+        <p>
+          • <strong>Probar:</strong> Manualmente desde "Probar" → "Manualmente".
+        </p>
+        <p>
+          • <strong>Historial:</strong> Revisar ejecuciones en "Mis flujos".
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>
+          • Aplica los conceptos de flujos programados en un caso práctico real.
+        </p>
+        <p>
+          • Enseña a automatizar reportes periódicos sin intervención manual.
+        </p>
+        <p>
+          • Prepara a los estudiantes para crear flujos más complejos con
+          filtros de fecha.
+        </p>
+        <p>
+          • Conecta SharePoint con Outlook a través de la automatización
+          programada.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

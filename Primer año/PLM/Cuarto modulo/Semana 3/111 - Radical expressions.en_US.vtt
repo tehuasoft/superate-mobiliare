@@ -1,0 +1,877 @@
+WEBVTT
+
+0
+00:00.230 --> 00:01.930
+<v Instructor>In this video, we're doing a couple examples</v>
+
+1
+00:01.930 --> 00:04.240
+of how to simplify radical expressions,
+
+2
+00:04.240 --> 00:06.370
+and just to clarify a few terms here,
+
+3
+00:06.370 --> 00:07.720
+when we say an expression,
+
+4
+00:07.720 --> 00:09.400
+we differentiate it from an equation
+
+5
+00:09.400 --> 00:11.550
+because an equation has an equal sign, right,
+
+6
+00:11.550 --> 00:13.610
+and there's two sides to the equal sign,
+
+7
+00:13.610 --> 00:15.800
+the left-hand side of the equal sign and the right-hand side
+
+8
+00:15.800 --> 00:17.630
+of the equal sign and that's an equation.
+
+9
+00:17.630 --> 00:19.630
+An expression doesn't have an equal sign,
+
+10
+00:19.630 --> 00:21.420
+so it's just an expression,
+
+11
+00:21.420 --> 00:24.180
+it's not an equation, and we call it a radical expression
+
+12
+00:24.180 --> 00:27.150
+because we have square roots involved or radicals involved.
+
+13
+00:27.150 --> 00:29.480
+In this first problem, we have three times the square root
+
+14
+00:29.480 --> 00:32.080
+of 2/7, minus five times the square root
+
+15
+00:32.080 --> 00:35.200
+of 7/2 plus three times the square root of 56,
+
+16
+00:35.200 --> 00:38.200
+and we want to simplify this radical expression.
+
+17
+00:38.200 --> 00:41.440
+Doing so is just going to require us to know our rules
+
+18
+00:41.440 --> 00:42.950
+of radical simplification.
+
+19
+00:42.950 --> 00:44.640
+For example, one of the rules tells us
+
+20
+00:44.640 --> 00:47.000
+that when we take the square root of a fraction,
+
+21
+00:47.000 --> 00:48.770
+we can take the square root of the numerator
+
+22
+00:48.770 --> 00:50.380
+and the denominator separately,
+
+23
+00:50.380 --> 00:52.380
+which means that three times the square root
+
+24
+00:52.380 --> 00:55.080
+of 2/7 becomes three times the square root
+
+25
+00:55.080 --> 00:57.499
+of two over the square root of seven,
+
+26
+00:57.499 --> 00:59.265
+and five times the square root
+
+27
+00:59.265 --> 01:01.370
+of 7/2 becomes five times the square root
+
+28
+01:01.370 --> 01:03.590
+of seven over the square root of two.
+
+29
+01:03.590 --> 01:06.910
+Here, for the square root of 56, one thing
+
+30
+01:06.910 --> 01:09.810
+that we can do is divide 56 by four
+
+31
+01:09.810 --> 01:11.240
+and we can call this the square root
+
+32
+01:11.240 --> 01:13.520
+of four times 14, right?
+
+33
+01:13.520 --> 01:15.050
+We haven't changed this at all,
+
+34
+01:15.050 --> 01:18.320
+because four times 14 is 56, so the square root
+
+35
+01:18.320 --> 01:22.320
+of four times 14 is the same thing as the square root of 56.
+
+36
+01:22.320 --> 01:24.920
+Now we want to go ahead and rationalize the denominators
+
+37
+01:24.920 --> 01:27.000
+of both of these fractions here,
+
+38
+01:27.000 --> 01:27.840
+which means that we just
+
+39
+01:27.840 --> 01:29.580
+want to eliminate the square root
+
+40
+01:29.580 --> 01:30.870
+from each of the denominators.
+
+41
+01:30.870 --> 01:33.280
+In order to do that, we'll multiply the fraction
+
+42
+01:33.280 --> 01:35.510
+by the denominator, so here we have the square root
+
+43
+01:35.510 --> 01:37.000
+of two over the square root of seven,
+
+44
+01:37.000 --> 01:38.680
+we want to multiply by the square root
+
+45
+01:38.680 --> 01:41.080
+of seven over the square root of seven,
+
+46
+01:41.080 --> 01:43.590
+because that'll make the denominator the square
+
+47
+01:43.590 --> 01:45.360
+root of seven times the square root of seven,
+
+48
+01:45.360 --> 01:46.630
+those square roots will cancel
+
+49
+01:46.630 --> 01:47.920
+and we'll just be left with seven
+
+50
+01:47.920 --> 01:49.040
+and we will have removed
+
+51
+01:49.040 --> 01:51.250
+the square root from the denominator.
+
+52
+01:51.250 --> 01:52.083
+Same thing here.
+
+53
+01:52.083 --> 01:52.970
+We want to do the square root
+
+54
+01:52.970 --> 01:55.150
+of two over the square root of two,
+
+55
+01:55.150 --> 01:57.880
+and when we do that, we're going to get three times
+
+56
+01:57.880 --> 02:00.020
+the square root of two times the square root of seven.
+
+57
+02:00.020 --> 02:01.810
+Well, when we have the square root
+
+58
+02:01.810 --> 02:04.820
+of m times the square root of n,
+
+59
+02:04.820 --> 02:08.060
+that's the same thing as the square root of m n,
+
+60
+02:08.060 --> 02:10.060
+and this is just radical multiplication.
+
+61
+02:10.060 --> 02:12.730
+We know that when we have two radicals multiplied together,
+
+62
+02:12.730 --> 02:15.550
+we can multiply the values that are inside the radicals,
+
+63
+02:15.550 --> 02:17.490
+put it all under one radical sign,
+
+64
+02:17.490 --> 02:18.440
+so here we have square root
+
+65
+02:18.440 --> 02:19.560
+of two times square root of seven,
+
+66
+02:19.560 --> 02:20.720
+that's going to become square root
+
+67
+02:20.720 --> 02:23.370
+of 14 over square root of seven
+
+68
+02:23.370 --> 02:25.580
+times square root of seven is just seven.
+
+69
+02:25.580 --> 02:27.840
+Here we're going to have minus five times
+
+70
+02:27.840 --> 02:29.400
+the square root of 14.
+
+71
+02:29.400 --> 02:31.950
+We multiply root seven by root two,
+
+72
+02:31.950 --> 02:35.100
+divided by root two times root two just gives us two,
+
+73
+02:35.100 --> 02:38.270
+those radicals cancel, and then we're going to have plus three.
+
+74
+02:38.270 --> 02:39.370
+Here we have the square root
+
+75
+02:39.370 --> 02:41.320
+of four times 14, in other words,
+
+76
+02:41.320 --> 02:43.580
+we have the square root of m times n.
+
+77
+02:43.580 --> 02:46.780
+And if we just apply this formula backwards,
+
+78
+02:46.780 --> 02:48.490
+we can see that we can separate m
+
+79
+02:48.490 --> 02:50.180
+and n into their own square roots,
+
+80
+02:50.180 --> 02:53.290
+which means we can separate root four times 14
+
+81
+02:53.290 --> 02:56.870
+into root four times root 14 like this.
+
+82
+02:56.870 --> 02:59.360
+Now, we know that the square root of four is two,
+
+83
+02:59.360 --> 03:01.350
+so instead of four, we can call this two,
+
+84
+03:01.350 --> 03:03.620
+and two times three gives us six,
+
+85
+03:03.620 --> 03:07.760
+so we'll replace this three root four here with six
+
+86
+03:07.760 --> 03:10.280
+and now we have plus six times the square root of 14.
+
+87
+03:10.280 --> 03:12.160
+Notice now that we have just square root
+
+88
+03:12.160 --> 03:13.710
+of 14, square root of 14
+
+89
+03:13.710 --> 03:16.270
+and square root of 14, so our goal is going to be
+
+90
+03:16.270 --> 03:18.880
+to combine these into one term.
+
+91
+03:18.880 --> 03:19.713
+The way that we're going to do
+
+92
+03:19.713 --> 03:21.960
+that is by finding a common denominator.
+
+93
+03:21.960 --> 03:26.410
+We essentially have here 3/7 times root 14
+
+94
+03:26.410 --> 03:31.410
+minus 5/2 times root 14 plus 6/1 times root 14.
+
+95
+03:34.060 --> 03:36.340
+So what we want to do is find the common denominator,
+
+96
+03:36.340 --> 03:37.570
+which means we need the least common
+
+97
+03:37.570 --> 03:39.870
+multiple of seven, two, and one.
+
+98
+03:39.870 --> 03:42.720
+That's going to be 14, so we're going to multiply
+
+99
+03:42.720 --> 03:46.160
+this first fraction by 2/2.
+
+100
+03:46.160 --> 03:48.453
+We're going to multiply this fraction by 7/7,
+
+101
+03:49.320 --> 03:53.490
+and we're going to multiply here by 14/14.
+
+102
+03:53.490 --> 03:58.490
+And when we do that, we're going to get 6/14 times root 14,
+
+103
+03:58.620 --> 04:03.620
+minus 35/14 times root 14 plus 14 times six is 60
+
+104
+04:05.610 --> 04:10.610
+and 24, 84/14 times root 14.
+
+105
+04:10.620 --> 04:13.990
+Now I just need to find six minus 35 plus 84.
+
+106
+04:13.990 --> 04:16.010
+If I combine my positive terms first,
+
+107
+04:16.010 --> 04:18.000
+six plus 84 gives me 90.
+
+108
+04:18.000 --> 04:22.170
+90 minus 35 gives me 55, so what I'm going to end up with
+
+109
+04:22.170 --> 04:27.000
+is 55/14 times root 14,
+
+110
+04:27.000 --> 04:29.830
+and I know that I can't reduce this fraction any further
+
+111
+04:29.830 --> 04:32.830
+because the only factors of 14 other than one are two,
+
+112
+04:32.830 --> 04:35.010
+seven, and 14, and two,
+
+113
+04:35.010 --> 04:38.560
+seven, and 14, none of those go evenly into 55,
+
+114
+04:38.560 --> 04:43.560
+so 55/14 times root 14 is going to be our final answer.
+
+115
+04:44.480 --> 04:46.050
+Now let's look at a second example.
+
+116
+04:46.050 --> 04:47.600
+Here we have the third root
+
+117
+04:47.600 --> 04:50.660
+of x to the fifth y cubed times
+
+118
+04:50.660 --> 04:53.440
+the fourth root of x y to the fifth.
+
+119
+04:53.440 --> 04:55.830
+Now, remember the exponent on each of these variables,
+
+120
+04:55.830 --> 04:57.340
+for example here x to the fifth,
+
+121
+04:57.340 --> 04:58.950
+the five is the exponent,
+
+122
+04:58.950 --> 05:02.020
+the three is the root, so this is the same thing as saying x
+
+123
+05:02.020 --> 05:04.700
+to the fifth and then raised again to the 1/3 power.
+
+124
+05:04.700 --> 05:05.720
+So what we're going to do is
+
+125
+05:05.720 --> 05:08.120
+we're going to take this value inside the square root here,
+
+126
+05:08.120 --> 05:10.250
+x to the fifth y to the 1/3,
+
+127
+05:10.250 --> 05:12.800
+and we're going to take the 1/3 root like this.
+
+128
+05:12.800 --> 05:13.840
+We haven't changed anything.
+
+129
+05:13.840 --> 05:16.050
+We can write the 1/3 root as the 1/3 root
+
+130
+05:16.050 --> 05:17.580
+of x to the fifth y to the third
+
+131
+05:17.580 --> 05:18.890
+like in the original problem,
+
+132
+05:18.890 --> 05:20.380
+or take what's inside the square root
+
+133
+05:20.380 --> 05:21.850
+and raise it to the 1/3 power.
+
+134
+05:21.850 --> 05:23.050
+So those things are the same.
+
+135
+05:23.050 --> 05:26.350
+And same thing here, we can take x y to the fifth
+
+136
+05:26.350 --> 05:29.050
+and raise it to the 1/4 instead.
+
+137
+05:29.050 --> 05:30.740
+Now what we can do is distribute
+
+138
+05:30.740 --> 05:34.220
+this 1/3 exponent across the five and the three.
+
+139
+05:34.220 --> 05:36.330
+When we do that, we multiply our exponents,
+
+140
+05:36.330 --> 05:40.850
+so five times 1/3 is 5/3, so we get x to the 5/3,
+
+141
+05:40.850 --> 05:44.320
+and then y to the 1/3 to the 1/3 again is y
+
+142
+05:44.320 --> 05:49.320
+to the three times 1/3 or just y to the 3/3.
+
+143
+05:49.440 --> 05:53.450
+Here, we're going to have x to the 1/4, so x to the 1/4,
+
+144
+05:53.450 --> 05:55.910
+and then y to the 1/5 raised to the 1/4 again.
+
+145
+05:55.910 --> 06:00.280
+We multiply five and 1/4 and we get y to the 5/4.
+
+146
+06:00.280 --> 06:02.370
+And now we know from the rules of exponents,
+
+147
+06:02.370 --> 06:03.670
+remember we know that x
+
+148
+06:03.670 --> 06:08.670
+to the a times x to the b is equal to x to the a plus b.
+
+149
+06:09.090 --> 06:10.570
+This is exponent addition here.
+
+150
+06:10.570 --> 06:12.110
+We add the exponents.
+
+151
+06:12.110 --> 06:13.730
+So because we have the same bases here,
+
+152
+06:13.730 --> 06:16.850
+x to the 5/3 and x to the 1/4, we can say x
+
+153
+06:16.850 --> 06:21.060
+to the 5/3 plus 1/4 and for y here,
+
+154
+06:21.060 --> 06:23.700
+we have y to the 3/3, which is the same thing as y
+
+155
+06:23.700 --> 06:25.150
+to the one, and then we have y
+
+156
+06:25.150 --> 06:30.150
+to the 5/4, so we can say times y to the one plus 5/4.
+
+157
+06:30.410 --> 06:33.000
+Now it's just a matter of finding a common denominator
+
+158
+06:33.000 --> 06:34.580
+between our fractions here,
+
+159
+06:34.580 --> 06:36.550
+so the common denominator for 5/3
+
+160
+06:36.550 --> 06:38.930
+and 1/4 is going to be 12,
+
+161
+06:38.930 --> 06:43.270
+so we're going to say 4/4, we're going to multiply by 4/4, here
+
+162
+06:43.270 --> 06:45.600
+we're going to multiply by 3/3.
+
+163
+06:45.600 --> 06:49.110
+The common denominator for one and 5/4 is going to be four,
+
+164
+06:49.110 --> 06:52.079
+so we're going to multiply this one by 4/4
+
+165
+06:52.079 --> 06:54.160
+which is just going to give us 4/4.
+
+166
+06:54.160 --> 06:56.430
+And now we just need to combine exponents,
+
+167
+06:56.430 --> 06:58.150
+so for x, we're going to get x
+
+168
+06:58.150 --> 07:03.150
+to the 20/12 plus 3/12 times y to the 9/4.
+
+169
+07:06.350 --> 07:07.630
+when we add 20 to three,
+
+170
+07:07.630 --> 07:10.810
+we're going to get 23, so our final answer is going to be x
+
+171
+07:10.810 --> 07:15.810
+to the 23/12 times y to the 9/4,
+
+172
+07:16.010 --> 07:17.920
+and even though it looks completely different,
+
+173
+07:17.920 --> 07:20.720
+we just used the rules that we knew about exponents
+
+174
+07:20.720 --> 07:23.010
+and radicals or roots to change
+
+175
+07:23.010 --> 07:25.960
+this original problem into our final answer here
+
+176
+07:25.960 --> 07:29.080
+and they actually mean exactly the same thing.
+
+177
+07:29.080 --> 07:30.660
+Let's do one final example here.
+
+178
+07:30.660 --> 07:34.800
+We have the third root of 27 times the square root of three.
+
+179
+07:34.800 --> 07:36.660
+Using our formula here where we have the square root
+
+180
+07:36.660 --> 07:37.780
+of m times the square root
+
+181
+07:37.780 --> 07:40.530
+of n is equal to the square root of m n,
+
+182
+07:40.530 --> 07:42.070
+here we basically have m
+
+183
+07:42.070 --> 07:46.150
+and n where m is 27 and n is the square root of three.
+
+184
+07:46.150 --> 07:49.090
+We know we can separate those into their own square roots,
+
+185
+07:49.090 --> 07:50.890
+so we can say that the third root
+
+186
+07:50.890 --> 07:55.520
+of 27 times the third root of the square root of three.
+
+187
+07:55.520 --> 07:56.353
+Keep in mind that we know
+
+188
+07:56.353 --> 07:59.750
+that 27 is three times three times three, right?
+
+189
+07:59.750 --> 08:01.190
+Three times three is nine.
+
+190
+08:01.190 --> 08:03.720
+Nine times three is 27, so 27 is equal
+
+191
+08:03.720 --> 08:06.640
+to three to the third, so we can say the third root
+
+192
+08:06.640 --> 08:09.480
+of three to the third and then here
+
+193
+08:09.480 --> 08:11.260
+we're going to say the third root of
+
+194
+08:11.260 --> 08:12.770
+and we're going to change the square root
+
+195
+08:12.770 --> 08:16.930
+of three to three to the 1/2, like this.
+
+196
+08:16.930 --> 08:19.200
+Now we can do the same thing we did in the last example,
+
+197
+08:19.200 --> 08:22.120
+so this three to the third inside the square root,
+
+198
+08:22.120 --> 08:23.810
+instead of taking the third root here,
+
+199
+08:23.810 --> 08:25.620
+we raise it to the 1/3 power,
+
+200
+08:25.620 --> 08:28.310
+then we take three to the 1/2,
+
+201
+08:28.310 --> 08:30.430
+and instead of taking the third root here,
+
+202
+08:30.430 --> 08:32.170
+we raise it to the 1/3 power.
+
+203
+08:32.170 --> 08:34.010
+Now this is exponent multiplication,
+
+204
+08:34.010 --> 08:38.440
+so three times 1/3 is going to be 3/3, so we get three
+
+205
+08:38.440 --> 08:42.355
+to the 3/3, and then we're going to say 1/2 times 1/3
+
+206
+08:42.355 --> 08:45.540
+is 1/6, so we get three to the 1/6,
+
+207
+08:45.540 --> 08:46.610
+and now it's back to this
+
+208
+08:46.610 --> 08:49.060
+formula up here of exponent addition.
+
+209
+08:49.060 --> 08:50.990
+So we're going to call this 3/3, we're just going to call
+
+210
+08:50.990 --> 08:55.970
+that one, and we're going to say three to the one plus 1/6.
+
+211
+08:55.970 --> 08:57.770
+If we find a common denominator,
+
+212
+08:57.770 --> 09:01.350
+we have to multiply this one by 6/6,
+
+213
+09:01.350 --> 09:03.760
+and now we can say six plus one is seven,
+
+214
+09:03.760 --> 09:06.770
+so we get three to the 7/6,
+
+215
+09:06.770 --> 09:10.260
+which is going to be the same thing as this original problem
+
+216
+09:10.260 --> 09:11.430
+that we started with up here.
+
+217
+09:11.430 --> 09:13.720
+We just used exponent rules
+
+218
+09:13.720 --> 09:18.720
+and radical rules to simplify it to three to the 7/6.

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Programación / Dart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .codigo-box {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            overflow-x: auto;
+        }
+        .codigo-box .cmd {
+            color: #4fc3f7;
+        }
+        .codigo-box .output {
+            color: #a5d6a7;
+        }
+        .codigo-box .comment {
+            color: #888;
+            font-style: italic;
+        }
+        .codigo-box .keyword {
+            color: #c792ea;
+        }
+        .codigo-box .string {
+            color: #c3e88d;
+        }
+        .codigo-box .number {
+            color: #f78c6c;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 10px 0;
+        }
+        .comparison-grid > div {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+        }
+        .comparison-grid > div strong {
+            color: #1a237e;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+            .comparison-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: while y do-while en Dart
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Comprende el funcionamiento de los bucles <code>while</code> y <code>do-while</code> en Dart, diferencia sus comportamientos, y los aplica en situaciones donde la cantidad de iteraciones no es conocida de antemano, desarrollando habilidades de control de flujo basado en condiciones.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es un bucle <code>while</code> y cuándo usarlo.</li>
+                <li>Define qué es un bucle <code>do-while</code> y cuándo usarlo.</li>
+                <li>Comprende la diferencia clave: <code>while</code> evalúa primero, <code>do-while</code> ejecuta primero.</li>
+                <li>Reconoce que ambos son útiles cuando <strong>no sabemos cuántas veces se repetirá</strong> el bucle.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Escribir bucles <code>while</code> con condiciones de parada.</li>
+                <li>Escribir bucles <code>do-while</code> para garantizar al menos una ejecución.</li>
+                <li>Elegir entre <code>while</code> y <code>do-while</code> según la necesidad.</li>
+                <li>Evitar bucles infinitos con condiciones correctas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra confianza al escribir bucles condicionales.</li>
+                <li>Participa activamente en la resolución de ejercicios.</li>
+                <li>Valora la utilidad de los bucles para tareas repetitivas.</li>
+                <li>Desarrolla pensamiento lógico al diseñar condiciones de parada.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Explicación super simple de while y do-while"</h4>
+            <p><span class="label">Metodología:</span> Analogías y ejemplos cotidianos.</p>
+            <p><span class="label">Descripción:</span> El docente explica con analogías sencillas.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">🧠 Analogía para entender while y do-while:</span>
+                <ul>
+                    <li><strong>while:</strong> "Revisa si hay pizza. Si hay, come una rebanada. Sigue mientras haya pizza."</li>
+                    <li><strong>do-while:</strong> "Come una rebanada de pizza. Luego revisa si hay más. Repite mientras haya pizza."</li>
+                </ul>
+            </div>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Diferencia clave:</span>
+                <ul>
+                    <li><strong>while:</strong> <strong>Primero pregunta</strong>, luego actúa. Si la condición es falsa, <strong>no se ejecuta ni una vez</strong>.</li>
+                    <li><strong>do-while:</strong> <strong>Primero actúa</strong>, luego pregunta. <strong>Siempre se ejecuta al menos una vez</strong>, aunque la condición sea falsa.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la diferencia fundamental entre while y do-while.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Explica con sus palabras la diferencia entre while y do-while.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "While y do-while en Dart - Ejemplos y práctica"</h4>
+            <p><span class="label">Metodología:</span> Explicación con ejemplos y ejercicios.</p>
+
+            <!-- Bucle while -->
+            <h4>🔹 Bucle while</h4>
+            <div style="background: #1a1a2e; color: #e0e0e0; padding: 12px 16px; border-radius: 8px; font-family: monospace; font-size: 16px; text-align: center; margin: 10px 0;">
+                <span style="color: #c792ea;">while</span> (<span style="color: #c3e88d;">condición</span>) { <br>
+                &nbsp;&nbsp;<span style="color: #888;">// Código que se repite MIENTRAS la condición sea verdadera</span><br>
+                }
+            </div>
+            <p><strong>Ejemplo 1: Contar del 1 al 5 con while</strong></p>
+            <div class="codigo-box">
+                <span class="keyword">void</span> <span class="cmd">main</span>() {<br>
+                &nbsp;&nbsp;<span class="keyword">int</span> i = 1;<br>
+                &nbsp;&nbsp;<span class="keyword">while</span> (i &lt;= 5) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(i);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;i++;<br>
+                &nbsp;&nbsp;}<br>
+                }<br>
+                <span class="comment">// Salida: 1, 2, 3, 4, 5</span>
+            </div>
+
+            <p><strong>Ejemplo 2: while con condición falsa (no se ejecuta)</strong></p>
+            <div class="codigo-box">
+                <span class="keyword">void</span> <span class="cmd">main</span>() {<br>
+                &nbsp;&nbsp;<span class="keyword">int</span> i = 10;<br>
+                &nbsp;&nbsp;<span class="keyword">while</span> (i &lt; 5) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(i); <span class="comment">// Esto nunca se ejecuta</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+
+            <!-- Bucle do-while -->
+            <h4>🔹 Bucle do-while</h4>
+            <div style="background: #1a1a2e; color: #e0e0e0; padding: 12px 16px; border-radius: 8px; font-family: monospace; font-size: 16px; text-align: center; margin: 10px 0;">
+                <span style="color: #c792ea;">do</span> { <br>
+                &nbsp;&nbsp;<span style="color: #888;">// Código que se ejecuta al menos una vez</span><br>
+                } <span style="color: #c792ea;">while</span> (<span style="color: #c3e88d;">condición</span>);
+            </div>
+            <p><strong>Ejemplo 1: Contar del 1 al 5 con do-while</strong></p>
+            <div class="codigo-box">
+                <span class="keyword">void</span> <span class="cmd">main</span>() {<br>
+                &nbsp;&nbsp;<span class="keyword">int</span> i = 1;<br>
+                &nbsp;&nbsp;<span class="keyword">do</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(i);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;i++;<br>
+                &nbsp;&nbsp;} <span class="keyword">while</span> (i &lt;= 5);<br>
+                }<br>
+                <span class="comment">// Salida: 1, 2, 3, 4, 5</span>
+            </div>
+
+            <p><strong>Ejemplo 2: do-while con condición falsa (se ejecuta al menos una vez)</strong></p>
+            <div class="codigo-box">
+                <span class="keyword">void</span> <span class="cmd">main</span>() {<br>
+                &nbsp;&nbsp;<span class="keyword">int</span> i = 10;<br>
+                &nbsp;&nbsp;<span class="keyword">do</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(i); <span class="comment">// Se ejecuta una vez, aunque i no sea < 5</span><br>
+                &nbsp;&nbsp;} <span class="keyword">while</span> (i &lt; 5);<br>
+                }<br>
+                <span class="comment">// Salida: 10 (se ejecuta una vez)</span>
+            </div>
+
+            <!-- Comparación -->
+            <h4>🔹 Comparación: while vs do-while</h4>
+            <div class="comparison-grid">
+                <div style="border-left-color: #2e7d32;">
+                    <strong>✅ while</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Evalúa la condición <strong>primero</strong>.</li>
+                        <li>Si es falsa, <strong>no se ejecuta</strong>.</li>
+                        <li>Útil cuando <strong>no sabemos si se debe ejecutar</strong>.</li>
+                    </ul>
+                    <div style="background: #1a1a2e; color: #e0e0e0; padding: 6px; border-radius: 6px; font-family: monospace; font-size: 13px; margin-top: 4px;">
+                        <span class="keyword">while</span> (condición) { ... }
+                    </div>
+                </div>
+                <div style="border-left-color: #0d47a1;">
+                    <strong>🔹 do-while</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Ejecuta el bloque <strong>primero</strong>.</li>
+                        <li>Luego evalúa la condición.</li>
+                        <li>Útil cuando <strong>debe ejecutarse al menos una vez</strong>.</li>
+                    </ul>
+                    <div style="background: #1a1a2e; color: #e0e0e0; padding: 6px; border-radius: 6px; font-family: monospace; font-size: 13px; margin-top: 4px;">
+                        <span class="keyword">do</span> { ... } <span class="keyword">while</span> (condición);
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cuándo usar cada uno -->
+            <h4>🔹 ¿Cuándo usar while y cuándo do-while?</h4>
+            <ul>
+                <li><strong>Usa while</strong> cuando <strong>no estás seguro</strong> de que la condición se cumpla, y quieres asegurarte de que no se ejecute si la condición es falsa.</li>
+                <li><strong>Usa do-while</strong> cuando el bloque <strong>debe ejecutarse al menos una vez</strong>, independientemente de la condición.</li>
+            </ul>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo práctico:</span><br>
+                <strong>while:</strong> Pedir a un usuario que ingrese un número mayor a 0. Si ingresa -1, no se ejecuta.<br>
+                <strong>do-while:</strong> Mostrar un menú al usuario. <strong>Siempre se muestra al menos una vez</strong>, luego se pregunta si quiere salir.
+            </div>
+
+            <!-- Ejercicios -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Escribe un programa en Dart que:</strong></p>
+                <ul>
+                    <li><strong>Ejercicio 1 (while):</strong> Pida al usuario un número positivo. Si ingresa un número negativo o cero, siga pidiendo hasta que ingrese uno positivo.</li>
+                    <li><strong>Ejercicio 2 (do-while):</strong> Muestre un menú con opciones (1. Saludar, 2. Despedirse, 3. Salir) y se repita hasta que el usuario elija salir.</li>
+                    <li><strong>Ejercicio 3 (while):</strong> Suma de números ingresados por el usuario hasta que ingrese 0.</li>
+                    <li><strong>Ejercicio 4 (do-while):</strong> Adivina un número secreto (1-10). El usuario intenta adivinarlo hasta que acierte.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es la principal diferencia entre while y do-while?</li>
+                    <li>¿En qué situación usarías do-while en lugar de while?</li>
+                    <li>¿Qué pasa si olvidas modificar la variable de control en un while?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante distingue entre while y do-while, y elige el adecuado según el problema.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Escribe bucles while y do-while correctamente.</li>
+                <li>Explica la diferencia entre ambos.</li>
+                <li>Resuelve los ejercicios propuestos.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con Dart instalado</li>
+                <li>VS Code</li>
+                <li>Terminal</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas rápidas"</h4>
+            <p><span class="label">Metodología:</span> Preguntas y respuestas.</p>
+            <ul>
+                <li>¿Cuándo usamos while? → <strong>Cuando no sabemos si la condición se cumplirá, y queremos verificar primero.</strong></li>
+                <li>¿Cuándo usamos do-while? → <strong>Cuando necesitamos que el bloque se ejecute al menos una vez.</strong></li>
+                <li>¿Qué pasa si la condición en un while es falsa desde el inicio? → <strong>El bloque no se ejecuta.</strong></li>
+                <li>¿Qué pasa si la condición en un do-while es falsa desde el inicio? → <strong>El bloque se ejecuta una vez.</strong></li>
+                <li>¿Qué es un bucle infinito? → <strong>Cuando la condición siempre es verdadera y nunca se detiene.</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida la diferencia entre while y do-while.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para recordar:</strong></p>
+        <p>• <strong>while:</strong> "Pregunta, luego actúa" → Puede que no se ejecute nunca.</p>
+        <p>• <strong>do-while:</strong> "Actúa, luego pregunta" → Siempre se ejecuta al menos una vez.</p>
+        <p>• <strong>Siempre modifica la variable de control</strong> dentro del bucle para evitar bucles infinitos.</p>
+        <p>• Usa <strong>while</strong> para validación de entrada (ej: pedir un número válido).</p>
+        <p>• Usa <strong>do-while</strong> para menús o juegos donde la opción se muestra al menos una vez.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce bucles que dependen de condiciones, no de un número fijo de iteraciones.</p>
+        <p>• Desarrolla habilidades de control de flujo en situaciones reales.</p>
+        <p>• Prepara a los estudiantes para manejar entrada de usuarios y validaciones.</p>
+        <p>• Conecta con temas como juegos, menús y sistemas interactivos.</p>
+    </div>
+
+</div>
+</body>
+</html>

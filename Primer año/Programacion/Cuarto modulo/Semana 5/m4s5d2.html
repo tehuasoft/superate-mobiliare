@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Filtros y Búsquedas en Power Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+            font-family: 'Courier New', monospace;
+        }
+
+        .mock-app {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .mock-app .header {
+            background: #1a237e;
+            color: white;
+            padding: 10px 14px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mock-app .body {
+            padding: 12px 14px;
+            background: #f5f7fa;
+        }
+        .mock-app .buscador {
+            background: white;
+            border: 1px solid #1e88e5;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mock-app .galeria-item {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #1e88e5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .mock-app .galeria-item .titulo {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a237e;
+        }
+        .mock-app .galeria-item .detalle {
+            font-size: 13px;
+            color: #555;
+            margin-top: 2px;
+        }
+        .mock-app .galeria-item .estatus {
+            display: inline-block;
+            padding: 1px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .estado-activo { background: #e3f2fd; color: #0d47a1; }
+        .estado-pausado { background: #fff3e0; color: #e65100; }
+        .estado-cerrado { background: #e8f5e9; color: #2e7d32; }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🔍 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Filtros y Búsquedas en Power Apps · Search() y Filter()</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a implementar funcionalidades de búsqueda y filtrado en una aplicación de Power Apps, utilizando un cuadro de texto de búsqueda y aplicando las funciones <code>Search()</code> y <code>Filter()</code> sobre una galería conectada a la lista "Proyectos".</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende la diferencia entre <code>Search()</code> y <code>Filter()</code>.</li>
+                <li>Reconoce la sintaxis de cada función.</li>
+                <li>Identifica cuándo usar cada una según el caso.</li>
+                <li>Entiende cómo vincular un cuadro de texto con una galería.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Insertar un cuadro de texto para búsqueda.</li>
+                <li>Aplicar <code>Search()</code> en la galería para búsqueda por texto.</li>
+                <li>Aplicar <code>Filter()</code> en la galería para filtros por condición.</li>
+                <li>Combinar <code>Search()</code> y <code>Filter()</code> para búsquedas avanzadas.</li>
+                <li>Probar y validar el funcionamiento de la búsqueda.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por mejorar la experiencia de usuario.</li>
+                <li>Valora la importancia de encontrar información rápidamente.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de filtrado y búsqueda.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo encontrar lo que busco rápidamente?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Si tienes 50 proyectos en tu aplicación, ¿cómo harías para encontrar uno específico? ¿Y para ver solo los que están activos?"</em> Se introduce la necesidad de filtros y búsquedas.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Funciones de búsqueda y filtrado en Power Apps:</span>
+                <ul>
+                    <li><strong><code>Search()</code>:</strong> Busca un texto en una o más columnas de una tabla. Ideal para búsquedas libres.</li>
+                    <li><strong><code>Filter()</code>:</strong> Filtra registros según una condición lógica. Ideal para filtros específicos (ej. Estatus = "Activo").</li>
+                </ul>
+                <p style="margin-top: 6px; font-size: 14px; color: #555;">💡 Ambas funciones se aplican en la propiedad <code>Items</code> de la galería.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la diferencia entre <code>Search()</code> y <code>Filter()</code>.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce la utilidad de cada función.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a Power Apps Studio</li>
+                <li>App con galería conectada a "Proyectos"</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Implementación de búsqueda y filtros en la galería"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- INSERTAR CUADRO DE TEXTO -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 1: Insertar un cuadro de texto para búsqueda</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Insertar un Text Input</h5>
+                <p>En <strong>BrowseScreen</strong>, ir a <strong>"Insertar"</strong> → <strong>"Entrada de texto"</strong> → <strong>"Entrada de texto"</strong> (Text Input).</p>
+                <div class="captura-mock">
+                    🔤 Insertar → Entrada de texto → Text Input
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Configurar el cuadro de texto</h5>
+                <p>Renombrarlo como <strong>"txtBusqueda"</strong>. En la propiedad <code>HintText</code>, escribir: <strong>"Buscar proyecto..."</strong>.</p>
+                <div class="captura-mock">
+                    📝 HintText: "Buscar proyecto..."
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">También se puede agregar un icono de búsqueda junto al cuadro.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Limpiar el campo por defecto</h5>
+                <p>Asegurarse de que la propiedad <code>Default</code> esté vacía: <code>""</code>.</p>
+                <div class="captura-mock">
+                    Default: ""
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- FUNCIÓN SEARCH -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 2: Aplicar <code>Search()</code> en la galería</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">4</span>
+                <h5>Configurar Items de la galería con Search()</h5>
+                <p>Seleccionar la galería en <strong>BrowseScreen</strong>. En la propiedad <code>Items</code>, escribir:</p>
+                <div class="captura-mock">
+                    Search(Proyectos, txtBusqueda.Text, "Título", "Descripción")
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Busca el texto ingresado en las columnas "Título" y "Descripción".</p>
+            </div>
+
+            <div class="ejemplo-box" style="background: #e8f5e9;">
+                <span class="highlight" style="color: #2e7d32;">📌 Explicación de Search():</span>
+                <div class="captura-mock" style="font-family: 'Courier New', monospace; margin-left: 0;">
+                    Search(Tabla, TextoBuscar, Columna1, Columna2, ...)
+                </div>
+                <ul>
+                    <li><strong>Tabla:</strong> <code>Proyectos</code> (la fuente de datos).</li>
+                    <li><strong>TextoBuscar:</strong> <code>txtBusqueda.Text</code> (lo que escribe el usuario).</li>
+                    <li><strong>Columnas:</strong> "Título", "Descripción" (dónde buscar).</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- FUNCIÓN FILTER -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 3: Aplicar <code>Filter()</code> en la galería</h4>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">5</span>
+                <h5>Configurar Items de la galería con Filter()</h5>
+                <p>Si se quiere filtrar por una condición específica (ej. solo proyectos activos), cambiar la propiedad <code>Items</code> a:</p>
+                <div class="captura-mock">
+                    Filter(Proyectos, Estatus.Value = "Activo")
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Muestra solo los proyectos con Estatus = "Activo".</p>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight" style="color: #e65100;">📌 Explicación de Filter():</span>
+                <div class="captura-mock" style="font-family: 'Courier New', monospace; margin-left: 0;">
+                    Filter(Tabla, Condición1, Condición2, ...)
+                </div>
+                <ul>
+                    <li><strong>Tabla:</strong> <code>Proyectos</code>.</li>
+                    <li><strong>Condición:</strong> <code>Estatus.Value = "Activo"</code>.</li>
+                    <li>Se pueden combinar múltiples condiciones con <code>&&</code> (AND) o <code>||</code> (OR).</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- COMBINAR SEARCH Y FILTER -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 4: Combinar <code>Search()</code> y <code>Filter()</code></h4>
+
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">6</span>
+                <h5>Combinar ambas funciones</h5>
+                <p>Para buscar por texto Y filtrar por condición, se pueden anidar las funciones en la propiedad <code>Items</code>:</p>
+                <div class="captura-mock">
+                    Filter(Search(Proyectos, txtBusqueda.Text, "Título", "Descripción"), Estatus.Value = "Activo")
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Busca el texto ingresado y además filtra solo los proyectos activos.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO VISUAL -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo visual de la búsqueda</h4>
+
+            <div class="mock-app">
+                <div class="header">
+                    <span>📋 Proyectos</span>
+                    <span>🔍</span>
+                </div>
+                <div class="body">
+                    <div class="buscador">
+                        🔍 <span>E-commerce</span>
+                    </div>
+                    <div class="galeria-item">
+                        <div class="titulo">E-commerce App</div>
+                        <div class="detalle">👤 Ana García</div>
+                        <span class="estatus estado-activo">Activo</span>
+                    </div>
+                    <div class="galeria-item">
+                        <div class="titulo">E-commerce Móvil</div>
+                        <div class="detalle">👤 Carlos López</div>
+                        <span class="estatus estado-activo">Activo</span>
+                    </div>
+                    <p style="font-size: 13px; color: #888; text-align: center; margin-top: 8px;">Mostrando 2 resultados para "E-commerce"</p>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Búsqueda en acción: el usuario escribe "E-commerce" y la galería se filtra automáticamente.</p>
+
+            <!-- ============================================ -->
+            <!-- COMPARACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Comparación: <code>Search()</code> vs <code>Filter()</code></h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>🔍 Search()</h5>
+                    <p><strong>Propósito:</strong> Buscar texto libre en una o más columnas.</p>
+                    <p><strong>Cuándo usar:</strong> Cuando el usuario escribe en un cuadro de texto.</p>
+                    <p><strong>Ejemplo:</strong> Buscar "E-commerce" en Título y Descripción.</p>
+                    <p><strong>Ventaja:</strong> Búsqueda flexible e intuitiva.</p>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #e65100;">
+                    <h5>🎯 Filter()</h5>
+                    <p><strong>Propósito:</strong> Filtrar registros según condiciones lógicas.</p>
+                    <p><strong>Cuándo usar:</strong> Cuando se quiere mostrar un subconjunto específico.</p>
+                    <p><strong>Ejemplo:</strong> Mostrar solo proyectos activos.</p>
+                    <p><strong>Ventaja:</strong> Control preciso sobre los datos mostrados.</p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- OTROS FILTROS ÚTILES -->
+            <!-- ============================================ -->
+            <h4>🔹 Otros filtros útiles</h4>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Ejemplos adicionales:</span>
+                <ul>
+                    <li><strong>Filtrar por propietario:</strong> <code>Filter(Proyectos, Propietario.DisplayName = "Ana García")</code></li>
+                    <li><strong>Filtrar por fecha:</strong> <code>Filter(Proyectos, 'Fecha de Inicio' >= Date(2025,1,1))</code></li>
+                    <li><strong>Múltiples condiciones:</strong> <code>Filter(Proyectos, Estatus.Value = "Activo" && 'Fecha de Inicio' >= Today())</code></li>
+                    <li><strong>Búsqueda en una sola columna:</strong> <code>Search(Proyectos, txtBusqueda.Text, "Título")</code></li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. En tu app "Gestor de Proyectos", inserta un <strong>Text Input</strong> llamado <code>txtBusqueda</code> con HintText "Buscar proyecto...".</li>
+                    <li>2. Cambia la propiedad <code>Items</code> de la galería a: <code>Search(Proyectos, txtBusqueda.Text, "Título", "Descripción")</code>.</li>
+                    <li>3. Reproduce la app y prueba la búsqueda escribiendo diferentes términos.</li>
+                    <li>4. Luego, cambia la propiedad <code>Items</code> para combinar: <code>Filter(Search(Proyectos, txtBusqueda.Text, "Título"), Estatus.Value = "Activo")</code>.</li>
+                    <li>5. Prueba buscar "E-commerce" y verifica que solo aparezcan los activos.</li>
+                    <li>6. Si no tienes acceso, escribe las fórmulas y describe el comportamiento esperado.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es la diferencia entre <code>Search()</code> y <code>Filter()</code>?</li>
+                    <li>¿Cómo mejorarías la búsqueda para que no distinga mayúsculas/minúsculas?</li>
+                    <li>¿Qué otras columnas agregarías a la búsqueda?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante implementa búsquedas y filtros en una galería usando <code>Search()</code> y <code>Filter()</code>.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Inserta un cuadro de texto para búsqueda.</li>
+                <li>Aplica <code>Search()</code> correctamente en la galería.</li>
+                <li>Aplica <code>Filter()</code> correctamente en la galería.</li>
+                <li>Combina ambas funciones para búsquedas avanzadas.</li>
+                <li>Comprende la diferencia entre ambas funciones.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a Power Apps Studio</li>
+                <li>App con galería conectada a "Proyectos"</li>
+                <li>Pizarra</li>
+                <li>Guía de funciones de búsqueda y filtrado</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cuál es la diferencia entre <code>Search()</code> y <code>Filter()</code>?</li>
+                <li>¿En qué propiedad de la galería se aplican estas funciones?</li>
+                <li>¿Cómo se configura un cuadro de texto para búsqueda?</li>
+                <li>¿Cómo se combinan <code>Search()</code> y <code>Filter()</code>?</li>
+                <li>¿Qué otras funciones de filtrado conoces?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Investiga cómo agregar un <strong>menú desplegable</strong> (Dropdown) para filtrar por Estatus. Describe la fórmula que usarías en la propiedad <code>Items</code> de la galería.</p>
+                <p style="font-size: 13px; color: #555; margin-top: 4px;">Pista: usa <code>Filter(Proyectos, Estatus.Value = dropdownEstatus.Selected.Value)</code>.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de filtros y búsquedas en Power Apps.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la aplicación de las funciones en diferentes escenarios.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Power Apps Studio</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para búsquedas y filtros en Power Apps:</strong></p>
+        <p>• <strong>Search():</strong> Busca texto libre en una o más columnas.</p>
+        <p>• <strong>Filter():</strong> Filtra según condiciones lógicas.</p>
+        <p>• <strong>Items:</strong> Propiedad de la galería donde se aplican.</p>
+        <p>• <strong>Combinar:</strong> <code>Filter(Search(...), condición)</code> para búsquedas avanzadas.</p>
+        <p>• <strong>Text Input:</strong> Control para que el usuario escriba el término de búsqueda.</p>
+        <p>• <strong>&& / ||:</strong> Operadores para combinar condiciones en Filter().</p>
+        <p>• <strong>Dropdown:</strong> Útil para filtros por categoría o estatus.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>• Enseña a implementar búsquedas y filtros en aplicaciones.</p>
+        <p>• Desarrolla habilidades de manejo de datos en tiempo real.</p>
+        <p>• Prepara a los estudiantes para crear apps con experiencia de usuario óptima.</p>
+        <p>• Conecta la teoría con la práctica en un entorno real de Microsoft.</p>
+    </div>
+
+</div>
+</body>
+</html>

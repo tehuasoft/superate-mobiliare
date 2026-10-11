@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fedora Setup Guide – Bilingual</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #f7f9fc;
+        font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+        padding: 2rem 1.5rem;
+        color: #1e293b;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 28px;
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        padding: 2rem 2.5rem;
+      }
+      h1 {
+        font-weight: 600;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #e9edf4;
+        padding-bottom: 0.75rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .toggle-wrap {
+        top: 30px;
+        right: 30px;
+        position: fixed;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      .toggle-btn {
+        background: #eef2f6;
+        border: none;
+        border-radius: 60px;
+        padding: 0.4rem 1.2rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #1e293b;
+        cursor: pointer;
+        transition: 0.15s;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        letter-spacing: 0.3px;
+      }
+      .toggle-btn:hover {
+        background: #dce3ec;
+      }
+      .toggle-btn.active {
+        background: #1e293b;
+        color: white;
+      }
+      .lang-indicator {
+        background: #dbeafe;
+        padding: 0.2rem 0.8rem;
+        border-radius: 40px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #1e4a7a;
+      }
+      .step {
+        margin: 1.8rem 0 0.8rem 0;
+        padding: 0.2rem 0 0.6rem 0;
+        border-bottom: 1px dashed #dce3ec;
+      }
+      .step-title {
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #0b2b4a;
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .step-num {
+        background: #d0dbe8;
+        border-radius: 30px;
+        padding: 0.05rem 0.8rem;
+        font-size: 0.75rem;
+        color: #1f3a5c;
+      }
+      .command-wrapper {
+        border-radius: 10px;
+        background-color: #0b2b4a;
+        color: #d0dbe8;
+        font-size: larger;
+        position: relative;
+        margin: 0.7rem 0 0.5rem 0;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 8px;
+        bottom: 8px;
+        right: 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #cbd5e1;
+        border-radius: 8px;
+        padding: 0.3rem 0.7rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-family: inherit;
+        backdrop-filter: blur(4px);
+      }
+      .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      .copy-btn.copied {
+        background: #22c55e;
+        border-color: #22c55e;
+        color: white;
+      }
+      .copy-btn svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+      .explanation {
+        background: #f1f5f9;
+        padding: 0.9rem 1.3rem;
+        border-radius: 14px;
+        margin: 0.3rem 0 0.5rem 0;
+        font-size: 0.96rem;
+        line-height: 1.5;
+        border-left: 4px solid #94a3b8;
+        color: #1e293b;
+      }
+      .explanation .lang-en {
+        display: block;
+      }
+      .explanation .lang-es {
+        display: none;
+      }
+      body.spanish .explanation .lang-en {
+        display: none;
+      }
+      body.spanish .explanation .lang-es {
+        display: block;
+      }
+      .inline-code {
+        background: #e2e8f0;
+        padding: 0.1rem 0.4rem;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+      .warning-box {
+        background: #fef9e7;
+        border-left: 6px solid #eab308;
+        padding: 0.8rem 1.2rem;
+        border-radius: 12px;
+        margin: 1rem 0 0.2rem 0;
+      }
+      hr {
+        margin: 2rem 0 1rem 0;
+        border: 0;
+        border-top: 2px solid #e2e8f0;
+      }
+      .footer-note {
+        font-size: 0.85rem;
+        color: #64748b;
+        text-align: right;
+        margin-top: 1.8rem;
+      }
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1e293b;
+        color: white;
+        padding: 0.6rem 1.8rem;
+        border-radius: 60px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 999;
+      }
+      .toast.show {
+        opacity: 1;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 1.5rem;
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        .command-box {
+          font-size: 0.8rem;
+          padding-right: 2.8rem;
+        }
+        .copy-btn {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.5rem;
+        }
+      }
+
+      .ext-links {
+        text-decoration: none;
+      }
+
+      .long-command {
+        display: block;
+        overflow: hidden;
+        max-width: 85%;
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <h1>
+        <span>⚙️ Fedora setup guide</span>
+        <span class="toggle-wrap">
+          <span class="lang-indicator" id="langLabel">EN</span>
+          <button class="toggle-btn" id="toggleLangBtn">🇪🇸 ES</button>
+        </span>
+      </h1>
+
+      <!-- Toast notification -->
+      <div class="toast" id="toast">✅ Copied!</div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">1</span> Rufus (Windows)
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            ><strong>Rufus</strong> is a utility that helps format and create
+            bootable USB drives. On Windows, download and run Rufus, select your
+            USB stick, and choose the Fedora ISO to write it in bootable
+            mode.</span
+          >
+          <span class="lang-es"
+            ><strong>Rufus</strong> es una utilidad que ayuda a formatear y
+            crear unidades USB de arranque. En Windows, descarga y ejecuta
+            Rufus, selecciona tu memoria USB y elige la ISO de Fedora para
+            escribirla en modo arrancable.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">2</span> Flash Fedora ISO
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Use Rufus to write the Fedora ISO to the USB stick. Follow the
+            on-screen setup; it will erase the USB and make it bootable.</span
+          >
+          <span class="lang-es"
+            >Usa Rufus para escribir la ISO de Fedora en la memoria USB. Sigue
+            la configuración en pantalla; borrará la USB y la hará
+            arrancable.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">3</span> Boot &amp; keyboard
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Change the boot order in your BIOS/UEFI to boot from the USB stick.
+            Once Fedora loads, open settings, then keyboard and select Spanish
+            (Guatemala), the keyboard distribution would be Spanish (Latin
+            American, dead tilde).</span
+          >
+          <span class="lang-es"
+            >Cambia el orden de arranque en tu BIOS/UEFI para iniciar desde la
+            USB. Una vez que Fedora cargue, abre settings y en la seccion
+            keyboard selecciona Spanish (Guatemala), la distribución del teclado
+            será Spanish (Latin American, dead tilde).</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">4</span> <code>sudo dnf check-update</code>
+        </div>
+        <div class="command-wrapper">
+          <pre><code id="cmd1">
+  sudo dnf check-update
+          </code></pre>
+          <button class="copy-btn" data-cmd="cmd1">📋 Copy</button>
+        </div>
+
+        <div class="explanation">
+          <span class="lang-en"
+            >Checks for available package updates without installing them. It
+            refreshes the repository metadata and lists any updates.</span
+          >
+          <span class="lang-es"
+            >Verifica las actualizaciones disponibles sin instalarlas. Refresca
+            los metadatos del repositorio y enumera las actualizaciones.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 5: Extensions -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">5</span> GNOME extensions
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >GNOME Shell extensions add extra features. You can install them via
+            the Software store or use the commands below.</span
+          >
+          <span class="lang-es"
+            >Las extensiones de GNOME Shell añaden funciones extra. Puedes
+            instalarlas desde la tienda de software o usar los comandos
+            siguientes.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd2">
+  sudo dnf install gnome-extensions-app</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd2">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs the GNOME Extensions application, a graphical manager for
+            extensions.</span
+          >
+          <span class="lang-es"
+            >Instala la aplicación GNOME Extensions, un gestor gráfico para
+            extensiones.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd3">
+  sudo dnf install gnome-tweaks</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd3">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs GNOME Tweaks, a tool to customize fonts, themes, and
+            advanced GNOME settings.</span
+          >
+          <span class="lang-es"
+            >Instala GNOME Tweaks, una herramienta para personalizar fuentes,
+            temas y configuraciones avanzadas de GNOME.</span
+          >
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Then open Firefox, go to
+            <span class="inline-code"
+              ><a
+                class="ext-links"
+                href="https://addons.mozilla.org/en-US/firefox/"
+                target="_blank"
+                >addons.mozilla.org</a
+              ></span
+            >
+            and install the <strong>GNOME Shell Integration</strong> add‑on.
+            Allow it in private windows, then visit
+            <span class="inline-code"
+              ><a
+                class="ext-links"
+                href="https://extensions.gnome.org/"
+                target="_blank"
+                >extensions.gnome.org</a
+              ></span
+            >
+            and install <strong>Dash to Dock</strong> by Michele G.</span
+          >
+          <span class="lang-es"
+            >Luego abre Firefox, ve a
+            <span class="inline-code">addons.mozilla.org</span> e instala el
+            complemento <strong>GNOME Shell Integration</strong>. Permite que se
+            ejecute en ventanas privadas, visita
+            <span class="inline-code">extensions.gnome.org</span> e instala
+            <strong>Dash to Dock</strong> de Michele G.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 6: Google Chrome -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">6</span> Google Chrome (RPM)
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Download the Google Chrome RPM package from the official website.
+            Then install it with
+            <span class="inline-code">dnf install</span>.</span
+          >
+          <span class="lang-es"
+            >Descarga el paquete RPM de Google Chrome desde el sitio web
+            oficial. Luego instálalo con
+            <span class="inline-code">dnf install</span>.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd4">
+    sudo dnf install &lt;path-to-rpm&gt;</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd4">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Replace <span class="inline-code">&lt;path-to-rpm&gt;</span> with
+            the actual path to the downloaded .rpm file (e.g.,
+            <span class="inline-code"
+              >sudo dnf install
+              /home/your-user/Downloads/google-chrome-stable_current_x86_64.rpm</span
+            >).</span
+          >
+          <span class="lang-es"
+            >Reemplaza <span class="inline-code">&lt;path-to-rpm&gt;</span> con
+            la ruta real del archivo .rpm descargado (ej:
+            <span class="inline-code"
+              >sudo dnf install
+              /home/your-user/Downloads/google-chrome-stable_current_x86_64.rpm</span
+            >).</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 7: OnlyOffice + VS Code -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">7</span> OnlyOffice &amp; Visual Studio Code
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Install OnlyOffice (from the website or Flathub) and then set up
+            the VS Code repository as shown.</span
+          >
+          <span class="lang-es"
+            >Instala OnlyOffice (desde el sitio web o Flathub) y luego configura
+            el repositorio de VS Code como se muestra.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code class="long-command" id="cmd5">
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &amp;&amp; echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo &gt; /dev/null</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd5">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Imports Microsoft’s GPG key and creates the official VS Code
+            repository file (<span class="inline-code"
+              >/etc/yum.repos.d/vscode.repo</span
+            >).</span
+          >
+          <span class="lang-es"
+            >Importa la clave GPG de Microsoft y crea el archivo de repositorio
+            oficial de VS Code (<span class="inline-code"
+              >/etc/yum.repos.d/vscode.repo</span
+            >).</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd6">
+  sudo dnf check-update</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd6">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Refreshes the package list so the new VS Code repository is
+            recognized.</span
+          >
+          <span class="lang-es"
+            >Refresca la lista de paquetes para que el nuevo repositorio de VS
+            Code sea reconocido.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd7">
+  sudo dnf install code</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd7">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs Visual Studio Code from the Microsoft repository.</span
+          >
+          <span class="lang-es"
+            >Instala Visual Studio Code desde el repositorio de Microsoft.</span
+          >
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >After opening VS Code, install the extensions:
+            <strong>Dart</strong>, <strong>Flutter</strong>, and
+            <strong>Prettier</strong>. Then go to Settings → type “AI features”
+            and check <em>Disable AI Features</em>.</span
+          >
+          <span class="lang-es"
+            >Después de abrir VS Code, instala las extensiones:
+            <strong>Dart</strong>, <strong>Flutter</strong> y
+            <strong>Prettier</strong>. Luego ve a Configuración → escribe “AI
+            features” y marca <em>Disable AI Features</em>.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 8: Flutter dependencies -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">8</span> Flutter – dependencies
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code class="long-command" id="cmd8">
+  sudo dnf install wget git unzip xz zip curl libstdc++.i686 mesa-libGLU</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd8">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs essential tools:
+            <span class="inline-code">wget</span> (download),
+            <span class="inline-code">git</span> (version control),
+            <span class="inline-code">unzip/xz/zip</span> (archive handling),
+            <span class="inline-code">curl</span> (data transfer), and 32-bit
+            libraries required by Flutter.</span
+          >
+          <span class="lang-es"
+            >Instala herramientas esenciales:
+            <span class="inline-code">wget</span> (descarga),
+            <span class="inline-code">git</span> (control de versiones),
+            <span class="inline-code">unzip/xz/zip</span> (manejo de archivos),
+            <span class="inline-code">curl</span> (transferencia de datos) y
+            bibliotecas de 32 bits necesarias para Flutter.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 9: development folder -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">9</span> Create
+          <span class="inline-code">~/development</span>
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd9">
+  mkdir development</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd9">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Creates a folder named
+            <span class="inline-code">development</span> in your home directory
+            to store the Flutter SDK and Android Studio.</span
+          >
+          <span class="lang-es"
+            >Crea una carpeta llamada
+            <span class="inline-code">development</span> en tu directorio
+            personal para almacenar el SDK de Flutter y Android Studio.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 10: Flutter SDK -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">10</span> Flutter SDK – extract
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Download the Flutter SDK (tar.xz) from the official site. Then
+            extract it into the
+            <span class="inline-code">development</span> folder.</span
+          >
+          <span class="lang-es"
+            >Descarga el SDK de Flutter (tar.xz) desde el sitio oficial. Luego
+            extráelo en la carpeta
+            <span class="inline-code">development</span>.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code class="long-command" id="cmd10">
+  tar -xf &lt;sdk_zip_path&gt; -C &lt;destination_directory_path&gt;</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd10">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Example:
+            <span class="inline-code"
+              >tar -xf
+              /home/your-user/Downloads/flutter_linux_3.24.0-stable.tar.xz -C
+              /home/your-user/development</span
+            >. This extracts the SDK into the target directory.</span
+          >
+          <span class="lang-es"
+            >Ejemplo:
+            <span class="inline-code"
+              >tar -xf
+              /home/your-user/Downloads/flutter_linux_3.24.0-stable.tar.xz -C
+              /home/your-user/development</span
+            >. Esto extrae el SDK en el directorio destino.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 11: Flutter PATH -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">11</span> Add Flutter to PATH
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code class="long-command" id="cmd11">
+  echo 'export PATH="$PATH:$HOME/development/flutter/bin"' &gt;&gt; ~/.bashrc source ~/.bashrc</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd11">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Appends the Flutter binary directory to the
+            <span class="inline-code">PATH</span> variable in your
+            <span class="inline-code">.bashrc</span> file, then
+            <span class="inline-code">source</span> reloads the file so the
+            change takes effect immediately.</span
+          >
+          <span class="lang-es"
+            >Añade el directorio bin de Flutter a la variable
+            <span class="inline-code">PATH</span> en tu archivo
+            <span class="inline-code">.bashrc</span> y luego recarga el archivo
+            para que el cambio surta efecto de inmediato.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 12: Java (Correto) -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">12</span> Java (Correto)
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Download the Correto Java RPM from AWS documentation. Install it
+            with <span class="inline-code">dnf install</span>. Then use
+            <span class="inline-code">update-alternatives</span> to set Correto
+            as the default.</span
+          >
+          <span class="lang-es"
+            >Descarga el RPM de Java Correto desde la documentación de AWS.
+            Instálalo con <span class="inline-code">dnf install</span>. Luego
+            usa <span class="inline-code">update-alternatives</span> para
+            establecer Correto como predeterminado.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd12">
+  sudo dnf install &lt;path-to-java-rpm&gt;</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd12">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Run the command <span class="inline-code">java --version</span> to
+            see which version of Java you are running.</span
+          >
+          <span class="lang-es"
+            >Corre el comando
+            <span class="inline-code">java --version</span> para ver que versión
+            de Java tiene tu computadora.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd13">
+  java --version</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd13">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >If you see a version string that doesn't mention
+            <span class="inline-code">Corretto</span>, run the following command
+            to change the default java or javac providers.
+          </span>
+          <span class="lang-es"
+            >Si tras correr el commando no ve en el texto resultante la palabra
+            <span class="inline-code">Correto</span> en ningún lado, entonces
+            corra el siguiente comando:
+          </span>
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd14">
+  sudo update-alternatives --config java</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd14">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Shows a list of installed Java versions; select the number
+            corresponding to Correto.</span
+          >
+          <span class="lang-es"
+            >Muestra una lista de versiones de Java instaladas; selecciona el
+            número correspondiente a Correto.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd15">
+  sudo update-alternatives --config javac</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd15">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Same as above, but for the Java compiler (<span class="inline-code"
+              >javac</span
+            >). Choose the Correto option.</span
+          >
+          <span class="lang-es"
+            >Igual que arriba, pero para el compilador de Java (<span
+              class="inline-code"
+              >javac</span
+            >). Elige la opción Correto.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 13: Android Studio -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">13</span> Android Studio
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Download Android Studio from
+            <span class="inline-code">developer.android.com/studio</span>.
+            Extract it to the
+            <span class="inline-code">development</span> folder.</span
+          >
+          <span class="lang-es"
+            >Descarga Android Studio desde
+            <span class="inline-code">developer.android.com/studio</span>.
+            Extráelo en la carpeta
+            <span class="inline-code">development</span>.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd16">
+  tar -zxvf &lt;android-studio-path&gt; -C &lt;destination_directory_path&gt;</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd16">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Example:
+            <span class="inline-code"
+              >tar -zxvf
+              /home/your-user/Downloads/android-studio-2024.1.1-linux.tar.gz -C
+              home/your-user/development</span
+            >. The <span class="inline-code">-z</span> flag handles gzip
+            compression.</span
+          >
+          <span class="lang-es"
+            >Ejemplo:
+            <span class="inline-code"
+              >tar -zxvf
+              /home/your-user/Downloads/android-studio-2024.1.1-linux.tar.gz -C
+              home/your-user/development</span
+            >. La opción <span class="inline-code">-z</span> maneja la
+            compresión gzip.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd17">
+  cd /home/your-user/development/android-studio/bin
+  ./studio</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd17">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Navigates to the Android Studio binary folder and launches the
+            installer. Complete the wizard and create a desktop shortcut when
+            prompted.</span
+          >
+          <span class="lang-es"
+            >Navega a la carpeta bin de Android Studio y ejecuta el instalador.
+            Completa el asistente y crea un acceso directo en el escritorio
+            cuando se indique.</span
+          >
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >After the wizard, open Android Studio → SDK Manager and install
+            <strong>Android SDK Command-line Tools (latest)</strong>. Click
+            Apply &amp; OK.</span
+          >
+          <span class="lang-es"
+            >Después del asistente, abre Android Studio → SDK Manager e instala
+            <strong>Android SDK Command-line Tools (latest)</strong>. Haz clic
+            en Apply y OK.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 14: flutter doctor licenses -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">14</span>
+          <code>flutter doctor --android-licenses</code>
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd18">
+  flutter doctor --android-licenses</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd18">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Accepts all Android SDK licenses. You’ll be prompted to type
+            <span class="inline-code">y</span> for each license.</span
+          >
+          <span class="lang-es"
+            >Acepta todas las licencias del SDK de Android. Se te pedirá que
+            escribas <span class="inline-code">y</span> para cada
+            licencia.</span
+          >
+        </div>
+      </div>
+
+      <!-- STEP 15: missing deps -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">15</span> Missing dependencies
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd19">
+  sudo dnf install glx-utils egl-utils</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd19">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs Mesa utilities for OpenGL and EGL, often required for
+            graphics and Flutter emulation.</span
+          >
+          <span class="lang-es"
+            >Instala utilidades Mesa para OpenGL y EGL, a menudo necesarias para
+            gráficos y emulación de Flutter.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd20">
+  sudo dnf install clang</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd20">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs the Clang compiler, which some Flutter dependencies
+            expect.</span
+          >
+          <span class="lang-es"
+            >Instala el compilador Clang, que algunas dependencias de Flutter
+            esperan.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd21">
+  sudo dnf install cmake</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd21">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs CMake, a build system generator used by certain Flutter
+            plugins.</span
+          >
+          <span class="lang-es"
+            >Instala CMake, un generador de sistemas de compilación usado por
+            algunos plugins de Flutter.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd22">
+  sudo dnf install gtk3-devel</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd22">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs GTK 3 development headers (libgtk-3-dev) needed for
+            Flutter’s Linux desktop embedding.</span
+          >
+          <span class="lang-es"
+            >Instala los encabezados de desarrollo de GTK 3 (libgtk-3-dev)
+            necesarios para la integración de Flutter en Linux.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmdninja">
+  sudo dnf install ninja</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmdninja">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Installs a performance‑optimized build tool that helps compile
+            native dependencies faster and more reliably when working with
+            Flutter on Linux.</span
+          >
+          <span class="lang-es"
+            >Instala una herramienta optimizada en desempeño que ayuda a
+            compilar dependencias nativas más rápido y de manera más confiable
+            cuando se trabaja con Flutter en Linux.</span
+          >
+        </div>
+      </div>
+
+      <!-- WARNING: upgrade -->
+      <div class="step">
+        <div class="step-title">
+          <span class="step-num">⚠️</span> Final upgrades (only after all
+          previous steps)
+        </div>
+        <div class="warning-box">
+          <span class="lang-en"
+            ><strong>WARNING:</strong> Do these upgrades only after completing
+            all the previous steps.</span
+          >
+          <span class="lang-es"
+            ><strong>ADVERTENCIA:</strong> Realiza estas actualizaciones solo
+            después de completar todos los pasos anteriores.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd23">
+  sudo dnf upgrade</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd23">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Upgrades all installed packages to the latest available versions
+            from the repositories.</span
+          >
+          <span class="lang-es"
+            >Actualiza todos los paquetes instalados a las versiones más
+            recientes disponibles en los repositorios.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd24">
+  sudo dnf upgrade --refresh</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd24">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Forces a refresh of repository metadata before upgrading, ensuring
+            you have the latest package lists.</span
+          >
+          <span class="lang-es"
+            >Fuerza un refresco de los metadatos del repositorio antes de
+            actualizar, asegurando que tengas las listas de paquetes más
+            recientes.</span
+          >
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >This synchronizes your system with the active Fedora mirrors and
+            ensures the package manager sees the correct
+            <span class="inline-code">fwupd</span> versions.</span
+          >
+          <span class="lang-es"
+            >Esto sincroniza tu sistema con los espejos activos de Fedora y
+            garantiza que el gestor de paquetes vea las versiones correctas de
+            <span class="inline-code">fwupd</span>.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd25">
+  sudo dnf search fwupd-plugin-uefi-capsule-data</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd25">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Searches for the
+            <span class="inline-code">fwupd-plugin-uefi-capsule-data</span>
+            package to verify it is available for your release.</span
+          >
+          <span class="lang-es"
+            >Busca el paquete
+            <span class="inline-code">fwupd-plugin-uefi-capsule-data</span> para
+            verificar que esté disponible para tu versión.</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code class="command-box" id="cmd26">
+  fwupdmgr refresh</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd26">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Refreshes the firmware metadata from the Linux Vendor Firmware
+            Service (LVFS).</span
+          >
+          <span class="lang-es"
+            >Refresca los metadatos de firmware desde el Servicio de Firmware de
+            Proveedores Linux (LVFS).</span
+          >
+        </div>
+        <div class="command-wrapper">
+          <pre>
+            <code id="cmd27">
+  fwupdmgr update</code>
+          </pre>
+          <button class="copy-btn" data-cmd="cmd27">📋 Copy</button>
+        </div>
+        <div class="explanation">
+          <span class="lang-en"
+            >Updates your system firmware (BIOS/UEFI) using the
+            <span class="inline-code">fwupd</span> service, if updates are
+            available.</span
+          >
+          <span class="lang-es"
+            >Actualiza el firmware de tu sistema (BIOS/UEFI) usando el servicio
+            <span class="inline-code">fwupd</span>, si hay actualizaciones
+            disponibles.</span
+          >
+        </div>
+      </div>
+
+      <hr />
+      <div class="footer-note">
+        <span class="lang-en"
+          >✅ READ INSTRUCTIONS CAREFULLY. Click 📋 to copy any command.</span
+        >
+        <span class="lang-es"
+          >✅ LEE LAS INSTRUCCIONES CUIDADOSAMENTE. Haz clic en 📋 para copiar
+          cualquier comando.</span
+        >
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        // Language toggle
+        const toggleBtn = document.getElementById("toggleLangBtn");
+        const body = document.body;
+        const langLabel = document.getElementById("langLabel");
+        let currentLang = "en";
+
+        function setLanguage(lang) {
+          currentLang = lang;
+          if (lang === "es") {
+            body.classList.add("spanish");
+            toggleBtn.textContent = "🇬🇧 EN";
+            langLabel.textContent = "ES";
+            toggleBtn.classList.add("active");
+          } else {
+            body.classList.remove("spanish");
+            toggleBtn.textContent = "🇪🇸 ES";
+            langLabel.textContent = "EN";
+            toggleBtn.classList.remove("active");
+          }
+        }
+
+        toggleBtn.addEventListener("click", function () {
+          setLanguage(currentLang === "en" ? "es" : "en");
+        });
+        setLanguage("en");
+
+        // Copy functionality
+        const toast = document.getElementById("toast");
+        let toastTimeout;
+
+        function showToast(message) {
+          toast.textContent = message || "✅ Copied!";
+          toast.classList.add("show");
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toast.classList.remove("show");
+          }, 2000);
+        }
+
+        document.querySelectorAll(".copy-btn").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const cmdId = this.getAttribute("data-cmd");
+            const cmdElement = document.getElementById(cmdId);
+            if (!cmdElement) return;
+
+            // Get the text content, preserving line breaks
+            let text = cmdElement.textContent;
+            // Clean up any extra spaces but keep structure
+            text = text.trim();
+
+            // Use the modern clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard
+                .writeText(text)
+                .then(() => {
+                  // Visual feedback
+                  this.classList.add("copied");
+                  this.innerHTML = "✅ Copied!";
+                  showToast("✅ Command copied!");
+                  setTimeout(() => {
+                    this.classList.remove("copied");
+                    this.innerHTML = "📋 Copy";
+                  }, 1500);
+                })
+                .catch(() => {
+                  // Fallback
+                  fallbackCopy(text, this);
+                });
+            } else {
+              fallbackCopy(text, this);
+            }
+          });
+        });
+
+        function fallbackCopy(text, btn) {
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand("copy");
+            btn.classList.add("copied");
+            btn.innerHTML = "✅ Copied!";
+            showToast("✅ Command copied!");
+            setTimeout(() => {
+              btn.classList.remove("copied");
+              btn.innerHTML = "📋 Copy";
+            }, 1500);
+          } catch (err) {
+            showToast("❌ Failed to copy");
+          }
+          document.body.removeChild(textarea);
+        }
+      })();
+    </script>
+  </body>
+</html>

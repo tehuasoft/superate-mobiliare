@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Diseño de Páginas en SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .webpart-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .webpart-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .webpart-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .webpart-card .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+        .tag-doc { background: #e3f2fd; color: #0d47a1; }
+        .tag-texto { background: #fff3e0; color: #e65100; }
+        .tag-imagen { background: #e8f5e9; color: #2e7d32; }
+        .tag-enlace { background: #f3e5f5; color: #6a1b9a; }
+
+        .mock-pagina {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin: 12px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .mock-pagina .seccion-pagina {
+            padding: 12px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border: 2px dashed #bbdefb;
+            background: #f5f9ff;
+        }
+        .mock-pagina .seccion-pagina .etiqueta {
+            font-size: 12px;
+            color: #1a237e;
+            font-weight: 600;
+            background: #e3f2fd;
+            padding: 2px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .colores-ejemplo {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+        .colores-ejemplo .color-muestra {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📄 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Diseño de Páginas en SharePoint · Web Parts · Personalización visual</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a diseñar páginas en SharePoint Online agregando y configurando web parts (bibliotecas de documentos, texto, imágenes, enlaces rápidos), y aplica personalización visual básica para mejorar la apariencia y usabilidad del sitio.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende la estructura de una página en SharePoint.</li>
+                <li>Reconoce los web parts más comunes: documentos, texto, imágenes, enlaces rápidos.</li>
+                <li>Identifica opciones de personalización visual (colores, diseño).</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear y editar páginas en SharePoint.</li>
+                <li>Agregar y configurar web parts de biblioteca de documentos, texto, imágenes y enlaces rápidos.</li>
+                <li>Aplicar personalización visual básica (cambiar colores, ajustar diseño).</li>
+                <li>Organizar el contenido de una página de manera efectiva.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por el diseño de interfaces colaborativas.</li>
+                <li>Valora la importancia de una buena presentación visual.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de diseño y organización.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué hace que una página de SharePoint sea útil?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente muestra ejemplos de páginas de SharePoint (bien diseñadas y mal diseñadas) y pregunta: <em>"¿Qué elementos hacen que una página sea fácil de usar? ¿Qué información debería estar visible?"</em></p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Web parts comunes en SharePoint:</span>
+                <ul>
+                    <li><strong>Biblioteca de documentos:</strong> Mostrar archivos compartidos.</li>
+                    <li><strong>Texto:</strong> Explicar, dar instrucciones.</li>
+                    <li><strong>Imagen:</strong> Aportar contexto visual.</li>
+                    <li><strong>Enlaces rápidos:</strong> Acceso a otras páginas o recursos.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los web parts básicos y su propósito.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los web parts presentados.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos visuales de páginas SharePoint</li>
+                <li>Acceso a SharePoint (demo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación de página y configuración de web parts"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- CREAR PÁGINA -->
+            <!-- ============================================ -->
+            <h4>🔹 Crear una nueva página</h4>
+            <div class="webpart-card">
+                <h5>📌 Pasos para crear una página</h5>
+                <ol style="padding-left: 20px; font-size: 14px;">
+                    <li>Ir al sitio de equipo.</li>
+                    <li>Hacer clic en <strong>"+ Nuevo"</strong> → <strong>"Página"</strong>.</li>
+                    <li>Elegir una plantilla (en blanco o con secciones predefinidas).</li>
+                    <li>Asignar un nombre a la página (ej. "Bienvenida", "Documentos del Proyecto").</li>
+                    <li>Hacer clic en <strong>"Crear"</strong>.</li>
+                </ol>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- WEB PARTS -->
+            <!-- ============================================ -->
+            <h4>🔹 Agregar Web Parts</h4>
+
+            <div class="webpart-card" style="border-left-color: #0d47a1;">
+                <h5><span class="tag tag-doc">📂</span> Web Part: Biblioteca de documentos</h5>
+                <p>Muestra archivos almacenados en una biblioteca específica. Permite a los usuarios ver y acceder a documentos directamente desde la página.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Seleccionar la biblioteca de documentos que se desea mostrar.</li>
+                    <li>Elegir vista (ej. "Todos los documentos", "Documentos recientes").</li>
+                    <li>Definir tamaño y diseño (lista, mosaicos, etc.).</li>
+                </ul>
+                <div class="mock-pagina" style="margin-top: 6px;">
+                    <div class="seccion-pagina">
+                        <span class="etiqueta">📂 Biblioteca de documentos</span>
+                        <p style="font-size: 14px; margin: 6px 0 0 0; color: #555;">📄 Informe_Proyecto.pptx &nbsp;|&nbsp; 📊 Datos_2025.xlsx &nbsp;|&nbsp; 📝 Acta_Reunion.docx</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="webpart-card" style="border-left-color: #e65100;">
+                <h5><span class="tag tag-texto">📝</span> Web Part: Texto</h5>
+                <p>Permite agregar contenido escrito, instrucciones, descripciones o encabezados. Se puede formatear con negrita, listas, enlaces, etc.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Escribir el texto deseado.</li>
+                    <li>Aplicar formato usando la barra de herramientas (negrita, viñetas, alineación).</li>
+                    <li>Insertar enlaces a otros sitios o documentos.</li>
+                </ul>
+                <div class="mock-pagina" style="margin-top: 6px;">
+                    <div class="seccion-pagina">
+                        <span class="etiqueta">📝 Texto</span>
+                        <p style="font-size: 14px; margin: 6px 0 0 0; color: #555;"><strong>Bienvenidos al equipo</strong><br>En este sitio encontrarán todos los documentos y recursos necesarios para el proyecto. Revisen las actualizaciones semanales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="webpart-card" style="border-left-color: #2e7d32;">
+                <h5><span class="tag tag-imagen">🖼️</span> Web Part: Imagen</h5>
+                <p>Inserta imágenes para hacer la página más visual. Puede ser un logotipo, una foto del equipo o un gráfico.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Seleccionar "Agregar imagen" y subir una imagen o elegir una existente.</li>
+                    <li>Ajustar tamaño y alineación.</li>
+                    <li>Agregar texto alternativo (accesibilidad).</li>
+                </ul>
+                <div class="mock-pagina" style="margin-top: 6px;">
+                    <div class="seccion-pagina" style="display: flex; align-items: center; gap: 12px;">
+                        <span class="etiqueta">🖼️ Imagen</span>
+                        <div style="background: #e0e0e0; width: 80px; height: 60px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 12px;">Logo</div>
+                        <p style="font-size: 14px; color: #555; margin: 0;">Imagen de ejemplo del equipo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="webpart-card" style="border-left-color: #6a1b9a;">
+                <h5><span class="tag tag-enlace">🔗</span> Web Part: Enlaces rápidos</h5>
+                <p>Proporciona acceso directo a otras páginas, sitios o recursos importantes. Mejora la navegación.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Agregar enlaces con nombre y URL.</li>
+                    <li>Elegir diseño (lista, mosaicos, iconos).</li>
+                    <li>Organizar en grupos si es necesario.</li>
+                </ul>
+                <div class="mock-pagina" style="margin-top: 6px;">
+                    <div class="seccion-pagina">
+                        <span class="etiqueta">🔗 Enlaces rápidos</span>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px;">
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px; font-size: 13px;">📄 Documentos</span>
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px; font-size: 13px;">📅 Calendario</span>
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px; font-size: 13px;">📊 Informes</span>
+                            <span style="background: #e3f2fd; padding: 4px 12px; border-radius: 4px; font-size: 13px;">👥 Equipo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PERSONALIZACIÓN VISUAL -->
+            <!-- ============================================ -->
+            <h4>🔹 Personalización visual básica</h4>
+
+            <div class="webpart-card" style="border-left-color: #00897b;">
+                <h5>🎨 Cambiar colores y diseño</h5>
+                <p>SharePoint permite ajustar la apariencia de la página para alinearla con la marca o preferencias del equipo.</p>
+                <p><strong>Opciones disponibles:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li><strong>Tema:</strong> Cambiar el color principal y los acentos.</li>
+                    <li><strong>Fondo:</strong> Seleccionar un color de fondo o imagen.</li>
+                    <li><strong>Diseño de secciones:</strong> Elegir entre una, dos o tres columnas.</li>
+                    <li><strong>Espaciado:</strong> Ajustar márgenes y padding.</li>
+                </ul>
+                <div class="colores-ejemplo">
+                    <span class="color-muestra" style="background: #1a237e; color: white;">Azul oscuro (formal)</span>
+                    <span class="color-muestra" style="background: #e65100; color: white;">Naranja (creativo)</span>
+                    <span class="color-muestra" style="background: #2e7d32; color: white;">Verde (fresco)</span>
+                    <span class="color-muestra" style="background: #6a1b9a; color: white;">Morado (moderno)</span>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO DE PÁGINA COMPLETA -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo de página completa</h4>
+            <div class="mock-pagina" style="border: 2px solid #1a237e;">
+                <div style="background: #1a237e; color: white; padding: 12px; border-radius: 6px 6px 0 0; font-weight: 600;">🏠 Inicio · Proyecto Innovación</div>
+                <div style="padding: 12px;">
+                    <div class="seccion-pagina" style="border-color: #1a237e;">
+                        <span class="etiqueta">📝 Texto</span>
+                        <p style="font-size: 16px; font-weight: 600; margin: 4px 0 0 0;">Bienvenidos al sitio del equipo de innovación</p>
+                        <p style="font-size: 14px; color: #555;">En este espacio compartimos documentos, avances y recursos para el proyecto. Manténganse al día con las actualizaciones.</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-top: 6px;">
+                        <div class="seccion-pagina" style="border-color: #0d47a1;">
+                            <span class="etiqueta">📂 Biblioteca de documentos</span>
+                            <p style="font-size: 14px; color: #555; margin: 4px 0 0 0;">📄 Plan_estrategico.pdf</p>
+                            <p style="font-size: 14px; color: #555; margin: 2px 0;">📊 Presupuesto_2025.xlsx</p>
+                            <p style="font-size: 14px; color: #555; margin: 2px 0;">📝 Acta_reunion_01.docx</p>
+                        </div>
+                        <div class="seccion-pagina" style="border-color: #6a1b9a;">
+                            <span class="etiqueta">🔗 Enlaces rápidos</span>
+                            <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 4px;">
+                                <span style="background: #e3f2fd; padding: 2px 10px; border-radius: 4px; font-size: 13px;">📅 Calendario de reuniones</span>
+                                <span style="background: #e3f2fd; padding: 2px 10px; border-radius: 4px; font-size: 13px;">📊 Dashboard de métricas</span>
+                                <span style="background: #e3f2fd; padding: 2px 10px; border-radius: 4px; font-size: 13px;">👥 Directorio del equipo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seccion-pagina" style="border-color: #2e7d32; margin-top: 6px; display: flex; align-items: center; gap: 12px;">
+                        <span class="etiqueta">🖼️ Imagen</span>
+                        <div style="background: #e8f5e9; padding: 4px 16px; border-radius: 4px; font-size: 14px; color: #2e7d32;">[ Imagen del equipo ]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, crea una nueva página en tu Sitio de Equipo.</li>
+                    <li>2. Agrega al menos los siguientes web parts:
+                        <ul>
+                            <li>Texto (con un mensaje de bienvenida).</li>
+                            <li>Imagen (sube una imagen de prueba o usa un enlace).</li>
+                            <li>Biblioteca de documentos (muestra la biblioteca predeterminada).</li>
+                            <li>Enlaces rápidos (agrega 3 enlaces a sitios útiles).</li>
+                        </ul>
+                    </li>
+                    <li>3. Personaliza la página: cambia el tema o colores, ajusta el diseño de secciones (usa 2 columnas).</li>
+                    <li>4. Publica la página y comparte el enlace con la clase (o describe tu diseño si no tienes acceso).</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué web part consideras más importante para una página de inicio?</li>
+                    <li>¿Cómo afecta la personalización visual a la percepción del sitio?</li>
+                    <li>¿Por qué es útil usar enlaces rápidos en una página?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea páginas en SharePoint, agrega web parts y aplica personalización visual básica.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Crea una página correctamente.</li>
+                <li>Agrega y configura web parts de documentos, texto, imagen y enlaces.</li>
+                <li>Aplica personalización visual (colores, diseño).</li>
+                <li>Publica la página correctamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Guía de web parts</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cómo se crea una nueva página en SharePoint?</li>
+                <li>¿Qué web parts usamos para mostrar documentos?</li>
+                <li>¿Qué web part usarías para dar instrucciones?</li>
+                <li>¿Qué web part usarías para mostrar acceso rápido a otras páginas?</li>
+                <li>¿Cómo se cambia el color principal de una página?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña una página de inicio para un sitio de equipo de una empresa ficticia. Incluye:</p>
+                <ul>
+                    <li>Un mensaje de bienvenida (texto).</li>
+                    <li>Una imagen representativa.</li>
+                    <li>Una biblioteca de documentos con al menos 3 archivos ficticios.</li>
+                    <li>Enlaces rápidos a: "Recursos Humanos", "Políticas de la empresa" y "Calendario".</li>
+                    <li>Un diseño con dos columnas (texto + imagen en una, documentos en la otra).</li>
+                    <li>Especifica los colores que usarías y por qué.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el diseño de páginas en SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende cómo estructurar una página efectiva.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para diseñar páginas en SharePoint:</strong></p>
+        <p>• <strong>Web part de documentos:</strong> Muestra archivos relevantes para el equipo.</p>
+        <p>• <strong>Web part de texto:</strong> Explica el propósito de la página o da instrucciones.</p>
+        <p>• <strong>Web part de imagen:</strong> Aporta contexto visual y hace la página más atractiva.</p>
+        <p>• <strong>Enlaces rápidos:</strong> Mejora la navegación y acceso a recursos.</p>
+        <p>• <strong>Personalización:</strong> Usa colores y diseño para alinear la página con la identidad del equipo.</p>
+        <p>• <strong>Organización:</strong> Distribuye el contenido en secciones y columnas para facilitar la lectura.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a construir páginas funcionales y atractivas en SharePoint.</p>
+        <p>• Desarrolla habilidades de diseño y organización de contenido.</p>
+        <p>• Prepara a los estudiantes para crear espacios colaborativos efectivos.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

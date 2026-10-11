@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Publicación y Compartir Power Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+            font-family: 'Courier New', monospace;
+        }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        .mock-dispositivo {
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #1a237e;
+            overflow: hidden;
+            margin: 8px auto;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .mock-dispositivo .header {
+            background: #1a237e;
+            color: white;
+            padding: 8px 12px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mock-dispositivo .body {
+            padding: 10px 12px;
+            background: #f5f7fa;
+            font-size: 13px;
+        }
+        .mock-dispositivo .app-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            border-left: 3px solid #1e88e5;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🚀 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Publicación y Compartir Power Apps · Pruebas en móvil y navegador</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante publica su aplicación de Power Apps, la comparte con otros usuarios (compañeros de clase o tutores), y verifica su funcionamiento tanto en dispositivos móviles como en navegadores web, asegurando una experiencia de usuario óptima en diferentes plataformas.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende el proceso de publicación de una app en Power Apps.</li>
+                <li>Reconoce las opciones de compartir con usuarios y grupos.</li>
+                <li>Identifica los requisitos para ejecutar la app en móvil y navegador.</li>
+                <li>Entiende los permisos necesarios para compartir apps.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Publicar una app en Power Apps.</li>
+                <li>Compartir la app con compañeros o tutores.</li>
+                <li>Asignar permisos de edición o solo uso.</li>
+                <li>Probar la app en Power Apps Mobile (móvil).</li>
+                <li>Probar la app en el navegador web.</li>
+                <li>Verificar el correcto funcionamiento en ambos entornos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por compartir sus creaciones.</li>
+                <li>Valora la importancia de probar en diferentes dispositivos.</li>
+                <li>Participa activamente en la retroalimentación.</li>
+                <li>Desarrolla habilidades de trabajo colaborativo.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo compartimos nuestra app con otros?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y contextualización.</p>
+            <p>El docente pregunta: <em>"Ya terminamos nuestra app de gestión de proyectos. ¿Cómo la compartimos con nuestros compañeros o tutores? ¿Cómo verificamos que funciona bien en un celular?"</em> Se introduce la necesidad de publicar y compartir.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Pasos finales del ciclo de desarrollo:</span>
+                <ul>
+                    <li><strong>Publicar:</strong> Guardar la versión final de la app.</li>
+                    <li><strong>Compartir:</strong> Dar acceso a otros usuarios.</li>
+                    <li><strong>Probar:</strong> Verificar en móvil y navegador.</li>
+                    <li><strong>Recibir feedback:</strong> Ajustar según comentarios.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la importancia de publicar, compartir y probar una app.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los pasos finales del desarrollo.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a make.powerapps.com</li>
+                <li>App "Gestor de Proyectos" terminada</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Publicación, compartición y pruebas de la app"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- PASO 1: PUBLICAR -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 1: Publicar la aplicación</h4>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">1</span>
+                <h5>Guardar los cambios</h5>
+                <p>En Power Apps Studio, hacer clic en <strong>"Guardar"</strong> (o <code>Ctrl+S</code>) para guardar la versión más reciente.</p>
+                <div class="captura-mock">
+                    💾 Archivo → Guardar
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">2</span>
+                <h5>Publicar la app</h5>
+                <p>Hacer clic en <strong>"Publicar"</strong> en la parte superior derecha. Esto hace que la app esté disponible para todos los usuarios con los que se comparta.</p>
+                <div class="captura-mock">
+                    🚀 Publicar → Publicar esta versión
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Al publicar, los usuarios ven la versión más reciente.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 2: COMPARTIR -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 2: Compartir la app con otros usuarios</h4>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">3</span>
+                <h5>Acceder a la opción de compartir</h5>
+                <p>En <strong>make.powerapps.com</strong>, ir a <strong>"Aplicaciones"</strong> → buscar tu app "Gestor de Proyectos".</p>
+                <p>Hacer clic en los <strong>tres puntos (...)</strong> junto al nombre de la app → seleccionar <strong>"Compartir"</strong>.</p>
+                <div class="captura-mock">
+                    📱 Aplicaciones → ... → Compartir
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">4</span>
+                <h5>Agregar usuarios o grupos</h5>
+                <p>En el panel de compartir, escribir los correos electrónicos o nombres de los compañeros/tutores.</p>
+                <div class="captura-mock">
+                    ✉️ Agregar: companero@escuela.com, tutor@escuela.com
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Se pueden agregar usuarios individuales o grupos de seguridad.</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">5</span>
+                <h5>Asignar permisos</h5>
+                <p>Elegir el nivel de permiso para cada usuario:</p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li><strong>Usuario:</strong> Puede usar la app pero no editarla.</li>
+                    <li><strong>Coproprietario:</strong> Puede usar y editar la app (útil para tutores que ayudan).</li>
+                </ul>
+                <div class="captura-mock">
+                    🔐 Permisos: Usuario (compañeros) | Coproprietario (tutor)
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">6</span>
+                <h5>Enviar la invitación</h5>
+                <p>Hacer clic en <strong>"Compartir"</strong>. Los usuarios recibirán un correo con el enlace a la app.</p>
+                <div class="captura-mock">
+                    📧 Compartir → Enviar invitación
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">También se puede copiar el enlace directo para compartir.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 3: PROBAR EN NAVEGADOR -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 3: Probar la app en el navegador web</h4>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">7</span>
+                <h5>Acceder desde el navegador</h5>
+                <p>Los usuarios pueden acceder desde <strong>office.com</strong> → <strong>Power Apps</strong> → <strong>Aplicaciones</strong>, o directamente desde el enlace compartido.</p>
+                <div class="captura-mock">
+                    🌐 https://apps.powerapps.com → Aplicaciones → Gestor de Proyectos
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">La app se abre en el navegador (Edge, Chrome, etc.).</p>
+            </div>
+
+            <div class="mock-dispositivo" style="max-width: 380px;">
+                <div class="header">
+                    <span>🖥️ Navegador</span>
+                    <span>─ □ ✕</span>
+                </div>
+                <div class="body" style="background: white; padding: 12px;">
+                    <p style="font-weight: 600; color: #1a237e; font-size: 14px; margin-bottom: 6px;">📋 Proyectos</p>
+                    <div class="app-item">E-commerce App — Ana García</div>
+                    <div class="app-item">CRM de Ventas — María Torres</div>
+                    <div class="app-item">Dashboard de Métricas — Ana García</div>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Vista de la app en navegador web.</p>
+
+            <!-- ============================================ -->
+            <!-- PASO 4: PROBAR EN MÓVIL -->
+            <!-- ============================================ -->
+            <h4>🔹 Paso 4: Probar la app en el móvil</h4>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">8</span>
+                <h5>Descargar Power Apps Mobile</h5>
+                <p>En el dispositivo móvil, descargar la aplicación <strong>Power Apps</strong> desde la App Store (iOS) o Google Play (Android).</p>
+                <div class="captura-mock">
+                    📲 App Store / Google Play → Power Apps
+                </div>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">9</span>
+                <h5>Iniciar sesión y abrir la app</h5>
+                <p>Iniciar sesión con la misma cuenta organizativa. La app "Gestor de Proyectos" aparecerá en la lista de aplicaciones compartidas.</p>
+                <div class="captura-mock">
+                    🔑 Iniciar sesión → Aplicaciones → Gestor de Proyectos
+                </div>
+            </div>
+
+            <div class="mock-dispositivo" style="max-width: 220px;">
+                <div class="header" style="font-size: 11px;">
+                    <span>📱 Móvil</span>
+                    <span>•••</span>
+                </div>
+                <div class="body" style="padding: 8px;">
+                    <p style="font-weight: 600; color: #1a237e; font-size: 12px; margin-bottom: 4px;">📋 Proyectos</p>
+                    <div class="app-item" style="font-size: 11px; padding: 6px 8px;">E-commerce App</div>
+                    <div class="app-item" style="font-size: 11px; padding: 6px 8px;">CRM de Ventas</div>
+                    <div class="app-item" style="font-size: 11px; padding: 6px 8px;">Dashboard de Métricas</div>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Vista de la app en dispositivo móvil.</p>
+
+            <!-- ============================================ -->
+            <!-- DIFERENCIAS MÓVIL VS NAVEGADOR -->
+            <!-- ============================================ -->
+            <h4>🔹 Diferencias entre móvil y navegador</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5>🖥️ Navegador web</h5>
+                    <ul>
+                        <li>Pantalla más grande, más espacio para datos.</li>
+                        <li>Puede mostrar más columnas simultáneamente.</li>
+                        <li>Ideal para uso en escritorio u oficina.</li>
+                        <li>Acceso rápido desde cualquier computadora.</li>
+                    </ul>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📱 Dispositivo móvil</h5>
+                    <ul>
+                        <li>Pantalla pequeña, requiere diseño vertical.</li>
+                        <li>Menos columnas visibles a la vez.</li>
+                        <li>Ideal para uso en campo o movimiento.</li>
+                        <li>Funciona con gestos táctiles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Consejos para diseño multiplataforma:</span>
+                <ul>
+                    <li>Usa formato <strong>Teléfono</strong> o <strong>Tablet</strong> en la configuración de la app.</li>
+                    <li>Diseña con <strong>pantallas verticales</strong> para móvil.</li>
+                    <li>Usa <strong>contenedores flexibles</strong> que se adapten al tamaño.</li>
+                    <li>Prueba <strong>siempre</strong> en ambos entornos antes de compartir.</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Publica tu app "Gestor de Proyectos" desde Power Apps Studio.</li>
+                    <li>2. Comparte la app con un compañero de clase (permiso: Usuario) y con el tutor (permiso: Coproprietario).</li>
+                    <li>3. Copia el enlace de la app y envíalo a tu compañero.</li>
+                    <li>4. Pídele a tu compañero que abra la app desde el navegador y pruebe la búsqueda y edición.</li>
+                    <li>5. Descarga Power Apps Mobile en tu celular (si es posible) e inicia sesión.</li>
+                    <li>6. Abre la app en el móvil y verifica que todos los elementos se vean correctamente.</li>
+                    <li>7. Anota las diferencias que observas entre la versión de navegador y la versión móvil.</li>
+                    <li>8. Si no tienes acceso a móvil, documenta los pasos que seguirías y qué verificarías.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué diferencias notaste entre la app en navegador y en móvil?</li>
+                    <li>¿Qué ajustes harías al diseño para mejorar la experiencia en móvil?</li>
+                    <li>¿Por qué es importante probar en diferentes dispositivos antes de compartir?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante publica, comparte y prueba su app en navegador y móvil, verificando su correcto funcionamiento.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Publica la app correctamente.</li>
+                <li>Comparte la app con otros usuarios asignando permisos.</li>
+                <li>Prueba la app en navegador web.</li>
+                <li>Prueba la app en dispositivo móvil.</li>
+                <li>Identifica diferencias entre plataformas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a make.powerapps.com</li>
+                <li>Dispositivo móvil con Power Apps Mobile instalada</li>
+                <li>Navegador web</li>
+                <li>Pizarra</li>
+                <li>Guía de publicación y compartición</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cuáles son los pasos para publicar una app?</li>
+                <li>¿Cómo se comparte una app con otros usuarios?</li>
+                <li>¿Qué diferencia hay entre permiso "Usuario" y "Coproprietario"?</li>
+                <li>¿Cómo se prueba la app en el navegador?</li>
+                <li>¿Cómo se prueba la app en el móvil?</li>
+                <li>¿Qué diferencias hay entre la experiencia en móvil y navegador?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Investiga cómo crear una <strong>versión de prueba</strong> de tu app antes de publicarla para todos. Describe el proceso y por qué es útil.</p>
+                <p style="font-size: 13px; color: #555; margin-top: 4px;">Pista: busca "Publicar como versión de prueba" en Power Apps.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el proceso de publicación, compartición y prueba de Power Apps.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende el ciclo completo de publicación.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Power Apps Studio</li>
+                <li>Power Apps Mobile</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para publicar y compartir Power Apps:</strong></p>
+        <p>• <strong>Publicar:</strong> Hace que la app esté disponible para los usuarios compartidos.</p>
+        <p>• <strong>Compartir:</strong> Desde make.powerapps.com → Aplicaciones → ... → Compartir.</p>
+        <p>• <strong>Permisos:</strong> Usuario (solo usar) o Coproprietario (usar y editar).</p>
+        <p>• <strong>Navegador:</strong> Acceso desde office.com o apps.powerapps.com.</p>
+        <p>• <strong>Móvil:</strong> Descargar Power Apps Mobile desde la tienda de apps.</p>
+        <p>• <strong>Pruebas:</strong> Verificar en ambos entornos antes de dar por finalizada la app.</p>
+        <p>• <strong>Diseño responsive:</strong> Asegurar que la app se adapte a diferentes tamaños de pantalla.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>• Cierra el ciclo de desarrollo de una aplicación.</p>
+        <p>• Enseña a compartir y colaborar con otros usuarios.</p>
+        <p>• Prepara a los estudiantes para entornos reales de trabajo.</p>
+        <p>• Desarrolla habilidades de prueba y validación multiplataforma.</p>
+    </div>
+
+</div>
+</body>
+</html>

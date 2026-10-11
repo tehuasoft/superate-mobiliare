@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Teoría del Color y Psicología del Color</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .color-card {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 2px 4px;
+        }
+        .color-rojo { background: #e53935; color: white; }
+        .color-amarillo { background: #fdd835; color: #333; }
+        .color-verde { background: #43a047; color: white; }
+        .color-azul { background: #1e88e5; color: white; }
+        .color-morado { background: #8e24aa; color: white; }
+
+        .mood-card {
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 12px 0;
+            border-left: 6px solid #3f51b5;
+        }
+        .mood-card h5 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .mood-card ul {
+            padding-left: 20px;
+        }
+        .mood-card ul li {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .combinacion-ejemplo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 10px 0;
+        }
+        .combinacion-ejemplo .muestra {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+        .combinacion-ejemplo .muestra.malo {
+            border: 2px solid #c62828;
+            background: #ffebee;
+        }
+        .combinacion-ejemplo .muestra.bueno {
+            border: 2px solid #2e7d32;
+            background: #e8f5e9;
+        }
+
+        .recurso-card {
+            background: #f5f7fa;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 6px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .recurso-card strong {
+            color: #1a237e;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🎨 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Teoría del Color · Psicología del Color · Combinaciones</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende la psicología del color y su impacto en la comunicación visual, identifica los 5 moods de colores principales (rojo, amarillo, verde, azul, morado) con sus significados y ejemplos de marcas, reconoce combinaciones cromáticas (análogos, complementarios, tríada) y aprende a utilizar herramientas como Color Hunt y Adobe Color para seleccionar paletas efectivas.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende que los colores transmiten mensajes y emociones.</li>
+                <li>Reconoce los 5 moods de colores: rojo, amarillo, verde, azul, morado.</li>
+                <li>Identifica combinaciones cromáticas: análogos, complementarios, tríada.</li>
+                <li>Entiende la importancia del color en branding y diseño.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Seleccionar colores según el mensaje que se quiere transmitir.</li>
+                <li>Utilizar combinaciones análogas, complementarias y triádicas.</li>
+                <li>Usar herramientas como Color Hunt y Adobe Color.</li>
+                <li>Identificar combinaciones de texto que son ilegibles (mal contraste).</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora el color como herramienta de comunicación.</li>
+                <li>Muestra interés por el diseño y la psicología visual.</li>
+                <li>Participa activamente en el análisis de marcas y paletas.</li>
+                <li>Desarrolla sensibilidad estética y crítica.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué mensaje transmiten los colores?"</h4>
+            <p><span class="label">Metodología:</span> Lluvia de ideas y reflexión.</p>
+            <p>El docente pregunta: <em>"¿Qué sensaciones te transmiten estos colores?"</em> y muestra ejemplos de marcas conocidas. Se introduce la idea de que los colores no son solo estéticos, sino que comunican.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplos rápidos:</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                    <span class="color-card color-rojo">Rojo</span>
+                    <span class="color-card color-amarillo">Amarillo</span>
+                    <span class="color-card color-verde">Verde</span>
+                    <span class="color-card color-azul">Azul</span>
+                    <span class="color-card color-morado">Morado</span>
+                </div>
+                <p style="margin-top: 8px;">Cada uno de estos colores tiene un significado distinto en el mundo del marketing y el diseño.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante reflexiona sobre cómo los colores influyen en la percepción de productos y marcas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la lluvia de ideas.</li>
+                <li>Reconoce que los colores tienen significado.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de marcas</li>
+                <li>Presentación visual</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Psicología del color, combinaciones y herramientas"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos visuales.</p>
+
+            <!-- ============================================ -->
+            <!-- LOS 5 MOODS DE COLORES -->
+            <!-- ============================================ -->
+            <h4>🔹 Los 5 moods de colores</h4>
+
+            <div class="mood-card" style="border-left-color: #e53935; background: #ffebee;">
+                <h5><span class="color-card color-rojo">Rojo</span> — Amor, energía, intensidad</h5>
+                <ul>
+                    <li><strong>Significado:</strong> Pasión, urgencia, emoción, poder.</li>
+                    <li><strong>Uso:</strong> Llamar la atención, productos de comida rápida, entretenimiento.</li>
+                    <li><strong>Marcas que lo usan:</strong>
+                        <ul>
+                            <li><strong>Coca-Cola:</strong> Energía, felicidad, tradición.</li>
+                            <li><strong>YouTube:</strong> Pasión por el contenido, emoción.</li>
+                            <li><strong>Netflix:</strong> Intensidad, entretenimiento.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mood-card" style="border-left-color: #fdd835; background: #fffde7;">
+                <h5><span class="color-card color-amarillo">Amarillo</span> — Gozo, intelecto, atención</h5>
+                <ul>
+                    <li><strong>Significado:</strong> Optimismo, creatividad, calidez, juventud.</li>
+                    <li><strong>Uso:</strong> Captar atención, marcas lúdicas, infantiles.</li>
+                    <li><strong>Marcas que lo usan:</strong>
+                        <ul>
+                            <li><strong>McDonald's:</strong> Felicidad, energía, comida rápida.</li>
+                            <li><strong>IKEA:</strong> Creatividad, diseño accesible.</li>
+                            <li><strong>Ferrero Rocher:</strong> Lujo, calidez.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mood-card" style="border-left-color: #43a047; background: #e8f5e9;">
+                <h5><span class="color-card color-verde">Verde</span> — Frescura, seguridad, crecimiento</h5>
+                <ul>
+                    <li><strong>Significado:</strong> Naturaleza, salud, sostenibilidad, dinero.</li>
+                    <li><strong>Uso:</strong> Productos ecológicos, salud, finanzas.</li>
+                    <li><strong>Marcas que lo usan:</strong>
+                        <ul>
+                            <li><strong>Starbucks:</strong> Frescura, tradición, sostenibilidad.</li>
+                            <li><strong>Spotify:</strong> Crecimiento, frescura, innovación.</li>
+                            <li><strong>BP (British Petroleum):</strong> Energía verde, sostenibilidad.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mood-card" style="border-left-color: #1e88e5; background: #e3f2fd;">
+                <h5><span class="color-card color-azul">Azul</span> — Estabilidad, confianza, serenidad</h5>
+                <ul>
+                    <li><strong>Significado:</strong> Confianza, seguridad, profesionalismo, tecnología.</li>
+                    <li><strong>Uso:</strong> Bancos, tecnología, empresas serias.</li>
+                    <li><strong>Marcas que lo usan:</strong>
+                        <ul>
+                            <li><strong>Facebook:</strong> Confianza, conexión.</li>
+                            <li><strong>PayPal:</strong> Seguridad, confianza en pagos.</li>
+                            <li><strong>IBM:</strong> Profesionalismo, tecnología.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mood-card" style="border-left-color: #8e24aa; background: #f3e5f5;">
+                <h5><span class="color-card color-morado">Morado / Púrpura</span> — Realeza, riqueza, femenino</h5>
+                <ul>
+                    <li><strong>Significado:</strong> Lujo, creatividad, espiritualidad, sofisticación.</li>
+                    <li><strong>Uso:</strong> Productos de lujo, belleza, marcas femeninas.</li>
+                    <li><strong>Marcas que lo usan:</strong>
+                        <ul>
+                            <li><strong>Cadbury:</strong> Lujo, placer, tradición.</li>
+                            <li><strong>Hallmark:</strong> Creatividad, emociones.</li>
+                            <li><strong>Yahoo:</strong> Innovación, creatividad.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- COMBINACIONES CROMÁTICAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Combinaciones cromáticas</h4>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 12px 0;">
+                <div style="background: #f5f7fa; padding: 14px; border-radius: 10px; border-top: 4px solid #4ecdc4;">
+                    <h5 style="color: #1a237e;">🟡 Análogos</h5>
+                    <p style="font-size: 14px;">Colores vecinos en la rueda de color. Generan armonía y suavidad.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Cuándo usar:</strong> Diseños relajantes, naturales, sin mucho contraste.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Ejemplo:</strong> Azul, azul-verdoso, verde.</p>
+                </div>
+                <div style="background: #f5f7fa; padding: 14px; border-radius: 10px; border-top: 4px solid #ff6b6b;">
+                    <h5 style="color: #1a237e;">🔴 Complementarios</h5>
+                    <p style="font-size: 14px;">Colores opuestos en la rueda. Generan alto contraste y energía.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Cuándo usar:</strong> Llamar la atención, botones de acción, elementos destacados.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Ejemplo:</strong> Rojo y verde, azul y naranja.</p>
+                </div>
+                <div style="background: #f5f7fa; padding: 14px; border-radius: 10px; border-top: 4px solid #ffd93d;">
+                    <h5 style="color: #1a237e;">🔺 Tríada</h5>
+                    <p style="font-size: 14px;">Tres colores equidistantes en la rueda. Equilibrio y variedad.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Cuándo usar:</strong> Paletas vibrantes, infantiles, creativas.</p>
+                    <p style="font-size: 13px; color: #555;"><strong>Ejemplo:</strong> Rojo, amarillo, azul.</p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- QUÉ COMBINACIONES EVITAR EN TEXTO -->
+            <!-- ============================================ -->
+            <h4>🔹 Combinaciones que se ven FATAL en texto</h4>
+            <div class="ejemplo-box">
+                <span class="highlight">⚠️ Mal contraste = texto ilegible</span>
+                <div class="combinacion-ejemplo">
+                    <div class="muestra malo" style="color: #ff6b6b; background: #ff6b6b; color: #ff6b6b; background: #ff6b6b;">Rojo sobre rojo (fatal)</div>
+                    <div class="muestra malo" style="color: #fdd835; background: white;">Amarillo sobre blanco (casi invisible)</div>
+                    <div class="muestra malo" style="color: #43a047; background: #e8f5e9;">Verde claro sobre verde claro (ilegible)</div>
+                    <div class="muestra malo" style="color: #1e88e5; background: #0d47a1;">Azul oscuro sobre azul oscuro (no se ve)</div>
+                </div>
+                <p style="margin-top: 8px;"><strong>✅ Recomendación:</strong> Siempre asegurar <strong>alto contraste</strong> entre fondo y texto. Blanco sobre oscuro, negro sobre claro, o combinaciones complementarias con suficiente luminosidad.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- HERRAMIENTAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Herramientas para seleccionar colores</h4>
+
+            <div class="recurso-card">
+                <strong>🎨 Color Hunt</strong> — <a href="https://colorhunt.co" target="_blank" style="color: #1a237e;">colorhunt.co</a>
+                <p>Paletas de colores predefinidas, actualizadas constantemente. Ideal para encontrar inspiración rápida.</p>
+            </div>
+
+            <div class="recurso-card">
+                <strong>🎨 Adobe Color</strong> — <a href="https://color.adobe.com" target="_blank" style="color: #1a237e;">color.adobe.com</a>
+                <p>Herramienta profesional para crear paletas basadas en reglas cromáticas (análogos, complementarios, tríada, etc.).</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Elige una marca ficticia (ej. una cafetería, una tienda de ropa, una app de finanzas).</li>
+                    <li>2. Define el mensaje que quieres transmitir (ej. confianza, frescura, lujo).</li>
+                    <li>3. Selecciona un color principal basado en los 5 moods.</li>
+                    <li>4. Usa Adobe Color o Color Hunt para crear una paleta de 3 colores.</li>
+                    <li>5. Explica por qué elegiste esa combinación y qué mensaje envía.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué color elegirías para una marca de productos ecológicos? ¿Por qué?</li>
+                    <li>¿Qué combinación usarías para destacar un botón de "Comprar"?</li>
+                    <li>¿Por qué es importante el contraste en el texto?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la psicología del color, reconoce combinaciones cromáticas y usa herramientas para crear paletas efectivas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Identifica los 5 moods de colores y sus significados.</li>
+                <li>Reconoce combinaciones análogas, complementarias y triádicas.</li>
+                <li>Usa herramientas como Color Hunt y Adobe Color.</li>
+                <li>Evita combinaciones de texto con mal contraste.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Proyector / ejemplos visuales</li>
+                <li>Color Hunt, Adobe Color</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué representa el color rojo en psicología?</li>
+                <li>¿Qué marcas usan el verde y por qué?</li>
+                <li>¿Qué combinación usarías para un diseño relajante?</li>
+                <li>¿Qué combinación usarías para llamar la atención?</li>
+                <li>¿Qué herramienta recomiendas para crear paletas?</li>
+                <li>¿Por qué es malo usar texto amarillo sobre fondo blanco?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Usando Adobe Color, crea una paleta <strong>complementaria</strong> para una marca de tecnología que quiera transmitir <strong>confianza y modernidad</strong>. Explica tu elección.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de teoría del color y su aplicación práctica.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende cómo aplicar el color en diseño.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Adobe Color</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para el uso del color:</strong></p>
+        <p>• <strong>Rojo:</strong> energía, amor, urgencia → llamar la atención.</p>
+        <p>• <strong>Amarillo:</strong> gozo, intelecto → marcas juveniles.</p>
+        <p>• <strong>Verde:</strong> frescura, seguridad → naturaleza, salud.</p>
+        <p>• <strong>Azul:</strong> confianza, estabilidad → tecnología, finanzas.</p>
+        <p>• <strong>Morado:</strong> lujo, creatividad → marcas premium.</p>
+        <p>• <strong>Análogos:</strong> armonía y suavidad.</p>
+        <p>• <strong>Complementarios:</strong> contraste y energía.</p>
+        <p>• <strong>Tríada:</strong> variedad y equilibrio.</p>
+        <p>• <strong>Texto:</strong> siempre alto contraste (blanco/negro sobre fondos oscuros/claros).</p>
+        <p>• Usa <strong>Color Hunt</strong> y <strong>Adobe Color</strong> para inspirarte.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a usar el color como herramienta de comunicación.</p>
+        <p>• Prepara a los estudiantes para diseñar con propósito.</p>
+        <p>• Conecta teoría con herramientas prácticas.</p>
+        <p>• Desarrolla criterio estético y estratégico.</p>
+    </div>
+
+</div>
+</body>
+</html>

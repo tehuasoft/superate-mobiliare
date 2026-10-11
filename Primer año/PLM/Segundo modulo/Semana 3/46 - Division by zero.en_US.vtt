@@ -1,0 +1,273 @@
+WEBVTT
+
+0
+00:00.550 --> 00:02.330
+<v Krista>In this video, we're talking about division</v>
+
+1
+00:02.330 --> 00:05.220
+by zero and the fact that dividing by zero
+
+2
+00:05.220 --> 00:07.250
+is actually undefined in math.
+
+3
+00:07.250 --> 00:09.630
+Lets look at a couple of examples to illustrate
+
+4
+00:09.630 --> 00:11.440
+why sometimes people get confused.
+
+5
+00:11.440 --> 00:13.100
+In this first example here,
+
+6
+00:13.100 --> 00:16.810
+we have fractions two over one times one over two.
+
+7
+00:16.810 --> 00:18.140
+We want to multiply these together.
+
+8
+00:18.140 --> 00:19.820
+Remember when we multiply fractions,
+
+9
+00:19.820 --> 00:21.770
+we multiply the numerators together.
+
+10
+00:21.770 --> 00:23.660
+So our numerators two times one.
+
+11
+00:23.660 --> 00:24.770
+We get two.
+
+12
+00:24.770 --> 00:27.940
+In the denominator, we have one times two or two.
+
+13
+00:27.940 --> 00:30.870
+Two over two is equal to one and that's fine.
+
+14
+00:30.870 --> 00:32.060
+But in this case,
+
+15
+00:32.060 --> 00:33.610
+we multiply our numerators together.
+
+16
+00:33.610 --> 00:35.840
+We have two times zero is zero
+
+17
+00:35.840 --> 00:38.130
+and our denominator is zero time two.
+
+18
+00:38.130 --> 00:39.230
+We also get zero.
+
+19
+00:39.230 --> 00:41.300
+So comparing this to our first example
+
+20
+00:41.300 --> 00:43.210
+where you have two over two is equal to one.
+
+21
+00:43.210 --> 00:45.770
+You might say zero over zero is equal to one.
+
+22
+00:45.770 --> 00:47.260
+But, in fact, that's not true.
+
+23
+00:47.260 --> 00:49.800
+Zero over zero is not equal to one.
+
+24
+00:49.800 --> 00:51.610
+It is undefined
+
+25
+00:51.610 --> 00:54.920
+and that's because zero is a special number.
+
+26
+00:54.920 --> 00:56.910
+We can't treat it exactly the same
+
+27
+00:56.910 --> 00:58.810
+as we do non-zero numbers.
+
+28
+00:58.810 --> 01:00.470
+In one of the ways, its not the same
+
+29
+01:00.470 --> 01:02.550
+is that we can never divide by zero.
+
+30
+01:02.550 --> 01:05.010
+So zero over zero is going to be undefined
+
+31
+01:05.010 --> 01:07.810
+and even if we just have some constant value
+
+32
+01:07.810 --> 01:10.980
+in the numerator and just zero in our denominator only,
+
+33
+01:10.980 --> 01:12.500
+that's still going to be undefined.
+
+34
+01:12.500 --> 01:14.060
+We can never do this.
+
+35
+01:14.060 --> 01:16.240
+We can never have zero in our denominator.
+
+36
+01:16.240 --> 01:18.130
+So this value is not equal to one.
+
+37
+01:18.130 --> 01:19.440
+In fact, its undefined.
+
+38
+01:19.440 --> 01:20.700
+And it doesn't matter what we might
+
+39
+01:20.700 --> 01:22.830
+be multiplying by zero in our denominator.
+
+40
+01:22.830 --> 01:25.340
+If we have a zero in our denominator, it will be undefined.
+
+41
+01:25.340 --> 01:27.520
+So lets look at this other example here
+
+42
+01:27.520 --> 01:29.610
+to show that this is also undefined.
+
+43
+01:29.610 --> 01:31.720
+If we multiply our numerators together,
+
+44
+01:31.720 --> 01:35.060
+we get three times zero times Y.
+
+45
+01:35.060 --> 01:37.030
+Well, because we're multiplying by zero,
+
+46
+01:37.030 --> 01:39.610
+we're still just going to get zero in our numerator.
+
+47
+01:39.610 --> 01:43.340
+In our denominator, we have zero times X times four
+
+48
+01:43.340 --> 01:45.720
+and it doesn't matter that we're multiplying by X and four
+
+49
+01:45.720 --> 01:49.230
+because anything multiplied by zero is still zero.
+
+50
+01:49.230 --> 01:51.860
+So we still end up here with the zero over zero
+
+51
+01:51.860 --> 01:55.750
+and, of course, we know that that is undefined.
+
+52
+01:55.750 --> 01:57.630
+Looking at this example over here.
+
+53
+01:57.630 --> 01:59.330
+When we multiply our numerators together,
+
+54
+01:59.330 --> 02:01.300
+we get AB times three,
+
+55
+02:01.300 --> 02:04.220
+or in other words, 3AB in the numerator
+
+56
+02:04.220 --> 02:06.930
+and in the denominator, we have zero times zero,
+
+57
+02:06.930 --> 02:08.310
+which we know is zero.
+
+58
+02:08.310 --> 02:10.760
+And here, even though we have a non-zero value
+
+59
+02:10.760 --> 02:12.540
+in our numerator, 3AB,
+
+60
+02:12.540 --> 02:15.360
+we still have a zero value in our denominator,
+
+61
+02:15.360 --> 02:17.360
+which is not allowed and so we say
+
+62
+02:17.360 --> 02:19.590
+that this is also undefined.
+
+63
+02:19.590 --> 02:22.500
+We can never divide by zero.
+
+64
+02:22.500 --> 02:24.400
+This here is not acceptable.
+
+65
+02:24.400 --> 02:26.410
+So for all three of these examples,
+
+66
+02:26.410 --> 02:28.670
+we can't come up with a real number answer.
+
+67
+02:28.670 --> 02:30.323
+They're all undefined.

@@ -1,0 +1,352 @@
+WEBVTT
+
+00:00.050 --> 00:05.720
+Now that we understand this idea of an exponent, we want to look at arithmetic with terms that involve
+
+00:05.720 --> 00:06.260
+exponents.
+
+00:06.260 --> 00:10.830
+So just as a reminder, let's say that we have this exponential term here.
+
+00:10.850 --> 00:14.870
+Remember, we call X, the base two is the exponent.
+
+00:14.900 --> 00:20.620
+Now we want to recognize that we can also have what's called a coefficient in front of the base.
+
+00:20.630 --> 00:23.030
+This three here is acting as the coefficient.
+
+00:23.060 --> 00:27.460
+It just multiplies the x squared or the x to the power of two.
+
+00:27.470 --> 00:32.840
+In other words, this is the same here as x squared.
+
+00:33.530 --> 00:35.060
+Plus X squared.
+
+00:35.710 --> 00:42.070
+Plus X squared, because here we're saying we have three X squared and here we're saying we have one
+
+00:42.070 --> 00:42.640
+x squared.
+
+00:42.640 --> 00:45.580
+If we add another one to it, we have two x squared.
+
+00:45.580 --> 00:48.010
+And if we add another one to it, we have three x squared.
+
+00:48.010 --> 00:50.680
+And then this is how we write three x squared.
+
+00:50.680 --> 00:58.090
+So with this idea of the coefficient, the base and the exponent, let's look at how to add two terms
+
+00:58.090 --> 00:59.740
+that include exponents.
+
+00:59.740 --> 01:02.470
+So here we have three x squared plus x squared.
+
+01:02.470 --> 01:08.230
+Whenever there's no coefficient, there's essentially an implied coefficient of positive one.
+
+01:08.230 --> 01:12.460
+So this is actually saying three x squared plus one x squared.
+
+01:12.460 --> 01:17.320
+Well when we have three of them and we're adding another one of them, we're just going to get four
+
+01:17.320 --> 01:17.680
+of them.
+
+01:17.680 --> 01:23.470
+So we're going to have four x squared is the result of this addition.
+
+01:23.470 --> 01:26.890
+We can also subtract terms with exponents.
+
+01:26.890 --> 01:31.090
+So if instead of the addition here, we use subtraction.
+
+01:31.120 --> 01:34.660
+Three of them, minus one of them is two of them.
+
+01:34.660 --> 01:37.340
+So we end up with two x squared.
+
+01:37.370 --> 01:43.160
+Now, it's important to say here that in order to do addition or subtraction with terms that include
+
+01:43.160 --> 01:46.580
+exponents, we have to have equivalent bases.
+
+01:46.580 --> 01:50.750
+So the bases have to be the same and the exponents have to be the same.
+
+01:50.990 --> 01:55.850
+So in both of these we were able to do the addition and subtraction because we had equivalent bases
+
+01:55.880 --> 01:58.400
+x and equivalent exponents.
+
+01:58.400 --> 02:00.020
+Two Same thing down here.
+
+02:00.020 --> 02:03.140
+Both bases were x, both exponents were two.
+
+02:03.170 --> 02:05.510
+So we were able to do the addition and subtraction.
+
+02:05.510 --> 02:11.720
+The coefficients do not have to be the same because the coefficients just tell us how many of that term
+
+02:11.720 --> 02:12.470
+we have.
+
+02:12.500 --> 02:23.180
+So to give a counter example, if we had maybe three x squared minus four x, we could not simplify
+
+02:23.180 --> 02:29.780
+this expression or combine these terms in any way because while the bases are the same, they both have
+
+02:29.780 --> 02:33.470
+base X, we have different coefficients, three and four, that's fine.
+
+02:33.470 --> 02:36.860
+But they have the same base, they have different exponents.
+
+02:36.860 --> 02:42.110
+Here we have an exponent of two here we have an implied exponent of one.
+
+02:42.140 --> 02:43.580
+The exponents are different.
+
+02:43.580 --> 02:45.770
+And so these are not like terms.
+
+02:45.770 --> 02:47.660
+We can't combine them in any way.
+
+02:47.660 --> 02:53.480
+We can't simplify this expression now while we have to have equivalent bases and equivalent exponents
+
+02:53.480 --> 02:57.590
+for addition and subtraction for multiplication and division.
+
+02:57.710 --> 03:03.650
+It is true that the bases have to be equivalent, but the exponents can be different.
+
+03:03.650 --> 03:07.550
+So here we're able to do this multiplication because we have equivalent bases.
+
+03:07.550 --> 03:08.780
+The bases are both x.
+
+03:08.810 --> 03:11.990
+The fact that the exponents are different doesn't matter.
+
+03:11.990 --> 03:19.820
+So the result of this is going to be just x, we keep the same base and then we add the exponents.
+
+03:19.820 --> 03:27.170
+So we get x to the two plus three or x to the fifth, x to the five.
+
+03:27.170 --> 03:28.970
+And the reason that that's true.
+
+03:29.590 --> 03:35.860
+Is because if we expand both the x squared and x cubed here, if we write them out as their expanded
+
+03:35.860 --> 03:42.670
+product, we know that x squared is the same as x times x, then we're multiplying here.
+
+03:42.760 --> 03:48.250
+We know x cubed is the same as x times x times x.
+
+03:48.490 --> 03:54.610
+And so what we see then here when we expand both of these is that we have five factors of X multiplied
+
+03:54.610 --> 04:00.550
+together and we know from exponents that we can rewrite that as X to the five.
+
+04:00.580 --> 04:02.890
+So that's how we're actually getting this result.
+
+04:02.890 --> 04:05.710
+That's how we justify that we can add the exponents.
+
+04:05.710 --> 04:10.480
+And in a more general sense we call that the product rule for exponents.
+
+04:10.480 --> 04:19.240
+And it tells us that any X to the A multiplied by any X to the B, again, here the bases are the same
+
+04:19.510 --> 04:22.560
+and the exponents can be different.
+
+04:22.570 --> 04:23.140
+By the way.
+
+04:23.140 --> 04:25.420
+The exponents can also be the same here.
+
+04:25.420 --> 04:30.410
+But this tells us that they're allowed to be different when we have any product like this.
+
+04:30.440 --> 04:35.720
+We know by the product rule for exponents that the result is going to be X to the A plus B.
+
+04:35.750 --> 04:43.490
+Now we also have a related rule for exponents that tells us that when the bases are different but the
+
+04:43.490 --> 04:48.320
+exponents are the same and we're multiplying, we can rewrite that product.
+
+04:48.320 --> 04:56.450
+This way we can multiply the bases so A times B and then raise that whole thing to the power of N.
+
+04:56.450 --> 05:03.140
+So as an example, let's say here we have three squared multiplied by two squared.
+
+05:03.140 --> 05:05.260
+We can see there that the bases are different.
+
+05:05.270 --> 05:08.000
+The bases A and B are three and two.
+
+05:08.030 --> 05:10.160
+They're different, but the exponents are the same.
+
+05:10.160 --> 05:12.800
+We have an exponent of two in both cases.
+
+05:12.800 --> 05:21.230
+So this rule tells us that we can rewrite this as three times two, multiplying the bases and then raise
+
+05:21.230 --> 05:23.390
+that whole thing to the power of two.
+
+05:23.390 --> 05:27.410
+And we can see that that's going to be equal to three times two is six.
+
+05:27.410 --> 05:32.990
+So we get six squared and of course we know that that's equal to 36.
+
+05:33.020 --> 05:41.330
+Now, if we did this without using this rule, what we would do is evaluate each of these terms individually.
+
+05:41.330 --> 05:45.320
+We know that three squared is nine, we know that two squared is four.
+
+05:45.320 --> 05:47.690
+So we get nine times four.
+
+05:47.690 --> 05:55.250
+And again, you can see we end up with the same value 36 And so we can see that this rule is in fact
+
+05:55.250 --> 05:55.960
+holding.
+
+05:55.970 --> 06:02.240
+So this product rule, this is multiplication of terms with exponents, but we also have a rule for
+
+06:02.240 --> 06:03.980
+dividing terms with exponents.
+
+06:03.980 --> 06:07.430
+So for example, here we have X to the fifth divided by x squared.
+
+06:07.430 --> 06:13.880
+In other words, we have a fraction where x to the fifth is the numerator and x squared is the denominator.
+
+06:13.880 --> 06:20.000
+Again, just like with multiplication, when we have this division of terms with exponents, the bases
+
+06:20.000 --> 06:24.980
+have to be equivalent, but the exponents can be different.
+
+06:24.980 --> 06:30.560
+And when we're dividing terms like this, the rule is that we subtract the exponents.
+
+06:30.560 --> 06:35.900
+So we keep the base the same, the base stays X, but then we take the exponent in the numerator and
+
+06:35.900 --> 06:39.140
+we subtract from that the exponent in the denominator.
+
+06:39.140 --> 06:43.160
+And the result then is x cubed in this case.
+
+06:43.160 --> 06:45.140
+And we can see that that's true.
+
+06:45.140 --> 06:51.740
+If we write this out X to the fifth over x squared, well x to the fifth we could write as x times x
+
+06:51.740 --> 06:52.760
+times x.
+
+06:54.090 --> 06:54.960
+This way.
+
+06:54.960 --> 06:59.700
+And then in the denominator we know x squared is x times x.
+
+06:59.820 --> 07:06.300
+And we saw before when we learned how to simplify fractions and identify equivalent fractions that when
+
+07:06.300 --> 07:10.350
+we have a common factor in the numerator and denominator, we can cancel it out.
+
+07:10.380 --> 07:16.020
+So we could cancel this factor of x with this one and then cancel this factor of x with this one.
+
+07:16.020 --> 07:23.580
+And you can see that all we're left with, all that remains is three factors of x here, which we know
+
+07:23.580 --> 07:25.350
+we could write as x cubed.
+
+07:25.350 --> 07:28.290
+And so you see how we get back to x cubed.
+
+07:28.290 --> 07:31.950
+That's the expanded version that justifies this rule.
+
+07:32.130 --> 07:36.930
+And if we want to generalize this rule, it's called the quotient rule for exponents.
+
+07:36.930 --> 07:40.140
+It governs division with exponential terms here.
+
+07:40.140 --> 07:45.930
+So again, this just tells us what we just learned, which is that we keep the base the same and we
+
+07:45.960 --> 07:47.460
+subtract the exponents.
+
+07:47.460 --> 07:52.470
+So we take the exponent in the numerator and subtract from that the exponent in the denominator.
+
+07:52.470 --> 07:56.500
+So again, these are some rules with exponents.
+
+07:56.500 --> 08:02.530
+Just remember that when we're adding or subtracting, the bases have to be the same and the exponent
+
+08:02.530 --> 08:07.870
+has to be the same in order for us to combine terms, in order for these to be like terms, in order
+
+08:07.870 --> 08:09.280
+to simplify the expression.
+
+08:09.280 --> 08:13.930
+But when we're multiplying or dividing, the bases still have to be the same.
+
+08:13.930 --> 08:16.450
+But the exponents can be different.

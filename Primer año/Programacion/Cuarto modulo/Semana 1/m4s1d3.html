@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Creación de Sitio de Equipo en SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 8px 0 8px 36px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border: 1px solid #c5cae9;
+            color: #1a237e;
+        }
+        .captura-mock .input {
+            background: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid #9fa8da;
+            display: inline-block;
+            margin: 2px 0;
+        }
+
+        .permisos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 8px 0 8px 36px;
+        }
+        .permisos-grid .nivel {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border-left: 4px solid #3f51b5;
+            font-size: 14px;
+        }
+        .permisos-grid .nivel h6 {
+            color: #1a237e;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .permisos-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🛠️ PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Creación práctica de un Sitio de Equipo en SharePoint · Configuración básica</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a crear un Sitio de Equipo en SharePoint Online desde cero, configurando nombre, descripción y permisos iniciales, entendiendo el propósito de cada paso y la importancia de una configuración correcta para la colaboración efectiva.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende el propósito de un Sitio de Equipo.</li>
+                <li>Reconoce la estructura de configuración de un sitio SharePoint.</li>
+                <li>Identifica los niveles de permisos básicos en SharePoint.</li>
+                <li>Entiende la importancia de una buena configuración inicial.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear un Sitio de Equipo desde el centro de administración de SharePoint.</li>
+                <li>Asignar nombre, descripción y configuración básica.</li>
+                <li>Configurar permisos iniciales (propietarios, miembros, visitantes).</li>
+                <li>Verificar la creación del sitio y acceder a él.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por la administración de plataformas colaborativas.</li>
+                <li>Valora la importancia de una configuración ordenada.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de administración de sitios.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Preparación para la creación de un sitio"</h4>
+            <p><span class="label">Metodología:</span> Repaso y contexto.</p>
+            <p>El docente repasa brevemente qué es un Sitio de Equipo y cuándo se usa. Se presenta el escenario: <em>"Vamos a crear un sitio para el equipo de innovación de una empresa que necesita un espacio para compartir documentos, gestionar tareas y colaborar en proyectos."</em></p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué necesitamos antes de crear un sitio?</span>
+                <ul>
+                    <li><strong>Nombre del sitio:</strong> Identificador único y descriptivo.</li>
+                    <li><strong>Descripción:</strong> Explicar el propósito del sitio.</li>
+                    <li><strong>Permisos:</strong> Definir quiénes pueden acceder y con qué nivel.</li>
+                    <li><strong>Propietarios:</strong> Personas que administrarán el sitio.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende los elementos necesarios para crear un Sitio de Equipo.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en el repaso.</li>
+                <li>Reconoce los datos necesarios para la creación.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a SharePoint (demo o entorno de prueba)</li>
+                <li>Presentación visual</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación paso a paso de un Sitio de Equipo"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen en sus equipos).</p>
+
+            <!-- ============================================ -->
+            <!-- PASO 1 -->
+            <!-- ============================================ -->
+            <div class="paso-card">
+                <span class="numero">1</span>
+                <h5>Acceder al centro de administración de SharePoint</h5>
+                <p>Ingresar a Microsoft 365, abrir el centro de administración de SharePoint o directamente desde la página principal de SharePoint Online. </p>
+                <div class="captura-mock">
+                    🌐 <strong>URL:</strong> https://[tu-tenant].sharepoint.com/_layouts/15/online/AdminHome.aspx
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 2 -->
+            <!-- ============================================ -->
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Crear nuevo sitio</h5>
+                <p>En el panel de administración, seleccionar <strong>"Crear"</strong> y luego elegir <strong>"Sitio de equipo"</strong>.</p>
+                <div class="captura-mock">
+                    📋 <strong>Opción seleccionada:</strong> Team site (Sitio de equipo) → "Crear"
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 3 -->
+            <!-- ============================================ -->
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Configurar nombre y descripción</h5>
+                <p>Completar los campos obligatorios:</p>
+                <div style="margin-left: 36px; margin-top: 6px;">
+                    <div class="captura-mock" style="margin-left: 0;">
+                        📝 <strong>Nombre del sitio:</strong> <span class="input">Innovación y Desarrollo</span>
+                    </div>
+                    <div class="captura-mock" style="margin-left: 0; margin-top: 4px;">
+                        📝 <strong>Descripción:</strong> <span class="input">Espacio colaborativo para el equipo de innovación. Compartimos documentos, ideas y gestionamos proyectos.</span>
+                    </div>
+                    <p style="font-size: 13px; color: #555; margin-top: 4px;">💡 El nombre se usará en la URL, la descripción ayuda a los usuarios a entender el propósito.</p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 4 -->
+            <!-- ============================================ -->
+            <div class="paso-card" style="border-left-color: #0d47a1;">
+                <span class="numero">4</span>
+                <h5>Configurar permisos iniciales</h5>
+                <p>Asignar los grupos de permisos básicos:</p>
+                <div class="permisos-grid">
+                    <div class="nivel" style="border-left-color: #c62828;">
+                        <h6>👑 Propietarios</h6>
+                        <p style="font-size: 13px;">Control total sobre el sitio. Pueden configurar, agregar miembros y eliminar contenido.</p>
+                        <p style="font-size: 13px; color: #555;"><strong>Ejemplo:</strong> jefe de proyecto, administradores.</p>
+                    </div>
+                    <div class="nivel" style="border-left-color: #2e7d32;">
+                        <h6>👥 Miembros</h6>
+                        <p style="font-size: 13px;">Pueden editar, agregar y modificar contenido. Son los colaboradores activos del sitio.</p>
+                        <p style="font-size: 13px; color: #555;"><strong>Ejemplo:</strong> equipo de desarrollo, diseñadores.</p>
+                    </div>
+                    <div class="nivel" style="border-left-color: #f9a825;">
+                        <h6>👀 Visitantes</h6>
+                        <p style="font-size: 13px;">Solo lectura. Pueden ver el contenido pero no editarlo.</p>
+                        <p style="font-size: 13px; color: #555;"><strong>Ejemplo:</strong> stakeholders, invitados.</p>
+                    </div>
+                </div>
+                <div class="captura-mock" style="margin-left: 0; margin-top: 6px;">
+                    🔐 <strong>Permisos asignados:</strong><br>
+                    • Propietarios: <span class="input">ana@empresa.com, carlos@empresa.com</span><br>
+                    • Miembros: <span class="input">equipo-innovacion@empresa.com</span><br>
+                    • Visitantes: <span class="input">direccion@empresa.com</span>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 5 -->
+            <!-- ============================================ -->
+            <div class="paso-card" style="border-left-color: #6c5ce7;">
+                <span class="numero">5</span>
+                <h5>Finalizar creación</h5>
+                <p>Revisar la configuración y hacer clic en <strong>"Crear"</strong>. SharePoint generará el sitio con la estructura básica: biblioteca de documentos, lista de noticias, página principal y navegación.</p>
+                <div class="captura-mock" style="margin-left: 0;">
+                    ✅ <strong>Sitio creado exitosamente</strong> → URL: <span class="input">https://[tenant].sharepoint.com/sites/InnovacionYDesarrollo</span>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PASO 6 -->
+            <!-- ============================================ -->
+            <div class="paso-card" style="border-left-color: #00897b;">
+                <span class="numero">6</span>
+                <h5>Verificar y acceder al sitio</h5>
+                <p>Una vez creado, abrir el sitio para confirmar que todo funciona. Se pueden hacer ajustes adicionales como agregar aplicaciones, configurar navegación o personalizar la página principal.</p>
+                <div class="captura-mock" style="margin-left: 0;">
+                    📂 <strong>Estructura inicial:</strong> Documentos compartidos | Noticias del sitio | Calendario | Lista de tareas (opcional)
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a un entorno de SharePoint (o simula en papel), crea un Sitio de Equipo con las siguientes especificaciones:</li>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Nombre:</strong> "Proyecto Alpha"</li>
+                        <li><strong>Descripción:</strong> "Sitio para el desarrollo del proyecto Alpha, incluye documentos, actas y seguimiento de tareas."</li>
+                        <li><strong>Propietarios:</strong> Tú y un compañero (nombres ficticios).</li>
+                        <li><strong>Miembros:</strong> El resto del equipo (mínimo 3 personas ficticias).</li>
+                        <li><strong>Visitantes:</strong> El gerente del proyecto (ficticio).</li>
+                    </ul>
+                    <li>2. Documenta los pasos que seguiste (puede ser en un documento o presentación).</li>
+                    <li>3. Comparte la URL (o la descripción del sitio si no tienes acceso real) con la clase.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Por qué es importante elegir bien el nombre del sitio?</li>
+                    <li>¿Qué pasa si asignamos a alguien como miembro en lugar de visitante?</li>
+                    <li>¿Cómo afecta la configuración de permisos a la colaboración?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea un Sitio de Equipo en SharePoint, configurando nombre, descripción y permisos iniciales correctamente.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Configura nombre y descripción adecuadamente.</li>
+                <li>Asigna permisos según los roles.</li>
+                <li>Comprende el propósito de cada grupo de permisos.</li>
+                <li>Verifica la creación del sitio.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online (demo o entorno real)</li>
+                <li>Pizarra</li>
+                <li>Guía de pasos impresa</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cuáles son los pasos para crear un Sitio de Equipo?</li>
+                <li>¿Qué información se solicita al crear el sitio?</li>
+                <li>¿Qué grupos de permisos existen en un Sitio de Equipo?</li>
+                <li>¿Cuál es la diferencia entre propietario, miembro y visitante?</li>
+                <li>¿Qué sucede si no configuramos los permisos correctamente?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña la estructura inicial de un Sitio de Equipo para un proyecto escolar. Define:</p>
+                <ul>
+                    <li>Nombre y descripción del sitio.</li>
+                    <li>Propietarios, miembros y visitantes (nombres ficticios).</li>
+                    <li>Qué bibliotecas o listas incluirías (ej. Documentos, Tareas, Calendario).</li>
+                    <li>Justifica cada decisión.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el proceso de creación de Sitios de Equipo en SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la importancia de una configuración adecuada.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para crear un Sitio de Equipo:</strong></p>
+        <p>• <strong>Nombre:</strong> Claro, descriptivo y sin caracteres especiales (afecta la URL).</p>
+        <p>• <strong>Descripción:</strong> Explica el propósito para que los usuarios sepan para qué sirve.</p>
+        <p>• <strong>Propietarios:</strong> Personas con experiencia para administrar el sitio.</p>
+        <p>• <strong>Miembros:</strong> El equipo activo que editará contenido.</p>
+        <p>• <strong>Visitantes:</strong> Personas que solo necesitan leer información.</p>
+        <p>• Revisa los permisos después de crear el sitio para ajustarlos si es necesario.</p>
+        <p>• SharePoint crea automáticamente grupos de permisos al crear el sitio.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a crear espacios de colaboración desde cero.</p>
+        <p>• Desarrolla habilidades de administración de SharePoint.</p>
+        <p>• Prepara a los estudiantes para gestionar equipos y proyectos.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

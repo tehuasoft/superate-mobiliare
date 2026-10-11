@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Informática</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .shortcut-icon {
+            display: inline-block;
+            background: #e8eaf6;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #1a237e;
+            margin: 2px 0;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Accesos directos, Calculadora y propiedades del Mouse/Touchpad
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Utiliza correctamente herramientas básicas del sistema operativo, reconociendo iconos y accesos directos, así como el uso de la calculadora y la configuración del mouse para mejorar su interacción con la computadora.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es un acceso directo y su utilidad.</li>
+                <li>Reconoce los iconos de acceso directo y su diferencia con los archivos originales.</li>
+                <li>Identifica las funciones básicas de la calculadora del sistema.</li>
+                <li>Comprende las opciones de configuración del mouse/touchpad.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear accesos directos en el escritorio y otras ubicaciones.</li>
+                <li>Usar la calculadora para operaciones básicas y avanzadas.</li>
+                <li>Configurar la velocidad del puntero, botones y gestos del touchpad.</li>
+                <li>Personalizar el mouse/touchpad según las preferencias del usuario.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por personalizar su experiencia de usuario.</li>
+                <li>Valora la utilidad de los accesos directos para ahorrar tiempo.</li>
+                <li>Participa activamente en la configuración y uso de herramientas.</li>
+                <li>Reconoce la importancia de la ergonomía al configurar el mouse/touchpad.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Herramientas que facilitan el uso de la computadora"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y reflexión.</p>
+            <p><span class="label">Descripción:</span> El docente pregunta:</p>
+            <ul>
+                <li>¿Cómo abres rápidamente un programa que usas todos los días?</li>
+                <li>¿Qué haces cuando necesitas hacer un cálculo rápido?</li>
+                <li>¿Te gusta cómo se mueve el puntero de tu mouse? ¿Te gustaría cambiarlo?</li>
+                <li>¿Qué harías si el touchpad de tu laptop es muy sensible?</li>
+            </ul>
+            <p>Se introduce la importancia de los <strong>accesos directos</strong> para agilizar el trabajo, la <strong>calculadora</strong> como herramienta útil y la <strong>configuración del mouse/touchpad</strong> para una experiencia personalizada.</p>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica herramientas básicas del sistema operativo que facilitan la interacción.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona ejemplos de accesos directos que usa.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con sistema operativo gráfico</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Accesos directos, Calculadora y Mouse/Touchpad"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada y práctica.</p>
+
+            <!-- Accesos directos -->
+            <h4>🔹 Accesos directos</h4>
+            <p>Un <strong>acceso directo</strong> (o <em>shortcut</em>) es un icono que apunta a un archivo, carpeta o programa, permitiendo abrirlo rápidamente sin tener que navegar hasta su ubicación original.</p>
+            <ul>
+                <li><strong>Características:</strong> Tienen una flecha pequeña en la esquina inferior izquierda (en Windows) o un icono especial en otros sistemas.</li>
+                <li><strong>Ventaja:</strong> Ahorran tiempo y organizan el acceso a programas y archivos frecuentes.</li>
+                <li><strong>Ubicación común:</strong> Escritorio, barra de tareas, menú de inicio.</li>
+            </ul>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Cómo crear un acceso directo:</span><br>
+                <strong>Windows:</strong> Clic derecho en el archivo/programa → "Crear acceso directo".<br>
+                <strong>Linux (GNOME):</strong> Clic derecho en el archivo → "Crear vínculo".<br>
+                <strong>macOS:</strong> Clic derecho → "Crear alias".
+            </div>
+
+            <!-- Calculadora -->
+            <h4>🔹 Calculadora del sistema</h4>
+            <p>La <strong>calculadora</strong> es una herramienta integrada en el sistema operativo que permite realizar operaciones matemáticas básicas y avanzadas.</p>
+            <ul>
+                <li><strong>Modos comunes:</strong> Básico, Científico, Programador (en Windows).</li>
+                <li><strong>Operaciones:</strong> Suma, resta, multiplicación, división, porcentajes, raíces, potencias, etc.</li>
+                <li><strong>Teclas útiles:</strong> <span class="shortcut-icon">=</span> para resultado, <span class="shortcut-icon">C</span> para limpiar, <span class="shortcut-icon">⌫</span> para retroceder.</li>
+            </ul>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Usos prácticos:</span><br>
+                ✔ Calcular el total de una compra.<br>
+                ✔ Convertir unidades (con modo científico).<br>
+                ✔ Hacer cálculos rápidos sin usar el teléfono.
+            </div>
+
+            <!-- Mouse/Touchpad -->
+            <h4>🔹 Propiedades del Mouse y Touchpad</h4>
+            <p>La configuración del <strong>mouse</strong> y <strong>touchpad</strong> permite personalizar cómo interactuamos con la computadora.</p>
+
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>🖱️ Configuración del Mouse</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li><strong>Velocidad del puntero:</strong> Qué tan rápido se mueve el cursor.</li>
+                        <li><strong>Botones:</strong> Cambiar el botón primario (zurdo/diestro).</li>
+                        <li><strong>Rueda:</strong> Velocidad de desplazamiento.</li>
+                        <li><strong>Puntero:</strong> Tamaño, color y visibilidad del cursor.</li>
+                    </ul>
+                </div>
+                <div style="background: #e3f2fd; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #0d47a1;">
+                    <strong>👆 Configuración del Touchpad</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li><strong>Sensibilidad:</strong> Controlar la respuesta al tacto.</li>
+                        <li><strong>Gestos:</strong> Desplazamiento con dos dedos, zoom, clic derecho.</li>
+                        <li><strong>Botones:</strong> Activar/desactivar clic al tocar.</li>
+                        <li><strong>Desactivar al escribir:</strong> Evita toques accidentales mientras tecleas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Cómo acceder a la configuración:</span><br>
+                <strong>Windows:</strong> Configuración → Dispositivos → Mouse / Touchpad.<br>
+                <strong>Linux (GNOME):</strong> Configuración → Mouse y Touchpad.<br>
+                <strong>macOS:</strong> Preferencias del Sistema → Mouse / Trackpad.
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Realiza los siguientes pasos en tu computadora:</strong></p>
+                <ul>
+                    <li>Crea un acceso directo a la <strong>Calculadora</strong> en tu escritorio.</li>
+                    <li>Abre la Calculadora y realiza las siguientes operaciones:</li>
+                    <ul>
+                        <li>345 + 789 = ?</li>
+                        <li>1250 ÷ 25 = ?</li>
+                        <li>15% de 200 = ?</li>
+                        <li>√144 = ?</li>
+                    </ul>
+                    <li>Abre la configuración del <strong>Mouse/Touchpad</strong>.</li>
+                    <li>Ajusta la velocidad del puntero a tu preferencia.</li>
+                    <li>Prueba cambiar el botón primario (si te atreves) y luego regrésalo.</li>
+                    <li>Si tienes touchpad, prueba activar/desactivar el clic al tocar.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventaja tiene un acceso directo en el escritorio?</li>
+                    <li>¿Cómo te ayudó la calculadora en los ejercicios?</li>
+                    <li>¿Qué cambio en el mouse/touchpad te pareció más útil?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante utiliza accesos directos, la calculadora y configura el mouse/touchpad para mejorar su interacción con la computadora.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Crea accesos directos correctamente.</li>
+                <li>Usa la calculadora para resolver operaciones básicas.</li>
+                <li>Navega por la configuración del mouse/touchpad.</li>
+                <li>Aplica cambios en la configuración del mouse/touchpad.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con sistema operativo gráfico</li>
+                <li>Calculadora del sistema</li>
+                <li>Configuración de mouse/touchpad</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de herramientas"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas y los estudiantes responden:</p>
+            <ul>
+                <li>¿Qué es un acceso directo? → <strong>Un icono que abre un archivo o programa rápidamente.</strong></li>
+                <li>¿Cómo se crea un acceso directo en el escritorio? → <strong>Clic derecho → Crear acceso directo / vínculo.</strong></li>
+                <li>¿Qué modos tiene la calculadora del sistema? → <strong>Básico, Científico, Programador.</strong></li>
+                <li>¿Qué opción configurarías si el puntero del mouse se mueve muy lento? → <strong>Velocidad del puntero.</strong></li>
+                <li>¿Qué harías si el touchpad es muy sensible al escribir? → <strong>Activar "Desactivar al escribir".</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de accesos directos, calculadora y configuración del mouse/touchpad.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Accesos directos:</strong> Úsalos para programas y archivos que usas a diario.</p>
+        <p>• <strong>Calculadora:</strong> Aprovecha el modo científico para operaciones avanzadas.</p>
+        <p>• <strong>Mouse/Touchpad:</strong> Personaliza la velocidad y gestos para mayor comodidad.</p>
+        <p>• <strong>Ergonomía:</strong> Una configuración adecuada previene fatiga y lesiones.</p>
+        <p>• <strong>Prueba:</strong> Siempre prueba los cambios en la configuración para ver si se adaptan a ti.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a personalizar el entorno para mayor eficiencia y comodidad.</p>
+        <p>• Introduce herramientas prácticas que se usan en la vida cotidiana.</p>
+        <p>• Desarrolla habilidades de configuración y adaptación del sistema.</p>
+        <p>• Prepara a los estudiantes para un uso más profesional de la computadora. 🖥️🖱️</p>
+    </div>
+
+</div>
+</body>
+</html>

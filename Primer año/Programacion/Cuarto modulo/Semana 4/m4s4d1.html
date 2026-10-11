@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Introducción a Power Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .app-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .app-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .app-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .app-card .tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+        .tag-lienzo { background: #e3f2fd; color: #0d47a1; }
+        .tag-modelo { background: #fff3e0; color: #e65100; }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .comparacion-item ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+        .paso-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .paso-card .numero {
+            display: inline-block;
+            background: #1a237e;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+        .paso-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .paso-card p {
+            font-size: 14px;
+            margin: 4px 0 4px 36px;
+        }
+
+        .captura-mock {
+            background: #e8eaf6;
+            padding: 8px 14px;
+            border-radius: 6px;
+            margin: 6px 0 6px 36px;
+            font-size: 14px;
+            border-left: 3px solid #3f51b5;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📱 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Introducción a Power Apps · Canvas Apps · Entorno make.powerapps.com</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende qué es Power Apps, diferencia entre los tipos de aplicaciones (Lienzo vs. Basada en modelos), se enfoca en las aplicaciones de Lienzo y aprende a acceder y navegar en el entorno de diseño make.powerapps.com.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es Power Apps y su propósito.</li>
+                <li>Reconoce los dos tipos principales de apps: Lienzo y Basada en modelos.</li>
+                <li>Identifica las características de las aplicaciones de Lienzo.</li>
+                <li>Conoce el entorno make.powerapps.com.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Acceder a make.powerapps.com.</li>
+                <li>Navegar por el Maker Portal.</li>
+                <li>Identificar las opciones de creación de apps.</li>
+                <li>Reconocer los componentes del entorno de diseño.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por el desarrollo low-code.</li>
+                <li>Valora la flexibilidad de las aplicaciones de Lienzo.</li>
+                <li>Participa activamente en la exploración del entorno.</li>
+                <li>Desarrolla habilidades de observación y análisis.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué es Power Apps?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y contextualización.</p>
+            <p>El docente pregunta: <em>"¿Alguna vez has necesitado una aplicación móvil para tu equipo, pero no sabes programar? ¿Cómo resolverías esa necesidad?"</em> Se introduce Power Apps como plataforma low-code para crear aplicaciones personalizadas.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es Microsoft Power Apps?</span>
+                <p>Power Apps es una plataforma low-code que permite a los usuarios crear aplicaciones personalizadas sin necesidad de escribir código complejo . Es parte de la Power Platform de Microsoft y se conecta a múltiples fuentes de datos como SharePoint, Excel, Dataverse y más .</p>
+                <ul>
+                    <li><strong>Beneficio clave:</strong> Acelera el desarrollo de aplicaciones empresariales.</li>
+                    <li><strong>Público:</strong> Desde usuarios de negocio hasta desarrolladores profesionales.</li>
+                    <li><strong>Plataforma:</strong> Integrada con otros servicios de Microsoft 365.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende qué es Power Apps y su utilidad.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce el propósito de Power Apps.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Acceso a make.powerapps.com</li>
+                <li>Presentación introductoria</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Tipos de apps, Canvas vs Model-driven y entorno make.powerapps.com"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos y práctica de exploración.</p>
+
+            <!-- ============================================ -->
+            <!-- TIPOS DE APPS -->
+            <!-- ============================================ -->
+            <h4>🔹 Tipos de aplicaciones en Power Apps</h4>
+
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #0d47a1;">
+                    <h5><span class="tag tag-lienzo">🖌️</span> Aplicación de Lienzo</h5>
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Comienzan con una <strong>pantalla en blanco</strong> como un lienzo .</li>
+                        <li>Diseño <strong>píxel a píxel</strong>, control total sobre la interfaz .</li>
+                        <li>Se conectan a <strong>más de 200 fuentes de datos</strong> .</li>
+                        <li>No requieren Dataverse obligatoriamente .</li>
+                        <li>Ideales para tareas específicas y experiencias personalizadas .</li>
+                    </ul>
+                    <p><strong>Ejemplo:</strong> App móvil para capturar datos de campo .</p>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #e65100;">
+                    <h5><span class="tag tag-modelo">📊</span> Aplicación Basada en Modelos</h5>
+                    <p><strong>Características:</strong></p>
+                    <ul>
+                        <li>Construidas sobre una <strong>base de datos Dataverse</strong> .</li>
+                        <li>La interfaz se genera <strong>automáticamente</strong> desde la estructura de datos .</li>
+                        <li>Ofrecen una <strong>experiencia uniforme</strong> y consistente .</li>
+                        <li>Requieren Dataverse sí o sí .</li>
+                        <li>Excelentes para <strong>procesos complejos</strong> y gestión de datos .</li>
+                    </ul>
+                    <p><strong>Ejemplo:</strong> Portal de administración de contratos y oportunidades .</p>
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 ¿Cómo elegir entre Lienzo y Basada en modelos?</span>
+                <p>Si tu aplicación se centra en <strong>tareas específicas</strong>, necesita una interfaz <strong>personalizada</strong> y se conecta a múltiples orígenes de datos, elige una <strong>App de Lienzo</strong> .</p>
+                <p>Si tu aplicación se centra en <strong>procesos de negocio</strong>, necesita <strong>gestión de datos</strong> compleja y uniformidad, elige una <strong>App Basada en modelos</strong> .</p>
+                <p style="margin-top: 6px; font-size: 14px; color: #555;">💡 En esta clase nos enfocaremos en las <strong>Aplicaciones de Lienzo</strong>.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- APPS DE LIENZO (ENFOQUE) -->
+            <!-- ============================================ -->
+            <h4>🔹 Enfoque en Aplicaciones de Lienzo</h4>
+
+            <div class="app-card" style="border-left-color: #0d47a1;">
+                <h5>📌 ¿Qué puedes hacer con una App de Lienzo?</h5>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li><strong>Diseño libre:</strong> Crear la interfaz exacta que necesitas, como un diseñador gráfico .</li>
+                    <li><strong>Conectividad:</strong> Conectar a SharePoint, Excel, SQL Server, y cientos de conectores más .</li>
+                    <li><strong>Comportamiento dinámico:</strong> Usar <strong>fórmulas de Power Fx</strong> (similares a Excel) para la lógica .</li>
+                    <li><strong>Multiplataforma:</strong> Ejecutarse en navegador web, Windows, iOS y Android .</li>
+                    <li><strong>Integración:</strong> Incorporarse en SharePoint, Power BI y Microsoft Teams .</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ENTORNO MAKE.POWERAPPS.COM -->
+            <!-- ============================================ -->
+            <h4>🔹 Entorno de diseño: <code>make.powerapps.com</code></h4>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">1</span>
+                <h5>Acceder al Maker Portal</h5>
+                <p>Ingresar con tu cuenta organizativa de Microsoft 365 y abrir <strong>make.powerapps.com</strong> en el navegador .</p>
+                <div class="captura-mock">
+                    🌐 <strong>URL:</strong> https://make.powerapps.com
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Es el portal donde los creadores gestionan y desarrollan aplicaciones .</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #e65100;">
+                <span class="numero">2</span>
+                <h5>Navegación principal</h5>
+                <p>El menú de la izquierda incluye opciones clave: <strong>Inicio, Crear, Aplicaciones, Bibliotecas, Soluciones</strong>, etc. </p>
+                <div class="captura-mock">
+                    📂 <strong>Menú izquierdo:</strong> Inicio | Crear | Aplicaciones | Bibliotecas | Soluciones | Conectores
+                </div>
+                <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px;">Desde <strong>Crear</strong> se inicia el desarrollo de una nueva aplicación .</p>
+            </div>
+
+            <div class="paso-card" style="border-left-color: #2e7d32;">
+                <span class="numero">3</span>
+                <h5>Opciones de creación</h5>
+                <p>En la página de creación, se puede elegir entre:</p>
+                <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px;">
+                    <li><strong>Empezar con Copilot</strong> (IA conversacional) .</li>
+                    <li><strong>Conectar a datos</strong> (SharePoint, Excel, Dataverse, etc.) .</li>
+                    <li><strong>Usar una plantilla</strong> (ejemplos predefinidos) .</li>
+                    <li><strong>Lienzo en blanco</strong> (desde cero) .</li>
+                </ul>
+                <div class="captura-mock">
+                    🚀 <strong>Opciones:</strong> Copilot | Conectar a datos | Plantillas | Lienzo en blanco
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #e8f5e9;">
+                <span class="highlight">📌 Power Apps Studio</span>
+                <p>Al crear una aplicación, se abre <strong>Power Apps Studio</strong>, el entorno de diseño donde se arrastran y colocan componentes (controles, galerías, formularios) y se configuran con fórmulas .</p>
+                <ul>
+                    <li><strong>Árbol de vista:</strong> Muestra la jerarquía de pantallas y controles .</li>
+                    <li><strong>Propiedades:</strong> Permite personalizar cada control (color, tamaño, datos).</li>
+                    <li><strong>Fórmulas:</strong> Power Fx define el comportamiento (ej. <code>Navigate()</code>, <code>Collect()</code>) .</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Accede a <strong>make.powerapps.com</strong> con tu cuenta de Microsoft 365.</li>
+                    <li>2. Explora el panel de navegación izquierdo y las opciones disponibles.</li>
+                    <li>3. Haz clic en <strong>"Crear"</strong> y observa las opciones de creación de aplicaciones.</li>
+                    <li>4. Identifica dónde se encuentran las plantillas y cómo se inicia un "Lienzo en blanco".</li>
+                    <li>5. Toma nota de los elementos del entorno (menús, paneles, botones).</li>
+                    <li>6. Si no tienes acceso, dibuja un mapa del portal con las secciones principales.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cuál es la diferencia principal entre una App de Lienzo y una Basada en modelos?</li>
+                    <li>¿Qué ventaja tiene una App de Lienzo para un usuario de negocio?</li>
+                    <li>¿Por qué es importante conocer el entorno make.powerapps.com?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante diferencia los tipos de apps en Power Apps, entiende las características de las Apps de Lienzo y se familiariza con el entorno make.powerapps.com.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Identifica las diferencias entre Apps de Lienzo y Basadas en modelos.</li>
+                <li>Reconoce las características de las Apps de Lienzo.</li>
+                <li>Accede y navega en make.powerapps.com.</li>
+                <li>Identifica las opciones de creación disponibles.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a make.powerapps.com</li>
+                <li>Pizarra</li>
+                <li>Guía de navegación del Maker Portal</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es Power Apps?</li>
+                <li>¿Cuáles son los dos tipos principales de aplicaciones?</li>
+                <li>¿Cuál es la principal característica de una App de Lienzo?</li>
+                <li>¿Qué requisito tiene una App Basada en modelos?</li>
+                <li>¿Cómo se accede al entorno de diseño de Power Apps?</li>
+                <li>¿Qué opciones de creación aparecen en la página "Crear"?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Describe un escenario de negocio donde usarías una <strong>App de Lienzo</strong> y otro donde usarías una <strong>App Basada en modelos</strong>. Justifica tu elección.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos básicos de Power Apps y la diferencia entre tipos de apps.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la aplicación de cada tipo de app.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre Power Apps:</strong></p>
+        <p>• <strong>Power Apps</strong> es una plataforma low-code para crear aplicaciones personalizadas.</p>
+        <p>• <strong>App de Lienzo:</strong> Control total sobre la interfaz, se conecta a múltiples fuentes de datos.</p>
+        <p>• <strong>App Basada en modelos:</strong> Se basa en Dataverse, interfaz automática, ideal para procesos complejos.</p>
+        <p>• <strong>make.powerapps.com</strong> es el portal de creación (Maker Portal).</p>
+        <p>• Desde <strong>Crear</strong> se puede iniciar una app usando Copilot, datos, plantillas o desde cero.</p>
+        <p>• Las Apps de Lienzo usan <strong>Power Fx</strong> (fórmulas similares a Excel).</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Introduce la plataforma de desarrollo low-code más usada en el ecosistema Microsoft.</p>
+        <p>• Permite a los estudiantes comprender cómo se crean aplicaciones empresariales sin programación tradicional.</p>
+        <p>• Prepara a los estudiantes para el desarrollo de soluciones personalizadas.</p>
+        <p>• Conecta la teoría con la práctica en un entorno real de Microsoft.</p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · dart:io, stdin.readLineSync() y parse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .code-block {
+            background: #1e1e2e;
+            color: #d4d4d4;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 12px 0;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 2;
+            border: 1px solid #333;
+        }
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #c586c0; }
+        .code-block .type { color: #4ec9b0; }
+        .code-block .string { color: #ce9178; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .operator { color: #d4d4d4; }
+        .code-block .punctuation { color: #d4d4d4; }
+        .code-block .variable { color: #9cdcfe; }
+        .code-block .boolean { color: #569cd6; }
+        .code-block .null { color: #569cd6; }
+        .code-block .interpolation { color: #ce9178; }
+
+        .def-block {
+            background: #f5f5f5;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin: 6px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .def-block strong {
+            color: #1a237e;
+        }
+        .dart-card {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid #00b4d8;
+            margin-bottom: 8px;
+        }
+        .dart-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .dart-card p {
+            margin: 4px 0;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Tema: dart:io · stdin.readLineSync() · parse (conversión de tipos)</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende el uso de la librería <code>dart:io</code> para interactuar con la entrada estándar, utiliza <code>stdin.readLineSync()</code> para leer datos del usuario, entiende que el resultado es un <code>String</code>, y aplica el método <code>parse</code> para convertir datos a otros tipos (int, double, etc.).</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es la librería <code>dart:io</code> y su propósito.</li>
+                <li>Reconoce que <code>stdin.readLineSync()</code> devuelve un <code>String</code>.</li>
+                <li>Entiende el concepto de <code>parse</code> para convertir cadenas a otros tipos.</li>
+                <li>Identifica cuándo es necesario convertir tipos de datos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Importar la librería <code>dart:io</code>.</li>
+                <li>Usar <code>stdin.readLineSync()</code> para leer entrada del usuario.</li>
+                <li>Convertir un <code>String</code> a <code>int</code> usando <code>int.parse()</code>.</li>
+                <li>Convertir un <code>String</code> a <code>double</code> usando <code>double.parse()</code>.</li>
+                <li>Manejar casos donde la conversión puede fallar.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por interactuar con el usuario a través de la consola.</li>
+                <li>Valora la importancia de la conversión de tipos en programación.</li>
+                <li>Participa activamente en la codificación y resolución de problemas.</li>
+                <li>Desarrolla una actitud meticulosa al manejar datos de entrada.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo interactuar con el usuario en Dart?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y reflexión.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas para introducir los conceptos:</p>
+            <ul>
+                <li>¿Cómo podemos pedir datos al usuario en un programa de consola?</li>
+                <li>¿Qué tipo de dato obtenemos cuando leemos algo del teclado?</li>
+                <li>¿Qué pasa si el usuario escribe "25" pero nosotros necesitamos un número para hacer operaciones?</li>
+            </ul>
+            <p>Se introduce la librería <code>dart:io</code> y el método <code>stdin.readLineSync()</code>.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo inicial:</span>
+                <div class="code-block">
+<span class="comment">// Importar la librería dart:io</span>
+<span class="keyword">import</span> <span class="string">'dart:io'</span>;
+
+<span class="keyword">void</span> <span class="function">main</span>() {
+  <span class="comment">// Leer datos del usuario</span>
+  <span class="function">print</span>(<span class="string">"Escribe tu nombre:"</span>);
+  <span class="type">String</span> nombre = <span class="function">stdin</span>.readLineSync()!; <span class="comment">// ¡El usuario escribe!</span>
+
+  <span class="function">print</span>(<span class="string">"Hola, <span class="interpolation">$nombre</span>"</span>);
+}
+                </div>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica la forma de leer entrada del usuario en Dart y comprende que el resultado es un String.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la discusión inicial.</li>
+                <li>Reconoce la función de <code>stdin.readLineSync()</code>.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Proyector / DartPad</li>
+                <li>Presentación con ejemplos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">40 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Lectura de entrada y conversión con parse"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos en vivo y ejercicios prácticos.</p>
+
+            <!-- dart:io -->
+            <h4>🔹 La librería <code>dart:io</code></h4>
+            <div class="def-block">
+                <strong>dart:io:</strong> Es una librería que permite acceder a funcionalidades del sistema, como entrada/salida estándar, archivos, redes, etc. Para usarla, debemos importarla con <code>import 'dart:io';</code>.
+            </div>
+
+            <!-- stdin.readLineSync() -->
+            <h4>🔹 <code>stdin.readLineSync()</code></h4>
+            <div class="def-block">
+                <strong>stdin.readLineSync():</strong> Lee una línea completa de la entrada estándar (teclado).<br>
+                <strong>Devuelve:</strong> Un <code>String?</code> (anulable). Usamos <code>!</code> para indicar que confiamos en que no es <code>null</code>.<br>
+                <strong>Importante:</strong> Siempre devuelve texto, aunque el usuario escriba números.
+            </div>
+            <div class="code-block">
+<span class="comment">// Ejemplo básico de lectura</span>
+<span class="keyword">import</span> <span class="string">'dart:io'</span>;
+
+<span class="keyword">void</span> <span class="function">main</span>() {
+  <span class="function">print</span>(<span class="string">"¿Cuál es tu edad?"</span>);
+  <span class="type">String</span> entrada = <span class="function">stdin</span>.readLineSync()!;
+  <span class="comment">// entrada contiene el texto que el usuario escribió</span>
+  <span class="function">print</span>(<span class="string">"El usuario escribió: <span class="interpolation">$entrada</span>"</span>);
+}
+            </div>
+
+            <!-- Parse -->
+            <h4>🔹 El método <code>parse</code> — Conversión de tipos</h4>
+            <div class="def-block">
+                <strong>parse:</strong> Es un método que convierte un <code>String</code> en otro tipo de dato (int, double, etc.).<br>
+                <strong>int.parse():</strong> Convierte un String a entero.<br>
+                <strong>double.parse():</strong> Convierte un String a número decimal.
+            </div>
+
+            <div class="dart-card" style="border-left-color: #ff6b6b;">
+                <strong>📌 Convertir String a int con <code>int.parse()</code></strong>
+                <div class="code-block">
+<span class="type">String</span> numeroStr = <span class="string">"25"</span>;
+<span class="type">int</span> numero = <span class="type">int</span>.<span class="function">parse</span>(numeroStr);
+<span class="function">print</span>(numero + <span class="number">10</span>); <span class="comment">// 35</span>
+                </div>
+            </div>
+
+            <div class="dart-card" style="border-left-color: #4ecdc4;">
+                <strong>📌 Convertir String a double con <code>double.parse()</code></strong>
+                <div class="code-block">
+<span class="type">String</span> alturaStr = <span class="string">"1.75"</span>;
+<span class="type">double</span> altura = <span class="type">double</span>.<span class="function">parse</span>(alturaStr);
+<span class="function">print</span>(altura * <span class="number">2</span>); <span class="comment">// 3.5</span>
+                </div>
+            </div>
+
+            <!-- Combinando lectura con parse -->
+            <h4>🔹 Combinando <code>stdin.readLineSync()</code> y <code>parse</code></h4>
+            <div class="def-block">
+                <strong>Flujo típico:</strong> Leer entrada → obtener String → parsear al tipo deseado.
+            </div>
+            <div class="code-block">
+<span class="keyword">import</span> <span class="string">'dart:io'</span>;
+
+<span class="keyword">void</span> <span class="function">main</span>() {
+  <span class="comment">// Leer un número entero</span>
+  <span class="function">print</span>(<span class="string">"Escribe tu edad:"</span>);
+  <span class="type">String</span> entradaEdad = <span class="function">stdin</span>.readLineSync()!;
+  <span class="type">int</span> edad = <span class="type">int</span>.<span class="function">parse</span>(entradaEdad);
+
+  <span class="comment">// Leer un número decimal</span>
+  <span class="function">print</span>(<span class="string">"Escribe tu estatura (ej: 1.75):"</span>);
+  <span class="type">String</span> entradaAltura = <span class="function">stdin</span>.readLineSync()!;
+  <span class="type">double</span> altura = <span class="type">double</span>.<span class="function">parse</span>(entradaAltura);
+
+  <span class="comment">// Usar los datos convertidos</span>
+  <span class="function">print</span>(<span class="string">"El año que viene tendrás <span class="interpolation">${edad + 1}</span> años"</span>);
+  <span class="function">print</span>(<span class="string">"Tu altura en metros es <span class="interpolation">$altura</span>"</span>);
+}
+            </div>
+
+            <!-- Parse en otros contextos -->
+            <h4>🔹 Usar <code>parse</code> con datos que vienen de otras fuentes</h4>
+            <div class="def-block">
+                <strong>parse no solo se usa con stdin:</strong> También se usa para convertir datos provenientes de archivos, bases de datos, API, etc. Cualquier dato que llegue como String y necesite ser convertido a otro tipo.
+            </div>
+            <div class="code-block">
+<span class="comment">// Datos simulados de una base de datos o API</span>
+<span class="type">String</span> temperaturaStr = <span class="string">"36.5"</span>;
+<span class="type">double</span> temperatura = <span class="type">double</span>.<span class="function">parse</span>(temperaturaStr);
+
+<span class="type">String</span> cantidadStr = <span class="string">"150"</span>;
+<span class="type">int</span> cantidad = <span class="type">int</span>.<span class="function">parse</span>(cantidadStr);
+
+<span class="function">print</span>(<span class="string">"Temperatura: <span class="interpolation">$temperatura</span>°C"</span>);
+<span class="function">print</span>(<span class="string">"Cantidad: <span class="interpolation">$cantidad</span> unidades"</span>);
+            </div>
+
+            <!-- Manejo de errores (mención breve) -->
+            <h4>🔹 ¿Qué pasa si el usuario escribe algo que no es un número?</h4>
+            <div class="def-block" style="border-left-color: #c62828;">
+                <strong>Error en tiempo de ejecución:</strong> Si el String no es convertible, Dart lanza una excepción (<code>FormatException</code>). En una clase introductoria, mencionamos que hay que tener cuidado con la entrada del usuario.
+            </div>
+            <div class="code-block">
+<span class="comment">// Esto causaría un error si el usuario escribe "abc"</span>
+<span class="type">String</span> entrada = <span class="function">stdin</span>.readLineSync()!;
+<span class="type">int</span> numero = <span class="type">int</span>.<span class="function">parse</span>(entrada); <span class="comment">// ¡FormatException!</span>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Ejercicios:</strong></p>
+                <ul>
+                    <li>1. Escribe un programa que pida el nombre del usuario y lo salude.</li>
+                    <li>2. Escribe un programa que pida un número entero y muestre su doble.</li>
+                    <li>3. Escribe un programa que pida dos números enteros y muestre la suma.</li>
+                    <li>4. Escribe un programa que pida un número decimal y muestre su cuadrado.</li>
+                    <li>5. Escribe un programa que pida el precio de un producto y la cantidad, y calcule el total.</li>
+                    <li>6. Simula datos de una API: convierte un String "100" a int.</li>
+                    <li>7. Simula datos de una API: convierte un String "99.9" a double.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Por qué <code>stdin.readLineSync()</code> devuelve un <code>String</code>?</li>
+                    <li>¿Qué sucede si intentamos sumar dos números sin convertirlos primero?</li>
+                    <li>¿En qué otros casos usamos <code>parse</code> además de la entrada del usuario?</li>
+                </ul>
+            </div>
+
+            <!-- Ejemplo completo -->
+            <h4>🔹 Ejemplo completo: Calculadora básica</h4>
+            <div class="code-block">
+<span class="keyword">import</span> <span class="string">'dart:io'</span>;
+
+<span class="keyword">void</span> <span class="function">main</span>() {
+  <span class="comment">// Pedir el primer número</span>
+  <span class="function">print</span>(<span class="string">"Ingresa el primer número:"</span>);
+  <span class="type">String</span> entrada1 = <span class="function">stdin</span>.readLineSync()!;
+  <span class="type">double</span> num1 = <span class="type">double</span>.<span class="function">parse</span>(entrada1);
+
+  <span class="comment">// Pedir el segundo número</span>
+  <span class="function">print</span>(<span class="string">"Ingresa el segundo número:"</span>);
+  <span class="type">String</span> entrada2 = <span class="function">stdin</span>.readLineSync()!;
+  <span class="type">double</span> num2 = <span class="type">double</span>.<span class="function">parse</span>(entrada2);
+
+  <span class="comment">// Mostrar resultados</span>
+  <span class="function">print</span>(<span class="string">"Suma: <span class="interpolation">${num1 + num2}</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Resta: <span class="interpolation">${num1 - num2}</span>"</span>);
+  <span class="function">print</span>(<span class="string">"Multiplicación: <span class="interpolation">${num1 * num2}</span>"</span>);
+  <span class="function">print</span>(<span class="string">"División: <span class="interpolation">${num1 / num2}</span>"</span>);
+}
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante usa <code>stdin.readLineSync()</code> para leer entrada del usuario y aplica <code>parse</code> para convertir Strings a otros tipos de datos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Importa correctamente <code>dart:io</code>.</li>
+                <li>Usa <code>stdin.readLineSync()</code> para leer datos.</li>
+                <li>Convierte Strings a int usando <code>int.parse()</code>.</li>
+                <li>Convierte Strings a double usando <code>double.parse()</code>.</li>
+                <li>Reconoce que el resultado de <code>readLineSync()</code> es un String.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>DartPad / entorno de desarrollo</li>
+                <li>Ejercicios impresos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas y discusión.</p>
+            <ul>
+                <li>¿Cómo se importa la librería <code>dart:io</code>?</li>
+                <li>¿Qué hace <code>stdin.readLineSync()</code>?</li>
+                <li>¿Qué tipo de dato devuelve <code>stdin.readLineSync()</code>?</li>
+                <li>¿Para qué sirve <code>int.parse()</code>?</li>
+                <li>¿Para qué sirve <code>double.parse()</code>?</li>
+                <li>¿Qué sucede si intentamos parsear un String que no es un número?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Escribe un programa en Dart que:</p>
+                <ul style="padding-left: 20px;">
+                    <li>Pida el nombre del usuario.</li>
+                    <li>Pida su edad (como texto).</li>
+                    <li>Convierta la edad a <code>int</code>.</li>
+                    <li>Pida su estatura (como texto).</li>
+                    <li>Convierta la estatura a <code>double</code>.</li>
+                    <li>Muestre un mensaje con el nombre, la edad y la estatura.</li>
+                    <li>Muestre cuántos años tendrá el usuario en 10 años.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de lectura de entrada y conversión de tipos en Dart.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Resuelve el desafío final.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>DartPad</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para Dart:</strong></p>
+        <p>• <strong>dart:io:</strong> librería para entrada/salida en consola.</p>
+        <p>• <strong>stdin.readLineSync():</strong> lee una línea del teclado y devuelve un <code>String?</code>.</p>
+        <p>• <strong>int.parse():</strong> convierte un String a entero.</p>
+        <p>• <strong>double.parse():</strong> convierte un String a número decimal.</p>
+        <p>• <strong>parse</strong> se usa para convertir datos que llegan como String (usuario, archivos, API, etc.).</p>
+        <p>• Recuerda que el usuario puede escribir algo que no sea un número, ¡cuidado con los errores!</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a interactuar con el usuario en programas de consola.</p>
+        <p>• Introduce la conversión de tipos, fundamental en programación.</p>
+        <p>• Prepara a los estudiantes para manejar datos de diversas fuentes.</p>
+        <p>• Sienta las bases para aplicaciones más complejas en Dart y Flutter.</p>
+    </div>
+
+</div>
+</body>
+</html>

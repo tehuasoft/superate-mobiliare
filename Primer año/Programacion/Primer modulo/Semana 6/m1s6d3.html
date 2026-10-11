@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Fotografía y Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .concept-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 8px;
+        }
+        .concept-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .concept-card p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+            color: #333;
+        }
+        .concept-card .effect {
+            font-size: 13px;
+            color: #555;
+            background: #e8eaf6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Fotografía y Video - Exposición, diafragma, velocidad de obturador, ISO, triángulo de exposición, modos manual y automático, balance de blancos y regla de tercios
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Comprende los conceptos fundamentales de la fotografía y el video: exposición, apertura de diafragma, velocidad de obturador, ISO, el triángulo de exposición, los modos manual y automático, el balance de blancos y la regla de tercios, aplicándolos para capturar imágenes y videos con mejor calidad y composición.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es la exposición y sus componentes (diafragma, obturador, ISO).</li>
+                <li>Comprende el funcionamiento del triángulo de exposición.</li>
+                <li>Diferencia entre modo manual y modo automático.</li>
+                <li>Reconoce el balance de blancos y su importancia para el color.</li>
+                <li>Identifica la regla de tercios como principio de composición.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Ajustar diafragma, velocidad e ISO en modo manual.</li>
+                <li>Usar el modo automático y semiautomático para diferentes situaciones.</li>
+                <li>Configurar el balance de blancos según la luz.</li>
+                <li>Utilizar la cuadrícula de la cámara para aplicar la regla de tercios.</li>
+                <li>Tomar fotografías y videos aplicando los conceptos aprendidos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por la técnica fotográfica y videográfica.</li>
+                <li>Valora la importancia de la composición visual.</li>
+                <li>Participa activamente en las prácticas de captura.</li>
+                <li>Reconoce la utilidad de estos conceptos en la creación de contenido.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué hace una buena foto o video?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y reflexión.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas:</p>
+            <ul>
+                <li>¿Qué hace que una foto sea "buena"?</li>
+                <li>¿Qué diferencia una foto de un celular de una foto profesional?</li>
+                <li>¿Cómo se controla la luz al tomar una foto?</li>
+                <li>¿Qué es la composición visual?</li>
+            </ul>
+            <p>Se introduce la idea de que la <strong>fotografía y el video</strong> son técnicas que combinan arte y tecnología, y que entender los conceptos básicos permite tomar mejores decisiones al capturar imágenes.</p>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los elementos que influyen en la calidad de una fotografía o video.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona al menos 3 factores que influyen en la exposición.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejemplos de fotos (buenas y malas)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Conceptos clave de fotografía y video"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos visuales.</p>
+
+            <!-- Exposición -->
+            <h4>🔹 Exposición</h4>
+            <p>La <strong>exposición</strong> es la cantidad de luz que llega al sensor de la cámara. Una exposición correcta produce una imagen bien iluminada, sin zonas quemadas (sobreexpuestas) ni demasiado oscuras (subexpuestas).</p>
+            <p>Se controla mediante tres parámetros:</p>
+
+            <!-- Triángulo de exposición -->
+            <h4>🔹 El triángulo de exposición</h4>
+            <div class="grid-3">
+                <div class="concept-card" style="border-left-color: #2e7d32;">
+                    <strong>📷 Apertura de diafragma</strong>
+                    <p>Controla la cantidad de luz que entra. Se mide en <strong>f-stops</strong> (f/1.4, f/2.8, f/8, f/16).</p>
+                    <ul style="font-size: 13px; padding-left: 20px; margin-top: 4px;">
+                        <li><strong>f/1.4</strong> → mucha luz, poco fondo nítido (desenfoque).</li>
+                        <li><strong>f/16</strong> → poca luz, mucho fondo nítido.</li>
+                    </ul>
+                    <span class="effect">📌 Efecto: profundidad de campo</span>
+                </div>
+                <div class="concept-card" style="border-left-color: #0d47a1;">
+                    <strong>⏱️ Velocidad de obturador</strong>
+                    <p>Controla el tiempo que el sensor está expuesto a la luz. Se mide en segundos o fracciones (1/1000, 1/250, 1/30, 1").</p>
+                    <ul style="font-size: 13px; padding-left: 20px; margin-top: 4px;">
+                        <li><strong>1/1000</strong> → congela el movimiento.</li>
+                        <li><strong>1/30</strong> → movimiento borroso (efecto barrido).</li>
+                    </ul>
+                    <span class="effect">📌 Efecto: movimiento</span>
+                </div>
+                <div class="concept-card" style="border-left-color: #f9a825;">
+                    <strong>🔆 ISO</strong>
+                    <p>Controla la sensibilidad del sensor a la luz. Valores típicos: 100, 200, 400, 800, 1600, 3200.</p>
+                    <ul style="font-size: 13px; padding-left: 20px; margin-top: 4px;">
+                        <li><strong>ISO 100</strong> → poca sensibilidad, imagen limpia.</li>
+                        <li><strong>ISO 3200</strong> → mucha sensibilidad, posible ruido.</li>
+                    </ul>
+                    <span class="effect">📌 Efecto: ruido (granulado)</span>
+                </div>
+            </div>
+
+            <div class="ejemplo-box">
+                <span class="highlight">💡 Regla de oro del triángulo:</span><br>
+                Si cambias un parámetro, ajusta otro para mantener la exposición correcta.<br>
+                <strong>Ejemplo:</strong> Si aumentas la velocidad (menos luz), abre el diafragma o aumenta el ISO.
+            </div>
+
+            <!-- Modos de la cámara -->
+            <h4>🔹 Modos de la cámara</h4>
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>✅ Modo Automático (Auto)</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>La cámara ajusta todos los parámetros (diafragma, obturador, ISO) automáticamente.</li>
+                        <li>Ideal para situaciones rápidas o cuando no se tiene experiencia.</li>
+                        <li>No permite control creativo.</li>
+                    </ul>
+                </div>
+                <div style="background: #e3f2fd; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #0d47a1;">
+                    <strong>🔹 Modo Manual (M)</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>El fotógrafo ajusta todos los parámetros manualmente.</li>
+                        <li>Permite control total y creatividad.</li>
+                        <li>Requiere práctica y comprensión del triángulo de exposición.</li>
+                    </ul>
+                </div>
+            </div>
+            <ul style="margin-top: 8px;">
+                <li><strong>Modos semiautomáticos:</strong> Prioridad de apertura (A/Av) y Prioridad de obturación (S/Tv).</li>
+            </ul>
+
+            <!-- Balance de blancos -->
+            <h4>🔹 Balance de blancos</h4>
+            <p>El <strong>balance de blancos</strong> ajusta los colores para que los objetos blancos se vean realmente blancos bajo diferentes fuentes de luz.</p>
+            <ul>
+                <li><strong>Luz solar:</strong> 5200K (temperatura de color).</li>
+                <li><strong>Tungsteno (interior):</strong> 3200K (más cálido).</li>
+                <li><strong>Nublado:</strong> 6000K (más frío).</li>
+                <li><strong>Fluorescente:</strong> 4000K.</li>
+            </ul>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Consejo:</span><br>
+                Usa el balance de blancos automático para la mayoría de situaciones, o ajusta manualmente para obtener colores más precisos en condiciones de luz complejas.
+            </div>
+
+            <!-- Regla de tercios -->
+            <h4>🔹 Regla de tercios</h4>
+            <p>La <strong>regla de tercios</strong> es un principio de composición que divide la imagen en 9 partes iguales mediante dos líneas horizontales y dos verticales. Los elementos importantes deben colocarse en las intersecciones o a lo largo de las líneas.</p>
+            <ul>
+                <li><strong>Cómo activar la cuadrícula:</strong> En la mayoría de cámaras y teléfonos, se activa en el menú de configuración de la cámara.</li>
+                <li><strong>Ventaja:</strong> Crea imágenes más equilibradas y atractivas.</li>
+                <li><strong>Aplicación:</strong> Paisajes, retratos, fotografía callejera.</li>
+            </ul>
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplos de uso:</span><br>
+                ✔ Poner el horizonte en una línea horizontal (no en el centro).<br>
+                ✔ Colocar el rostro de una persona en una intersección.<br>
+                ✔ Ubicar un objeto en una de las líneas verticales.
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Realiza los siguientes pasos en tu teléfono o cámara:</strong></p>
+                <ul>
+                    <li><strong>Activa la cuadrícula</strong> de la cámara (regla de tercios).</li>
+                    <li>Toma 5 fotos aplicando la regla de tercios (paisaje, objeto, persona).</li>
+                    <li>Cambia al <strong>modo manual</strong> (si tu cámara lo permite) y experimenta con:</li>
+                    <ul>
+                        <li>Apertura (f/2.8, f/8).</li>
+                        <li>Velocidad de obturador (1/1000, 1/30).</li>
+                        <li>ISO (100, 800).</li>
+                    </ul>
+                    <li>Toma fotos con diferentes balances de blancos (luz solar, nublado, tungsteno).</li>
+                    <li>Compara las fotos y elige la mejor exposición.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cómo afecta la apertura al fondo de la imagen?</li>
+                    <li>¿Qué sucede con la imagen si aumentas el ISO?</li>
+                    <li>¿Qué modo es mejor para una foto de acción?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica los conceptos de exposición, modos, balance de blancos y composición para capturar imágenes.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Explica la función de diafragma, obturador e ISO.</li>
+                <li>Diferencia entre modo manual y automático.</li>
+                <li>Configura el balance de blancos según la luz.</li>
+                <li>Aplica la regla de tercios en al menos 3 fotos.</li>
+                <li>Toma fotos con diferentes configuraciones.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Teléfono inteligente o cámara</li>
+                <li>Acceso a la configuración de la cámara</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Compartiendo fotos"</h4>
+            <p><span class="label">Metodología:</span> Exhibición y retroalimentación.</p>
+            <ul>
+                <li>¿Qué concepto te pareció más interesante?</li>
+                <li>¿Qué foto tomaste aplicando la regla de tercios?</li>
+                <li>¿Qué aprendiste sobre el balance de blancos?</li>
+            </ul>
+            <p>El docente refuerza conceptos clave:</p>
+            <ul>
+                <li><strong>El triángulo de exposición</strong> es la base para controlar la luz.</li>
+                <li><strong>El modo manual</strong> da control creativo, pero requiere práctica.</li>
+                <li><strong>La regla de tercios</strong> mejora la composición visual.</li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos fotográficos y valora su aplicación práctica.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Comparte sus fotos y explica las configuraciones usadas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Diafragma:</strong> Números bajos (f/1.4) = más luz y fondo desenfocado. Números altos (f/16) = menos luz y fondo nítido.</p>
+        <p>• <strong>Obturador:</strong> Velocidades altas (1/1000) congelan el movimiento. Velocidades bajas (1/30) crean desenfoque de movimiento.</p>
+        <p>• <strong>ISO:</strong> Usa el ISO más bajo posible para evitar ruido. Solo sube el ISO si hay poca luz.</p>
+        <p>• <strong>Balance de blancos:</strong> Ajusta según la luz para obtener colores naturales.</p>
+        <p>• <strong>Regla de tercios:</strong> Activa la cuadrícula en tu cámara y úsala como guía.</p>
+        <p>• <strong>Práctica:</strong> Experimenta en modo manual para aprender cómo se comporta cada parámetro.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Sienta las bases técnicas de la fotografía y el video.</p>
+        <p>• Permite tomar mejores decisiones creativas al capturar imágenes.</p>
+        <p>• Prepara a los estudiantes para la creación de contenido audiovisual.</p>
+        <p>• Conecta con el uso de cámaras y teléfonos en la vida cotidiana.</p>
+    </div>
+
+</div>
+</body>
+</html>

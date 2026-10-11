@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheat Sheet · Linux comandos básicos</title>
+    <style>
+      /* Reset y estilo base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #f7f3ee;
+        font-family:
+          "Segoe UI",
+          Roboto,
+          system-ui,
+          -apple-system,
+          sans-serif;
+        display: flex;
+        justify-content: center;
+        padding: 2rem 1rem;
+      }
+
+      .cheat-sheet {
+        max-width: 1100px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 32px;
+        padding: 2rem 2rem 2.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2d9cf;
+      }
+
+      /* encabezado */
+      .header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        border-bottom: 4px solid #d5cabc;
+        padding-bottom: 0.7rem;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        font-size: 2.8rem;
+        font-weight: 600;
+        color: #1e2b36;
+        letter-spacing: -0.5px;
+      }
+
+      .header .badge {
+        font-size: 1.1rem;
+        background: #e8dfd6;
+        padding: 0.25rem 1.5rem;
+        border-radius: 60px;
+        color: #2d3d4a;
+        border: 1px solid #cdbfb0;
+      }
+
+      /* grid de comandos */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.8rem 1.5rem;
+      }
+
+      /* cada tarjeta */
+      .card {
+        background: #fcfaf7;
+        border-radius: 20px;
+        padding: 1.2rem 1.2rem 1.4rem;
+        border: 1px solid #e7dfd4;
+        transition: background 0.1s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+
+      .comando {
+        font-family: "Menlo", "Cascadia Code", "Fira Code", monospace;
+        font-size: 1.6rem;
+        font-weight: 600;
+        background: #e5dcd0;
+        display: inline-block;
+        padding: 0.1rem 1.2rem;
+        border-radius: 60px;
+        color: #1a262f;
+        border: 1px solid #cbbdb0;
+        letter-spacing: -0.3px;
+        margin-bottom: 0.6rem;
+      }
+
+      .explicacion {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: #1f2b33;
+        margin-bottom: 0.2rem;
+      }
+
+      .explicacion span {
+        background: #efe8df;
+        padding: 0.1rem 0.5rem;
+        border-radius: 20px;
+        font-weight: 400;
+      }
+
+      .ejemplo {
+        margin-top: 0.65rem;
+        font-family: "Menlo", monospace;
+        font-size: 0.9rem;
+        background: #f0eae1;
+        padding: 0.3rem 1rem;
+        border-radius: 40px;
+        display: inline-block;
+        border: 1px solid #d5c9bb;
+        color: #1f313b;
+      }
+
+      .nota {
+        margin-top: 0.6rem;
+        font-size: 0.85rem;
+        color: #5e6d78;
+        border-top: 1px dashed #d4c9bc;
+        padding-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* pie de página */
+      .footer-note {
+        margin-top: 2.8rem;
+        text-align: right;
+        font-size: 0.9rem;
+        color: #6c7a85;
+        border-top: 2px dotted #d3c8bb;
+        padding-top: 1rem;
+      }
+
+      /* --- ESTILOS PARA IMPRESIÓN --- */
+      @media print {
+        body {
+          background: white;
+          padding: 0.2in;
+          display: block;
+        }
+        .cheat-sheet {
+          box-shadow: none;
+          border: 1px solid #888;
+          border-radius: 12px;
+          padding: 1.5rem 1.8rem;
+          max-width: 100%;
+        }
+        .header {
+          border-bottom-color: #666;
+        }
+        .header .badge {
+          background: #eaeaea;
+          border: 1px solid #777;
+        }
+        .card {
+          background: #fcfcfc;
+          border: 1px solid #aaa;
+          break-inside: avoid;
+          box-shadow: none;
+        }
+        .comando {
+          background: #eaeaea;
+          border: 1px solid #888;
+        }
+        .ejemplo {
+          background: #f0f0f0;
+          border: 1px solid #999;
+        }
+        .nota {
+          border-top: 1px solid #aaa;
+        }
+        .footer-note {
+          border-top: 2px dotted #888;
+        }
+      }
+
+      /* pantallas pequeñas */
+      @media (max-width: 640px) {
+        .cheat-sheet {
+          padding: 1rem;
+        }
+        .header h1 {
+          font-size: 2.2rem;
+        }
+        .header .badge {
+          font-size: 0.9rem;
+          padding: 0.2rem 1rem;
+          margin-top: 4px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+        .comando {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cheat-sheet">
+      <div class="header">
+        <h1>🐧 Linux · comandos</h1>
+        <span class="badge">cheat sheet · imprimir</span>
+      </div>
+
+      <!-- grid de comandos -->
+      <div class="grid">
+        <!-- pwd -->
+        <div class="card">
+          <div class="comando">pwd</div>
+          <div class="explicacion">
+            Muestra <span>dónde estás</span> ahora en el ordenador.
+          </div>
+          <div class="ejemplo">pwd</div>
+          <div class="nota">📍 te dice la ruta completa donde estas</div>
+        </div>
+
+        <!-- ls -->
+        <div class="card">
+          <div class="comando">ls</div>
+          <div class="explicacion">
+            Enseña los <span>nombres</span> de las cosas que hay aquí.
+          </div>
+          <div class="ejemplo">ls</div>
+          <div class="nota">📁 archivos y carpetas</div>
+        </div>
+
+        <!-- ls -la -->
+        <div class="card">
+          <div class="comando">ls -la</div>
+          <div class="explicacion">
+            Muestra <span>todo</span>, incluso lo escondido, con muchos
+            detalles.
+          </div>
+          <div class="ejemplo">ls -la</div>
+          <div class="nota">🔍 permisos, dueño, tamaño</div>
+        </div>
+
+        <!-- cd (con argumento) -->
+        <div class="card">
+          <div class="comando">cd /ruta-a-la-carpeta</div>
+          <div class="explicacion">
+            Te mueves a <span>otro lugar</span> que elijas.
+          </div>
+          <div class="ejemplo">cd /home/user/Documents</div>
+          <div class="nota">🚶 entra en una carpeta</div>
+        </div>
+
+        <!-- cd .. -->
+        <div class="card">
+          <div class="comando">cd ..</div>
+          <div class="explicacion">
+            Subes <span>un paso atrás</span>, a la carpeta de antes.
+          </div>
+          <div class="ejemplo">cd ..</div>
+          <div class="nota">⬆️ retrocede una carpeta</div>
+        </div>
+
+        <!-- cd (sin argumentos) -->
+        <div class="card">
+          <div class="comando">cd</div>
+          <div class="explicacion">
+            Sin nada más, te lleva <span>directo a tu casa</span> (tu carpeta
+            personal).
+          </div>
+          <div class="ejemplo">cd</div>
+          <div class="nota">🏠 vuelve a tu carpeta de inicio</div>
+        </div>
+
+        <!-- mkdir -->
+        <div class="card">
+          <div class="comando">mkdir</div>
+          <div class="explicacion">
+            Crea una <span>carpeta nueva</span> con el nombre que pongas.
+          </div>
+          <div class="ejemplo">mkdir archivos</div>
+          <div class="nota">📂 hace una carpeta llamada "archivos"</div>
+        </div>
+
+        <!-- cp -->
+        <div class="card">
+          <div class="comando">cp</div>
+          <div class="explicacion">
+            Copia un archivo y lo pone en <span>otro sitio</span>.
+          </div>
+          <div class="ejemplo">
+            cp archivo.txt /ruta/donde/lo/quieres/copiar
+          </div>
+          <div class="nota">📄 copiar y pegar</div>
+        </div>
+
+        <!-- mv -->
+        <div class="card">
+          <div class="comando">mv</div>
+          <div class="explicacion">
+            Mueve o cambia el <span>nombre</span> de un archivo o carpeta.
+          </div>
+          <div class="ejemplo">mv archivo.txt /ruta/donde/lo/quieres/mover</div>
+          <div class="nota">🔀 mover o renombrar</div>
+        </div>
+
+        <!-- rm -->
+        <div class="card">
+          <div class="comando">rm</div>
+          <div class="explicacion">
+            Borra un archivo <span>para siempre</span>. No vuelve. No borra
+            carpetas
+          </div>
+          <div class="ejemplo">rm archivo.txt</div>
+          <div class="nota">🗑️ eliminar archivo.txt</div>
+        </div>
+
+        <!-- rm -r -->
+        <div class="card">
+          <div class="comando">rm -r</div>
+          <div class="explicacion">
+            Borra una carpeta y <span>todo lo de dentro</span>.
+          </div>
+          <div class="ejemplo">rm -r /ruta/carpeta/que/quieres/borrar</div>
+          <div class="nota">📁🗑️ borrar carpeta y contenido</div>
+        </div>
+
+        <!-- rm -rf -->
+        <div class="card">
+          <div class="comando">rm -rf</div>
+          <div class="explicacion">
+            Borra <span>sin preguntar</span> y con más fuerza. ¡Cuidado!
+          </div>
+          <div class="ejemplo">rm -rf /ruta/carpeta/que/quieres/borrar</div>
+          <div class="nota">
+            ⚠️ fuerza bruta, no pregunta, nunca corras sudo rm -rf
+          </div>
+        </div>
+
+        <!-- clear -->
+        <div class="card">
+          <div class="comando">clear</div>
+          <div class="explicacion">
+            Limpia la pantalla para que <span>no veas</span> lo de antes.
+          </div>
+          <div class="ejemplo">clear</div>
+          <div class="nota">🧹 pantalla limpia</div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <span
+          >⏺️ cada comando hace una cosa simple · usa <kbd>cd</kbd> para
+          moverte, <kbd>ls</kbd> para ver</span
+        >
+      </div>
+    </div>
+  </body>
+</html>

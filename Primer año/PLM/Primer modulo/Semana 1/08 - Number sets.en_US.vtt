@@ -1,0 +1,941 @@
+WEBVTT
+
+0
+00:00.240 --> 00:01.810
+<v Krista>Before we get into all the other things</v>
+
+1
+00:01.810 --> 00:03.750
+we're going to talk about in this course,
+
+2
+00:03.750 --> 00:06.930
+I want to talk a little bit about numbers themselves,
+
+3
+00:06.930 --> 00:09.010
+actually just numbers,
+
+4
+00:09.010 --> 00:12.180
+because there's more to numbers than we think about
+
+5
+00:12.180 --> 00:14.610
+when we just think about numbers in our daily lives.
+
+6
+00:14.610 --> 00:17.090
+When you think about numbers in general,
+
+7
+00:17.090 --> 00:19.890
+you tend to think about these kinds of numbers,
+
+8
+00:19.890 --> 00:22.940
+the counting numbers, so one, two,
+
+9
+00:22.940 --> 00:27.100
+three, four, five, and on forever.
+
+10
+00:27.100 --> 00:29.690
+We're used to seeing those kinds of numbers all the time.
+
+11
+00:29.690 --> 00:32.150
+We deal with those in real life.
+
+12
+00:32.150 --> 00:34.670
+And sometimes people will also think about
+
+13
+00:34.670 --> 00:38.620
+this set of numbers but also including the number zero
+
+14
+00:38.620 --> 00:41.290
+because, of course, zero is a number as well.
+
+15
+00:41.290 --> 00:43.200
+Either way, these are the numbers
+
+16
+00:43.200 --> 00:45.150
+that we tend to think about,
+
+17
+00:45.150 --> 00:46.980
+that we use in our daily lives,
+
+18
+00:46.980 --> 00:51.000
+but there are a lot of other different kinds of numbers
+
+19
+00:51.000 --> 00:52.830
+that we want to be familiar with
+
+20
+00:52.830 --> 00:54.090
+as we're going through this course.
+
+21
+00:54.090 --> 00:56.480
+And we're going to go into all these other numbers
+
+22
+00:56.480 --> 01:00.500
+in a lot more detail, so this is really just a preview
+
+23
+01:00.500 --> 01:02.970
+of the kinds of numbers that you'll see
+
+24
+01:02.970 --> 01:04.280
+throughout the course.
+
+25
+01:04.280 --> 01:07.260
+You don't have to understand all of the detail about them,
+
+26
+01:07.260 --> 01:09.740
+but I want to sort of give you an introduction
+
+27
+01:09.740 --> 01:12.430
+to the different kinds of numbers that we'll deal with.
+
+28
+01:12.430 --> 01:16.040
+So, these numbers here, zero, one, two, three, four, five,
+
+29
+01:16.040 --> 01:17.930
+these are called whole numbers.
+
+30
+01:17.930 --> 01:19.600
+So, let's go ahead, we're going to build ourselves
+
+31
+01:19.600 --> 01:21.490
+a little system down here.
+
+32
+01:21.490 --> 01:25.873
+Let's go ahead and write this as whole numbers,
+
+33
+01:28.220 --> 01:33.220
+and those include all of these positive numbers plus zero.
+
+34
+01:33.860 --> 01:36.060
+So, zero, one,
+
+35
+01:36.060 --> 01:39.380
+two, three, four, five,
+
+36
+01:39.380 --> 01:42.520
+and of course we could keep going on forever.
+
+37
+01:42.520 --> 01:44.130
+These are the whole numbers.
+
+38
+01:44.130 --> 01:47.420
+So, we define an even narrower set of numbers
+
+39
+01:47.420 --> 01:50.473
+inside of whole numbers that's called natural numbers.
+
+40
+01:52.130 --> 01:53.290
+Natural numbers
+
+41
+01:54.780 --> 01:57.270
+are all of these same numbers,
+
+42
+01:57.270 --> 01:59.180
+everything except the zero,
+
+43
+01:59.180 --> 02:03.940
+so one, two, three, four, five,
+
+44
+02:03.940 --> 02:06.400
+and continuing on forever.
+
+45
+02:06.400 --> 02:08.830
+We also sometimes call these natural numbers
+
+46
+02:09.980 --> 02:13.340
+counting numbers, and of course that makes a lot of sense
+
+47
+02:13.340 --> 02:14.920
+because when we learn to count,
+
+48
+02:14.920 --> 02:16.690
+we learn to count starting with one
+
+49
+02:16.690 --> 02:20.300
+as one, two, three, four, five, all the way up to 10.
+
+50
+02:20.300 --> 02:22.810
+That's how we learn to count even when we're little
+
+51
+02:22.810 --> 02:25.940
+and so sometimes we call those counting numbers.
+
+52
+02:25.940 --> 02:29.170
+But then if you add to that natural number set,
+
+53
+02:29.170 --> 02:30.650
+and all of these that we're talking about here
+
+54
+02:30.650 --> 02:32.140
+are called number sets,
+
+55
+02:32.140 --> 02:35.840
+so if you add to the set of natural numbers the number zero,
+
+56
+02:35.840 --> 02:38.550
+then you have the set of whole numbers.
+
+57
+02:38.550 --> 02:41.830
+We're also going to talk about in this course negative numbers,
+
+58
+02:41.830 --> 02:44.020
+so all of these same positive numbers
+
+59
+02:44.020 --> 02:46.740
+except they're negative versions.
+
+60
+02:46.740 --> 02:49.640
+And again, don't worry too much about the details of this
+
+61
+02:49.640 --> 02:51.910
+'cause we're going to go over all of it.
+
+62
+02:51.910 --> 02:54.330
+But if we add in negative numbers,
+
+63
+02:54.330 --> 02:58.930
+for instance, negative three, negative two, negative one,
+
+64
+02:58.930 --> 03:01.170
+but we keep all these same values that we had,
+
+65
+03:01.170 --> 03:02.740
+so we're still including zero,
+
+66
+03:02.740 --> 03:04.860
+we're still including all these positive numbers,
+
+67
+03:04.860 --> 03:09.270
+zero, one, two, three, and on forever,
+
+68
+03:09.270 --> 03:10.670
+four, five, six, et cetera,
+
+69
+03:10.670 --> 03:13.090
+and even on this way forever,
+
+70
+03:13.090 --> 03:16.050
+negative four, negative five, negative six, negative seven,
+
+71
+03:16.050 --> 03:17.550
+we keep going that way,
+
+72
+03:17.550 --> 03:21.750
+these are called the integers.
+
+73
+03:21.750 --> 03:25.790
+So, the integers are just all of the whole numbers,
+
+74
+03:25.790 --> 03:29.110
+but in addition to that, the negative numbers included,
+
+75
+03:29.110 --> 03:32.310
+the negative versions of these positive whole numbers.
+
+76
+03:32.310 --> 03:34.590
+When we start including those negative numbers,
+
+77
+03:34.590 --> 03:37.680
+this set of numbers we call integers.
+
+78
+03:37.680 --> 03:40.690
+And then an even broader number set
+
+79
+03:40.690 --> 03:43.860
+that includes even more values than the integers
+
+80
+03:43.860 --> 03:44.970
+are what we call
+
+81
+03:46.850 --> 03:48.123
+rational numbers.
+
+82
+03:51.920 --> 03:54.160
+And rational numbers are going to include
+
+83
+03:54.160 --> 03:56.540
+all of these numbers that we had in integers,
+
+84
+03:56.540 --> 03:58.260
+which of course include all the whole numbers,
+
+85
+03:58.260 --> 04:00.020
+which include all the natural numbers.
+
+86
+04:00.020 --> 04:02.620
+It's going to include all of the integers,
+
+87
+04:02.620 --> 04:05.180
+but it's also going to include fractions.
+
+88
+04:05.180 --> 04:07.280
+And we have several sections in the course
+
+89
+04:07.280 --> 04:08.300
+devoted to fractions,
+
+90
+04:08.300 --> 04:10.420
+so we're going to go over these in more detail,
+
+91
+04:10.420 --> 04:15.380
+but fractions are things like negative seven over two
+
+92
+04:15.380 --> 04:18.470
+or three over four
+
+93
+04:18.470 --> 04:22.020
+or 11 over six, things like that.
+
+94
+04:22.020 --> 04:25.440
+So, all of these values, but also the integers,
+
+95
+04:25.440 --> 04:27.490
+so let's just put in some integers there.
+
+96
+04:27.490 --> 04:32.490
+How about a negative six and a positive 12 here.
+
+97
+04:33.510 --> 04:36.060
+Those are all rational numbers.
+
+98
+04:36.060 --> 04:37.420
+And then above those,
+
+99
+04:37.420 --> 04:40.530
+and this is sort of overarching everything,
+
+100
+04:40.530 --> 04:41.650
+are what we call
+
+101
+04:42.910 --> 04:44.033
+real numbers.
+
+102
+04:47.090 --> 04:48.680
+And because real numbers sort of
+
+103
+04:48.680 --> 04:52.650
+sit over the top of everything and include all of these,
+
+104
+04:52.650 --> 04:55.330
+we describe this whole number system,
+
+105
+04:55.330 --> 04:57.520
+all these numbers that we work with
+
+106
+04:57.520 --> 04:59.140
+as the real number system.
+
+107
+04:59.140 --> 05:01.080
+So, when we put them all together,
+
+108
+05:01.080 --> 05:03.240
+we talk about the real number system
+
+109
+05:03.240 --> 05:05.640
+and it includes all of these numbers
+
+110
+05:05.640 --> 05:06.830
+that we're going to deal with.
+
+111
+05:06.830 --> 05:08.610
+So you can kind of think about it this way.
+
+112
+05:08.610 --> 05:10.230
+We have real numbers at the top
+
+113
+05:10.230 --> 05:14.000
+and then that is going to include rational numbers,
+
+114
+05:14.000 --> 05:16.170
+rational numbers includes integers,
+
+115
+05:16.170 --> 05:18.490
+integers includes whole numbers,
+
+116
+05:18.490 --> 05:22.330
+whole numbers includes natural or counting numbers.
+
+117
+05:22.330 --> 05:24.220
+So, each one of these number systems
+
+118
+05:24.220 --> 05:26.890
+includes all of the number systems below it.
+
+119
+05:26.890 --> 05:29.470
+And then over here on this other side,
+
+120
+05:29.470 --> 05:32.270
+also included in the real number system
+
+121
+05:32.270 --> 05:35.333
+are what we call irrational numbers.
+
+122
+05:37.620 --> 05:39.480
+And if we try to remember this diagram,
+
+123
+05:39.480 --> 05:40.670
+that should make sense to us
+
+124
+05:40.670 --> 05:42.970
+because we have rational over here on the left
+
+125
+05:42.970 --> 05:44.990
+and irrational over here on the right,
+
+126
+05:44.990 --> 05:46.090
+so they go together.
+
+127
+05:46.090 --> 05:48.570
+Rational and irrational numbers
+
+128
+05:48.570 --> 05:51.210
+are sort of opposite number systems.
+
+129
+05:51.210 --> 05:53.270
+All of these things over here on the left
+
+130
+05:53.270 --> 05:55.220
+are part of the rational number system,
+
+131
+05:55.220 --> 05:57.540
+and then over here, totally separately,
+
+132
+05:57.540 --> 05:59.450
+we have irrational numbers.
+
+133
+05:59.450 --> 06:01.680
+And remember that over here with rational numbers
+
+134
+06:01.680 --> 06:03.810
+we talked about including fractions,
+
+135
+06:03.810 --> 06:05.380
+which again we'll talk about more later,
+
+136
+06:05.380 --> 06:08.020
+but fractions were these things like negative seven halves,
+
+137
+06:08.020 --> 06:13.020
+three fourths, 11 over six, all of these kinds of values.
+
+138
+06:13.070 --> 06:15.500
+Irrational numbers, all you need to know right now
+
+139
+06:15.500 --> 06:18.410
+is that irrational numbers are values
+
+140
+06:18.410 --> 06:21.150
+that cannot be written as fractions.
+
+141
+06:21.150 --> 06:24.290
+So, all of these numbers over here on the left,
+
+142
+06:24.290 --> 06:28.480
+one way or another, we can express them as a fraction,
+
+143
+06:28.480 --> 06:30.000
+but there are a few numbers
+
+144
+06:30.000 --> 06:32.600
+that we can't write as a fraction.
+
+145
+06:32.600 --> 06:35.440
+They can't be defined in fraction form,
+
+146
+06:35.440 --> 06:37.870
+and those are numbers like, for instance,
+
+147
+06:37.870 --> 06:40.290
+the square root of two,
+
+148
+06:40.290 --> 06:42.770
+and we're going to talk about square roots and roots
+
+149
+06:42.770 --> 06:44.020
+later on in this course.
+
+150
+06:44.020 --> 06:45.830
+So again, you don't need to know what this means,
+
+151
+06:45.830 --> 06:48.480
+but we're going to talk about what roots are,
+
+152
+06:48.480 --> 06:52.460
+but the square root of two cannot be written as a fraction.
+
+153
+06:52.460 --> 06:54.950
+Numbers like pi.
+
+154
+06:54.950 --> 06:56.890
+Pi is a special number that we use
+
+155
+06:56.890 --> 06:59.170
+to calculate the area of a circle
+
+156
+06:59.170 --> 07:01.300
+or the circumference of a circle,
+
+157
+07:01.300 --> 07:03.560
+and it also can't be written as a fraction.
+
+158
+07:03.560 --> 07:07.480
+So, there's numbers over here in this irrational realm
+
+159
+07:07.480 --> 07:09.830
+that we'll touch on later, but as you can see,
+
+160
+07:09.830 --> 07:11.670
+most of what we're going to deal with
+
+161
+07:11.670 --> 07:14.970
+is over here on the rational side.
+
+162
+07:14.970 --> 07:16.810
+And there's really only one more thing you want to remember
+
+163
+07:16.810 --> 07:18.500
+about these number systems,
+
+164
+07:18.500 --> 07:20.580
+and that is the symbols that we use
+
+165
+07:20.580 --> 07:23.190
+to represent these different number systems.
+
+166
+07:23.190 --> 07:25.380
+So, oftentimes, we'll use the symbol R,
+
+167
+07:25.380 --> 07:27.610
+and a lot of times we write it like this
+
+168
+07:27.610 --> 07:31.100
+with this little double line as the side of the R.
+
+169
+07:31.100 --> 07:34.590
+So, we'll represent real numbers with the letter R
+
+170
+07:34.590 --> 07:37.240
+We'll represent rational numbers with the letter Q,
+
+171
+07:37.240 --> 07:41.950
+and again, oftentimes we put this little second line on it.
+
+172
+07:41.950 --> 07:45.900
+Integers we often name with Z.
+
+173
+07:45.900 --> 07:50.420
+Whole numbers, and this one's easier, we use W,
+
+174
+07:50.420 --> 07:54.940
+and natural numbers we oftentimes use N.
+
+175
+07:54.940 --> 07:56.730
+Irrational numbers, strangely enough,
+
+176
+07:56.730 --> 07:58.950
+doesn't really have its own symbol,
+
+177
+07:58.950 --> 08:02.470
+but what we'll often say for irrational numbers,
+
+178
+08:02.470 --> 08:05.940
+because irrational numbers is all of the real numbers
+
+179
+08:05.940 --> 08:08.980
+except all of the rational numbers
+
+180
+08:08.980 --> 08:11.340
+and everything included in rational numbers,
+
+181
+08:11.340 --> 08:13.810
+we'll express this like this.
+
+182
+08:13.810 --> 08:16.020
+We'll say all the real numbers
+
+183
+08:16.020 --> 08:20.620
+minus all of the rational numbers.
+
+184
+08:20.620 --> 08:22.300
+Or you can really think about this as
+
+185
+08:22.300 --> 08:26.130
+all the real numbers except all the rational numbers.
+
+186
+08:26.130 --> 08:28.230
+So, irrational numbers is just really
+
+187
+08:28.230 --> 08:31.750
+everything else outside of this rational realm,
+
+188
+08:31.750 --> 08:33.740
+and so we often express it that way.
+
+189
+08:33.740 --> 08:35.630
+And then the last thing is that,
+
+190
+08:35.630 --> 08:38.660
+keep in mind, we've been talking about these number sets,
+
+191
+08:38.660 --> 08:40.930
+all these different sets of natural numbers,
+
+192
+08:40.930 --> 08:43.090
+whole numbers, irrational numbers.
+
+193
+08:43.090 --> 08:45.410
+These are all just different number sets,
+
+194
+08:45.410 --> 08:47.260
+and we can express a number set.
+
+195
+08:47.260 --> 08:51.910
+Oftentimes when we write a number set we use set notation.
+
+196
+08:51.910 --> 08:54.630
+And so for instance, you might see something like this.
+
+197
+08:54.630 --> 08:59.630
+We might say the set of whole numbers is this.
+
+198
+08:59.730 --> 09:03.750
+We write these curly brackets
+
+199
+09:03.750 --> 09:05.340
+and then we write out our whole numbers,
+
+200
+09:05.340 --> 09:09.680
+so zero, one, two, three, four,
+
+201
+09:09.680 --> 09:11.200
+like this, dot dot dot,
+
+202
+09:11.200 --> 09:13.580
+and then we close our curly braces.
+
+203
+09:13.580 --> 09:14.830
+This is set notation,
+
+204
+09:14.830 --> 09:17.470
+and this says the set of whole numbers
+
+205
+09:17.470 --> 09:19.170
+includes all of these things,
+
+206
+09:19.170 --> 09:22.340
+and you list all of the items that are included in the set
+
+207
+09:22.340 --> 09:24.320
+inside these curly braces.
+
+208
+09:24.320 --> 09:27.400
+But, we can also use set notation to list,
+
+209
+09:27.400 --> 09:29.730
+really, anything else that we want.
+
+210
+09:29.730 --> 09:34.040
+For example, I might choose to list out a set of...
+
+211
+09:34.040 --> 09:37.333
+So, I'm going to say taco ingredients,
+
+212
+09:39.350 --> 09:44.350
+and I'm going to say that that includes in that set is,
+
+213
+09:44.470 --> 09:48.330
+let's say lettuce,
+
+214
+09:48.330 --> 09:50.610
+let's say meat,
+
+215
+09:50.610 --> 09:53.830
+let's say cheese,
+
+216
+09:53.830 --> 09:55.743
+maybe salsa,
+
+217
+09:56.860 --> 09:58.890
+maybe sour cream,
+
+218
+09:58.890 --> 10:01.740
+and I could keep going
+
+219
+10:01.740 --> 10:02.940
+and tell you
+
+220
+10:03.820 --> 10:04.780
+what's in
+
+221
+10:06.070 --> 10:08.520
+this set of taco ingredients.
+
+222
+10:08.520 --> 10:11.660
+So, if I'm serving tacos and I want to write out
+
+223
+10:11.660 --> 10:14.540
+all of the taco ingredients that I want to prepare,
+
+224
+10:14.540 --> 10:17.860
+I could, if I wanted to, put that in set notation.
+
+225
+10:17.860 --> 10:19.310
+I would write it out like this,
+
+226
+10:19.310 --> 10:22.540
+and just make sure to include everything that I'm serving
+
+227
+10:22.540 --> 10:23.890
+at my taco night.
+
+228
+10:23.890 --> 10:25.610
+So, you can use set notation
+
+229
+10:25.610 --> 10:28.390
+not only for these kinds of number sets
+
+230
+10:28.390 --> 10:32.100
+but for anything else in math that sort of makes up a set
+
+231
+10:32.100 --> 10:34.210
+or for anything in real life like this
+
+232
+10:34.210 --> 10:35.880
+that isn't even mathematical
+
+233
+10:35.880 --> 10:40.040
+but is just a list of items that you want to gather together
+
+234
+10:40.040 --> 10:41.113
+as part of a set.

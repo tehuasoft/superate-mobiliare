@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación de Clase · Manejo de Errores y Pruebas en Power Automate
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .error-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .error-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      .error-card p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .error-card .solucion {
+        background: #e8f5e9;
+        padding: 6px 12px;
+        border-radius: 6px;
+        border-left: 3px solid #2e7d32;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .error-card .causa {
+        background: #fff3e0;
+        padding: 6px 12px;
+        border-radius: 6px;
+        border-left: 3px solid #e65100;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      .mock-historial {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+        margin: 8px 0;
+      }
+      .mock-historial table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .mock-historial th {
+        background: #e8eaf6;
+        color: #1a237e;
+        padding: 8px 12px;
+        text-align: left;
+        font-weight: 600;
+      }
+      .mock-historial td {
+        padding: 6px 12px;
+        border-top: 1px solid #e0e0e0;
+      }
+      .estado-exitoso {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .estado-fallido {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #ffebee;
+        color: #c62828;
+      }
+      .estado-cancelado {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      .depuracion-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 12px 0;
+      }
+      .depuracion-item {
+        background: #f5f7fa;
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-top: 4px solid #3f51b5;
+      }
+      .depuracion-item h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+      .depuracion-item p {
+        font-size: 14px;
+        margin: 4px 0;
+      }
+      .depuracion-item ul {
+        padding-left: 20px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .depuracion-grid {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🛠️ PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Manejo de Errores y Pruebas en Power Automate · Historial y Depuración
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante aprende a ejecutar flujos en modo prueba, revisar el
+          historial de ejecuciones y depurar fallos comunes en Power Automate,
+          identificando causas como permisos insuficientes, columnas incorrectas
+          y conexiones mal configuradas, para garantizar el correcto
+          funcionamiento de sus automatizaciones.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>
+              Comprende la importancia de probar flujos antes de publicarlos.
+            </li>
+            <li>
+              Reconoce los estados de ejecución: Exitoso, Fallido, Cancelado.
+            </li>
+            <li>Identifica los errores comunes y sus causas.</li>
+            <li>Entiende el uso del historial de ejecuciones para depurar.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Ejecutar un flujo en modo prueba (manual y automático).</li>
+            <li>Revisar el historial de ejecuciones paso a paso.</li>
+            <li>Identificar el paso que falló y la causa del error.</li>
+            <li>Solucionar errores de permisos, columnas y conexiones.</li>
+            <li>
+              Verificar que el flujo funciona correctamente después de corregir.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>
+              Muestra interés por la calidad y confiabilidad de sus flujos.
+            </li>
+            <li>Valora la importancia de probar antes de publicar.</li>
+            <li>Participa activamente en la depuración de errores.</li>
+            <li>Desarrolla paciencia y método para resolver problemas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "¿Qué hacemos cuando un flujo falla?"</h4>
+          <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+          <p>
+            El docente pregunta:
+            <em
+              >"¿Alguna vez has creado un flujo y no funciona? ¿Qué haces para
+              descubrir qué salió mal? ¿Cómo podemos evitar que los flujos
+              fallen?"</em
+            >
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Ciclo de pruebas y depuración:</span>
+            <ul>
+              <li>
+                <strong>1. Ejecutar en modo prueba:</strong> Probar el flujo
+                manualmente antes de confiar en él.
+              </li>
+              <li>
+                <strong>2. Revisar el historial:</strong> Ver cada paso y su
+                resultado.
+              </li>
+              <li>
+                <strong>3. Identificar el error:</strong> Localizar el paso que
+                falló y la causa.
+              </li>
+              <li>
+                <strong>4. Corregir:</strong> Ajustar permisos, columnas,
+                conexiones, etc.
+              </li>
+              <li>
+                <strong>5. Volver a probar:</strong> Verificar que el flujo
+                funciona correctamente.
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende la importancia de probar y depurar flujos.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión.</li>
+            <li>Reconoce el ciclo de pruebas y depuración.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Flujo previamente creado (con errores simulados)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Ejecutar, revisar y depurar flujos"</h4>
+          <p>
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes siguen).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PASO 1: EJECUTAR EN MODO PRUEBA -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 1: Ejecutar un flujo en modo prueba</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">1</span>
+            <h5>Probar un flujo manualmente</h5>
+            <p>
+              En Power Automate, abrir el flujo y hacer clic en
+              <strong>"Probar"</strong> (Test) en la esquina superior derecha.
+            </p>
+            <div class="captura-mock">
+              ▶️ Probar → Manualmente → Ejecutar flujo
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Esto ejecuta el flujo con los datos actuales y permite ver el
+              resultado paso a paso.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">2</span>
+            <h5>Probar un flujo automático</h5>
+            <p>
+              Para flujos con trigger de SharePoint, ir a la lista y
+              <strong>crear un nuevo elemento</strong> para disparar el flujo.
+            </p>
+            <div class="captura-mock">
+              📋 SharePoint → Lista "Proyectos" → + Agregar elemento → Guardar
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              El flujo se ejecutará automáticamente y podremos revisar el
+              historial.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 2: REVISAR HISTORIAL -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 2: Revisar el historial de ejecuciones</h4>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">3</span>
+            <h5>Acceder al historial</h5>
+            <p>
+              En Power Automate, ir a <strong>"Mis flujos"</strong> →
+              seleccionar el flujo → hacer clic en
+              <strong>"Historial de ejecuciones"</strong>.
+            </p>
+            <div class="captura-mock">
+              📊 Mis flujos → [Nombre del flujo] → Historial de ejecuciones
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">4</span>
+            <h5>Interpretar los estados de ejecución</h5>
+            <p>Cada ejecución muestra un estado:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Exitoso (verde):</strong> El flujo se ejecutó sin
+                errores.
+              </li>
+              <li>
+                <strong>Fallido (rojo):</strong> Hubo un error en algún paso.
+              </li>
+              <li>
+                <strong>Cancelado (naranja):</strong> El flujo se detuvo antes
+                de terminar.
+              </li>
+            </ul>
+            <div class="captura-mock">
+              ✅ Exitoso | ❌ Fallido | ⏸️ Cancelado
+            </div>
+          </div>
+
+          <div class="mock-historial">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th>Duración</th>
+                  <th>Trigger</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>06/10/2025 10:15</td>
+                  <td><span class="estado-exitoso">Exitoso</span></td>
+                  <td>2s</td>
+                  <td>Cuando se crea un elemento</td>
+                </tr>
+                <tr>
+                  <td>06/10/2025 10:10</td>
+                  <td><span class="estado-fallido">Fallido</span></td>
+                  <td>1s</td>
+                  <td>Cuando se crea un elemento</td>
+                </tr>
+                <tr>
+                  <td>06/10/2025 10:05</td>
+                  <td><span class="estado-cancelado">Cancelado</span></td>
+                  <td>0s</td>
+                  <td>Cuando se crea un elemento</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo de historial de ejecuciones con diferentes estados.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PASO 3: DEPURAR ERRORES -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 3: Depurar errores comunes</h4>
+
+          <div class="paso-card" style="border-left-color: #c62828">
+            <span class="numero">5</span>
+            <h5>Analizar el paso que falló</h5>
+            <p>
+              Hacer clic en la ejecución <strong>fallida</strong> para ver el
+              detalle. Cada paso muestra:
+            </p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li><strong>Entradas:</strong> Datos que recibió el paso.</li>
+              <li><strong>Salidas:</strong> Datos que devolvió el paso.</li>
+              <li><strong>Error:</strong> Mensaje con la causa del fallo.</li>
+            </ul>
+            <div class="captura-mock">
+              ❌ Error: "No se encontró la columna 'Estatus Value'"
+            </div>
+          </div>
+
+          <div class="depuracion-grid">
+            <div class="depuracion-item" style="border-top-color: #c62828">
+              <h5>❌ Error de permisos</h5>
+              <p>
+                <strong>Causa:</strong> El usuario no tiene permisos para
+                acceder a la lista, sitio o enviar correos.
+              </p>
+              <p>
+                <strong>Mensaje típico:</strong> "Acceso denegado" o "No tiene
+                permisos".
+              </p>
+              <div class="solucion">
+                <strong>✅ Solución:</strong> Verificar que el usuario tenga
+                permisos de edición en la lista y de envío en Outlook. Pedir al
+                administrador que otorgue los permisos necesarios.
+              </div>
+            </div>
+            <div class="depuracion-item" style="border-top-color: #e65100">
+              <h5>❌ Error de columna incorrecta</h5>
+              <p>
+                <strong>Causa:</strong> El nombre de la columna en el flujo no
+                coincide con el nombre real en SharePoint.
+              </p>
+              <p>
+                <strong>Mensaje típico:</strong> "No se encontró la columna 'X'"
+                o "Propiedad no válida".
+              </p>
+              <div class="solucion">
+                <strong>✅ Solución:</strong> Verificar el nombre exacto de la
+                columna en la lista y volver a seleccionarla desde el panel de
+                campos dinámicos.
+              </div>
+            </div>
+            <div class="depuracion-item" style="border-top-color: #6c5ce7">
+              <h5>❌ Error de conexión</h5>
+              <p>
+                <strong>Causa:</strong> La conexión con SharePoint, Outlook o
+                Aprobaciones ha caducado o no está configurada.
+              </p>
+              <p>
+                <strong>Mensaje típico:</strong> "Conexión no válida" o "Se
+                requiere autenticación".
+              </p>
+              <div class="solucion">
+                <strong>✅ Solución:</strong> Ir a "Conexiones" en Power
+                Automate y volver a autenticar la conexión afectada.
+              </div>
+            </div>
+            <div class="depuracion-item" style="border-top-color: #2e7d32">
+              <h5>❌ Error de tipo de dato</h5>
+              <p>
+                <strong>Causa:</strong> Se intenta usar un valor de un tipo
+                incorrecto (ej. texto donde se espera número).
+              </p>
+              <p>
+                <strong>Mensaje típico:</strong> "No se puede convertir el
+                valor" o "Tipo de dato no válido".
+              </p>
+              <div class="solucion">
+                <strong>✅ Solución:</strong> Verificar el tipo de dato de la
+                columna y usar expresiones de conversión si es necesario (ej.
+                <code>int()</code>, <code>string()</code>).
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE DEPURACIÓN -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo práctico de depuración</h4>
+
+          <div
+            class="ejemplo-box"
+            style="background: #ffebee; border-left: 4px solid #c62828"
+          >
+            <span class="highlight" style="color: #c62828"
+              >📌 Caso: El flujo falla al actualizar el estatus</span
+            >
+            <p>
+              <strong>Paso 1:</strong> Revisar el historial → La ejecución está
+              "Fallida" en el paso "Actualizar elemento".
+            </p>
+            <p>
+              <strong>Paso 2:</strong> Hacer clic en el paso fallido → Ver el
+              mensaje de error:
+              <em>"No se encontró la columna 'Estatus Value'"</em>.
+            </p>
+            <p>
+              <strong>Paso 3:</strong> Ir a la lista "Proyectos" en SharePoint →
+              Verificar el nombre exacto de la columna → Se llama
+              <code>Estatus</code>, no <code>Estatus Value</code>.
+            </p>
+            <p>
+              <strong>Paso 4:</strong> En el flujo, eliminar el campo incorrecto
+              y seleccionar el campo dinámico correcto
+              <code>Estatus Value</code> desde el panel.
+            </p>
+            <p>
+              <strong>Paso 5:</strong> Guardar y volver a probar → El flujo se
+              ejecuta exitosamente.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 4: PROBAR DESPUÉS DE CORREGIR -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 4: Probar después de corregir</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">6</span>
+            <h5>Volver a ejecutar el flujo</h5>
+            <p>
+              Después de corregir el error, hacer clic en
+              <strong>"Probar"</strong> nuevamente o crear un nuevo elemento en
+              SharePoint para disparar el flujo.
+            </p>
+            <div class="captura-mock">
+              ▶️ Probar → Manualmente → Ejecutar flujo
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">7</span>
+            <h5>Verificar el resultado</h5>
+            <p>
+              Revisar el historial de ejecuciones y confirmar que el estado es
+              <strong>"Exitoso"</strong>. Verificar que las acciones se
+              ejecutaron correctamente (correo enviado, estatus actualizado,
+              etc.).
+            </p>
+            <div class="captura-mock">
+              ✅ Historial: Exitoso → Correo enviado → Estatus actualizado
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- BUENAS PRÁCTICAS -->
+          <!-- ============================================ -->
+          <h4>🔹 Buenas prácticas de pruebas y depuración</h4>
+
+          <div class="depuracion-grid">
+            <div class="depuracion-item" style="border-top-color: #2e7d32">
+              <h5>✅ Antes de publicar</h5>
+              <ul>
+                <li>Probar el flujo manualmente con datos reales.</li>
+                <li>Verificar que todas las conexiones estén activas.</li>
+                <li>Revisar que los nombres de las columnas coincidan.</li>
+                <li>Confirmar que los permisos son suficientes.</li>
+                <li>
+                  Probar con diferentes escenarios (aprobado, rechazado, etc.).
+                </li>
+              </ul>
+            </div>
+            <div class="depuracion-item" style="border-top-color: #c62828">
+              <h5>❌ Errores comunes a evitar</h5>
+              <ul>
+                <li>No probar el flujo antes de confiar en él.</li>
+                <li>Usar nombres de columnas incorrectos.</li>
+                <li>No verificar los permisos de los usuarios.</li>
+                <li>Ignorar los mensajes de error del historial.</li>
+                <li>No documentar los cambios realizados.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Abre uno de los flujos creados en clases anteriores (ej.
+                "Bienvenida a nuevos proyectos").
+              </li>
+              <li>2. Ejecútalo en <strong>modo prueba</strong> manualmente.</li>
+              <li>
+                3. Revisa el <strong>historial de ejecuciones</strong> y
+                verifica el estado de cada paso.
+              </li>
+              <li>
+                4. Si el flujo falla, identifica el paso que falló y el mensaje
+                de error.
+              </li>
+              <li>
+                5. Corrige el error (permisos, columna incorrecta, conexión,
+                etc.).
+              </li>
+              <li>
+                6. Vuelve a probar el flujo y verifica que ahora es exitoso.
+              </li>
+              <li>7. Documenta el error y la solución aplicada.</li>
+              <li>
+                8. Si no tienes acceso, describe un error común y cómo lo
+                solucionarías.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>¿Qué error fue más fácil de identificar? ¿Por qué?</li>
+              <li>¿Cómo podrías prevenir errores de permisos en el futuro?</li>
+              <li>
+                ¿Qué harías si el flujo funciona en prueba pero falla en
+                producción?
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante ejecuta flujos en modo prueba, revisa el historial y
+            depura errores comunes.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Ejecuta flujos en modo prueba correctamente.</li>
+            <li>Interpreta el historial de ejecuciones.</li>
+            <li>Identifica el paso que falló y la causa del error.</li>
+            <li>Soluciona errores de permisos, columnas y conexiones.</li>
+            <li>Verifica que el flujo funciona después de corregir.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Flujo creado en clases anteriores</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+            <li>Pizarra</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso y preguntas finales"</h4>
+          <ul>
+            <li>¿Cómo se ejecuta un flujo en modo prueba?</li>
+            <li>¿Qué significa cada estado en el historial de ejecuciones?</li>
+            <li>¿Cómo se identifica el paso que falló?</li>
+            <li>¿Cuáles son los errores más comunes y cómo se solucionan?</li>
+            <li>¿Qué se debe verificar antes de publicar un flujo?</li>
+            <li>¿Cómo se documenta un error y su solución?</li>
+          </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final:</span>
+            <p>
+              Investiga cómo configurar la acción
+              <strong>"Configurar ejecución después de"</strong> (Configure run
+              after) en Power Automate para que el flujo continúe ejecutándose
+              incluso si un paso falla. Describe un caso de uso.
+            </p>
+            <p style="font-size: 13px; color: #555; margin-top: 4px">
+              Pista: En la configuración de una acción, busca "Configurar
+              ejecución después de" y selecciona "ha fallado" o "se ha omitido".
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida las prácticas de prueba y depuración de
+            flujos en Power Automate.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Comprende la importancia de probar y depurar flujos.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Power Automate</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p><strong>💡 Tips clave para manejo de errores y pruebas:</strong></p>
+        <p>
+          • <strong>Probar:</strong> Ejecutar el flujo manualmente antes de
+          confiar en él.
+        </p>
+        <p>
+          • <strong>Historial:</strong> Revisar cada ejecución y su estado
+          (Exitoso, Fallido, Cancelado).
+        </p>
+        <p>
+          • <strong>Depurar:</strong> Hacer clic en la ejecución fallida y
+          revisar entradas, salidas y error.
+        </p>
+        <p>
+          • <strong>Error de permisos:</strong> Verificar permisos de la lista y
+          de Outlook.
+        </p>
+        <p>
+          • <strong>Error de columna:</strong> Verificar nombres exactos de
+          columnas y usar campos dinámicos.
+        </p>
+        <p>
+          • <strong>Error de conexión:</strong> Volver a autenticar las
+          conexiones en "Conexiones".
+        </p>
+        <p>
+          • <strong>Error de tipo:</strong> Verificar tipos de datos y usar
+          expresiones de conversión.
+        </p>
+        <p>
+          • <strong>Documentar:</strong> Registrar el error y la solución para
+          futuras referencias.
+        </p>
+        <p>
+          • <strong>Configurar ejecución después de:</strong> Permite continuar
+          el flujo aunque un paso falle.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>Esta clase es clave porque:</strong></p>
+        <p>
+          • Enseña a garantizar la confiabilidad de los flujos automatizados.
+        </p>
+        <p>
+          • Desarrolla habilidades de diagnóstico y resolución de problemas.
+        </p>
+        <p>
+          • Prepara a los estudiantes para entornos reales donde los errores son
+          comunes.
+        </p>
+        <p>
+          • Conecta la teoría con la práctica mediante la depuración de flujos
+          reales.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

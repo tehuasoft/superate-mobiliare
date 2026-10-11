@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación de Clase · Flujo Automatizado en Power Automate</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+      .subtitulo {
+        font-size: 18px;
+        color: #1a237e;
+        margin-top: -8px;
+        margin-bottom: 25px;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+
+      .paso-card {
+        background: #f5f7fa;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #3f51b5;
+      }
+      .paso-card .numero {
+        display: inline-block;
+        background: #1a237e;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      .paso-card h5 {
+        color: #1a237e;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      .paso-card p {
+        font-size: 14px;
+        margin: 4px 0 4px 36px;
+      }
+
+      .captura-mock {
+        background: #e8eaf6;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin: 6px 0 6px 36px;
+        font-size: 14px;
+        border-left: 3px solid #3f51b5;
+        font-family: "Courier New", monospace;
+      }
+
+      .flujo-estructura {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: #f5f7fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin: 12px 0;
+      }
+      .flujo-estructura .bloque {
+        background: white;
+        border: 2px solid #1a237e;
+        border-radius: 10px;
+        padding: 12px 20px;
+        text-align: center;
+        min-width: 160px;
+      }
+      .flujo-estructura .bloque.trigger {
+        border-color: #e65100;
+        background: #fff3e0;
+      }
+      .flujo-estructura .bloque.action {
+        border-color: #2e7d32;
+        background: #e8f5e9;
+      }
+      .flujo-estructura .bloque .titulo {
+        font-weight: 600;
+        font-size: 15px;
+        color: #1a237e;
+      }
+      .flujo-estructura .bloque .subtitulo {
+        font-size: 12px;
+        color: #555;
+        margin-top: 2px;
+      }
+      .flujo-estructura .flecha {
+        font-size: 28px;
+        color: #3f51b5;
+      }
+
+      .mock-correo {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 8px 0;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .mock-correo .header {
+        background: #f5f5f5;
+        padding: 10px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 13px;
+        color: #555;
+      }
+      .mock-correo .header strong {
+        color: #1a237e;
+      }
+      .mock-correo .body {
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .mock-correo .body .linea {
+        margin: 4px 0;
+      }
+      .mock-correo .body .destacado {
+        background: #e3f2fd;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin: 8px 0;
+        border-left: 4px solid #1e88e5;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+        .flujo-estructura {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚡ PLANIFICACIÓN DE CLASE</h1>
+      <div class="subtitulo">
+        Flujo Automatizado: "Cuando se crea un elemento" → Correo de bienvenida
+      </div>
+
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          El estudiante crea un flujo automatizado en Power Automate que se
+          dispara cuando se crea un elemento en la lista "Proyectos" de
+          SharePoint, enviando un correo electrónico de bienvenida al
+          Propietario del proyecto, comprendiendo la estructura Trigger +
+          Actions en un caso práctico real.
+        </p>
+      </div>
+
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>Comprende el flujo automatizado y su trigger de SharePoint.</li>
+            <li>Reconoce la acción "Enviar un correo electrónico".</li>
+            <li>Identifica cómo usar campos dinámicos en el correo.</li>
+            <li>
+              Entiende el concepto de "Expresiones" para acceder a propiedades.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>Crear un flujo automatizado desde cero.</li>
+            <li>
+              Configurar el trigger "Cuando se crea un elemento" en SharePoint.
+            </li>
+            <li>Agregar la acción "Enviar un correo electrónico".</li>
+            <li>Usar campos dinámicos del elemento creado.</li>
+            <li>Probar el flujo creando un nuevo proyecto.</li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>Muestra interés por la automatización de notificaciones.</li>
+            <li>Valora la eficiencia que aporta la comunicación automática.</li>
+            <li>Participa activamente en la práctica guiada.</li>
+            <li>Desarrolla pensamiento lógico para diseñar flujos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>
+            Actividad: "¿Cómo avisamos automáticamente cuando alguien crea un
+            proyecto?"
+          </h4>
+          <p>
+            <span class="label">Metodología:</span> Reflexión y
+            contextualización.
+          </p>
+          <p>
+            El docente pregunta:
+            <em
+              >"Cuando alguien crea un nuevo proyecto en nuestra lista, ¿cómo
+              podríamos avisarle automáticamente al propietario? ¿Qué
+              información debería incluir ese correo?"</em
+            >
+          </p>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Objetivo del flujo:</span>
+            <ul>
+              <li>
+                <strong>Trigger:</strong> Cuando se crea un elemento en la lista
+                "Proyectos".
+              </li>
+              <li>
+                <strong>Action:</strong> Enviar un correo de bienvenida al
+                Propietario del proyecto.
+              </li>
+              <li>
+                <strong>Resultado:</strong> El propietario recibe un correo con
+                los datos del proyecto automáticamente.
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende el objetivo y la estructura del flujo a
+            crear.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Participa en la reflexión.</li>
+            <li>Reconoce el trigger y la acción del flujo.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Creación paso a paso del flujo automatizado"</h4>
+          <p>
+            <span class="label">Metodología:</span> Práctica guiada (el docente
+            muestra en vivo mientras los estudiantes siguen).
+          </p>
+
+          <!-- ============================================ -->
+          <!-- ESTRUCTURA DEL FLUJO -->
+          <!-- ============================================ -->
+          <h4>🔹 Estructura del flujo</h4>
+
+          <div class="flujo-estructura">
+            <div class="bloque trigger">
+              <div class="titulo">🎯 TRIGGER</div>
+              <div class="subtitulo">Cuando se crea un elemento</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                SharePoint → Lista "Proyectos"
+              </div>
+            </div>
+            <div class="flecha">→</div>
+            <div class="bloque action">
+              <div class="titulo">⚙️ ACTION</div>
+              <div class="subtitulo">Enviar un correo</div>
+              <div class="subtitulo" style="font-size: 11px; color: #888">
+                Al Propietario del proyecto
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 1: CREAR FLUJO -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 1: Crear el flujo automatizado</h4>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">1</span>
+            <h5>Acceder a Power Automate</h5>
+            <p>
+              Ingresar a <strong>make.powerautomate.com</strong> y hacer clic en
+              <strong>"Crear"</strong>.
+            </p>
+            <div class="captura-mock">
+              🌐 https://make.powerautomate.com → Crear
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">2</span>
+            <h5>Seleccionar "Flujo automatizado"</h5>
+            <p>
+              Elegir la opción <strong>"Flujo automatizado"</strong> (Automated
+              cloud flow).
+            </p>
+            <div class="captura-mock">🤖 Crear → Flujo automatizado</div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">3</span>
+            <h5>Asignar nombre y trigger</h5>
+            <p>
+              Asignar un nombre al flujo:
+              <strong>"Bienvenida a nuevos proyectos"</strong>.
+            </p>
+            <p>
+              Buscar y seleccionar el trigger:
+              <strong>"Cuando se crea un elemento"</strong> (SharePoint).
+            </p>
+            <div class="captura-mock">
+              📝 Nombre: "Bienvenida a nuevos proyectos"<br />
+              🎯 Trigger: "Cuando se crea un elemento" → SharePoint
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Hacer clic en <strong>"Crear"</strong>.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 2: CONFIGURAR TRIGGER -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 2: Configurar el Trigger</h4>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">4</span>
+            <h5>Configurar el trigger</h5>
+            <p>En el trigger "Cuando se crea un elemento", configurar:</p>
+            <ul style="padding-left: 20px; font-size: 14px; margin-left: 16px">
+              <li>
+                <strong>Dirección del sitio:</strong> Seleccionar la URL del
+                sitio de SharePoint.
+              </li>
+              <li>
+                <strong>Nombre de la lista:</strong> Seleccionar
+                <code>Proyectos</code>.
+              </li>
+            </ul>
+            <div class="captura-mock">
+              📂 Dirección del sitio:
+              https://[tenant].sharepoint.com/sites/[sitio]<br />
+              📋 Nombre de la lista: Proyectos
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Hacer clic en <strong>"Nuevo paso"</strong> para agregar la
+              acción.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PASO 3: AGREGAR ACCIÓN -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 3: Agregar la acción "Enviar un correo electrónico"</h4>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">5</span>
+            <h5>Buscar la acción</h5>
+            <p>
+              En el buscador de acciones, escribir
+              <strong>"Enviar un correo electrónico"</strong> y seleccionar la
+              acción de <strong>Office 365 Outlook</strong>.
+            </p>
+            <div class="captura-mock">
+              📧 Buscar: "Enviar un correo electrónico" → Office 365 Outlook
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">6</span>
+            <h5>Configurar el destinatario</h5>
+            <p>
+              En el campo <strong>"Para"</strong>, hacer clic y seleccionar el
+              campo dinámico <strong>"Propietario Email"</strong> o
+              <strong>"Propietario Correo electrónico"</strong> del trigger.
+            </p>
+            <div class="captura-mock">
+              👤 Para: Propietario Email (dinámico del trigger)
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Si el campo no aparece directamente, se puede usar una expresión.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">7</span>
+            <h5>Configurar el asunto</h5>
+            <p>
+              En el campo <strong>"Asunto"</strong>, escribir:
+              <strong>"¡Bienvenido al proyecto: </strong> y seleccionar el campo
+              dinámico <strong>"Título"</strong> del trigger.
+            </p>
+            <div class="captura-mock">
+              📌 Asunto: "¡Bienvenido al proyecto: " + Título
+            </div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #6c5ce7">
+            <span class="numero">8</span>
+            <h5>Configurar el cuerpo del correo</h5>
+            <p>
+              En el campo <strong>"Cuerpo"</strong>, escribir el mensaje de
+              bienvenida incluyendo campos dinámicos del proyecto:
+            </p>
+            <div
+              class="captura-mock"
+              style="font-family: &quot;Courier New&quot;, monospace"
+            >
+              Hola,<br /><br />
+              Te damos la bienvenida al proyecto: <strong>[Título]</strong
+              ><br /><br />
+              <strong>Descripción:</strong> [Descripción]<br />
+              <strong>Fecha de Inicio:</strong> [Fecha de Inicio]<br />
+              <strong>Estatus:</strong> [Estatus Value]<br /><br />
+              Saludos,<br />
+              Equipo de Gestión de Proyectos
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              Los campos entre corchetes se insertan desde el panel de contenido
+              dinámico.
+            </p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- EJEMPLO DE CORREO -->
+          <!-- ============================================ -->
+          <h4>🔹 Ejemplo del correo que se enviará</h4>
+
+          <div class="mock-correo">
+            <div class="header">
+              <strong>De:</strong> Power Automate
+              &lt;no-reply@powerautomate.com&gt;<br />
+              <strong>Para:</strong> ana.garcia@empresa.com<br />
+              <strong>Asunto:</strong> ¡Bienvenido al proyecto: E-commerce App
+            </div>
+            <div class="body">
+              <p class="linea">Hola,</p>
+              <p class="linea">
+                Te damos la bienvenida al proyecto:
+                <strong>E-commerce App</strong>
+              </p>
+              <div class="destacado">
+                <p class="linea">
+                  <strong>Descripción:</strong> Desarrollo de tienda online
+                </p>
+                <p class="linea">
+                  <strong>Fecha de Inicio:</strong> 01/02/2025
+                </p>
+                <p class="linea"><strong>Estatus:</strong> Activo</p>
+              </div>
+              <p class="linea">Saludos,<br />Equipo de Gestión de Proyectos</p>
+            </div>
+          </div>
+          <p style="font-size: 13px; color: #555; text-align: center">
+            ↑ Ejemplo del correo que recibe el propietario del proyecto.
+          </p>
+
+          <!-- ============================================ -->
+          <!-- PASO 4: GUARDAR Y PROBAR -->
+          <!-- ============================================ -->
+          <h4>🔹 Paso 4: Guardar y probar el flujo</h4>
+
+          <div class="paso-card" style="border-left-color: #2e7d32">
+            <span class="numero">9</span>
+            <h5>Guardar el flujo</h5>
+            <p>
+              Hacer clic en <strong>"Guardar"</strong> en la parte superior
+              derecha.
+            </p>
+            <div class="captura-mock">💾 Guardar</div>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #e65100">
+            <span class="numero">10</span>
+            <h5>Probar el flujo</h5>
+            <p>
+              Ir a la lista "Proyectos" en SharePoint y
+              <strong>crear un nuevo elemento</strong>. Verificar que el flujo
+              se ejecuta y que llega el correo al propietario.
+            </p>
+            <div class="captura-mock">
+              📋 SharePoint → Lista "Proyectos" → + Agregar elemento → Guardar
+            </div>
+            <p style="font-size: 13px; color: #555; margin: 4px 0 4px 36px">
+              El flujo se ejecutará automáticamente y enviará el correo.
+            </p>
+          </div>
+
+          <div class="paso-card" style="border-left-color: #0d47a1">
+            <span class="numero">11</span>
+            <h5>Verificar la ejecución</h5>
+            <p>
+              En Power Automate, ir a <strong>"Mis flujos"</strong> →
+              seleccionar el flujo → revisar el
+              <strong>historial de ejecuciones</strong>. Cada ejecución muestra
+              si fue exitosa o falló.
+            </p>
+            <div class="captura-mock">
+              📊 Mis flujos → Bienvenida a nuevos proyectos → Historial de
+              ejecuciones
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- ACTIVIDAD PRÁCTICA -->
+          <!-- ============================================ -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p><strong>Instrucciones:</strong></p>
+            <ul>
+              <li>
+                1. Accede a make.powerautomate.com y crea un
+                <strong>flujo automatizado</strong> llamado "Bienvenida a nuevos
+                proyectos".
+              </li>
+              <li>
+                2. Configura el trigger
+                <strong>"Cuando se crea un elemento"</strong> en la lista
+                "Proyectos" de SharePoint.
+              </li>
+              <li>
+                3. Agrega la acción
+                <strong>"Enviar un correo electrónico"</strong> (Office 365
+                Outlook).
+              </li>
+              <li>
+                4. Configura el destinatario con el campo dinámico
+                <strong>Propietario Email</strong>.
+              </li>
+              <li>
+                5. Configura el asunto y el cuerpo del correo usando campos
+                dinámicos del proyecto.
+              </li>
+              <li>
+                6. Guarda el flujo y pruébalo creando un nuevo proyecto en la
+                lista.
+              </li>
+              <li>
+                7. Verifica el historial de ejecuciones para confirmar que el
+                flujo se ejecutó correctamente.
+              </li>
+              <li>
+                8. Si no tienes acceso, escribe los pasos y dibuja la estructura
+                del flujo.
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>¿Qué sucede si el campo Propietario está vacío?</li>
+              <li>
+                ¿Cómo podrías personalizar aún más el correo de bienvenida?
+              </li>
+              <li>¿Qué otras acciones podrías agregar al flujo?</li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante crea un flujo automatizado que envía un correo de
+            bienvenida al propietario cuando se crea un nuevo proyecto.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Crea el flujo automatizado correctamente.</li>
+            <li>Configura el trigger "Cuando se crea un elemento".</li>
+            <li>Agrega la acción "Enviar un correo electrónico".</li>
+            <li>Usa campos dinámicos en el correo.</li>
+            <li>Prueba el flujo y verifica su ejecución.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Acceso a make.powerautomate.com</li>
+            <li>Lista "Proyectos" en SharePoint</li>
+            <li>Pizarra</li>
+            <li>Guía de configuración de flujos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Repaso y preguntas finales"</h4>
+          <ul>
+            <li>¿Qué tipo de flujo creamos?</li>
+            <li>¿Cuál fue el Trigger utilizado?</li>
+            <li>¿Cuál fue la Acción ejecutada?</li>
+            <li>¿Cómo se configura el destinatario del correo?</li>
+            <li>¿Qué campos dinámicos se pueden usar en el correo?</li>
+            <li>¿Cómo verificamos que el flujo se ejecutó correctamente?</li>
+          </ul>
+
+          <div class="ejemplo-box">
+            <span class="highlight">📌 Desafío final:</span>
+            <p>
+              Modifica el flujo para que además de enviar el correo al
+              propietario,
+              <strong
+                >publique un mensaje en un canal de Microsoft Teams</strong
+              >
+              anunciando el nuevo proyecto. ¿Qué acción agregarías?
+            </p>
+            <p style="font-size: 13px; color: #555; margin-top: 4px">
+              Pista: busca la acción "Publicar mensaje en un canal" de Microsoft
+              Teams.
+            </p>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante consolida la creación de flujos automatizados con
+            trigger y acciones.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Responde correctamente las preguntas.</li>
+            <li>Participa activamente en la discusión.</li>
+            <li>Comprende la estructura del flujo creado.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Power Automate</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p>
+          <strong
+            >💡 Tips clave para flujos automatizados en Power Automate:</strong
+          >
+        </p>
+        <p>
+          • <strong>Tipo de flujo:</strong> Automatizado (se dispara por un
+          evento).
+        </p>
+        <p>
+          • <strong>Trigger:</strong> "Cuando se crea un elemento" en
+          SharePoint.
+        </p>
+        <p>
+          • <strong>Acción:</strong> "Enviar un correo electrónico" (Office 365
+          Outlook).
+        </p>
+        <p>
+          • <strong>Campos dinámicos:</strong> Se insertan desde el panel de
+          contenido dinámico.
+        </p>
+        <p>
+          • <strong>Destinatario:</strong> Usar el campo "Propietario Email" del
+          trigger.
+        </p>
+        <p>
+          • <strong>Probar:</strong> Crear un elemento en la lista y verificar
+          el correo.
+        </p>
+        <p>
+          • <strong>Historial:</strong> Revisar ejecuciones en "Mis flujos".
+        </p>
+        <p>
+          • <strong>Expresiones:</strong> Para casos avanzados, usar
+          <code>triggerBody()?['Propietario']?['Email']</code>.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>
+          • Aplica los conceptos de Power Automate en un caso práctico real.
+        </p>
+        <p>• Enseña a automatizar notificaciones por correo electrónico.</p>
+        <p>• Prepara a los estudiantes para crear flujos más complejos.</p>
+        <p>• Conecta SharePoint con Outlook a través de la automatización.</p>
+      </div>
+    </div>
+  </body>
+</html>

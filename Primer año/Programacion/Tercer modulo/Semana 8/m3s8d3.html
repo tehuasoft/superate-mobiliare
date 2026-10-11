@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · UI Design · Jerarquía, Layout, Alineación, White Space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .ui-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .ui-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .ui-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .ejemplo-jerarquia {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            margin: 6px 0;
+        }
+        .ejemplo-jerarquia .titulo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+        }
+        .ejemplo-jerarquia .subtitulo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #3f51b5;
+        }
+        .ejemplo-jerarquia .cuerpo {
+            font-size: 16px;
+            color: #555;
+        }
+        .ejemplo-jerarquia .pequeño {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .demo-layout {
+            background: #f0f4f8;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .demo-layout .bloque {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+        .demo-layout .bloque.principal {
+            flex: 2;
+            background: #e3f2fd;
+            border: 2px solid #1e88e5;
+        }
+
+        .demo-white-space {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 10px 0;
+        }
+        .demo-white-space .sin-espacio {
+            background: white;
+            padding: 4px;
+            border: 1px solid #ddd;
+        }
+        .demo-white-space .con-espacio {
+            background: white;
+            padding: 24px;
+            border: 1px solid #ddd;
+        }
+
+        .audiencia-ejemplo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .audiencia-ejemplo .tipo {
+            background: #f5f7fa;
+            padding: 14px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .audiencia-ejemplo .tipo h5 {
+            color: #1a237e;
+        }
+        .audiencia-ejemplo .tipo p {
+            font-size: 14px;
+        }
+
+        .alineacion-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 8px 0;
+        }
+        .alineacion-demo .izquierda {
+            text-align: left;
+        }
+        .alineacion-demo .centro {
+            text-align: center;
+        }
+        .alineacion-demo .derecha {
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .audiencia-ejemplo { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📱 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">UI · User Interface Design · Jerarquía, Layout, Alineación, White Space, Audiencia</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende los principios fundamentales del diseño de interfaces de usuario (UI): jerarquía visual (color y tamaño), layout (distribución de elementos), alineación (pocos puntos de alineación), white space (espacio negativo) y la importancia de conocer a la audiencia para tomar decisiones de diseño.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende qué es la jerarquía visual y cómo se logra.</li>
+                <li>Reconoce la importancia del layout y la distribución.</li>
+                <li>Entiende el concepto de white space y su valor.</li>
+                <li>Identifica la relación entre audiencia y diseño.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear jerarquía usando color y tamaño.</li>
+                <li>Diseñar layouts equilibrados (ni muy largos ni muy cortos).</li>
+                <li>Aplicar alineación consistente (pocos puntos de alineación).</li>
+                <li>Usar white space para mejorar la legibilidad y estética.</li>
+                <li>Adaptar el diseño según la audiencia objetivo.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la importancia del diseño centrado en el usuario.</li>
+                <li>Muestra interés por la estética y la funcionalidad.</li>
+                <li>Participa activamente en el análisis de interfaces.</li>
+                <li>Desarrolla criterio de diseño.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Qué hace que una interfaz se vea bien?"</h4>
+            <p><span class="label">Metodología:</span> Análisis y reflexión.</p>
+            <p>El docente muestra dos ejemplos de interfaces: una con diseño pobre y otra bien diseñada. Se pregunta: <em>"¿Qué hace que una se vea mejor? ¿Qué elementos llaman tu atención primero?"</em></p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Conceptos clave de la clase:</span>
+                <ul>
+                    <li><strong>Jerarquía</strong> — Organizar la información por importancia.</li>
+                    <li><strong>Layout</strong> — Distribución de elementos en la pantalla.</li>
+                    <li><strong>Alineación</strong> — Orden visual (pocos puntos de alineación).</li>
+                    <li><strong>White Space</strong> — Espacio vacío que mejora el diseño.</li>
+                    <li><strong>Audiencia</strong> — Diseñar para el usuario correcto.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los principios básicos de UI design.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en el análisis.</li>
+                <li>Reconoce elementos de jerarquía y layout.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos visuales de interfaces</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Jerarquía, Layout, Alineación, White Space y Audiencia"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos visuales.</p>
+
+            <!-- ============================================ -->
+            <!-- JERARQUÍA -->
+            <!-- ============================================ -->
+            <h4>🔹 Jerarquía visual</h4>
+            <div class="ui-card">
+                <h5>📌 ¿Qué es la jerarquía?</h5>
+                <p>Es el orden de importancia de los elementos en la pantalla. Guía la atención del usuario de lo más importante a lo menos importante.</p>
+                <p><strong>Se logra con:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Color:</strong> Colores llamativos para elementos importantes, colores neutros para secundarios.</li>
+                    <li><strong>Tamaño:</strong> Elementos más grandes = más importancia.</li>
+                    <li><strong>Peso (bold):</strong> Texto en negrita destaca sobre texto regular.</li>
+                    <li><strong>Espaciado:</strong> Más espacio alrededor = más importancia.</li>
+                </ul>
+            </div>
+
+            <div class="ejemplo-jerarquia">
+                <span style="font-weight: 700; color: #1a237e;">🎯 Jerarquía con color y tamaño</span>
+                <div class="titulo" style="color: #1a237e;">Título principal (grande, color fuerte)</div>
+                <div class="subtitulo" style="color: #e65100;">Subtítulo (mediano, color de acento)</div>
+                <div class="cuerpo">Cuerpo del texto (tamaño normal, color neutro)</div>
+                <div class="pequeño">Texto secundario / pequeño (tamaño reducido, color tenue)</div>
+                <div style="margin-top: 6px; display: flex; gap: 12px;">
+                    <span style="background: #1e88e5; color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600;">Botón principal (color fuerte)</span>
+                    <span style="background: #e0e0e0; color: #555; padding: 8px 16px; border-radius: 6px;">Botón secundario (color neutro)</span>
+                </div>
+            </div>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué quiero destacar con el color?</span>
+                <p>El color atrae la atención. Úsalo para elementos clave: botones de acción, títulos importantes, llamados a la acción (CTA).</p>
+                <span class="highlight">📌 ¿Qué quiero destacar con el tamaño?</span>
+                <p>El tamaño establece jerarquía. Los títulos deben ser grandes, el cuerpo más pequeño, la información secundaria aún más pequeña.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- LAYOUT -->
+            <!-- ============================================ -->
+            <h4>🔹 Layout — Distribución en la pantalla</h4>
+            <div class="ui-card" style="border-left-color: #e65100;">
+                <h5>📌 ¿Qué es el layout?</h5>
+                <p>Es la forma en que se organizan los elementos en la interfaz. Un buen layout es <strong>equilibrado</strong>, <strong>ordenado</strong> y <strong>fácil de escanear</strong>.</p>
+                <p><strong>Consejos:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>No hacer la pantalla <strong>demasiado larga</strong> (el usuario se cansa de scroll).</li>
+                    <li>No hacerla <strong>demasiado corta</strong> (se siente incompleta).</li>
+                    <li>Usa <strong>grillas</strong> para organizar el contenido.</li>
+                    <li>Distribuye el peso visual de manera equilibrada.</li>
+                </ul>
+            </div>
+
+            <div class="demo-layout">
+                <div class="bloque principal">🔹 Contenido principal (más grande)</div>
+                <div class="bloque">Secundario 1</div>
+                <div class="bloque">Secundario 2</div>
+                <div class="bloque">Secundario 3</div>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">Ejemplo: layout con un elemento principal y tres secundarios.</p>
+
+            <!-- ============================================ -->
+            <!-- ALINEACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Alineación — Pocos puntos de alineación</h4>
+            <div class="ui-card" style="border-left-color: #0d47a1;">
+                <h5>📌 ¿Qué es la alineación?</h5>
+                <p>Es la forma en que se alinean los elementos entre sí. Lo recomendable es usar <strong>pocos puntos de alineación</strong> (1 o 2) para mantener el orden y la limpieza.</p>
+                <p><strong>Regla:</strong> Alinea todo a la izquierda, al centro o a la derecha. No mezcles muchas alineaciones en una misma pantalla.</p>
+            </div>
+
+            <div class="alineacion-demo">
+                <div class="izquierda">⬅️ Alineación a la izquierda (la más común para texto)</div>
+                <div class="centro">⬆️ Alineación al centro (para títulos o elementos destacados)</div>
+                <div class="derecha">➡️ Alineación a la derecha (menos común, para números o precios)</div>
+                <p style="font-size: 13px; color: #555; margin-top: 6px;">✅ Recomendación: usa 1 o 2 alineaciones como máximo.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- WHITE SPACE -->
+            <!-- ============================================ -->
+            <h4>🔹 White Space (Espacio blanco / espacio negativo)</h4>
+            <div class="ui-card" style="border-left-color: #2e7d32;">
+                <h5>📌 ¿Qué es el white space?</h5>
+                <p>Es el <strong>espacio vacío</strong> entre los elementos. No es espacio desperdiciado, es espacio que <strong>mejora la legibilidad</strong>, la claridad y la estética.</p>
+                <p><strong>Beneficios:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>Hace que el diseño se vea <strong>más limpio</strong>.</li>
+                    <li>Hace que el diseño se vea <strong>más caro</strong> y premium.</li>
+                    <li>Ayuda a la <strong>comprensión</strong> del contenido.</li>
+                </ul>
+            </div>
+
+            <div class="demo-white-space">
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 150px;">
+                        <p style="font-weight: 600;">❌ Sin white space</p>
+                        <div class="sin-espacio" style="padding: 4px;">
+                            <p style="margin: 2px 0; background: #f0f0f0; padding: 2px;">Elemento 1</p>
+                            <p style="margin: 2px 0; background: #f0f0f0; padding: 2px;">Elemento 2</p>
+                            <p style="margin: 2px 0; background: #f0f0f0; padding: 2px;">Elemento 3</p>
+                            <p style="margin: 2px 0; background: #f0f0f0; padding: 2px;">Elemento 4</p>
+                        </div>
+                        <p style="font-size: 12px; color: #888;">Se siente apretado, confuso.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 150px;">
+                        <p style="font-weight: 600;">✅ Con white space</p>
+                        <div class="con-espacio" style="padding: 24px;">
+                            <p style="margin: 12px 0; background: #f5f5f5; padding: 8px;">Elemento 1</p>
+                            <p style="margin: 12px 0; background: #f5f5f5; padding: 8px;">Elemento 2</p>
+                            <p style="margin: 12px 0; background: #f5f5f5; padding: 8px;">Elemento 3</p>
+                            <p style="margin: 12px 0; background: #f5f5f5; padding: 8px;">Elemento 4</p>
+                        </div>
+                        <p style="font-size: 12px; color: #888;">Se ve más limpio, premium, fácil de leer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- AUDIENCIA -->
+            <!-- ============================================ -->
+            <h4>🔹 Audiencia — ¿Para quién diseño?</h4>
+            <div class="ui-card" style="border-left-color: #6c5ce7;">
+                <h5>📌 ¿Qué es la audiencia?</h5>
+                <p>Es el <strong>público objetivo</strong> al que va dirigido el producto. El diseño debe adaptarse a sus necesidades, gustos y expectativas.</p>
+                <p><strong>Preguntas clave:</strong></p>
+                <ul style="padding-left: 20px;">
+                    <li>¿Quién es mi usuario? (edad, profesión, intereses)</li>
+                    <li>¿Qué espera de la interfaz?</li>
+                    <li>¿Qué colores, tipografías y estilos le atraen?</li>
+                </ul>
+            </div>
+
+            <div class="audiencia-ejemplo">
+                <div class="tipo" style="border-top-color: #e65100;">
+                    <h5>👶 Audiencia juvenil (15-25 años)</h5>
+                    <p>Colores vibrantes, tipografías modernas, layouts dinámicos, mucho espacio, elementos divertidos.</p>
+                    <p style="font-size: 13px; color: #555;">Ejemplo: TikTok, Instagram, marcas de moda joven.</p>
+                </div>
+                <div class="tipo" style="border-top-color: #1e88e5;">
+                    <h5>🧑‍💼 Audiencia profesional (25-50 años)</h5>
+                    <p>Colores sobrios (azul, gris), tipografías serias, layouts limpios, información clara y directa.</p>
+                    <p style="font-size: 13px; color: #555;">Ejemplo: LinkedIn, bancos, software empresarial.</p>
+                </div>
+                <div class="tipo" style="border-top-color: #2e7d32;">
+                    <h5>🌿 Audiencia ecológica / saludable</h5>
+                    <p>Colores verdes, tonos tierra, tipografías orgánicas, espacios amplios, sensación de calma.</p>
+                    <p style="font-size: 13px; color: #555;">Ejemplo: marcas de productos orgánicos, wellness.</p>
+                </div>
+                <div class="tipo" style="border-top-color: #6c5ce7;">
+                    <h5>💎 Audiencia de lujo</h5>
+                    <p>Colores oscuros (negro, dorado), tipografías serif elegantes, mucho white space, minimalismo.</p>
+                    <p style="font-size: 13px; color: #555;">Ejemplo: marcas de moda premium, joyería.</p>
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Dependiendo de mi público, así será mi diseño:</span>
+                <p>Si diseño para adolescentes, usaré colores brillantes y tipografías modernas. Si diseño para ejecutivos, usaré colores sobrios y layouts formales. <strong>¡El diseño debe hablar el idioma de tu audiencia!</strong></p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Elige una audiencia (juvenil, profesional, ecológica, lujo).</li>
+                    <li>2. Diseña una interfaz (puede ser en papel o herramienta digital) para una aplicación de <strong>recordatorios</strong>.</li>
+                    <li>3. Aplica jerarquía: usa color y tamaño para destacar lo importante.</li>
+                    <li>4. Aplica layout: distribuye elementos de forma equilibrada.</li>
+                    <li>5. Usa pocos puntos de alineación (máximo 2).</li>
+                    <li>6. Incluye white space para que se vea limpio.</li>
+                    <li>7. Explica cómo tu diseño se adapta a la audiencia elegida.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Cómo cambia el diseño si cambia la audiencia?</li>
+                    <li>¿Por qué el white space hace que un diseño se vea "más caro"?</li>
+                    <li>¿Cuántos puntos de alineación recomiendas usar?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante aplica los principios de UI design: jerarquía, layout, alineación, white space y diseño para audiencia.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Usa color y tamaño para crear jerarquía.</li>
+                <li>Distribuye elementos de forma equilibrada.</li>
+                <li>Aplica alineación consistente.</li>
+                <li>Incluye white space en el diseño.</li>
+                <li>Adapta el diseño a la audiencia elegida.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Papel / Figma / Canva</li>
+                <li>Ejemplos de interfaces reales</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cómo se logra la jerarquía visual?</li>
+                <li>¿Qué elementos usamos para destacar información?</li>
+                <li>¿Qué es el white space y por qué es importante?</li>
+                <li>¿Cuántos puntos de alineación recomiendas?</li>
+                <li>¿Por qué debemos conocer a nuestra audiencia?</li>
+                <li>¿Qué pasa si diseño sin considerar al usuario?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Rediseña mentalmente la interfaz de una aplicación que uses a diario. Identifica qué elementos de jerarquía, layout, alineación y white space podrían mejorarse. Comparte tu análisis.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de UI design y su aplicación práctica.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende cómo aplicar los principios en diseño.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de interfaces</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para UI Design:</strong></p>
+        <p>• <strong>Jerarquía:</strong> Usa color y tamaño para guiar la atención.</p>
+        <p>• <strong>Color:</strong> Destaca lo importante (botones, títulos).</p>
+        <p>• <strong>Tamaño:</strong> Más grande = más importante.</p>
+        <p>• <strong>Layout:</strong> Equilibrado, ni muy largo ni muy corto.</p>
+        <p>• <strong>Alineación:</strong> Máximo 2 puntos de alineación.</p>
+        <p>• <strong>White Space:</strong> Hace que el diseño se vea limpio y premium.</p>
+        <p>• <strong>Audiencia:</strong> Diseña para tu usuario, no para ti.</p>
+        <p>• <strong>Pregunta siempre:</strong> ¿A quién le estoy diseñando?</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña los fundamentos del diseño de interfaces.</p>
+        <p>• Desarrolla criterio visual y estratégico.</p>
+        <p>• Conecta el diseño con las necesidades del usuario.</p>
+        <p>• Prepara a los estudiantes para crear experiencias digitales efectivas.</p>
+    </div>
+
+</div>
+</body>
+</html>

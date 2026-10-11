@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Falacias Lógicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .fallacy-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 8px;
+        }
+        .fallacy-card strong {
+            color: #1a237e;
+            font-size: 16px;
+        }
+        .fallacy-card p {
+            font-size: 14px;
+            margin: 4px 0 0 0;
+            color: #333;
+        }
+        .fallacy-card .example {
+            font-size: 13px;
+            color: #555;
+            background: #e8eaf6;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Falacias lógicas - Pendiente resbaladiza, Pregunta cargada, Red herring, Generalización apresurada, Petición de principio, Post hoc ergo propter hoc, Apelación a la emoción
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Identifica y analiza las principales falacias lógicas utilizadas en argumentos cotidianos y académicos, desarrollando habilidades de pensamiento crítico para evaluar la validez de los razonamientos y construir argumentos sólidos.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es una falacia lógica y su impacto en la argumentación.</li>
+                <li>Identifica las características de cada falacia estudiada: Pendiente resbaladiza, Pregunta cargada, Red herring, Generalización apresurada, Petición de principio, Post hoc ergo propter hoc, Apelación a la emoción.</li>
+                <li>Comprende por qué estas falacias son consideradas errores de razonamiento.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Reconocer falacias en discursos, debates y textos argumentativos.</li>
+                <li>Diferenciar entre argumentos válidos y falacias.</li>
+                <li>Construir contraargumentos para refutar falacias.</li>
+                <li>Evaluar la calidad de un argumento identificando posibles falacias.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra pensamiento crítico al analizar argumentos.</li>
+                <li>Valora la importancia de la argumentación lógica y fundamentada.</li>
+                <li>Participa activamente en el análisis de ejemplos y ejercicios.</li>
+                <li>Reconoce la utilidad de identificar falacias en la vida cotidiana y académica.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Falacias en la argumentación cotidiana"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y presentación.</p>
+            <p><span class="label">Descripción:</span> El docente introduce el tema y repasa la importancia de identificar falacias.</p>
+
+            <p><strong>🔹 ¿Por qué es importante reconocer falacias?</strong></p>
+            <ul>
+                <li>Las falacias son errores de razonamiento que pueden hacer que un argumento parezca válido cuando no lo es .</li>
+                <li>Reconocerlas permite evaluar críticamente discursos, debates y publicidad .</li>
+                <li>Ayuda a construir argumentos más sólidos y fundamentados .</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">💡 Recordatorio:</span><br>
+                Una falacia no es un argumento falso, sino un <strong>error en la estructura lógica</strong> del razonamiento.
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la importancia de identificar falacias en la argumentación.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Explica por qué es importante reconocer falacias.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejemplos de argumentos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Explorando las falacias lógicas"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada con ejemplos.</p>
+
+            <!-- Falacia 1: Pendiente resbaladiza -->
+            <h4>🔹 Pendiente resbaladiza (Slippery slope)</h4>
+            <div class="fallacy-card" style="border-left-color: #2e7d32;">
+                <strong>📌 Pendiente resbaladiza</strong>
+                <p>Se argumenta que un primer paso inevitablemente llevará a una cadena de eventos negativos, sin evidencia de que eso suceda .</p>
+                <span class="example">📌 Ejemplo: "Si permitimos que los estudiantes usen celulares en clase, pronto estarán usando computadoras, luego drones, y la educación se acabará."</span>
+            </div>
+
+            <!-- Falacia 2: Pregunta cargada -->
+            <h4>🔹 Pregunta cargada (Loaded question)</h4>
+            <div class="fallacy-card" style="border-left-color: #c62828;">
+                <strong>📌 Pregunta cargada</strong>
+                <p>Se formula una pregunta que contiene una suposición no demostrada, y cualquier respuesta parece aceptar esa suposición .</p>
+                <span class="example">📌 Ejemplo: "¿Seguís robando dinero de la empresa?" (Asume que la persona robó en el pasado).</span>
+            </div>
+
+            <!-- Falacia 3: Red herring -->
+            <h4>🔹 Red herring (Pista falsa o cortina de humo)</h4>
+            <div class="fallacy-card" style="border-left-color: #f9a825;">
+                <strong>📌 Red herring</strong>
+                <p>Se introduce un tema irrelevante para desviar la atención del argumento principal .</p>
+                <span class="example">📌 Ejemplo: "El gobierno dice que debemos reducir el gasto, pero ¿qué hay de la corrupción en el partido de oposición?"</span>
+            </div>
+
+            <!-- Falacia 4: Generalización apresurada -->
+            <h4>🔹 Generalización apresurada (Hasty generalization)</h4>
+            <div class="fallacy-card" style="border-left-color: #e65100;">
+                <strong>📌 Generalización apresurada</strong>
+                <p>Se llega a una conclusión general basada en una muestra demasiado pequeña o poco representativa .</p>
+                <span class="example">📌 Ejemplo: "Conocí a dos personas de ese país y eran groseras, así que todos los de ese país son groseros."</span>
+            </div>
+
+            <!-- Falacia 5: Petición de principio -->
+            <h4>🔹 Petición de principio (Argumento circular)</h4>
+            <div class="fallacy-card" style="border-left-color: #6a1b9a;">
+                <strong>📌 Petición de principio</strong>
+                <p>La conclusión del argumento ya está incluida en las premisas, por lo que no hay un razonamiento real .</p>
+                <span class="example">📌 Ejemplo: "La Biblia es la palabra de Dios porque la Biblia dice que es la palabra de Dios."</span>
+            </div>
+
+            <!-- Falacia 6: Post hoc ergo propter hoc -->
+            <h4>🔹 Post hoc ergo propter hoc (Falsa causa)</h4>
+            <div class="fallacy-card" style="border-left-color: #0d47a1;">
+                <strong>📌 Post hoc ergo propter hoc</strong>
+                <p>Se asume que, porque un evento ocurrió antes que otro, el primero fue la causa del segundo .</p>
+                <span class="example">📌 Ejemplo: "Me puse este amuleto y al día siguiente gané la lotería, así que el amuleto me dio suerte."</span>
+            </div>
+
+            <!-- Falacia 7: Apelación a la emoción -->
+            <h4>🔹 Apelación a la emoción (Argumentum ad passiones)</h4>
+            <div class="fallacy-card" style="border-left-color: #c62828;">
+                <strong>📌 Apelación a la emoción</strong>
+                <p>Se intenta manipular las emociones del público en lugar de presentar evidencia lógica .</p>
+                <span class="example">📌 Ejemplo: "Si no donas a esta causa, esos niños hambrientos sufrirán por tu culpa."</span>
+            </div>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Identifica la falacia en cada uno de los siguientes argumentos:</strong></p>
+                <ul>
+                    <li><strong>1.</strong> "Si dejas que tu hijo juegue videojuegos violentos, pronto empezará a tener pesadillas, luego será agresivo y eventualmente se convertirá en un delincuente." → <strong>Pendiente resbaladiza</strong></li>
+                    <li><strong>2.</strong> "¿Por qué apoyas a ese político corrupto?" → <strong>Pregunta cargada</strong></li>
+                    <li><strong>3.</strong> "El candidato A dice que debemos mejorar la educación, pero ¿qué hay del escándalo de su partido?" → <strong>Red herring</strong></li>
+                    <li><strong>4.</strong> "Mi vecino tiene un perro agresivo, así que todos los perros son peligrosos." → <strong>Generalización apresurada</strong></li>
+                    <li><strong>5.</strong> "El sistema funciona porque funciona." → <strong>Petición de principio</strong></li>
+                    <li><strong>6.</strong> "Me tomé este remedio y al día siguiente se me quitó el dolor, así que el remedio funcionó." → <strong>Post hoc ergo propter hoc</strong></li>
+                    <li><strong>7.</strong> "Si no compras este producto, estarás perdiendo la oportunidad de ser más feliz." → <strong>Apelación a la emoción</strong></li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué falacia crees que es más común en la publicidad? ¿Por qué?</li>
+                    <li>¿Cómo puedes identificar una falacia cuando escuchas un argumento?</li>
+                    <li>¿Por qué es importante reconocer las falacias en la vida cotidiana?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica las principales falacias lógicas y las reconoce en diferentes contextos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Define correctamente cada falacia.</li>
+                <li>Identifica falacias en ejemplos dados.</li>
+                <li>Explica por qué una falacia es un error de razonamiento.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Ejemplos de argumentos</li>
+                <li>Computadora (opcional)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de falacias"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué falacia se comete al argumentar que un primer paso llevará a una catástrofe? → <strong>Pendiente resbaladiza</strong></li>
+                <li>¿Qué falacia se comete al formular una pregunta que contiene una suposición? → <strong>Pregunta cargada</strong></li>
+                <li>¿Qué falacia se comete al desviar la atención del tema principal? → <strong>Red herring</strong></li>
+                <li>¿Qué falacia se comete al sacar una conclusión general de una muestra pequeña? → <strong>Generalización apresurada</strong></li>
+                <li>¿Qué falacia se comete cuando la conclusión ya está en las premisas? → <strong>Petición de principio</strong></li>
+                <li>¿Qué falacia se comete al asumir que la causa es el evento anterior? → <strong>Post hoc ergo propter hoc</strong></li>
+                <li>¿Qué falacia se comete al manipular emociones en lugar de usar lógica? → <strong>Apelación a la emoción</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el reconocimiento de las falacias lógicas estudiadas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para identificar falacias:</strong></p>
+        <p>• <strong>Pendiente resbaladiza:</strong> ¿Se está asumiendo una cadena de eventos sin evidencia? → Esa es la falacia.</p>
+        <p>• <strong>Pregunta cargada:</strong> ¿La pregunta contiene una suposición no demostrada? → Cuidado.</p>
+        <p>• <strong>Red herring:</strong> ¿Se está cambiando el tema para evitar el argumento principal? → Es una cortina de humo.</p>
+        <p>• <strong>Generalización apresurada:</strong> ¿La muestra es lo suficientemente grande y representativa? → Si no, es una falacia.</p>
+        <p>• <strong>Petición de principio:</strong> ¿La conclusión es igual a la premisa? → Es un argumento circular.</p>
+        <p>• <strong>Post hoc:</strong> ¿La correlación implica causalidad? → No siempre.</p>
+        <p>• <strong>Apelación a la emoción:</strong> ¿Se está usando la emoción en lugar de la lógica? → Es una falacia.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Desarrolla habilidades de pensamiento crítico y análisis argumentativo.</p>
+        <p>• Prepara a los estudiantes para identificar errores de razonamiento en debates y discursos.</p>
+        <p>• Conecta con la importancia de la argumentación lógica en la vida académica y cotidiana.</p>
+        <p>• Fortalece la capacidad de construir argumentos sólidos y fundamentados. 🧠⚡</p>
+    </div>
+
+</div>
+</body>
+</html>

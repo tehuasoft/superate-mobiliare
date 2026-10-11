@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Validaciones en Listas de SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .validacion-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .validacion-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .validacion-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .validacion-card .formula {
+            background: #1e1e2e;
+            color: #d4d4d4;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 4px 0;
+            display: inline-block;
+        }
+
+        .mock-lista {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .mock-lista table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .mock-lista th {
+            background: #e8eaf6;
+            color: #1a237e;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .mock-lista td {
+            padding: 6px 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .mock-lista .etiqueta-estado {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .estado-activo { background: #e3f2fd; color: #0d47a1; }
+        .estado-pausado { background: #fff3e0; color: #e65100; }
+        .estado-cerrado { background: #e8f5e9; color: #2e7d32; }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>✅ PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Validaciones de columna y lista en SharePoint</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a configurar validaciones en listas de SharePoint, tanto a nivel de columna (ej. fecha no menor a hoy) como a nivel de lista (ej. si el estatus es "Cerrado", la fecha de fin es obligatoria), para garantizar la integridad y calidad de los datos ingresados.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende la importancia de las validaciones en bases de datos.</li>
+                <li>Reconoce la diferencia entre validación de columna y validación de lista.</li>
+                <li>Identifica casos de uso comunes para validaciones.</li>
+                <li>Entiende la sintaxis básica de fórmulas en SharePoint.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Configurar validación de columna (ej. fecha >= hoy).</li>
+                <li>Configurar validación de lista (ej. si Estatus = "Cerrado", FechaFin no vacía).</li>
+                <li>Escribir fórmulas de validación usando sintaxis de SharePoint.</li>
+                <li>Probar y verificar el comportamiento de las validaciones.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la calidad de los datos en sistemas colaborativos.</li>
+                <li>Muestra interés por la integridad de la información.</li>
+                <li>Participa activamente en la configuración de validaciones.</li>
+                <li>Desarrolla habilidades de control de calidad de datos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Por qué son importantes las validaciones?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"¿Qué problemas pueden ocurrir si los usuarios ingresan datos incorrectos en una lista? ¿Cómo podemos evitarlo?"</em> Se introduce el concepto de validaciones como mecanismos para garantizar la integridad de los datos.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué son las validaciones en SharePoint?</span>
+                <p>Son <strong>reglas</strong> que se aplican a los datos ingresados en una lista para asegurar que cumplan con ciertos criterios. Pueden ser a nivel de <strong>columna</strong> o a nivel de <strong>lista</strong>.</p>
+                <ul>
+                    <li><strong>Validación de columna:</strong> Aplica a una columna específica (ej. fecha no puede ser anterior a hoy).</li>
+                    <li><strong>Validación de lista:</strong> Aplica a toda la lista y puede involucrar varias columnas (ej. si Estatus = "Cerrado", FechaFin es obligatoria).</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende la utilidad de las validaciones para mantener la calidad de los datos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce la importancia de las validaciones.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de datos incorrectos</li>
+                <li>Acceso a SharePoint (demo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Configuración de validaciones de columna y lista"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- ESTRUCTURA DE LA LISTA -->
+            <!-- ============================================ -->
+            <h4>🔹 Lista de ejemplo: "Proyectos"</h4>
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Columnas de la lista "Proyectos":</span>
+                <ul>
+                    <li><strong>Título</strong> (Texto) — Nombre del proyecto.</li>
+                    <li><strong>Descripción</strong> (Texto) — Detalles.</li>
+                    <li><strong>Propietario</strong> (Persona o Grupo) — Responsable.</li>
+                    <li><strong>Fecha de Inicio</strong> (Fecha) — Inicio del proyecto.</li>
+                    <li><strong>Fecha de Fin</strong> (Fecha) — Fin del proyecto (opcional).</li>
+                    <li><strong>Estatus</strong> (Elección) — Activo, Pausado, Cerrado.</li>
+                </ul>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- VALIDACIÓN DE COLUMNA -->
+            <!-- ============================================ -->
+            <h4>🔹 Validación de columna: Fecha de Inicio no menor a hoy</h4>
+            <div class="validacion-card" style="border-left-color: #0d47a1;">
+                <h5>📌 Regla: La fecha de inicio no puede ser anterior al día de hoy</h5>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Ir a la columna <strong>Fecha de Inicio</strong> → <strong>Configuración de columna</strong>.</li>
+                    <li>En <strong>Validación de columna</strong>, escribir la fórmula:</li>
+                </ul>
+                <div class="formula">= [Fecha de Inicio] >= Today()</div>
+                <p style="font-size: 13px; color: #555;">📌 <strong>Mensaje de error:</strong> "La fecha de inicio no puede ser anterior al día de hoy."</p>
+                <p style="font-size: 13px; color: #555;"><strong>Explicación:</strong> <code>Today()</code> devuelve la fecha actual. La validación impide que el usuario ingrese una fecha anterior.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- VALIDACIÓN DE LISTA -->
+            <!-- ============================================ -->
+            <h4>🔹 Validación de lista: Si Estatus = "Cerrado", Fecha de Fin es obligatoria</h4>
+            <div class="validacion-card" style="border-left-color: #e65100;">
+                <h5>📌 Regla: Si el estatus es "Cerrado", la fecha de fin no puede estar vacía</h5>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Ir a <strong>Configuración</strong> de la lista → <strong>Validación</strong>.</li>
+                    <li>Escribir la fórmula:</li>
+                </ul>
+                <div class="formula">= IF([Estatus]="Cerrado", NOT(ISBLANK([Fecha de Fin])), TRUE)</div>
+                <p style="font-size: 13px; color: #555;">📌 <strong>Mensaje de error:</strong> "Si el estatus es 'Cerrado', la fecha de fin es obligatoria."</p>
+                <p style="font-size: 13px; color: #555;"><strong>Explicación:</strong> Si <code>Estatus</code> es "Cerrado", entonces <code>Fecha de Fin</code> no puede estar vacía. En cualquier otro caso, la validación es verdadera.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- OTRAS VALIDACIONES COMUNES -->
+            <!-- ============================================ -->
+            <h4>🔹 Otros ejemplos de validaciones</h4>
+            <div class="comparacion-grid">
+                <div class="comparacion-item" style="border-top-color: #2e7d32;">
+                    <h5>📌 Fecha de Fin >= Fecha de Inicio</h5>
+                    <p>Valida que la fecha de fin sea posterior o igual a la fecha de inicio.</p>
+                    <div class="formula" style="font-size: 12px;">= [Fecha de Fin] >= [Fecha de Inicio]</div>
+                    <p style="font-size: 13px; color: #555;">Mensaje: "La fecha de fin debe ser posterior a la fecha de inicio."</p>
+                </div>
+                <div class="comparacion-item" style="border-top-color: #6c5ce7;">
+                    <h5>📌 Título no vacío</h5>
+                    <p>Valida que el título no esté vacío.</p>
+                    <div class="formula" style="font-size: 12px;">= NOT(ISBLANK([Título]))</div>
+                    <p style="font-size: 13px; color: #555;">Mensaje: "El título es obligatorio."</p>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO VISUAL DE LISTA CON VALIDACIONES -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo de lista con validaciones aplicadas</h4>
+            <div class="mock-lista">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Fecha de Inicio</th>
+                            <th>Fecha de Fin</th>
+                            <th>Estatus</th>
+                            <th>Validación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>E-commerce App</td>
+                            <td>01/02/2025</td>
+                            <td>—</td>
+                            <td><span class="etiqueta-estado estado-activo">Activo</span></td>
+                            <td>✅ Válido</td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td>Migración de Datos</td>
+                            <td>20/12/2024</td>
+                            <td>—</td>
+                            <td><span class="etiqueta-estado estado-cerrado">Cerrado</span></td>
+                            <td>❌ Fecha de Fin obligatoria</td>
+                        </tr>
+                        <tr>
+                            <td>Dashboard de Métricas</td>
+                            <td>05/04/2025</td>
+                            <td>10/05/2025</td>
+                            <td><span class="etiqueta-estado estado-cerrado">Cerrado</span></td>
+                            <td>✅ Válido</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Ejemplo de lista con validaciones: el segundo registro está marcado como inválido porque falta la Fecha de Fin al estar Cerrado.</p>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, crea una lista "Proyectos" con las columnas mencionadas.</li>
+                    <li>2. Configura la validación de columna para que <strong>Fecha de Inicio</strong> no sea anterior a hoy.</li>
+                    <li>3. Configura la validación de lista para que si <strong>Estatus = "Cerrado"</strong>, entonces <strong>Fecha de Fin</strong> sea obligatoria.</li>
+                    <li>4. Prueba las validaciones: intenta agregar un proyecto con fecha de inicio anterior a hoy y otro con estatus "Cerrado" sin fecha de fin.</li>
+                    <li>5. Si no tienes acceso, escribe las fórmulas y explica cómo funcionarían.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué otras validaciones serían útiles en una lista de proyectos?</li>
+                    <li>¿Qué diferencia hay entre validación de columna y validación de lista?</li>
+                    <li>¿Cómo afectan las validaciones a la experiencia del usuario?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante configura validaciones de columna y lista en SharePoint para garantizar la calidad de los datos.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Configura validación de columna con fórmula correcta.</li>
+                <li>Configura validación de lista con fórmula condicional.</li>
+                <li>Comprende el propósito de cada validación.</li>
+                <li>Prueba y verifica el comportamiento de las validaciones.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Guía de fórmulas de validación</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es una validación de columna?</li>
+                <li>¿Qué es una validación de lista?</li>
+                <li>¿Cómo se escribe una fórmula para que una fecha no sea anterior a hoy?</li>
+                <li>¿Cómo se escribe una fórmula condicional para obligar un campo según el estatus?</li>
+                <li>¿Qué función se usa para verificar si un campo está vacío?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña dos validaciones adicionales para la lista "Proyectos":</p>
+                <ul>
+                    <li>1. Que el <strong>Título</strong> tenga al menos 5 caracteres.</li>
+                    <li>2. Que si el <strong>Estatus</strong> es "Activo", la <strong>Fecha de Fin</strong> esté vacía o sea posterior a la fecha actual.</li>
+                </ul>
+                <p>Escribe las fórmulas y explica el mensaje de error que mostrarías.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de validaciones en listas de SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende cómo aplicar validaciones en diferentes escenarios.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre validaciones en SharePoint:</strong></p>
+        <p>• <strong>Validación de columna:</strong> Se aplica a una sola columna. Fórmula simple.</p>
+        <p>• <strong>Validación de lista:</strong> Puede involucrar varias columnas. Usa <code>IF</code> y <code>AND</code>/<code>OR</code>.</p>
+        <p>• <strong>Today():</strong> Fecha actual.</p>
+        <p>• <strong>ISBLANK():</strong> Verifica si un campo está vacío.</p>
+        <p>• <strong>AND(), OR():</strong> Combinan condiciones.</p>
+        <p>• <strong>Mensajes de error:</strong> Claros y útiles para el usuario.</p>
+        <p>• <strong>Prueba siempre</strong> las validaciones después de configurarlas.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a garantizar la calidad de los datos en listas colaborativas.</p>
+        <p>• Desarrolla habilidades de control de integridad de información.</p>
+        <p>• Prepara a los estudiantes para gestionar datos confiables en entornos profesionales.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

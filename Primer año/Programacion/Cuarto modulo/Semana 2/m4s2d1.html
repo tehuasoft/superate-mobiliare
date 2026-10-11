@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Navegación en SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .nav-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .nav-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .nav-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        .mock-nav {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 12px 16px;
+            margin: 8px 0;
+        }
+        .mock-nav .menu-superior {
+            display: flex;
+            gap: 16px;
+            background: #1a237e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px 4px 0 0;
+            font-weight: 500;
+        }
+        .mock-nav .menu-superior span { padding: 4px 8px; }
+        .mock-nav .menu-lateral {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px 0;
+            background: #f5f7fa;
+            border-right: 1px solid #e0e0e0;
+            width: 180px;
+            padding: 8px 12px;
+        }
+        .mock-nav .menu-lateral span {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .mock-nav .menu-lateral span.activo {
+            background: #e3f2fd;
+            color: #0d47a1;
+            font-weight: 600;
+        }
+        .mock-nav .footer {
+            background: #e8eaf6;
+            padding: 8px 16px;
+            border-radius: 0 0 4px 4px;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .mock-nav .contenido {
+            display: flex;
+            gap: 16px;
+            padding: 12px 0;
+        }
+        .mock-nav .contenido .area {
+            flex: 1;
+            padding: 8px 12px;
+        }
+
+        .buenas-practicas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .buenas-practicas .item {
+            background: #f5f7fa;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border-left: 4px solid #2e7d32;
+        }
+        .buenas-practicas .item h6 {
+            color: #1a237e;
+        }
+        .buenas-practicas .item p {
+            font-size: 13px;
+            margin: 2px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .buenas-practicas { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+            .mock-nav .contenido { flex-direction: column; }
+            .mock-nav .menu-lateral { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🧭 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Navegación en SharePoint · Menús, navegación izquierda, pie de página · Arquitectura de información</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante comprende la importancia de la navegación en SharePoint, aprende a configurar menús (superior, izquierdo y pie de página), y aplica buenas prácticas de arquitectura de información para que los usuarios encuentren lo que necesitan de manera rápida e intuitiva.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende el concepto de arquitectura de información.</li>
+                <li>Reconoce los elementos de navegación en SharePoint: menú superior, navegación izquierda, pie de página.</li>
+                <li>Identifica buenas prácticas para organizar contenido.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Configurar el menú de navegación superior.</li>
+                <li>Configurar la navegación izquierda (estructura de navegación).</li>
+                <li>Agregar enlaces en el pie de página.</li>
+                <li>Aplicar principios de arquitectura de información para organizar el sitio.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la importancia de una navegación clara para la experiencia del usuario.</li>
+                <li>Muestra interés por la organización y estructura de la información.</li>
+                <li>Participa activamente en la configuración de navegación.</li>
+                <li>Desarrolla criterio para diseñar arquitecturas de información efectivas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo encontrar información en un sitio?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Cuando entras a un sitio web o intranet, ¿cómo sabes dónde hacer clic para encontrar lo que buscas? ¿Qué hace que una navegación sea buena o mala?"</em></p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Elementos de navegación en SharePoint:</span>
+                <ul>
+                    <li><strong>Menú superior:</strong> Enlaces principales, visible en todas las páginas.</li>
+                    <li><strong>Navegación izquierda:</strong> Estructura jerárquica del sitio o de la sección actual.</li>
+                    <li><strong>Pie de página:</strong> Enlaces secundarios, información legal, contacto.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los elementos de navegación de SharePoint y su propósito.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los elementos de navegación.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de sitios con buena y mala navegación</li>
+                <li>Acceso a SharePoint (demo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Configuración de navegación y arquitectura de información"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- MENÚ SUPERIOR -->
+            <!-- ============================================ -->
+            <h4>🔹 Configurar el menú superior</h4>
+            <div class="nav-card">
+                <h5>📌 Menú superior (cabecera)</h5>
+                <p>El menú superior aparece en la parte superior de todas las páginas. Contiene enlaces a las secciones principales del sitio.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Ir a <strong>Configuración</strong> → <strong>Información del sitio</strong> → <strong>Ver todas las características</strong> → <strong>Navegación</strong>.</li>
+                    <li>En <strong>Navegación global</strong>, agregar o editar enlaces.</li>
+                    <li>Ejemplo de enlaces: "Inicio", "Documentos", "Calendario", "Acerca de".</li>
+                </ul>
+            </div>
+
+            <div class="mock-nav">
+                <div class="menu-superior">
+                    <span>🏠 Inicio</span>
+                    <span>📂 Documentos</span>
+                    <span>📅 Calendario</span>
+                    <span>👥 Equipo</span>
+                    <span>ℹ️ Acerca de</span>
+                </div>
+                <div style="padding: 8px; font-size: 13px; color: #888; text-align: center;">↑ Menú superior (visible en todas las páginas)</div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- NAVEGACIÓN IZQUIERDA -->
+            <!-- ============================================ -->
+            <h4>🔹 Configurar navegación izquierda</h4>
+            <div class="nav-card" style="border-left-color: #e65100;">
+                <h5>📌 Navegación izquierda (jerarquía)</h5>
+                <p>Muestra la estructura del sitio o de la sección actual. Ayuda a los usuarios a entender dónde están y navegar a niveles superiores o inferiores.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>En <strong>Configuración</strong> → <strong>Navegación</strong>, sección <strong>Navegación actual</strong>.</li>
+                    <li>Seleccionar elementos para mostrar, crear subniveles, ordenar.</li>
+                    <li>Recomendación: usar <strong>navegación estructurada</strong> (manual) para tener control sobre el orden.</li>
+                </ul>
+            </div>
+
+            <div class="mock-nav">
+                <div style="display: flex; gap: 16px;">
+                    <div class="menu-lateral" style="width: 160px; min-width: 140px;">
+                        <span class="activo">📂 Documentos</span>
+                        <span style="padding-left: 20px;">📁 Informes</span>
+                        <span style="padding-left: 20px;">📁 Plantillas</span>
+                        <span>📅 Calendario</span>
+                        <span>👥 Equipo</span>
+                        <span>⚙️ Configuración</span>
+                    </div>
+                    <div class="area" style="flex: 1; padding: 8px;">
+                        <p style="font-size: 14px; color: #555;"><strong>Contenido de la sección</strong></p>
+                        <p style="font-size: 14px; color: #555;">Aquí se muestra el contenido de la página actual. La navegación izquierda ayuda a moverse entre secciones relacionadas.</p>
+                    </div>
+                </div>
+                <div style="padding: 8px; font-size: 13px; color: #888; text-align: center;">↑ Navegación izquierda (estructura jerárquica)</div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- PIE DE PÁGINA -->
+            <!-- ============================================ -->
+            <h4>🔹 Configurar pie de página</h4>
+            <div class="nav-card" style="border-left-color: #2e7d32;">
+                <h5>📌 Pie de página</h5>
+                <p>El pie de página aparece al final de todas las páginas. Se usa para enlaces secundarios, información legal, contacto, etc.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>En el sitio, ir a <strong>Configuración</strong> → <strong>Editar página principal</strong>.</li>
+                    <li>Agregar un web part de <strong>Texto</strong> o <strong>Enlaces</strong> en la sección del pie.</li>
+                    <li>O usar <strong>Navegación</strong> → <strong>Pie de página</strong> (en algunas versiones).</li>
+                </ul>
+            </div>
+
+            <div class="mock-nav">
+                <div class="footer">
+                    <span>📧 contacto@empresa.com</span>
+                    <span>📞 +34 900 123 456</span>
+                    <span>📋 Política de privacidad</span>
+                    <span>© 2025 Empresa</span>
+                </div>
+                <div style="padding: 4px; font-size: 13px; color: #888; text-align: center;">↑ Pie de página (enlaces secundarios)</div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ARQUITECTURA DE INFORMACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Buenas prácticas de arquitectura de información</h4>
+
+            <div class="buenas-practicas">
+                <div class="item">
+                    <h6>📌 1. Organización por categorías</h6>
+                    <p>Agrupa contenido relacionado. Ejemplo: "Documentos", "Calendario", "Equipo", "Recursos".</p>
+                </div>
+                <div class="item">
+                    <h6>📌 2. Jerarquía clara</h6>
+                    <p>Máximo 3-4 niveles de profundidad. El usuario no debe perderse.</p>
+                </div>
+                <div class="item">
+                    <h6>📌 3. Nombres descriptivos</h6>
+                    <p>Usa nombres que los usuarios entiendan. "Documentos" en lugar de "Biblioteca1".</p>
+                </div>
+                <div class="item">
+                    <h6>📌 4. Consistencia</h6>
+                    <p>Mantén la misma estructura en todo el sitio. No cambies los nombres de los menús.</p>
+                </div>
+                <div class="item">
+                    <h6>📌 5. Navegación visible</h6>
+                    <p>El usuario debe saber siempre dónde está (migas de pan, navegación izquierda activa).</p>
+                </div>
+                <div class="item">
+                    <h6>📌 6. Menos es más</h6>
+                    <p>No satures los menús. 5-7 elementos principales es lo ideal.</p>
+                </div>
+            </div>
+
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Arquitectura de información ejemplo:</span>
+                <div style="font-size: 14px; padding: 8px; background: white; border-radius: 6px;">
+                    <strong>Inicio</strong> (página principal)<br>
+                    ├── <strong>Documentos</strong><br>
+                    │&nbsp;&nbsp;├── Informes<br>
+                    │&nbsp;&nbsp;├── Plantillas<br>
+                    │&nbsp;&nbsp;└── Actas<br>
+                    ├── <strong>Calendario</strong><br>
+                    ├── <strong>Equipo</strong><br>
+                    │&nbsp;&nbsp;├── Perfiles<br>
+                    │&nbsp;&nbsp;└── Contacto<br>
+                    └── <strong>Recursos</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── Manuales<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;└── Enlaces útiles
+                </div>
+                <p style="font-size: 13px; color: #555; margin-top: 4px;">✅ Estructura clara, con categorías y subcategorías lógicas.</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, configura la navegación de tu Sitio de Equipo:</li>
+                    <ul style="padding-left: 20px;">
+                        <li>Agrega al menos 4 elementos en el <strong>menú superior</strong>.</li>
+                        <li>Personaliza la <strong>navegación izquierda</strong> con 2-3 niveles de profundidad.</li>
+                        <li>Agrega un <strong>pie de página</strong> con información de contacto y un enlace a política de privacidad.</li>
+                    </ul>
+                    <li>2. Dibuja un mapa de la arquitectura de información (estructura de navegación) de tu sitio.</li>
+                    <li>3. Explica por qué organizaste el contenido de esa manera.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Por qué es importante que el usuario sepa dónde está en el sitio?</li>
+                    <li>¿Qué problemas puede causar una navegación inconsistente?</li>
+                    <li>¿Cuántos elementos recomiendas en un menú superior?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante configura menús de navegación en SharePoint y aplica principios de arquitectura de información.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Configura el menú superior correctamente.</li>
+                <li>Configura la navegación izquierda con estructura jerárquica.</li>
+                <li>Agrega enlaces en el pie de página.</li>
+                <li>Organiza el contenido con una arquitectura clara.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Guía de configuración de navegación</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cuáles son los elementos de navegación en SharePoint?</li>
+                <li>¿Cómo se configura el menú superior?</li>
+                <li>¿Para qué sirve la navegación izquierda?</li>
+                <li>¿Qué tipo de enlaces van en el pie de página?</li>
+                <li>¿Qué es la arquitectura de información?</li>
+                <li>¿Cuántos niveles de profundidad recomiendas?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña la arquitectura de información (mapa de navegación) para un sitio de SharePoint de una empresa ficticia con los siguientes departamentos:</p>
+                <ul>
+                    <li>Recursos Humanos</li>
+                    <li>Tecnología</li>
+                    <li>Ventas</li>
+                    <li>Comunicación</li>
+                </ul>
+                <p>Define el menú superior, la navegación izquierda y el pie de página. Explica tus decisiones.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de navegación y arquitectura de información en SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende la importancia de una buena navegación.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para navegación en SharePoint:</strong></p>
+        <p>• <strong>Menú superior:</strong> Enlaces principales, 5-7 elementos máximo.</p>
+        <p>• <strong>Navegación izquierda:</strong> Estructura jerárquica, ayuda a ubicar al usuario.</p>
+        <p>• <strong>Pie de página:</strong> Enlaces secundarios, contacto, legal.</p>
+        <p>• <strong>Arquitectura de información:</strong> Organiza el contenido de forma lógica.</p>
+        <p>• <strong>Consistencia:</strong> Mantén la misma estructura en todo el sitio.</p>
+        <p>• <strong>Nombres claros:</strong> Usa términos que los usuarios entiendan.</p>
+        <p>• <strong>Menos es más:</strong> No satures los menús.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a estructurar la información para que los usuarios encuentren lo que buscan.</p>
+        <p>• Desarrolla habilidades de organización y arquitectura de información.</p>
+        <p>• Prepara a los estudiantes para diseñar intranets y sitios colaborativos efectivos.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

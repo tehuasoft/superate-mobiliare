@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación de Clase - Informática / Linux</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f4f8;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background: white;
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #1a237e;
+        border-left: 6px solid #1a237e;
+        padding-left: 20px;
+        margin-bottom: 30px;
+      }
+      .comp-general {
+        background: #e8eaf6;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        border-left: 6px solid #3f51b5;
+      }
+      .comp-general h2 {
+        font-size: 18px;
+        color: #1a237e;
+        margin-bottom: 6px;
+      }
+      .comp-general p {
+        font-size: 15px;
+        color: #1a237e;
+        line-height: 1.6;
+      }
+      .competencias {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 35px;
+      }
+      .comp-box {
+        background: #f5f7fa;
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid #3f51b5;
+      }
+      .comp-box h3 {
+        font-size: 15px;
+        color: #1a237e;
+        margin-bottom: 10px;
+      }
+      .comp-box ul {
+        list-style: none;
+        padding: 0;
+      }
+      .comp-box ul li {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 0;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .comp-box ul li::before {
+        content: "•";
+        color: #3f51b5;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+      .seccion {
+        margin-bottom: 35px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+      .seccion-header {
+        padding: 14px 25px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .seccion-header .tiempo {
+        font-size: 16px;
+        font-weight: normal;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 4px 16px;
+        border-radius: 30px;
+      }
+      .inicio .seccion-header {
+        background: #2e7d32;
+      }
+      .desarrollo .seccion-header {
+        background: #e65100;
+      }
+      .cierre .seccion-header {
+        background: #0d47a1;
+      }
+
+      .seccion-body {
+        padding: 25px 30px;
+        background: #fafbfc;
+      }
+      .seccion-body h4 {
+        font-size: 18px;
+        color: #1a237e;
+        margin: 18px 0 8px 0;
+      }
+      .seccion-body h4:first-of-type {
+        margin-top: 0;
+      }
+      .seccion-body p,
+      .seccion-body li {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #222;
+      }
+      .seccion-body ul {
+        padding-left: 25px;
+        margin: 8px 0 12px 0;
+      }
+      .seccion-body .label {
+        font-weight: 600;
+        color: #1a237e;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 12px 0;
+      }
+      .ejemplo-box {
+        background: #e3f2fd;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      .ejemplo-box .highlight {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0d47a1;
+      }
+      .codigo-box {
+        background: #1a1a2e;
+        color: #e0e0e0;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin: 8px 0;
+        font-family: "Courier New", monospace;
+        font-size: 15px;
+        overflow-x: auto;
+      }
+      .codigo-box .cmd {
+        color: #4fc3f7;
+      }
+      .codigo-box .output {
+        color: #a5d6a7;
+      }
+      .codigo-box .comment {
+        color: #888;
+        font-style: italic;
+      }
+      .actividad-practica {
+        background: #fff3e0;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin: 18px 0 8px 0;
+      }
+      .actividad-practica ul {
+        columns: 2;
+        column-gap: 30px;
+      }
+      .actividad-practica ul li {
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .tip-clave {
+        background: #e8f5e9;
+        padding: 18px 25px;
+        border-radius: 12px;
+        margin-top: 25px;
+        border-left: 6px solid #2e7d32;
+      }
+      .tip-clave p {
+        margin: 6px 0;
+        font-size: 15px;
+      }
+      .footer-clase {
+        background: #fce4ec;
+        padding: 16px 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        border-left: 6px solid #c62828;
+      }
+      .footer-clase p {
+        font-size: 15px;
+        margin: 4px 0;
+      }
+      .warning-box {
+        background: #fff8e1;
+        border-left: 6px solid #f9a825;
+        padding: 12px 18px;
+        border-radius: 10px;
+        margin: 12px 0;
+      }
+      .step-list {
+        list-style: none;
+        counter-reset: step-counter;
+        padding: 0;
+      }
+      .step-list li {
+        counter-increment: step-counter;
+        padding: 10px 0 10px 50px;
+        position: relative;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      .step-list li::before {
+        content: counter(step-counter);
+        background: #3f51b5;
+        color: white;
+        font-weight: bold;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top: 8px;
+        font-size: 14px;
+      }
+      .step-list li:last-child {
+        border-bottom: none;
+      }
+      .upgrade-warning {
+        background: #ffcdd2;
+        border-left: 6px solid #c62828;
+        padding: 12px 18px;
+        border-radius: 10px;
+        margin: 16px 0;
+      }
+      .upgrade-warning p {
+        margin: 4px 0;
+        font-weight: 500;
+      }
+      .upgrade-warning code {
+        background: #1a1a2e;
+        color: #e0e0e0;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+        .competencias {
+          grid-template-columns: 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .actividad-practica ul {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+      <p
+        style="
+          font-size: 18px;
+          color: #1a237e;
+          margin-top: -10px;
+          margin-bottom: 25px;
+          font-weight: 500;
+        "
+      >
+        Tema: Instalación de herramientas de desarrollo en Fedora (Google
+        Chrome, VS Code, Flutter, Java, Android Studio) + Actualización final
+        del sistema
+      </p>
+
+      <!-- COMPETENCIA GENERAL -->
+      <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>
+          Instala y configura todas las herramientas esenciales para el
+          desarrollo de software en Fedora: Google Chrome, Visual Studio Code,
+          Flutter SDK, Java Correto, Android Studio y las dependencias
+          faltantes, siguiendo instrucciones paso a paso, para luego finalizar
+          con la actualización completa del sistema y el firmware.
+        </p>
+      </div>
+
+      <!-- COMPETENCIAS -->
+      <div class="competencias">
+        <div class="comp-box">
+          <h3>📖 Conceptuales (Saber)</h3>
+          <ul>
+            <li>
+              Comprende el propósito de cada herramienta: Chrome (navegador), VS
+              Code (editor), Flutter (framework móvil), Java (lenguaje y
+              runtime), Android Studio (IDE para Android).
+            </li>
+            <li>
+              Reconoce las dependencias necesarias para Flutter y Android
+              Studio.
+            </li>
+            <li>
+              Entiende el concepto de PATH y cómo agregar directorios para
+              ejecutar comandos globalmente.
+            </li>
+            <li>
+              Comprende la importancia de mantener el sistema actualizado (dnf
+              upgrade y fwupd).
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>🛠️ Procedimentales (Saber hacer)</h3>
+          <ul>
+            <li>
+              Instalar paquetes RPM con
+              <code>sudo dnf install &lt;ruta&gt;</code>.
+            </li>
+            <li>
+              Configurar repositorios de VS Code y agregar la clave GPG de
+              Microsoft.
+            </li>
+            <li>
+              Instalar dependencias de Flutter con
+              <code>sudo dnf install</code>.
+            </li>
+            <li>
+              Extraer archivos comprimidos (<code>tar -xf</code> para .tar.xz,
+              <code>tar -zxvf</code> para .tar.gz).
+            </li>
+            <li>Agregar directorios al PATH en <code>~/.bashrc</code>.</li>
+            <li>
+              Usar <code>update-alternatives</code> para seleccionar versiones
+              de Java.
+            </li>
+            <li>
+              Ejecutar <code>flutter doctor</code> y aceptar licencias de
+              Android.
+            </li>
+            <li>
+              Ejecutar <code>sudo dnf upgrade</code> y
+              <code>fwupdmgr update</code> para actualizar sistema y firmware.
+            </li>
+          </ul>
+        </div>
+        <div class="comp-box">
+          <h3>❤️ Actitudinales (Saber ser)</h3>
+          <ul>
+            <li>
+              Sigue las instrucciones del maestro con atención y precisión.
+            </li>
+            <li>
+              Muestra paciencia al instalar herramientas con múltiples pasos.
+            </li>
+            <li>
+              Comparte archivos y comandos con compañeros cuando sea necesario.
+            </li>
+            <li>Desarrolla confianza al ejecutar comandos en la terminal.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== INICIO ========== -->
+      <div class="seccion inicio">
+        <div class="seccion-header">
+          <span>🟢 INICIO</span>
+          <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Preparando el entorno de desarrollo completo"</h4>
+          <p>
+            <span class="label">Metodología:</span> Presentación y organización.
+          </p>
+          <p>
+            <span class="label">Descripción:</span> El docente explica que en
+            esta clase instalarán todas las herramientas necesarias para el
+            desarrollo de aplicaciones con Flutter.
+          </p>
+          <ul>
+            <li>
+              <strong>Google Chrome:</strong> Navegador principal para pruebas y
+              desarrollo web.
+            </li>
+            <li>
+              <strong>Visual Studio Code:</strong> Editor de código con
+              extensiones para Flutter y Dart.
+            </li>
+            <li>
+              <strong>Flutter SDK:</strong> Framework para desarrollar
+              aplicaciones multiplataforma.
+            </li>
+            <li>
+              <strong>Java Correto:</strong> Runtime necesario para Android
+              Studio y Flutter.
+            </li>
+            <li>
+              <strong>Android Studio:</strong> IDE completo para desarrollo
+              Android con emulador.
+            </li>
+            <li>
+              <strong>Dependencias:</strong> clang, cmake, gtk3-devel, ninja,
+              etc.
+            </li>
+            <li>
+              <strong>Actualización final:</strong>
+              <code>sudo dnf upgrade</code> y <code>fwupdmgr update</code>.
+            </li>
+          </ul>
+          <p>
+            El maestro indica que todos los archivos necesarios están en un USB
+            y deben copiarlos a sus carpetas de Descargas o a
+            <code>~/development</code>.
+          </p>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante comprende qué herramientas instalarán y para qué sirve
+            cada una.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>
+              Identifica las herramientas que se instalarán y su propósito.
+            </li>
+            <li>Participa en la organización de archivos desde el USB.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>USB con los archivos de instalación</li>
+            <li>Computadora con Fedora</li>
+            <li>Terminal</li>
+            <li>Pizarra</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== DESARROLLO ========== -->
+      <div class="seccion desarrollo">
+        <div class="seccion-header">
+          <span>🟡 DESARROLLO</span>
+          <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Instalación guiada de herramientas de desarrollo"</h4>
+          <p>
+            <span class="label">Metodología:</span> Demostración paso a paso +
+            práctica individual.
+          </p>
+
+          <!-- Google Chrome -->
+          <h4>🔹 1. Google Chrome (RPM)</h4>
+          <p>
+            Copiar el paquete RPM de Google Chrome desde el USB. Luego instalar
+            con <code>dnf install</code>.
+          </p>
+          <div class="codigo-box">
+            <span class="comment"># Ejemplo: instalar Chrome desde el RPM</span
+            ><br />
+            <span class="cmd"
+              >sudo dnf install
+              ~/Descargas/google-chrome-stable_current_x86_64.rpm</span
+            >
+          </div>
+
+          <!-- VS Code -->
+          <h4>🔹 2. Visual Studio Code</h4>
+          <p>Configurar el repositorio de Microsoft para instalar VS Code.</p>
+          <div class="codigo-box">
+            <span class="comment"># Importar clave GPG y crear repositorio</span
+            ><br />
+            <span class="cmd"
+              >sudo rpm --import
+              https://packages.microsoft.com/keys/microsoft.asc</span
+            ><br />
+            <span class="cmd"
+              >echo -e "[code]\nname=Visual Studio
+              Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc"
+              | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null</span
+            ><br /><br />
+            <span class="comment"># Actualizar repositorios e instalar</span
+            ><br />
+            <span class="cmd">sudo dnf check-update</span><br />
+            <span class="cmd">sudo dnf install code</span>
+          </div>
+          <p>
+            Después de instalar VS Code, abrirlo e instalar las extensiones
+            <strong>Dart</strong>, <strong>Flutter</strong> y
+            <strong>Prettier</strong>. Luego ir a Configuración → buscar "AI
+            features" y marcar <strong>Disable AI Features</strong>.
+          </p>
+
+          <!-- Dependencias Flutter -->
+          <h4>🔹 3. Dependencias para Flutter</h4>
+          <div class="codigo-box">
+            <span class="cmd"
+              >sudo dnf install wget git unzip xz zip curl libstdc++.i686
+              mesa-libGLU</span
+            >
+          </div>
+
+          <!-- Crear carpeta development -->
+          <h4>🔹 4. Crear carpeta ~/development</h4>
+          <div class="codigo-box">
+            <span class="cmd">mkdir ~/development</span>
+          </div>
+
+          <!-- Flutter SDK -->
+          <h4>🔹 5. Flutter SDK</h4>
+          <p>
+            Copiar el archivo <code>flutter_linux_*.tar.xz</code> desde el USB.
+            Luego extraerlo en <code>~/development</code>.
+          </p>
+          <div class="codigo-box">
+            <span class="comment"># Extraer Flutter SDK en development</span
+            ><br />
+            <span class="cmd"
+              >tar -xf ~/Descargas/flutter_linux_3.24.0-stable.tar.xz -C
+              ~/development</span
+            >
+          </div>
+
+          <!-- Agregar Flutter al PATH -->
+          <h4>🔹 6. Agregar Flutter al PATH</h4>
+          <div class="codigo-box">
+            <span class="cmd"
+              >echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >>
+              ~/.bashrc</span
+            ><br />
+            <span class="cmd">source ~/.bashrc</span>
+          </div>
+
+          <!-- Java Correto -->
+          <h4>🔹 7. Java Correto</h4>
+          <p>Copiar el RPM de Java Correto desde el USB e instalarlo.</p>
+          <div class="codigo-box">
+            <span class="cmd"
+              >sudo dnf install ~/Descargas/java-correto-*.rpm</span
+            ><br /><br />
+            <span class="comment"># Verificar versión de Java</span><br />
+            <span class="cmd">java --version</span><br /><br />
+            <span class="comment"
+              ># Si no aparece "Correto", configurar con
+              update-alternatives</span
+            ><br />
+            <span class="cmd">sudo update-alternatives --config java</span
+            ><br />
+            <span class="cmd">sudo update-alternatives --config javac</span>
+          </div>
+
+          <!-- Android Studio -->
+          <h4>🔹 8. Android Studio</h4>
+          <p>
+            Copiar el archivo <code>android-studio-*.tar.gz</code> desde el USB.
+            Extraerlo en <code>~/development</code>.
+          </p>
+          <div class="codigo-box">
+            <span class="cmd"
+              >tar -zxvf ~/Descargas/android-studio-2024.1.1-linux.tar.gz -C
+              ~/development</span
+            ><br /><br />
+            <span class="cmd">cd ~/development/android-studio/bin</span><br />
+            <span class="cmd">./studio</span>
+          </div>
+          <p>
+            Completar el asistente de instalación de Android Studio. Luego abrir
+            <strong>SDK Manager</strong> e instalar
+            <strong>Android SDK Command-line Tools (latest)</strong>.
+          </p>
+
+          <!-- Licencias de Android -->
+          <h4>🔹 9. Aceptar licencias de Android</h4>
+          <div class="codigo-box">
+            <span class="cmd">flutter doctor --android-licenses</span>
+          </div>
+
+          <!-- Dependencias faltantes -->
+          <h4>🔹 10. Dependencias faltantes para Flutter</h4>
+          <div class="codigo-box">
+            <span class="cmd">sudo dnf install glx-utils egl-utils</span><br />
+            <span class="cmd">sudo dnf install clang</span><br />
+            <span class="cmd">sudo dnf install cmake</span><br />
+            <span class="cmd">sudo dnf install gtk3-devel</span><br />
+            <span class="cmd">sudo dnf install ninja</span>
+          </div>
+
+          <!-- Actualización final -->
+          <h4>🔹 11. Actualización final del sistema y firmware</h4>
+          <div class="upgrade-warning">
+            <p><strong>⚠️ ADVERTENCIA IMPORTANTE</strong></p>
+            <p>
+              Realiza estas actualizaciones <strong>solo después</strong> de
+              haber completado todos los pasos anteriores.
+            </p>
+          </div>
+          <div class="codigo-box">
+            <span class="comment"># Actualizar todos los paquetes</span><br />
+            <span class="cmd">sudo dnf upgrade</span><br /><br />
+            <span class="comment"
+              ># Forzar actualización con refresco de repositorios</span
+            ><br />
+            <span class="cmd">sudo dnf upgrade --refresh</span><br /><br />
+            <span class="comment"
+              ># Verificar disponibilidad del paquete de firmware</span
+            ><br />
+            <span class="cmd"
+              >sudo dnf search fwupd-plugin-uefi-capsule-data</span
+            ><br /><br />
+            <span class="comment"
+              ># Refrescar metadatos de firmware desde LVFS</span
+            ><br />
+            <span class="cmd">fwupdmgr refresh</span><br /><br />
+            <span class="comment"
+              ># Actualizar firmware del sistema (BIOS/UEFI)</span
+            ><br />
+            <span class="cmd">fwupdmgr update</span>
+          </div>
+          <div class="warning-box">
+            <p>
+              <strong>⚠️ Importante:</strong> La actualización de firmware
+              (<code>fwupdmgr update</code>) puede reiniciar la computadora.
+              Asegúrate de guardar todo tu trabajo antes de ejecutarlo.
+            </p>
+          </div>
+
+          <!-- Actividad práctica -->
+          <div class="actividad-practica">
+            <h4 style="margin-top: 0">📝 Actividad práctica</h4>
+            <p>
+              <strong>Realiza los siguientes pasos en tu computadora:</strong>
+            </p>
+            <ul>
+              <li>Copia los archivos desde el USB a tu carpeta Descargas.</li>
+              <li>Instala Google Chrome desde el RPM.</li>
+              <li>Configura el repositorio de VS Code e instálalo.</li>
+              <li>
+                Instala las dependencias de Flutter con
+                <code>sudo dnf install</code>.
+              </li>
+              <li>Crea la carpeta <code>~/development</code>.</li>
+              <li>Extrae el SDK de Flutter en <code>~/development</code>.</li>
+              <li>Agrega Flutter al PATH en <code>~/.bashrc</code>.</li>
+              <li>
+                Instala Java Correto y configúralo con
+                <code>update-alternatives</code>.
+              </li>
+              <li>
+                Extrae Android Studio en <code>~/development</code> y ejecuta
+                <code>./studio</code>.
+              </li>
+              <li>
+                Acepta las licencias de Android con
+                <code>flutter doctor --android-licenses</code>.
+              </li>
+              <li>
+                Instala las dependencias faltantes (clang, cmake, gtk3-devel,
+                ninja).
+              </li>
+              <li>
+                Ejecuta <code>flutter doctor</code> y verifica que todas las
+                verificaciones estén en verde.
+              </li>
+              <li>
+                Ejecuta <code>sudo dnf upgrade</code> y luego
+                <code>fwupdmgr update</code> (si hay actualizaciones de
+                firmware).
+              </li>
+            </ul>
+            <p style="margin-top: 12px">
+              <strong>Preguntas de reflexión:</strong>
+            </p>
+            <ul>
+              <li>
+                ¿Qué comando usaste para extraer Flutter? ¿Y para Android
+                Studio?
+              </li>
+              <li>
+                ¿Qué es el PATH y por qué es importante agregar Flutter allí?
+              </li>
+              <li>
+                ¿Qué dice <code>flutter doctor</code>? ¿Todo está correcto?
+              </li>
+              <li>
+                ¿Qué diferencia hay entre <code>sudo dnf upgrade</code> y
+                <code>sudo dnf upgrade --refresh</code>?
+              </li>
+            </ul>
+          </div>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante instala y configura todas las herramientas necesarias
+            para el desarrollo con Flutter en Fedora, y actualiza el sistema y
+            firmware.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Copia correctamente los archivos desde el USB.</li>
+            <li>
+              Instala Google Chrome, VS Code, Flutter, Java y Android Studio.
+            </li>
+            <li>Configura el PATH para Flutter.</li>
+            <li>Acepta las licencias de Android.</li>
+            <li>Instala todas las dependencias faltantes.</li>
+            <li>Ejecuta <code>flutter doctor</code> sin errores críticos.</li>
+            <li>
+              Ejecuta <code>sudo dnf upgrade</code> y
+              <code>fwupdmgr update</code> correctamente.
+            </li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>USB con archivos de instalación</li>
+            <li>Computadora con Fedora</li>
+            <li>Terminal</li>
+            <li>Pizarra</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ========== CIERRE ========== -->
+      <div class="seccion cierre">
+        <div class="seccion-header">
+          <span>🔵 CIERRE</span>
+          <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+          <h4>Actividad: "Verificación final y resumen"</h4>
+          <p><span class="label">Metodología:</span> Revisión y preguntas.</p>
+          <p>
+            <span class="label">Descripción:</span> El docente guía la
+            verificación de las instalaciones:
+          </p>
+          <ul>
+            <li>Abrir Google Chrome y verificar que funciona.</li>
+            <li>
+              Abrir VS Code y verificar que las extensiones Dart y Flutter estén
+              instaladas.
+            </li>
+            <li>Ejecutar <code>flutter doctor</code> y mostrar la salida.</li>
+            <li>Abrir Android Studio y verificar que el SDK esté instalado.</li>
+            <li>
+              Confirmar que <code>sudo dnf upgrade</code> se ejecutó sin
+              errores.
+            </li>
+          </ul>
+          <p>
+            Se enfatiza la importancia de tener todas las herramientas listas
+            para comenzar con el desarrollo de aplicaciones en la siguiente
+            clase.
+          </p>
+
+          <h4>Aprendizaje esperado</h4>
+          <p>
+            El estudiante verifica que todas las herramientas estén
+            correctamente instaladas y funcionales.
+          </p>
+
+          <h4>Criterios de evaluación</h4>
+          <ul>
+            <li>Verifica que todas las herramientas abren correctamente.</li>
+            <li>
+              <code>flutter doctor</code> muestra todas las verificaciones en
+              verde.
+            </li>
+            <li>Participa en la revisión final.</li>
+          </ul>
+
+          <h4>Recursos</h4>
+          <ul>
+            <li>Pizarra</li>
+            <li>Marcadores</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TIP CLAVE -->
+      <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>
+          • <strong>Instalación de RPM:</strong>
+          <code>sudo dnf install /ruta/al/archivo.rpm</code>.
+        </p>
+        <p>
+          • <strong>Extraer tar.xz:</strong>
+          <code>tar -xf archivo.tar.xz -C /destino</code>.
+        </p>
+        <p>
+          • <strong>Extraer tar.gz:</strong>
+          <code>tar -zxvf archivo.tar.gz -C /destino</code>.
+        </p>
+        <p>
+          • <strong>Agregar al PATH:</strong>
+          <code
+            >echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >>
+            ~/.bashrc</code
+          >
+          y luego <code>source ~/.bashrc</code>.
+        </p>
+        <p>
+          • <strong>Configurar Java:</strong> usar
+          <code>sudo update-alternatives --config java</code> para elegir la
+          versión correcta.
+        </p>
+        <p>
+          • <strong>flutter doctor:</strong> es la herramienta de diagnóstico de
+          Flutter. Todo debe estar en verde (✔).
+        </p>
+        <p>
+          • <strong>Dependencias clave:</strong> clang, cmake, gtk3-devel, ninja
+          son necesarias para Flutter en Linux.
+        </p>
+        <p>
+          • <strong>Actualización final:</strong>
+          <code>sudo dnf upgrade</code> y <code>fwupdmgr update</code> mantienen
+          el sistema y firmware actualizados.
+        </p>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>
+          • Prepara el entorno de desarrollo completo para Flutter y Android.
+        </p>
+        <p>
+          • Enseña habilidades prácticas de instalación de software en Linux.
+        </p>
+        <p>
+          • Introduce herramientas que se usarán durante todo el curso de
+          desarrollo móvil.
+        </p>
+        <p>
+          • Desarrolla la capacidad de seguir instrucciones técnicas detalladas.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

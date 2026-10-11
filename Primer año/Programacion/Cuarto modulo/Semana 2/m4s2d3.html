@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Creación de Listas desde Cero · Tipos de Columnas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .columna-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .columna-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .columna-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .columna-card .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+        .tag-texto { background: #e3f2fd; color: #0d47a1; }
+        .tag-numero { background: #fff3e0; color: #e65100; }
+        .tag-fecha { background: #e8f5e9; color: #2e7d32; }
+        .tag-eleccion { background: #f3e5f5; color: #6a1b9a; }
+        .tag-persona { background: #fce4ec; color: #c62828; }
+        .tag-sino { background: #e0f7fa; color: #00838f; }
+
+        .mock-lista {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .mock-lista table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .mock-lista th {
+            background: #e8eaf6;
+            color: #1a237e;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .mock-lista td {
+            padding: 6px 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .mock-lista .etiqueta-estado {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .estado-activo { background: #e3f2fd; color: #0d47a1; }
+        .estado-inactivo { background: #ffebee; color: #c62828; }
+
+        .columnas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .columnas-grid .item {
+            background: #f5f7fa;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border-left: 4px solid #3f51b5;
+        }
+        .columnas-grid .item h6 {
+            color: #1a237e;
+        }
+        .columnas-grid .item p {
+            font-size: 13px;
+            margin: 2px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .columnas-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📋 PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Creación de Listas desde Cero · Tipos de Columnas</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a crear listas en SharePoint desde cero, comprendiendo los diferentes tipos de columnas disponibles (Texto, Número, Fecha, Elección, Persona o Grupo, Sí/No) y cuándo utilizar cada una para estructurar información de manera efectiva.</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende la estructura de una lista en SharePoint.</li>
+                <li>Reconoce los tipos de columnas disponibles.</li>
+                <li>Identifica el propósito de cada tipo de columna.</li>
+                <li>Entiende cómo elegir el tipo de columna adecuado para cada dato.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear una lista desde cero.</li>
+                <li>Agregar columnas de tipo Texto, Número, Fecha, Elección, Persona o Grupo, Sí/No.</li>
+                <li>Configurar propiedades de cada columna (nombre, opciones, validaciones).</li>
+                <li>Poblar la lista con datos de ejemplo.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la importancia de estructurar datos correctamente.</li>
+                <li>Muestra interés por la personalización de listas.</li>
+                <li>Participa activamente en la práctica guiada.</li>
+                <li>Desarrolla habilidades de diseño de bases de datos colaborativas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo estructurar información en una lista?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Si tuvieras que crear una lista para registrar los libros de una biblioteca, ¿qué información necesitarías guardar? ¿Qué tipos de datos serían?"</em> Se introduce el concepto de columnas como los "campos" de la lista.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es una columna en SharePoint?</span>
+                <p>Una columna es un <strong>campo de datos</strong> que define un tipo específico de información dentro de una lista. Cada columna tiene un <strong>tipo</strong> que determina qué tipo de datos puede almacenar (texto, números, fechas, etc.).</p>
+                <p><strong>Tipos de columnas que veremos:</strong></p>
+                <ul>
+                    <li><span class="tag tag-texto">Texto</span> — Texto simple o varias líneas.</li>
+                    <li><span class="tag tag-numero">Número</span> — Valores numéricos (enteros o decimales).</li>
+                    <li><span class="tag tag-fecha">Fecha</span> — Fechas y horas.</li>
+                    <li><span class="tag tag-eleccion">Elección</span> — Selección de una o más opciones.</li>
+                    <li><span class="tag tag-persona">Persona o Grupo</span> — Usuarios o grupos de la organización.</li>
+                    <li><span class="tag tag-sino">Sí/No</span> — Valor booleano (verdadero/falso).</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica los tipos de columnas y su utilidad.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los tipos de columnas básicos.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de columnas en SharePoint</li>
+                <li>Acceso a SharePoint (demo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación de lista desde cero y configuración de columnas"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- CREAR LISTA DESDE CERO -->
+            <!-- ============================================ -->
+            <h4>🔹 Crear una lista desde cero</h4>
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Pasos para crear una lista desde cero:</span>
+                <ol style="padding-left: 20px; margin-top: 6px;">
+                    <li>Ir al sitio de SharePoint.</li>
+                    <li>Hacer clic en <strong>"+ Nuevo"</strong> → <strong>"Lista"</strong>.</li>
+                    <li>Seleccionar <strong>"Lista en blanco"</strong>.</li>
+                    <li>Asignar un nombre a la lista (ej. "Inventario de Productos").</li>
+                    <li>Hacer clic en <strong>"Crear"</strong>.</li>
+                </ol>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- TIPOS DE COLUMNAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Tipos de columnas en detalle</h4>
+
+            <!-- Texto -->
+            <div class="columna-card" style="border-left-color: #0d47a1;">
+                <h5><span class="tag tag-texto">📝</span> Texto</h5>
+                <p>Permite almacenar texto simple o varias líneas. Es el tipo más común.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Línea de texto (hasta 255 caracteres).</li>
+                    <li>Varias líneas (texto largo, con formato).</li>
+                    <li>Opcional: longitud máxima, validación.</li>
+                </ul>
+                <p><strong>Ejemplo de uso:</strong> "Nombre del producto", "Descripción", "Comentarios".</p>
+            </div>
+
+            <!-- Número -->
+            <div class="columna-card" style="border-left-color: #e65100;">
+                <h5><span class="tag tag-numero">🔢</span> Número</h5>
+                <p>Almacena valores numéricos (enteros o decimales).</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Número entero o decimal.</li>
+                    <li>Rango mínimo y máximo.</li>
+                    <li>Formato (moneda, porcentaje, etc.).</li>
+                </ul>
+                <p><strong>Ejemplo de uso:</strong> "Cantidad", "Precio", "Porcentaje de avance".</p>
+            </div>
+
+            <!-- Fecha -->
+            <div class="columna-card" style="border-left-color: #2e7d32;">
+                <h5><span class="tag tag-fecha">📅</span> Fecha</h5>
+                <p>Almacena fechas y opcionalmente horas.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Fecha y hora (opcional).</li>
+                    <li>Formato de fecha (localizado).</li>
+                    <li>Valor predeterminado (fecha actual).</li>
+                </ul>
+                <p><strong>Ejemplo de uso:</strong> "Fecha de vencimiento", "Fecha de creación", "Fecha de entrega".</p>
+            </div>
+
+            <!-- Elección -->
+            <div class="columna-card" style="border-left-color: #6a1b9a;">
+                <h5><span class="tag tag-eleccion">☑️</span> Elección</h5>
+                <p>Permite seleccionar una o varias opciones de una lista predefinida.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Opciones (separadas por punto y coma).</li>
+                    <li>Selección única o múltiple.</li>
+                    <li>Posibilidad de permitir valores personalizados.</li>
+                </ul>
+                <p><strong>Ejemplo de uso:</strong> "Estado" (Pendiente, En progreso, Completado), "Categoría".</p>
+            </div>
+
+            <!-- Persona o Grupo -->
+            <div class="columna-card" style="border-left-color: #c62828;">
+                <h5><span class="tag tag-persona">👤</span> Persona o Grupo</h5>
+                <p>Permite seleccionar usuarios o grupos de la organización.</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Selección de una persona o grupo.</li>
+                    <li>Mostrar nombre, correo, etc.</li>
+                    <li>Posibilidad de selección múltiple.</li>
+                </ul>
+                <p><strong>Ejemplo de uso:</strong> "Asignado a", "Responsable", "Aprobador".</p>
+            </div>
+
+            <!-- Sí/No -->
+            <div class="columna-card" style="border-left-color: #00838f;">
+                <h5><span class="tag tag-sino">🔘</span> Sí/No</h5>
+                <p>Almacena un valor booleano (verdadero/falso).</p>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Valor predeterminado (Sí o No).</li>
+                    <li>Se muestra como checkbox.</li>
+                </ul>
+                <p><strong>Ejemplo de uso:</strong> "Activo", "Completado", "Aprobado", "En oferta".</p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- EJEMPLO DE LISTA CON COLUMNAS -->
+            <!-- ============================================ -->
+            <h4>🔹 Ejemplo: Lista "Inventario de Productos"</h4>
+            <div class="columnas-grid">
+                <div class="item"><h6>📝 Nombre del producto</h6><p><span class="tag tag-texto">Texto</span> — Línea de texto (255 caracteres)</p></div>
+                <div class="item"><h6>📝 Descripción</h6><p><span class="tag tag-texto">Texto</span> — Varias líneas</p></div>
+                <div class="item"><h6>🔢 Precio</h6><p><span class="tag tag-numero">Número</span> — Decimal con 2 posiciones</p></div>
+                <div class="item"><h6>🔢 Cantidad en stock</h6><p><span class="tag tag-numero">Número</span> — Entero</p></div>
+                <div class="item"><h6>📅 Fecha de vencimiento</h6><p><span class="tag tag-fecha">Fecha</span> — Solo fecha</p></div>
+                <div class="item"><h6>☑️ Categoría</h6><p><span class="tag tag-eleccion">Elección</span> — Electrónicos, Ropa, Alimentos</p></div>
+                <div class="item"><h6>👤 Responsable</h6><p><span class="tag tag-persona">Persona o Grupo</span> — Asignado a</p></div>
+                <div class="item"><h6>🔘 En oferta</h6><p><span class="tag tag-sino">Sí/No</span> — Checkbox</p></div>
+            </div>
+
+            <div class="mock-lista">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Categoría</th>
+                            <th>En oferta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Laptop Pro</td>
+                            <td>$1,200.00</td>
+                            <td>15</td>
+                            <td>Electrónicos</td>
+                            <td><span class="etiqueta-estado estado-activo">Sí</span></td>
+                        </tr>
+                        <tr>
+                            <td>Camiseta algodón</td>
+                            <td>$25.00</td>
+                            <td>120</td>
+                            <td>Ropa</td>
+                            <td><span class="etiqueta-estado estado-inactivo">No</span></td>
+                        </tr>
+                        <tr>
+                            <td>Café molido</td>
+                            <td>$8.50</td>
+                            <td>60</td>
+                            <td>Alimentos</td>
+                            <td><span class="etiqueta-estado estado-activo">Sí</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Lista "Inventario de Productos" con diferentes tipos de columnas.</p>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, crea una lista desde cero con el nombre <strong>"Proyectos"</strong>.</li>
+                    <li>2. Agrega las siguientes columnas:</li>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Nombre del proyecto</strong> (Texto — línea de texto)</li>
+                        <li><strong>Descripción</strong> (Texto — varias líneas)</li>
+                        <li><strong>Presupuesto</strong> (Número — decimal)</li>
+                        <li><strong>Fecha de inicio</strong> (Fecha)</li>
+                        <li><strong>Fecha de fin</strong> (Fecha)</li>
+                        <li><strong>Estado</strong> (Elección — Planeado, En curso, Finalizado, Cancelado)</li>
+                        <li><strong>Líder del proyecto</strong> (Persona o Grupo)</li>
+                        <li><strong>Prioritario</strong> (Sí/No)</li>
+                    </ul>
+                    <li>3. Agrega al menos <strong>3 proyectos</strong> de ejemplo.</li>
+                    <li>4. Si no tienes acceso, diseña en papel la estructura de la lista con las columnas y 3 registros.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué tipo de columna usarías para almacenar el correo electrónico de un contacto?</li>
+                    <li>¿Qué tipo de columna usarías para indicar si un producto está disponible?</li>
+                    <li>¿Por qué es importante elegir el tipo de columna correcto?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea listas desde cero y configura columnas de diferentes tipos según la información a almacenar.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Crea una lista desde cero correctamente.</li>
+                <li>Agrega columnas de tipo Texto, Número, Fecha, Elección, Persona o Grupo y Sí/No.</li>
+                <li>Configura correctamente las propiedades de cada columna.</li>
+                <li>Puebla la lista con datos de ejemplo.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Guía de tipos de columnas</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Cómo se crea una lista desde cero en SharePoint?</li>
+                <li>¿Qué tipo de columna usarías para el nombre de una persona?</li>
+                <li>¿Qué tipo de columna usarías para el precio de un producto?</li>
+                <li>¿Qué tipo de columna usarías para indicar si una tarea está completada?</li>
+                <li>¿Qué tipo de columna usarías para seleccionar un empleado responsable?</li>
+                <li>¿Qué tipo de columna usarías para el estado de un pedido?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña una lista de SharePoint para una empresa de <strong>alquiler de vehículos</strong>. Define:</p>
+                <ul>
+                    <li>Nombre de la lista.</li>
+                    <li>Mínimo 6 columnas con diferentes tipos (Texto, Número, Fecha, Elección, Persona o Grupo, Sí/No).</li>
+                    <li>Explica por qué elegiste cada tipo de columna.</li>
+                    <li>Agrega 3 registros de ejemplo.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida los conceptos de creación de listas y tipos de columnas.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende cómo elegir el tipo de columna adecuado.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave sobre tipos de columnas en SharePoint:</strong></p>
+        <p>• <strong>Texto:</strong> Para nombres, descripciones, comentarios.</p>
+        <p>• <strong>Número:</strong> Para cantidades, precios, porcentajes.</p>
+        <p>• <strong>Fecha:</strong> Para fechas de inicio, vencimiento, entrega.</p>
+        <p>• <strong>Elección:</strong> Para categorías, estados, prioridades.</p>
+        <p>• <strong>Persona o Grupo:</strong> Para asignaciones, responsables.</p>
+        <p>• <strong>Sí/No:</strong> Para indicadores binarios (activo, completado).</p>
+        <p>• <strong>Elige el tipo correcto</strong> según el dato que quieras guardar.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a estructurar información correctamente en listas de SharePoint.</p>
+        <p>• Desarrolla habilidades de diseño de bases de datos colaborativas.</p>
+        <p>• Prepara a los estudiantes para crear soluciones de gestión de información.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

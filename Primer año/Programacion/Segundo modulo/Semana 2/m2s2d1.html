@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase - Procesador de Textos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 12px 0;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 6px solid #f9a825;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin: 12px 0;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 10px 0 10px 50px;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            background: #3f51b5;
+            color: white;
+            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 14px;
+        }
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+        .table-example {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 14px;
+            text-align: left;
+        }
+        .table-example th {
+            background: #3f51b5;
+            color: white;
+            padding: 8px 12px;
+            border: 1px solid #3f51b5;
+        }
+        .table-example td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+        .table-example tr:nth-child(even) {
+            background: #f5f7fa;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>📘 PLANIFICACIÓN DE CLASE</h1>
+    <p style="font-size: 18px; color: #1a237e; margin-top: -10px; margin-bottom: 25px; font-weight: 500;">
+        Tema: Tablas en Word
+    </p>
+
+    <!-- COMPETENCIA GENERAL -->
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>Utiliza tablas en Microsoft Word para organizar información de forma clara y estructurada en documentos, aplicando herramientas de diseño y formato para mejorar la presentación de datos.</p>
+    </div>
+
+    <!-- COMPETENCIAS -->
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Define qué es una tabla y su utilidad en documentos.</li>
+                <li>Identifica los elementos de una tabla: celdas, filas, columnas.</li>
+                <li>Comprende la diferencia entre tabla y texto en columnas.</li>
+                <li>Reconoce las opciones de formato y diseño de tablas en Word.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Insertar tablas en Word.</li>
+                <li>Agregar y eliminar filas y columnas.</li>
+                <li>Combinar y dividir celdas.</li>
+                <li>Aplicar estilos y formato a las tablas.</li>
+                <li>Ordenar datos en tablas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Muestra interés por organizar datos de manera estructurada.</li>
+                <li>Valora la utilidad de las tablas para presentar información clara.</li>
+                <li>Participa activamente en la creación y edición de tablas.</li>
+                <li>Reconoce la importancia del diseño de tablas en documentos profesionales.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">15 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo organizar datos en un documento?"</h4>
+            <p><span class="label">Metodología:</span> Cuestionamiento y exploración.</p>
+            <p><span class="label">Descripción:</span> El docente plantea preguntas:</p>
+            <ul>
+                <li>¿Cómo organizarías una lista de nombres y calificaciones en un documento?</li>
+                <li>¿Qué herramienta de Word te permite crear una estructura de filas y columnas?</li>
+                <li>¿Qué ventajas tiene usar una tabla en lugar de texto separado por espacios?</li>
+            </ul>
+            <p>Se introduce el concepto de <strong>tablas</strong> como una herramienta fundamental para organizar información en filas y columnas de manera clara y profesional.</p>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante identifica la utilidad de las tablas para organizar información.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Menciona ejemplos de uso de tablas en documentos.</li>
+                <li>Participa en la discusión inicial.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+                <li>Computadora con Microsoft Word</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">35 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación y formato de tablas en Word"</h4>
+            <p><span class="label">Metodología:</span> Explicación guiada y práctica.</p>
+
+            <!-- Tablas -->
+            <h4>🔹 ¿Qué es una tabla?</h4>
+            <p>Una <strong>tabla</strong> es una estructura organizada en <strong>filas</strong> (horizontales) y <strong>columnas</strong> (verticales) que permite presentar información de manera ordenada y fácil de leer.</p>
+
+            <ul>
+                <li><strong>Celdas:</strong> Cada intersección de fila y columna.</li>
+                <li><strong>Bordes:</strong> Líneas que separan las celdas.</li>
+                <li><strong>Encabezados:</strong> Fila superior que describe el contenido de cada columna.</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Ejemplo de tabla:</span>
+                <table class="table-example">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Ciudad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ana</td>
+                            <td>25</td>
+                            <td>Madrid</td>
+                        </tr>
+                        <tr>
+                            <td>Luis</td>
+                            <td>30</td>
+                            <td>Barcelona</td>
+                        </tr>
+                        <tr>
+                            <td>María</td>
+                            <td>22</td>
+                            <td>Valencia</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>🔹 Cómo insertar una tabla en Word</h4>
+            <ol class="step-list">
+                <li>Ubicar el cursor donde se desea insertar la tabla.</li>
+                <li>Ir a la pestaña <strong>"Insertar"</strong> en la cinta de opciones.</li>
+                <li>Hacer clic en el botón <strong>"Tabla"</strong>.</li>
+                <li>Seleccionar el número de filas y columnas arrastrando en la cuadrícula.</li>
+                <li>Alternativamente, hacer clic en <strong>"Insertar tabla"</strong> y especificar el número exacto.</li>
+            </ol>
+
+            <h4>🔹 Herramientas de formato de tablas</h4>
+            <p>Word ofrece dos pestañas contextuales para trabajar con tablas:</p>
+            <div class="grid-2">
+                <div style="background: #e8f5e9; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                    <strong>🛠️ Diseño de tabla</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Estilos de tabla predefinidos.</li>
+                        <li>Opciones de estilo: fila de encabezado, filas alternas, etc.</li>
+                        <li>Colores de relleno y bordes.</li>
+                    </ul>
+                </div>
+                <div style="background: #e3f2fd; padding: 12px 16px; border-radius: 10px; border-left: 4px solid #0d47a1;">
+                    <strong>📐 Diseño (Distribución)</strong>
+                    <ul style="font-size: 14px; padding-left: 16px;">
+                        <li>Insertar y eliminar filas/columnas.</li>
+                        <li>Combinar y dividir celdas.</li>
+                        <li>Ajustar alto de filas y ancho de columnas.</li>
+                        <li>Alinear texto dentro de las celdas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>🔹 Buenas prácticas para tablas</h4>
+            <ul>
+                <li><strong>Usa encabezados:</strong> La primera fila debe describir el contenido de cada columna.</li>
+                <li><strong>Mantén la simplicidad:</strong> No abuses de colores o bordes excesivos.</li>
+                <li><strong>Alineación:</strong> Usa alineación centrada para títulos y alineación izquierda para texto.</li>
+                <li><strong>Alterna colores:</strong> Usa filas alternadas para mejorar la legibilidad.</li>
+                <li><strong>Evita celdas vacías:</strong> Si no hay información, usa un guion o "N/A".</li>
+            </ul>
+
+            <!-- Actividad práctica -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Crea un documento en Word y realiza lo siguiente:</strong></p>
+                <ul>
+                    <li>Inserta una tabla con <strong>4 columnas</strong> y <strong>5 filas</strong>.</li>
+                    <li>En la primera fila, escribe los encabezados: <strong>Producto, Cantidad, Precio Unitario, Total</strong>.</li>
+                    <li>Rellena las filas con datos de ejemplo (puedes inventar productos).</li>
+                    <li>Calcula el total en la última columna (Cantidad × Precio Unitario).</li>
+                    <li>Aplica un <strong>estilo de tabla</strong> desde la pestaña "Diseño de tabla".</li>
+                    <li>Agrega una <strong>fila adicional</strong> al final con la suma total de la columna "Total".</li>
+                    <li>Guarda el documento como <strong>"tabla_ejercicio.docx"</strong>.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventajas tiene usar tablas para organizar datos numéricos?</li>
+                    <li>¿Cómo influye el diseño de la tabla en la legibilidad del documento?</li>
+                    <li>¿Qué otros usos podrías darle a las tablas en tus documentos?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea y formatea tablas en Microsoft Word.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Inserta tablas correctamente.</li>
+                <li>Agrega y elimina filas y columnas.</li>
+                <li>Aplica estilos y formato a tablas.</li>
+                <li>Combina y divide celdas cuando sea necesario.</li>
+                <li>Organiza datos de manera clara en tablas.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Computadora con Microsoft Word</li>
+                <li>Microsoft Word (versión de escritorio o web)</li>
+                <li>Pizarra</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso de conceptos"</h4>
+            <p><span class="label">Metodología:</span> Preguntas rápidas.</p>
+            <ul>
+                <li>¿Qué es una tabla en Word? → <strong>Una estructura de filas y columnas para organizar datos.</strong></li>
+                <li>¿Cómo se inserta una tabla? → <strong>Insertar → Tabla.</strong></li>
+                <li>¿Qué pestaña se usa para cambiar el diseño de la tabla? → <strong>Diseño de tabla.</strong></li>
+                <li>¿Qué función tiene la opción "Combinar celdas"? → <strong>Unir dos o más celdas en una sola.</strong></li>
+                <li>¿Cómo se agrega una fila a una tabla? → <strong>Click derecho → Insertar → Filas arriba/abajo.</strong></li>
+            </ul>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de tablas en Word.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Marcadores</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave:</strong></p>
+        <p>• <strong>Inserta tablas con anticipación:</strong> Planifica cuántas filas y columnas necesitas.</p>
+        <p>• <strong>Usa estilos rápidos:</strong> Word tiene estilos predefinidos que mejoran la apariencia.</p>
+        <p>• <strong>Ordena datos:</strong> Puedes ordenar alfabética o numéricamente desde la pestaña "Diseño".</p>
+        <p>• <strong>Tablas anidadas:</strong> Puedes insertar una tabla dentro de otra si es necesario.</p>
+        <p>• <strong>Copiar tablas de Excel:</strong> Puedes pegar una tabla desde Excel y mantener el formato.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a organizar información de manera estructurada y profesional.</p>
+        <p>• Desarrolla habilidades de presentación de datos en documentos.</p>
+        <p>• Prepara a los estudiantes para crear informes, listados y bases de datos simples.</p>
+        <p>• Conecta con el uso de tablas en entornos académicos y laborales.</p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Clase · Vistas de Lista en SharePoint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a237e;
+            border-left: 6px solid #1a237e;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 18px;
+            color: #1a237e;
+            margin-top: -8px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding-left: 26px;
+        }
+        .comp-general {
+            background: #e8eaf6;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 6px solid #3f51b5;
+        }
+        .comp-general h2 {
+            font-size: 18px;
+            color: #1a237e;
+            margin-bottom: 6px;
+        }
+        .comp-general p {
+            font-size: 15px;
+            color: #1a237e;
+            line-height: 1.6;
+        }
+        .competencias {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+        .comp-box {
+            background: #f5f7fa;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comp-box h3 {
+            font-size: 15px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .comp-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comp-box ul li {
+            font-size: 14px;
+            color: #333;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .comp-box ul li::before {
+            content: "•";
+            color: #3f51b5;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .seccion {
+            margin-bottom: 35px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .seccion-header {
+            padding: 14px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seccion-header .tiempo {
+            font-size: 16px;
+            font-weight: normal;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .inicio .seccion-header { background: #2e7d32; }
+        .desarrollo .seccion-header { background: #e65100; }
+        .cierre .seccion-header { background: #0d47a1; }
+
+        .seccion-body {
+            padding: 25px 30px;
+            background: #fafbfc;
+        }
+        .seccion-body h4 {
+            font-size: 18px;
+            color: #1a237e;
+            margin: 18px 0 8px 0;
+        }
+        .seccion-body h4:first-of-type {
+            margin-top: 0;
+        }
+        .seccion-body p, .seccion-body li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #222;
+        }
+        .seccion-body ul {
+            padding-left: 25px;
+            margin: 8px 0 12px 0;
+        }
+        .seccion-body .label {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .ejemplo-box {
+            background: #e3f2fd;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+        .ejemplo-box .highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0d47a1;
+        }
+        .actividad-practica {
+            background: #fff3e0;
+            padding: 18px 22px;
+            border-radius: 12px;
+            margin: 18px 0 8px 0;
+        }
+        .actividad-practica ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .actividad-practica ul li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+        .tip-clave {
+            background: #e8f5e9;
+            padding: 18px 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border-left: 6px solid #2e7d32;
+        }
+        .tip-clave p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .footer-clase {
+            background: #fce4ec;
+            padding: 16px 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 6px solid #c62828;
+        }
+        .footer-clase p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .vista-card {
+            background: #f5f7fa;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3f51b5;
+        }
+        .vista-card h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .vista-card p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .vista-card .tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+        .tag-publica { background: #e3f2fd; color: #0d47a1; }
+        .tag-privada { background: #fce4ec; color: #c62828; }
+
+        .mock-lista {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .mock-lista table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .mock-lista th {
+            background: #e8eaf6;
+            color: #1a237e;
+            padding: 8px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .mock-lista td {
+            padding: 6px 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .mock-lista .etiqueta-estado {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .estado-activo { background: #e3f2fd; color: #0d47a1; }
+        .estado-pausado { background: #fff3e0; color: #e65100; }
+        .estado-cerrado { background: #e8f5e9; color: #2e7d32; }
+
+        .comparacion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .comparacion-item {
+            background: #f5f7fa;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-top: 4px solid #3f51b5;
+        }
+        .comparacion-item h5 {
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .comparacion-item p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .competencias { grid-template-columns: 1fr; }
+            .comparacion-grid { grid-template-columns: 1fr; }
+            .actividad-practica ul { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>PLANIFICACIÓN DE CLASE</h1>
+    <div class="subtitulo">Vistas de Lista en SharePoint · Filtros, Ordenamientos y Agrupaciones</div>
+
+    <div class="comp-general">
+        <h2>🎯 Competencia General</h2>
+        <p>El estudiante aprende a crear y configurar vistas de lista en SharePoint, tanto públicas como privadas, aplicando filtros, ordenamientos y agrupaciones para visualizar la información de manera eficiente (ej. mostrar solo proyectos "Activos").</p>
+    </div>
+
+    <div class="competencias">
+        <div class="comp-box">
+            <h3>📖 Conceptuales (Saber)</h3>
+            <ul>
+                <li>Comprende el concepto de vista en SharePoint.</li>
+                <li>Reconoce la diferencia entre vistas públicas y privadas.</li>
+                <li>Identifica los elementos de configuración: filtros, ordenamientos y agrupaciones.</li>
+                <li>Entiende cómo las vistas ayudan a organizar y analizar datos.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>🛠️ Procedimentales (Saber hacer)</h3>
+            <ul>
+                <li>Crear una vista pública y una vista privada.</li>
+                <li>Aplicar filtros para mostrar solo ciertos elementos (ej. Estatus = "Activo").</li>
+                <li>Configurar ordenamientos por columnas.</li>
+                <li>Agrupar elementos por una columna (ej. agrupar por Estatus).</li>
+                <li>Cambiar entre vistas y personalizar columnas mostradas.</li>
+            </ul>
+        </div>
+        <div class="comp-box">
+            <h3>❤️ Actitudinales (Saber ser)</h3>
+            <ul>
+                <li>Valora la organización de la información para una mejor toma de decisiones.</li>
+                <li>Muestra interés por personalizar la visualización de datos.</li>
+                <li>Participa activamente en la configuración de vistas.</li>
+                <li>Desarrolla habilidades de análisis y organización de datos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== INICIO ========== -->
+    <div class="seccion inicio">
+        <div class="seccion-header">
+            <span>🟢 INICIO</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "¿Cómo visualizar datos de manera eficiente?"</h4>
+            <p><span class="label">Metodología:</span> Reflexión y análisis.</p>
+            <p>El docente pregunta: <em>"Si tienes una lista con 100 proyectos, ¿cómo puedes ver solo los que están activos? ¿O los que están a tu cargo?"</em> Se introduce el concepto de vistas como una forma de personalizar la visualización de los datos.</p>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 ¿Qué es una vista en SharePoint?</span>
+                <p>Una vista es una <strong>perspectiva personalizada</strong> de una lista que permite mostrar solo la información relevante. Puede incluir filtros, ordenamientos y agrupaciones.</p>
+                <ul>
+                    <li><strong>Pública:</strong> Visible para todos los usuarios del sitio.</li>
+                    <li><strong>Privada:</strong> Visible solo para el usuario que la crea.</li>
+                </ul>
+                <p><strong>Elementos de una vista:</strong></p>
+                <ul>
+                    <li><strong>Columnas:</strong> Qué campos se muestran.</li>
+                    <li><strong>Filtros:</strong> Condiciones para mostrar solo ciertos elementos.</li>
+                    <li><strong>Ordenamiento:</strong> Cómo se ordenan los elementos.</li>
+                    <li><strong>Agrupación:</strong> Cómo se agrupan los elementos.</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante comprende el propósito de las vistas en SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Participa en la reflexión.</li>
+                <li>Reconoce los elementos de una vista.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos de listas con vistas</li>
+                <li>Acceso a SharePoint (demo)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== DESARROLLO ========== -->
+    <div class="seccion desarrollo">
+        <div class="seccion-header">
+            <span>🟡 DESARROLLO</span>
+            <span class="tiempo">50 minutos</span>
+        </div>
+        <div class="seccion-body">
+
+            <h4>Actividad: "Creación y configuración de vistas"</h4>
+            <p><span class="label">Metodología:</span> Práctica guiada (el docente muestra en vivo mientras los estudiantes siguen).</p>
+
+            <!-- ============================================ -->
+            <!-- LISTA DE EJEMPLO -->
+            <!-- ============================================ -->
+            <h4>🔹 Lista de ejemplo: "Proyectos"</h4>
+            <div class="ejemplo-box" style="background: #fff3e0;">
+                <span class="highlight">📌 Datos de ejemplo:</span>
+                <div class="mock-lista" style="margin-top: 6px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Propietario</th>
+                                <th>Fecha de Inicio</th>
+                                <th>Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>E-commerce App</td><td>Ana García</td><td>01/02/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                            <tr><td>Intranet Corporativa</td><td>Carlos López</td><td>15/01/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                            <tr><td>CRM de Ventas</td><td>María Torres</td><td>10/03/2025</td><td><span class="etiqueta-estado estado-pausado">Pausado</span></td></tr>
+                            <tr><td>Migración de Datos</td><td>Luis Ramírez</td><td>20/12/2024</td><td><span class="etiqueta-estado estado-cerrado">Cerrado</span></td></tr>
+                            <tr><td>Dashboard de Métricas</td><td>Ana García</td><td>05/04/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- CREAR VISTA PÚBLICA -->
+            <!-- ============================================ -->
+            <h4>🔹 Crear una vista pública: "Proyectos Activos"</h4>
+            <div class="vista-card" style="border-left-color: #0d47a1;">
+                <h5>📌 Vista pública: Proyectos Activos</h5>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>En la lista, hacer clic en <strong>"Configuración de vista"</strong> → <strong>"Crear nueva vista"</strong>.</li>
+                    <li>Seleccionar <strong>"Vista estándar"</strong>.</li>
+                    <li>Asignar el nombre: <strong>"Proyectos Activos"</strong>.</li>
+                    <li>En <strong>"Filtro"</strong>, configurar: <code>Estatus es igual a "Activo"</code>.</li>
+                    <li>En <strong>"Ordenar"</strong>, ordenar por <strong>Fecha de Inicio</strong> (más reciente primero).</li>
+                    <li>Seleccionar <strong>"Pública"</strong> (visible para todos).</li>
+                    <li>Hacer clic en <strong>"Crear"</strong>.</li>
+                </ul>
+                <div style="margin-top: 6px;">
+                    <span class="tag tag-publica">Pública</span>
+                    <span style="font-size: 13px; color: #555;">Mostrará solo proyectos con Estatus = "Activo", ordenados por fecha.</span>
+                </div>
+            </div>
+
+            <div class="mock-lista">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Propietario</th>
+                            <th>Fecha de Inicio</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Dashboard de Métricas</td><td>Ana García</td><td>05/04/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                        <tr><td>E-commerce App</td><td>Ana García</td><td>01/02/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                        <tr><td>Intranet Corporativa</td><td>Carlos López</td><td>15/01/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Vista "Proyectos Activos" (filtrada y ordenada).</p>
+
+            <!-- ============================================ -->
+            <!-- CREAR VISTA PRIVADA -->
+            <!-- ============================================ -->
+            <h4>🔹 Crear una vista privada: "Mis Proyectos"</h4>
+            <div class="vista-card" style="border-left-color: #c62828;">
+                <h5>📌 Vista privada: Mis Proyectos</h5>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Crear una nueva vista estándar con nombre <strong>"Mis Proyectos"</strong>.</li>
+                    <li>En <strong>"Filtro"</strong>, configurar: <code>Propietario es igual a "Usuario actual"</code>.</li>
+                    <li>En <strong>"Ordenar"</strong>, ordenar por <strong>Título</strong>.</li>
+                    <li>Seleccionar <strong>"Privada"</strong> (solo visible para ti).</li>
+                    <li>Hacer clic en <strong>"Crear"</strong>.</li>
+                </ul>
+                <div style="margin-top: 6px;">
+                    <span class="tag tag-privada">Privada</span>
+                    <span style="font-size: 13px; color: #555;">Mostrará solo proyectos asignados al usuario actual.</span>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- AGRUPACIÓN -->
+            <!-- ============================================ -->
+            <h4>🔹 Agrupación: Ver proyectos agrupados por Estatus</h4>
+            <div class="vista-card" style="border-left-color: #2e7d32;">
+                <h5>📌 Vista con agrupación: "Proyectos por Estatus"</h5>
+                <p><strong>Configuración:</strong></p>
+                <ul style="padding-left: 20px; font-size: 14px;">
+                    <li>Crear una nueva vista estándar con nombre <strong>"Proyectos por Estatus"</strong>.</li>
+                    <li>En <strong>"Agrupar"</strong>, seleccionar la columna <strong>Estatus</strong>.</li>
+                    <li>Orden ascendente o descendente según prefieras.</li>
+                    <li>Seleccionar <strong>"Pública"</strong>.</li>
+                    <li>Hacer clic en <strong>"Crear"</strong>.</li>
+                </ul>
+                <div style="margin-top: 6px;">
+                    <span class="tag tag-publica">Pública</span>
+                    <span style="font-size: 13px; color: #555;">Los proyectos se agrupan por Estatus (Activo, Pausado, Cerrado).</span>
+                </div>
+            </div>
+
+            <div class="mock-lista">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="4" style="background: #e8eaf6; color: #1a237e;">📋 Activo</th>
+                        </tr>
+                        <tr>
+                            <th>Título</th><th>Propietario</th><th>Fecha de Inicio</th><th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>E-commerce App</td><td>Ana García</td><td>01/02/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                        <tr><td>Dashboard de Métricas</td><td>Ana García</td><td>05/04/2025</td><td><span class="etiqueta-estado estado-activo">Activo</span></td></tr>
+                    </tbody>
+                    <thead>
+                        <tr><th colspan="4" style="background: #e8eaf6; color: #1a237e;">⏸️ Pausado</th></tr>
+                        <tr><th>Título</th><th>Propietario</th><th>Fecha de Inicio</th><th>Estatus</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CRM de Ventas</td><td>María Torres</td><td>10/03/2025</td><td><span class="etiqueta-estado estado-pausado">Pausado</span></td></tr>
+                    </tbody>
+                    <thead>
+                        <tr><th colspan="4" style="background: #e8eaf6; color: #1a237e;">✅ Cerrado</th></tr>
+                        <tr><th>Título</th><th>Propietario</th><th>Fecha de Inicio</th><th>Estatus</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Migración de Datos</td><td>Luis Ramírez</td><td>20/12/2024</td><td><span class="etiqueta-estado estado-cerrado">Cerrado</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 13px; color: #555; text-align: center;">↑ Vista agrupada por Estatus.</p>
+
+            <!-- ============================================ -->
+            <!-- ACTIVIDAD PRÁCTICA -->
+            <!-- ============================================ -->
+            <div class="actividad-practica">
+                <h4 style="margin-top: 0;">📝 Actividad práctica</h4>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>1. Si tienes acceso a SharePoint, crea una lista "Proyectos" con al menos 5 registros.</li>
+                    <li>2. Crea una vista pública llamada <strong>"Proyectos Activos"</strong> que filtre por Estatus = "Activo".</li>
+                    <li>3. Crea una vista privada llamada <strong>"Mis Proyectos"</strong> que filtre por Propietario = "Usuario actual".</li>
+                    <li>4. Crea una vista pública agrupada por <strong>Estatus</strong>.</li>
+                    <li>5. Cambia entre vistas y observa cómo cambia la información mostrada.</li>
+                    <li>6. Si no tienes acceso, diseña en papel las tres vistas con los datos de ejemplo.</li>
+                </ul>
+                <p style="margin-top: 12px;"><strong>Preguntas de reflexión:</strong></p>
+                <ul>
+                    <li>¿Qué ventaja tiene una vista pública frente a una privada?</li>
+                    <li>¿Cuándo es útil agrupar elementos en una vista?</li>
+                    <li>¿Cómo ayudan los filtros a gestionar grandes volúmenes de datos?</li>
+                </ul>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante crea vistas públicas y privadas aplicando filtros, ordenamientos y agrupaciones.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Crea vistas públicas y privadas correctamente.</li>
+                <li>Aplica filtros para mostrar datos específicos.</li>
+                <li>Configura ordenamientos en las vistas.</li>
+                <li>Agrupa elementos por una columna.</li>
+                <li>Comprende la utilidad de cada tipo de vista.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Acceso a SharePoint Online</li>
+                <li>Pizarra</li>
+                <li>Guía de configuración de vistas</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ========== CIERRE ========== -->
+    <div class="seccion cierre">
+        <div class="seccion-header">
+            <span>🔵 CIERRE</span>
+            <span class="tiempo">10 minutos</span>
+        </div>
+        <div class="seccion-body">
+            <h4>Actividad: "Repaso y preguntas finales"</h4>
+            <ul>
+                <li>¿Qué es una vista en SharePoint?</li>
+                <li>¿Cuál es la diferencia entre una vista pública y una privada?</li>
+                <li>¿Cómo se filtra una vista para mostrar solo proyectos "Activos"?</li>
+                <li>¿Cómo se agrupan elementos en una vista?</li>
+                <li>¿Para qué sirve el ordenamiento en una vista?</li>
+            </ul>
+
+            <div class="ejemplo-box">
+                <span class="highlight">📌 Desafío final:</span>
+                <p>Diseña tres vistas para la lista "Proyectos" de una empresa:</p>
+                <ul>
+                    <li><strong>Vista 1:</strong> Proyectos que están "Activos" y cuya fecha de inicio es posterior a enero de 2025.</li>
+                    <li><strong>Vista 2:</strong> Proyectos agrupados por "Propietario".</li>
+                    <li><strong>Vista 3:</strong> Vista privada que muestre solo los proyectos que tú lideras, ordenados por fecha de inicio.</li>
+                </ul>
+                <p>Explica qué filtros, ordenamientos y agrupaciones usarías en cada caso.</p>
+            </div>
+
+            <h4>Aprendizaje esperado</h4>
+            <p>El estudiante consolida el uso de vistas en listas de SharePoint.</p>
+
+            <h4>Criterios de evaluación</h4>
+            <ul>
+                <li>Responde correctamente las preguntas.</li>
+                <li>Participa activamente en la discusión.</li>
+                <li>Comprende cómo aplicar filtros, ordenamientos y agrupaciones.</li>
+            </ul>
+
+            <h4>Recursos</h4>
+            <ul>
+                <li>Pizarra</li>
+                <li>Ejemplos prácticos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TIP CLAVE -->
+    <div class="tip-clave">
+        <p><strong>💡 Tips clave para vistas en SharePoint:</strong></p>
+        <p>• <strong>Vista pública:</strong> Todos los usuarios del sitio la ven.</p>
+        <p>• <strong>Vista privada:</strong> Solo la ve el usuario que la crea.</p>
+        <p>• <strong>Filtro:</strong> Muestra solo los elementos que cumplen una condición.</p>
+        <p>• <strong>Ordenamiento:</strong> Organiza los elementos según una columna.</p>
+        <p>• <strong>Agrupación:</strong> Agrupa elementos por una columna común.</p>
+        <p>• <strong>Cambia de vistas</strong> fácilmente desde el menú de la lista.</p>
+        <p>• Usa vistas para <strong>simplificar</strong> la visualización de grandes volúmenes de datos.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-clase">
+        <p><strong>🔥 Esta clase es clave porque:</strong></p>
+        <p>• Enseña a organizar y visualizar datos de manera eficiente.</p>
+        <p>• Desarrolla habilidades de gestión de información.</p>
+        <p>• Prepara a los estudiantes para trabajar con grandes volúmenes de datos.</p>
+        <p>• Conecta la teoría con la práctica en una plataforma real.</p>
+    </div>
+
+</div>
+</body>
+</html>

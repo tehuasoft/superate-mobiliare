@@ -1,0 +1,514 @@
+WEBVTT
+
+1
+00:00:00.090 --> 00:00:01.210
+<v Krista>In this video, we're going to talk</v>
+
+2
+00:00:01.210 --> 00:00:03.550
+about the relationship between fractional numbers.
+
+3
+00:00:03.550 --> 00:00:04.670
+And in this particular problem,
+
+4
+00:00:04.670 --> 00:00:07.360
+we've been asked to find a number that's 1/5 of the way
+
+5
+00:00:07.360 --> 00:00:09.310
+from 1/8 to 9/11.
+
+6
+00:00:09.310 --> 00:00:11.270
+What we need to realize is that even though
+
+7
+00:00:11.270 --> 00:00:13.650
+this problem might be somewhat difficult to visualize,
+
+8
+00:00:13.650 --> 00:00:15.440
+all we need to do to get a better idea
+
+9
+00:00:15.440 --> 00:00:18.540
+of what we're looking at is to graph these on a number line.
+
+10
+00:00:18.540 --> 00:00:20.120
+So, I've drawn a number line here,
+
+11
+00:00:20.120 --> 00:00:22.510
+where we have zero on the number line on the left
+
+12
+00:00:22.510 --> 00:00:24.470
+and one on the number line on the right.
+
+13
+00:00:24.470 --> 00:00:25.860
+So, we've really zoomed in
+
+14
+00:00:25.860 --> 00:00:28.550
+to the portion of the number line between zero and one.
+
+15
+00:00:28.550 --> 00:00:31.160
+I've gone ahead and graphed 1/8 and 9/11,
+
+16
+00:00:31.160 --> 00:00:33.030
+and these may not be perfectly accurate.
+
+17
+00:00:33.030 --> 00:00:35.750
+But we know that 1/8 is 1/8 of the way
+
+18
+00:00:35.750 --> 00:00:37.260
+between zero and one, right?
+
+19
+00:00:37.260 --> 00:00:38.350
+If we've divided the area
+
+20
+00:00:38.350 --> 00:00:40.870
+between zero and one into eight sections,
+
+21
+00:00:40.870 --> 00:00:43.570
+then 1/8 would be at the end of the first section,
+
+22
+00:00:43.570 --> 00:00:44.960
+so pretty close to zero.
+
+23
+00:00:44.960 --> 00:00:46.690
+And then same thing here with 9/11,
+
+24
+00:00:46.690 --> 00:00:47.760
+if we divided the section
+
+25
+00:00:47.760 --> 00:00:50.340
+between zero and one into 11 pieces,
+
+26
+00:00:50.340 --> 00:00:53.330
+9/11 would be at the end of the ninth section,
+
+27
+00:00:53.330 --> 00:00:54.880
+so it'd be pretty close to one.
+
+28
+00:00:54.880 --> 00:00:57.930
+So, we have roughly an idea of 1/8 and 9/11,
+
+29
+00:00:57.930 --> 00:01:00.420
+and we have to think of those sort of as our end points.
+
+30
+00:01:00.420 --> 00:01:01.810
+Now we're interested in a number
+
+31
+00:01:01.810 --> 00:01:05.310
+that's 1/5 of the way from 1/8 to 9/11.
+
+32
+00:01:05.310 --> 00:01:08.140
+So, in other words, if we have this section right here,
+
+33
+00:01:08.140 --> 00:01:11.180
+the section between 1/8 and 9/11,
+
+34
+00:01:11.180 --> 00:01:14.090
+and now we want to divide it into five pieces,
+
+35
+00:01:14.090 --> 00:01:16.100
+which means we can draw four lines in between,
+
+36
+00:01:16.100 --> 00:01:19.740
+so one, two, three, four, something like that.
+
+37
+00:01:19.740 --> 00:01:22.180
+So, now we have one, two, three, four,
+
+38
+00:01:22.180 --> 00:01:26.620
+5/5, or five sections in between 1/8 and 9/11.
+
+39
+00:01:26.620 --> 00:01:30.550
+Then 1/5 of the way from 1/8 to 9/11 is right here.
+
+40
+00:01:30.550 --> 00:01:32.300
+It's at the end of the first section.
+
+41
+00:01:32.300 --> 00:01:35.500
+That would be 1/5 of the way from 1/8 to 9/11.
+
+42
+00:01:35.500 --> 00:01:38.760
+So, we're interested in finding this number right here.
+
+43
+00:01:38.760 --> 00:01:41.980
+Well, really this number is just 1/8
+
+44
+00:01:41.980 --> 00:01:46.590
+plus 1/5 of however long this distance is,
+
+45
+00:01:46.590 --> 00:01:49.940
+however long the distance is between 1/8 and 9/11.
+
+46
+00:01:49.940 --> 00:01:51.650
+So, the first thing we need to do
+
+47
+00:01:51.650 --> 00:01:53.900
+is find out how long this section is.
+
+48
+00:01:53.900 --> 00:01:57.180
+What's the distance between 1/8 and 9/11?
+
+49
+00:01:57.180 --> 00:01:58.680
+And the way that we're going to do that
+
+50
+00:01:58.680 --> 00:02:03.080
+is we're going to say 9/11, the larger number, minus 1/8.
+
+51
+00:02:03.080 --> 00:02:04.860
+Just like if we wanted to find the distance
+
+52
+00:02:04.860 --> 00:02:06.500
+between zero and one,
+
+53
+00:02:06.500 --> 00:02:09.140
+we would take the larger number, one, and subtract zero.
+
+54
+00:02:09.140 --> 00:02:11.050
+We'd say one minus zero is one,
+
+55
+00:02:11.050 --> 00:02:12.390
+so the distance between zero
+
+56
+00:02:12.390 --> 00:02:14.260
+and one on the number line is one.
+
+57
+00:02:14.260 --> 00:02:16.470
+Same thing here, between 1/8 and 9/11,
+
+58
+00:02:16.470 --> 00:02:18.440
+we take the larger number, 9/11,
+
+59
+00:02:18.440 --> 00:02:21.450
+and we subtract 1/8 to get the distance between them.
+
+60
+00:02:21.450 --> 00:02:24.190
+So, now we just have a subtraction problem with fractions,
+
+61
+00:02:24.190 --> 00:02:26.920
+which means we need to find a common denominator.
+
+62
+00:02:26.920 --> 00:02:29.290
+The common denominator is going to be 88.
+
+63
+00:02:29.290 --> 00:02:31.980
+So, in order to get 88 for this first fraction,
+
+64
+00:02:31.980 --> 00:02:34.730
+we're going to have to multiply by eight over eight,
+
+65
+00:02:34.730 --> 00:02:38.900
+so eight over eight times 9/11 to get 88 in the denominator.
+
+66
+00:02:38.900 --> 00:02:41.330
+And to get 88 in the denominator of 1/8,
+
+67
+00:02:41.330 --> 00:02:44.760
+we're going to have to multiply by 11 over 11
+
+68
+00:02:44.760 --> 00:02:46.600
+times 1/8 like this.
+
+69
+00:02:46.600 --> 00:02:48.360
+And now when we do our multiplication,
+
+70
+00:02:48.360 --> 00:02:51.650
+eight times nine is 72, over 88.
+
+71
+00:02:51.650 --> 00:02:55.570
+11 times one is 11, so minus 11 over 88.
+
+72
+00:02:55.570 --> 00:02:58.620
+And when we do 72 minus 11, we get 61.
+
+73
+00:02:58.620 --> 00:03:03.250
+So, 61 over 88 is the distance between 1/8 and 9/11.
+
+74
+00:03:03.250 --> 00:03:07.320
+So, the length of this orange section here is 61/88.
+
+75
+00:03:07.320 --> 00:03:11.640
+Now we need to find the length of just 1/5 of this distance.
+
+76
+00:03:11.640 --> 00:03:12.473
+So, in other words,
+
+77
+00:03:12.473 --> 00:03:14.670
+we found the length of the orange section,
+
+78
+00:03:14.670 --> 00:03:17.240
+but now we need to find the length of 1/5 of it
+
+79
+00:03:17.240 --> 00:03:18.750
+to get this length right here.
+
+80
+00:03:18.750 --> 00:03:21.460
+So, in order to find the length of 1/5 of it,
+
+81
+00:03:21.460 --> 00:03:24.510
+we just have to multiply by 1/5
+
+82
+00:03:24.510 --> 00:03:26.770
+or divide this thing by five.
+
+83
+00:03:26.770 --> 00:03:28.130
+Remember, dividing by five
+
+84
+00:03:28.130 --> 00:03:30.120
+is the same as multiplying by 1/5.
+
+85
+00:03:30.120 --> 00:03:32.090
+So, either way, when we multiply across,
+
+86
+00:03:32.090 --> 00:03:37.090
+we're going to get 61 over, 88 times five is 440.
+
+87
+00:03:37.590 --> 00:03:39.180
+So, that tells us that the length
+
+88
+00:03:39.180 --> 00:03:41.400
+of this particular section right here,
+
+89
+00:03:41.400 --> 00:03:44.270
+this length, the distance between 1/8
+
+90
+00:03:44.270 --> 00:03:48.640
+and this point that we're interested in, is 61 over 440.
+
+91
+00:03:48.640 --> 00:03:52.240
+So, now in order to find this exact point right here,
+
+92
+00:03:52.240 --> 00:03:55.990
+we need to do 1/8 plus 61 over 440.
+
+93
+00:03:55.990 --> 00:04:00.490
+Because if we do 1/8 plus 61 over 440 on the number line,
+
+94
+00:04:00.490 --> 00:04:02.220
+that'll land us right at this point
+
+95
+00:04:02.220 --> 00:04:03.390
+that we're interested in.
+
+96
+00:04:03.390 --> 00:04:07.700
+So, we'll do 1/8 plus 61 over 440.
+
+97
+00:04:07.700 --> 00:04:09.380
+We need to find a common denominator,
+
+98
+00:04:09.380 --> 00:04:12.090
+and we can find a common denominator of 440
+
+99
+00:04:12.090 --> 00:04:16.940
+if we multiply this first fraction by 55 over 55
+
+100
+00:04:16.940 --> 00:04:19.660
+because eight times 55 is 440.
+
+101
+00:04:19.660 --> 00:04:23.410
+So, multiplying across here, 55 times one, we have 55.
+
+102
+00:04:23.410 --> 00:04:25.497
+55 times eight is 440.
+
+103
+00:04:26.410 --> 00:04:30.300
+Then we add 61 over 440.
+
+104
+00:04:30.300 --> 00:04:34.320
+55 plus 61 is 116.
+
+105
+00:04:34.320 --> 00:04:37.050
+And, of course, our common denominator of 440.
+
+106
+00:04:37.050 --> 00:04:39.070
+Now we can divide both the numerator
+
+107
+00:04:39.070 --> 00:04:40.380
+and the denominator by two.
+
+108
+00:04:40.380 --> 00:04:42.820
+We want to reduce the fraction as much as we can.
+
+109
+00:04:42.820 --> 00:04:45.590
+Because both the numerator and denominator are even,
+
+110
+00:04:45.590 --> 00:04:46.760
+we'll divide by two.
+
+111
+00:04:46.760 --> 00:04:49.503
+116 divided by two is 58.
+
+112
+00:04:50.447 --> 00:04:53.030
+440 divided by two is 220.
+
+113
+00:04:53.030 --> 00:04:56.230
+We have even numbers still, so we can divide by two again.
+
+114
+00:04:56.230 --> 00:04:59.450
+58 divided by two will be 29,
+
+115
+00:04:59.450 --> 00:05:02.340
+and 220 divided by two will be 110.
+
+116
+00:05:02.340 --> 00:05:03.670
+29 is a prime number.
+
+117
+00:05:03.670 --> 00:05:06.590
+It has no factors other than 29 or one.
+
+118
+00:05:06.590 --> 00:05:09.210
+And 29 doesn't go evenly into 110.
+
+119
+00:05:09.210 --> 00:05:11.560
+So, this is now an irreducible fraction.
+
+120
+00:05:11.560 --> 00:05:13.160
+We've reduced it as much as we can,
+
+121
+00:05:13.160 --> 00:05:15.150
+which means this'll be our final answer.
+
+122
+00:05:15.150 --> 00:05:18.220
+So, if we were going to label this point right here,
+
+123
+00:05:18.220 --> 00:05:20.820
+just like we labeled this point on the number line is zero,
+
+124
+00:05:20.820 --> 00:05:23.190
+this one is 1/8, this one is 9/11,
+
+125
+00:05:23.190 --> 00:05:24.350
+if we were going to label this point,
+
+126
+00:05:24.350 --> 00:05:27.710
+we would label it as 29 over 110.
+
+127
+00:05:27.710 --> 00:05:30.120
+And we know that that point is 1/5 of the way
+
+128
+00:05:30.120 --> 00:05:32.323
+from 1/8 to 9/11.
+
